@@ -1,0 +1,15 @@
+spring.main.banner-mode=off
+logging.level.org.springframework=ERROR
+
+spring.jpa.hibernate.ddl-auto=none
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/testdb
+spring.datasource.username=admin
+spring.datasource.password=admin
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.show-sql=false
+
+server.port=8095

@@ -1,0 +1,18 @@
+package uk.codersden.login;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+	@PostMapping("/login")
+	public User loginUser() {
+		User u = new User("mvelasco", "J@ck12");
+		
+		
+		
+		return u;
+	}
+}
