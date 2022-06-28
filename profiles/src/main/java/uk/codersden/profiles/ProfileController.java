@@ -8,42 +8,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/profile")
 public class ProfileController {
 	
 	@Autowired
 	private ProfileService profileService;
 	
-	@GetMapping("/profile")
+	@GetMapping
 	public List<Profile> retrieveAllProfiles(){
 		return profileService.findAllProfiles();
 		
 	}
 	
 	@GetMapping("/{id}")
-	public Profile retrieveProfile(@PathParam("id") String id) {
-		return null;
+	public Profile retrieveProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
+		return profileService.findProfileByIdentifier(id);
 		
 	}
 	
-	@PostMapping("/profile")
+	@PostMapping
 	public void createProfile(@RequestBody Profile profile) {
 		profileService.create(profile);
 	}
 	
 	@PutMapping("/{id}")
-	public void updateProfile(@PathParam("id") String id, @RequestBody Profile profile) {
-		
+	public void updateProfile(@PathVariable("id") String id, @RequestBody Profile profile) throws ProfileNotFoundException {
+		Profile p = profileService.findProfileByIdentifier(id);
+		profileService.update(id, profile);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteProfile(@PathParam("id") String id) {
-		
+	public void deleteProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
+		Profile p = profileService.findProfileByIdentifier(id);
+		p.setDeleted(true);
+		profileService.update(id, p);
 	}
 	
 	

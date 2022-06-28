@@ -27,6 +27,8 @@ public class Profile {
 	//private Date dao;
 	private String email;
 	
+	private boolean deleted;
+	
 	public Profile() {
 		
 	}
@@ -59,6 +61,13 @@ public class Profile {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+		
+	}
+	public boolean isDeleted() {
+		return this.deleted;
 	}
 	
 	
