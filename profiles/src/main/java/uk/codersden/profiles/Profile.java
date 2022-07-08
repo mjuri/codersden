@@ -2,12 +2,16 @@ package uk.codersden.profiles;
 
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "profiles")
 public class Profile {
@@ -24,7 +28,9 @@ public class Profile {
 	
 	@Column(name ="lastname")
 	private String lastName;
-	//private Date dao;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date dob;
 	private String email;
 	
 	private boolean deleted;
@@ -50,12 +56,7 @@ public class Profile {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	/*public Date getDao() {
-		return dao;
-	}
-	public void setDao(Date dao) {
-		this.dao = dao;
-	}*/
+
 	public String getEmail() {
 		return email;
 	}
@@ -69,6 +70,11 @@ public class Profile {
 	public boolean isDeleted() {
 		return this.deleted;
 	}
-	
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
 	
 }
