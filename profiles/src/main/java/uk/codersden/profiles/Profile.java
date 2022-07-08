@@ -35,6 +35,9 @@ public class Profile {
 	
 	private boolean deleted;
 	
+	@Column(name="account_identifier")
+	private String accountIdentifier;
+	
 	public Profile() {
 		
 	}
@@ -75,6 +78,13 @@ public class Profile {
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+	
+	public String getAccountIdentifier() {
+		return accountIdentifier;
+	}
+	public void setAccountIdentifier(String accountIdentifier) {
+		this.accountIdentifier = accountIdentifier;
 	}
 	
 }
