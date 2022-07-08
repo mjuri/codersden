@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,6 +31,12 @@ public class Profile {
 	
 	private boolean deleted;
 	
+	@Column(name="account_identifier", nullable = true)
+	private String accountIdentifier;
+    /*@ManyToOne
+    @JoinColumn(name="account_identifier", nullable=false)
+	private Account account;
+	*/
 	public Profile() {
 		
 	}
@@ -50,6 +58,7 @@ public class Profile {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	/*public Date getDao() {
 		return dao;
 	}
@@ -68,6 +77,19 @@ public class Profile {
 	}
 	public boolean isDeleted() {
 		return this.deleted;
+	}
+	/*
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}*/
+	public String getAccountIdentifier() {
+		return accountIdentifier;
+	}
+	public void setAccountIdentifier(String accountIdentifier) {
+		this.accountIdentifier = accountIdentifier;
 	}
 	
 	
