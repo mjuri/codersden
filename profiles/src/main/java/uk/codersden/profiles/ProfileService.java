@@ -13,11 +13,12 @@ public class ProfileService {
 	@Autowired
 	private ProfileDao profileDao;
 
-	public void create(Profile profile) {
+	public Profile create(Profile profile) {
 		if(profile.getIdentifier() != null) {
 			profile.setIdentifier(generateIdentifier());
 		}
-		this.profileDao.save(profile);
+		Profile newProfile = this.profileDao.save(profile);
+		return newProfile;
 	}
 
 	private String generateIdentifier() {
