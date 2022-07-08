@@ -2,6 +2,8 @@ package uk.codersden.profiles;
 
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "profiles")
 public class Profile {
@@ -26,7 +30,9 @@ public class Profile {
 	
 	@Column(name ="lastname")
 	private String lastName;
-	//private Date dao;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date dob;
 	private String email;
 	
 	private boolean deleted;
@@ -58,6 +64,7 @@ public class Profile {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+<<<<<<< HEAD
 	
 	/*public Date getDao() {
 		return dao;
@@ -65,6 +72,9 @@ public class Profile {
 	public void setDao(Date dao) {
 		this.dao = dao;
 	}*/
+=======
+
+>>>>>>> b6573a897700421d9951e3319d18aba95ead9910
 	public String getEmail() {
 		return email;
 	}
@@ -78,6 +88,7 @@ public class Profile {
 	public boolean isDeleted() {
 		return this.deleted;
 	}
+<<<<<<< HEAD
 	/*
 	public Account getAccount() {
 		return account;
@@ -92,5 +103,13 @@ public class Profile {
 		this.accountIdentifier = accountIdentifier;
 	}
 	
+=======
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+>>>>>>> b6573a897700421d9951e3319d18aba95ead9910
 	
 }
