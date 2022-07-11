@@ -33,8 +33,9 @@ public class ProfileController {
 	
 	@GetMapping("/{id}")
 	@CrossOrigin
-	public Profile retrieveProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
-		return profileService.findProfileByIdentifier(id);
+	public ResponseEntity<?> retrieveProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
+		Profile p = profileService.findProfileByIdentifier(id);
+		return ResponseEntity.ok(p);
 		
 	}
 	
@@ -47,9 +48,11 @@ public class ProfileController {
 	}
 	
 	@PutMapping("/{id}")
-	public void updateProfile(@PathVariable("id") String id, @RequestBody Profile profile) throws ProfileNotFoundException {
+	@CrossOrigin
+	public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile) throws ProfileNotFoundException {
 		Profile p = profileService.findProfileByIdentifier(id);
-		profileService.update(id, profile);
+		p = profileService.update(id, profile);
+		return ResponseEntity.ok(p);
 	}
 	
 	@DeleteMapping("/{id}")

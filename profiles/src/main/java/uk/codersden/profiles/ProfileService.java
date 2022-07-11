@@ -40,10 +40,10 @@ public class ProfileService {
 		return optional.get();
 		
 	}
-
-	public void update(String id, Profile profile) {
-		this.profileDao.save(profile);
-		
+	
+	public Profile update(String id, Profile profile) {
+		Profile p = this.profileDao.save(profile);
+		return p;
 	}
 	
 	
