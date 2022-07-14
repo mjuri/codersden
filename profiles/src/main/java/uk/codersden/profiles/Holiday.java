@@ -20,10 +20,12 @@ public class Holiday {
         strategy = "org.hibernate.id.UUIDGenerator")
 	private String identifier;
 	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date start;
 	
 	@Column(name="end_date")
-	private Date endDate;
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private Date end;
 	
 	@Column(name="profile_identifier")
 	private String profileIdentifier;
@@ -35,6 +37,7 @@ public class Holiday {
 	private String authorizedBy;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="date_created")
 	private Date dateCreated;
 	
 	@Column(name="mod_date")
@@ -42,6 +45,7 @@ public class Holiday {
 	private Date modDate;
 	
 	private HolidayStatus status;
+
 
 	public Holiday() {
 		
@@ -62,12 +66,12 @@ public class Holiday {
 		this.start = start;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public Date getEnd() {
+		return end;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 	public String getProfileIdentifier() {
@@ -125,6 +129,5 @@ public class Holiday {
 	public void setStatus(HolidayStatus status) {
 		this.status = status;
 	}
-	
 	
 }
