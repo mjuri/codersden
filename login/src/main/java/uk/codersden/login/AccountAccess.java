@@ -17,12 +17,14 @@ public class AccountAccess {
 	@Column(name = "user_name")
 	private String userName;
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date start;
+	
+	private Timestamp start;
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name = "ends")
-	private Date end;
+	private Timestamp end;
 	public AccountAccess(String userName) {
 		this.setUserName(userName);
+		this.setStart(new Timestamp(System.currentTimeMillis()));
 	}
 	@Id
     @GeneratedValue(generator = "UUID")
@@ -31,6 +33,9 @@ public class AccountAccess {
         strategy = "org.hibernate.id.UUIDGenerator")
 	private String token;
 	
+	public AccountAccess() {
+		
+	}
 
 	public String getUserName() {
 		return userName;
@@ -38,16 +43,16 @@ public class AccountAccess {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public Date getStart() {
+	public Timestamp getStart() {
 		return start;
 	}
-	public void setStart(Date start) {
+	public void setStart(Timestamp start) {
 		this.start = start;
 	}
-	public Date getEnd() {
+	public Timestamp getEnd() {
 		return end;
 	}
-	public void setEnd(Date end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
 	public String getToken() {

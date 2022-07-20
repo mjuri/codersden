@@ -35,6 +35,11 @@ public class LoginController {
 		}
 		return ResponseEntity.ok(access);
 		
-
+	}
+	@PostMapping("/logout")
+	@CrossOrigin
+	public ResponseEntity<?> logoutUser(@RequestBody String token){
+		AccountAccess access = this.loginService.logoutUser(token);
+		return ResponseEntity.ok(access);
 	}
 }

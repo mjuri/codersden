@@ -1,5 +1,6 @@
 package uk.codersden.login;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,17 @@ public class LoginService {
 		AccountAccess access = this.accountAccessDao.save(new AccountAccess(login.getUserName()));
 		
 		return access;
+	}
+	public AccountAccess logoutUser(String token) {
+		Optional<AccountAccess> op = this.accountAccessDao.findById(token);
+		if(op.isEmpty()) {
+			throw new NullPointerException();
+			
+		}
+		AccountAccess access = op.get();
+		access.setEnd(new Timestamp(System.currentTimeMillis()));
+		return this.accountAccessDao.save(access);
+		
 	}
 
 }
