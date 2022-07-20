@@ -1,8 +1,13 @@
 package uk.codersden.profiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +26,14 @@ public class HolidayController {
 		Holiday h = this.holidayService.requestHoliday(holiday);
 		
 		return ResponseEntity.ok(h);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/{id}")
+	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String id){
+		List<Holiday> list = new ArrayList<>();
+		list = holidayService.findAllHolidayByProfileIdentifier(id);
+		return ResponseEntity.ok(list);
+		
 	}
 }

@@ -1,12 +1,14 @@
 package uk.codersden.profiles;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,17 +23,17 @@ public class Holiday {
 	private String identifier;
 	
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date start;
+	private Timestamp start;
 	
 	@Column(name="end_date")
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Date end;
+	private Timestamp end;
 	
 	@Column(name="profile_identifier")
 	private String profileIdentifier;
 	
 	private String comments;
-	private HolidayType type;
+	private String type;
 	
 	@Column(name="authorized_by")
 	private String authorizedBy;
@@ -43,8 +45,8 @@ public class Holiday {
 	@Column(name="mod_date")
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date modDate;
-	
-	private HolidayStatus status;
+
+	private String status = HolidayStatus.REQUESTED.toString();
 
 
 	public Holiday() {
@@ -58,19 +60,19 @@ public class Holiday {
 		this.identifier = identifier;
 	}
 
-	public Date getStart() {
+	public Timestamp getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Timestamp start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public Timestamp getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
 
@@ -90,11 +92,12 @@ public class Holiday {
 		this.comments = comments;
 	}
 
-	public HolidayType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(HolidayType type) {
+
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -122,11 +125,11 @@ public class Holiday {
 		this.modDate = modDate;
 	}
 
-	public HolidayStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(HolidayStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	

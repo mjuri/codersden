@@ -1,5 +1,7 @@
 package uk.codersden.profiles;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ public class HolidayService {
 		// Send email
 		Holiday h = this.holidayDao.save(holiday);
 		return h;
+	}
+
+	public List<Holiday> findAllHolidayByProfileIdentifier(String id) {
+		return this.holidayDao.findAllByProfileIdentifier(id);
 	}
 
 }
