@@ -34,7 +34,7 @@ public class AccountAccess {
 	private String token;
 	
 	public AccountAccess() {
-		
+			
 	}
 
 	public String getUserName() {

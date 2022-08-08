@@ -31,7 +31,7 @@ public class LoginService {
 	}
 	public AccountAccess logoutUser(String token) {
 		Optional<AccountAccess> op = this.accountAccessDao.findById(token);
-		if(op.isEmpty()) {
+		if(op.isEmpty()) {	
 			throw new NullPointerException();
 			
 		}

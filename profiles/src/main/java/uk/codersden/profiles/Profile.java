@@ -37,6 +37,9 @@ public class Profile {
 	
 	private boolean deleted;
 	
+	@Column(name ="entitlement_absence")
+	private int entitlementAbsence;
+	
 
 
 	@Column(name="account_identifier", nullable = true)
@@ -93,6 +96,13 @@ public class Profile {
 	}
 	public void setAccountIdentifier(String accountIdentifier) {
 		this.accountIdentifier = accountIdentifier;
+	}
+	
+	public int getEntitlementAbsence() {
+		return entitlementAbsence;
+	}
+	public void setEntitlementAbsence(int entitlementAbsence) {
+		this.entitlementAbsence = entitlementAbsence;
 	}
 	
 }
