@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +41,13 @@ public class LoginController {
 	@CrossOrigin
 	public ResponseEntity<?> logoutUser(@RequestBody String token){
 		AccountAccess access = this.loginService.logoutUser(token);
+		return ResponseEntity.ok(access);
+	}
+	
+	@GetMapping("/access/{token}")
+	@CrossOrigin
+	public ResponseEntity<?> retrieveAccessByToken(@PathVariable("token") String token){
+		AccountAccess access = this.loginService.findAccountAccessByToken(token);
 		return ResponseEntity.ok(access);
 	}
 }

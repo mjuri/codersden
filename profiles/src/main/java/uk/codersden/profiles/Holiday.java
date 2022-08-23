@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,6 +24,17 @@ public class Holiday {
         strategy = "org.hibernate.id.UUIDGenerator")
 	private String identifier;
 	
+    @ManyToOne
+    @JoinColumn(name="profile_identifier",  nullable=false, insertable=false, updatable=false)
+	private Profile profile;
+	
+	public Profile getProfile() {
+		return profile;
+	}
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp start;
 	

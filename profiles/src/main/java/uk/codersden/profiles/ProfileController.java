@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
-	
+
+    
 	@Autowired
 	private ProfileService profileService;
 	
@@ -37,6 +39,12 @@ public class ProfileController {
 		Profile p = profileService.findProfileByIdentifier(id);
 		return ResponseEntity.ok(p);
 		
+	}
+	@GetMapping("/token/{token}")
+	@CrossOrigin
+	public ResponseEntity<?> retrieveProfileByToken(@PathVariable("token") String token) throws ProfileNotFoundException {
+		Profile p = profileService.findProfileByToken(token);
+		return ResponseEntity.ok(p);
 	}
 	
 	@PostMapping

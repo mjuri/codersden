@@ -21,4 +21,7 @@ public class HolidayService {
 		return this.holidayDao.findAllByProfileIdentifier(id);
 	}
 
+	public List<Holiday> findAllRequestedHolidays(String managerIdentifer){
+		return this.holidayDao.findAllByAuthorizedByAndStatus(managerIdentifer, HolidayStatus.REQUESTED.toString());
+	}
 }

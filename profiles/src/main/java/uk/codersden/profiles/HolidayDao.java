@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface HolidayDao extends JpaRepository<Holiday, String>{
 
 	List<Holiday> findAllByProfileIdentifier(String id);
+	List<Holiday> findAllByAuthorizedByAndStatus(String managerIdentifier, String status);
 
 	
 }

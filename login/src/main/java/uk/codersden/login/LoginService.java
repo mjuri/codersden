@@ -40,5 +40,14 @@ public class LoginService {
 		return this.accountAccessDao.save(access);
 		
 	}
+	public AccountAccess findAccountAccessByToken(String token) {
+		Optional<AccountAccess> op = this.accountAccessDao.findById(token);
+		if(op.isEmpty()) {	
+			throw new NullPointerException();
+			
+		}
+		AccountAccess access = op.get();
+		return access;
+	}	
 
 }

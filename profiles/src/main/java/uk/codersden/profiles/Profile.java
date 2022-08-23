@@ -3,17 +3,21 @@ package uk.codersden.profiles;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name = "profiles")
 public class Profile {
@@ -44,7 +48,36 @@ public class Profile {
 
 	@Column(name="account_identifier", nullable = true)
 	private String accountIdentifier;
+	
+	@ManyToMany
+	@JoinTable(name="organization_chart",
+			 joinColumns=@JoinColumn(name="child_identifier"),
+			 inverseJoinColumns=@JoinColumn(name="parent_identifier")
+	)
+	@JsonIgnoreProperties("children")
+	private List<Profile> parents;
 
+	@ManyToMany
+	@JoinTable(name="organization_chart",
+			 joinColumns=@JoinColumn(name="parent_identifier"),
+			 inverseJoinColumns=@JoinColumn(name="child_identifier")
+
+	)
+	@JsonIgnoreProperties("parents")
+	private List<Profile> children;
+
+	public List<Profile> getParents() {
+		return parents;
+	}
+	public void setParents(List<Profile> parents) {
+		this.parents = parents;
+	}
+	public List<Profile> getChildren() {
+		return children;
+	}
+	public void setChildren(List<Profile> children) {
+		this.children = children;
+	}
 	public Profile() {
 		
 	}

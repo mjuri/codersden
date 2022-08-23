@@ -36,4 +36,11 @@ public class HolidayController {
 		return ResponseEntity.ok(list);
 		
 	}
+	@CrossOrigin
+	@GetMapping("/awaiting-approval/{id}")
+	public ResponseEntity<?> retrieveAwaitingApprovalHolidays(@PathVariable("id") String id){
+		List<Holiday> list = new ArrayList<>();
+		list = holidayService.findAllRequestedHolidays(id);
+		return ResponseEntity.ok(list);
+	}
 }
