@@ -3,7 +3,9 @@ package uk.codersden.profiles;
 
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +20,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import uk.codersden.profiles.documents.Document;
 
 @Entity(name = "profiles")
 public class Profile {
@@ -66,6 +70,9 @@ public class Profile {
 	@JsonIgnoreProperties("parents")
 	private List<Profile> children;
 
+    @ManyToMany(mappedBy = "sharedWith")
+    private Set<Document> sharedDocumentsWith = new HashSet<>();
+	
 	public List<Profile> getParents() {
 		return parents;
 	}
@@ -136,6 +143,12 @@ public class Profile {
 	}
 	public void setEntitlementAbsence(int entitlementAbsence) {
 		this.entitlementAbsence = entitlementAbsence;
+	}
+	public Set<Document> getSharedDocumentsWith() {
+		return sharedDocumentsWith;
+	}
+	public void setSharedDocumentsWith(Set<Document> sharedDocumentsWith) {
+		this.sharedDocumentsWith = sharedDocumentsWith;
 	}
 	
 }

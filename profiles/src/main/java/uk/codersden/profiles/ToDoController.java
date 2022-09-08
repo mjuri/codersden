@@ -47,7 +47,21 @@ public class ToDoController {
 		return ResponseEntity.ok(toDo);
 		
 	}
+	@CrossOrigin
+	@PostMapping("/complete/{identifier}")
+	public ResponseEntity<?> completeToDoItem(@PathVariable("identifier") String identifier) {
+		ToDo toDo;
+		try {
+			toDo = toDoService.completeToDoItem(identifier);
+			return ResponseEntity.ok(toDo);
+		} catch (TaskNotFoundException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
 
+		}
+
+		
+	}
 	
 	
 }
