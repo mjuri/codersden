@@ -1,9 +1,15 @@
 package uk.codersden.profiles;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,7 +54,7 @@ public class ProfileService {
 
 	public Profile findProfileByIdentifier(String id) throws ProfileNotFoundException {
 		Optional<Profile> optional = profileDao.findById(id);
-		if(optional == null) {
+		if(optional.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
 		
@@ -60,7 +66,7 @@ public class ProfileService {
         InstanceInfo instanceInfo = application.getInstances().get(0);
         String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort()
         + "/access/" + token;
-        System.out.println("URL" + url);
+        System.out.println("URL: " + url);
         ResponseEntity<AccountAccess> responseAccess = restTemplate.getForEntity(url, AccountAccess.class);
         AccountAccess access = responseAccess.getBody();
         
@@ -78,6 +84,28 @@ public class ProfileService {
 		return p;
 	}
 	
-	
+	public String saveAvatar(String profileIdentifier, String fileBase64) {
+		Path pathFolder = Paths.get("/Users/mvelasco/Documents/uploads/" + profileIdentifier.toString());
+		File file = null;
+		try {
+			Files.createDirectories(pathFolder);
+			byte[] imageByte= Base64.decodeBase64(fileBase64);
+			String fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
+			file = new File(fileName);
+			if(file.exists()) {
+				file.delete();
+			}
+			FileOutputStream fos = new FileOutputStream(fileName);
+			fos.write(imageByte);
+			fos.close();
+			file = new File(fileName);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+		}		
+		return file.getAbsolutePath();
+		
+	}
 	
 }

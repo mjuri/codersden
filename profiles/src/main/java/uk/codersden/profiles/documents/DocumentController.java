@@ -55,7 +55,7 @@ public class DocumentController {
 		  ObjectMapper mapper = new ObjectMapper();
 		  DocumentPayload payload = mapper.readValue(documentPayload, DocumentPayload.class);
 		  Document docUploaded = service.saveDocument(payload, file, profileIdentifier);
-	      message = "Uploaded the file successfully: " + file.getOriginalFilename() + "identifier: " + docUploaded.getIdentifier();
+	      message = "Uploasded the file successfully: " + file.getOriginalFilename() + "identifier: " + docUploaded.getIdentifier();
 
 		}catch(Exception e) {
 			message = "Could not upload the file: " + file.getOriginalFilename() + "!";

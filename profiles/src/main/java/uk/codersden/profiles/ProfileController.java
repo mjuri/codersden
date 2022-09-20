@@ -5,7 +5,9 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.apache.catalina.connector.Response;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import uk.codersden.profiles.documents.DocumentPayload;
 
 
 @RestController
@@ -49,13 +58,57 @@ public class ProfileController {
 	
 	@PostMapping
 	@CrossOrigin
-	public ResponseEntity<?> createProfile(@RequestBody Profile profile) 
+	public ResponseEntity<?> createProfile(@RequestParam("profile") String profilePayload, @RequestParam("file") String fileBase64) 
 	{
-		Profile p = profileService.create(profile);
+		Profile profile = null;
+		Profile p = null;
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			profile = mapper.readValue(profilePayload, Profile.class);
+			p = profileService.create(profile);
+			
+			if(null != fileBase64 ) {
+				String fileName = this.profileService.saveAvatar(p.getIdentifier(), fileBase64);
+				p.setAvatar(fileName);
+				p = profileService.update(p.getIdentifier(), p);
+			}			
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return ResponseEntity.ok(p);
 	}
-	
 	@PutMapping("/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> updateProfileWithAvatar(@RequestParam("profile") String profilePayload,
+			@RequestParam("file") String fileBase64, 
+			@PathVariable("id") String id){
+
+		Profile profile = null;
+		Profile p = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			profile = mapper.readValue(profilePayload, Profile.class);
+			profileService.findProfileByIdentifier(id);
+		} catch (ProfileNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(null != fileBase64 ) {
+			String fileName = this.profileService.saveAvatar(id, fileBase64);
+			profile.setAvatar(fileName);
+		}
+		p = profileService.update(id, profile);
+		return ResponseEntity.ok(p);
+	}
+
+
+	@PutMapping("/old/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile) throws ProfileNotFoundException {
 		Profile p = profileService.findProfileByIdentifier(id);

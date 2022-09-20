@@ -52,7 +52,6 @@ public class DocumentService {
 			throws ProfileNotFoundException {
 		Document doc = new Document();
 		UUID identifier = UUID.randomUUID();
-		File folder = new File(this.root.getFileName().toString() + "/" + identifier.toString());
 
 		doc.setIdentifier(identifier.toString());
 
