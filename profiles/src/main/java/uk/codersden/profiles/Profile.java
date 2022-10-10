@@ -66,11 +66,8 @@ public class Profile {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	@ManyToMany
-	@JoinTable(name="organization_chart",
-			 joinColumns=@JoinColumn(name="parent_identifier"),
-			 inverseJoinColumns=@JoinColumn(name="child_identifier")
-	)
+	
+	@ManyToMany(mappedBy = "children")
 	@JsonIgnoreProperties("children")
 	private List<Profile> parents;
 
@@ -82,8 +79,8 @@ public class Profile {
 
 	@ManyToMany
 	@JoinTable(name="organization_chart",
-			 joinColumns=@JoinColumn(name="child_identifier"),
-			 inverseJoinColumns=@JoinColumn(name="parent_identifier")
+			 joinColumns=@JoinColumn(name="parent_identifier"),
+			 inverseJoinColumns=@JoinColumn(name="child_identifier")
 
 	)
 	@JsonIgnoreProperties("parents")

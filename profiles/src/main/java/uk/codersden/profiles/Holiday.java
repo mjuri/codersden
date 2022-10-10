@@ -48,6 +48,19 @@ public class Holiday {
 	private String comments;
 	private String type;
 	
+	@Column(name="includesaturday")
+	private boolean includeSaturday;
+	
+	@Column(name="includesunday")
+	private boolean includeSunday;
+	
+	@Column(name="halfdaystart")
+	private boolean halfDayStart;
+	
+	@Column(name="halfdayend")
+	private boolean halfDayEnd;
+	
+	
 	@Column(name="authorized_by")
 	private String authorizedBy;
 	
@@ -144,6 +157,30 @@ public class Holiday {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public boolean isIncludeSaturday() {
+		return includeSaturday;
+	}
+	public void setIncludeSaturday(boolean includeSaturday) {
+		this.includeSaturday = includeSaturday;
+	}
+	public boolean isIncludeSunday() {
+		return includeSunday;
+	}
+	public void setIncludeSunday(boolean includeSunday) {
+		this.includeSunday = includeSunday;
+	}
+	public boolean isHalfDayStart() {
+		return halfDayStart;
+	}
+	public void setHalfDayStart(boolean halfDayStart) {
+		this.halfDayStart = halfDayStart;
+	}
+	public boolean isHalfDayEnd() {
+		return halfDayEnd;
+	}
+	public void setHalfDayEnd(boolean halfDayEnd) {
+		this.halfDayEnd = halfDayEnd;
 	}
 	
 }
