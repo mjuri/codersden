@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -42,6 +44,138 @@ public class Profile {
 	private boolean deleted;
 	private String avatar;
 	
+	private String title;
+	
+	@Column(name = "known_as")
+	private String knownAs;
+	
+	private String address;
+	private String gender;
+	
+	@Column(name = "gender_identity")
+	private String genderIdentity;
+	
+	@Column(name = "preferred_pronoun")
+	private String preferredPronoun;
+	
+	@Column(name = "marital_status")
+	private String maritalStatus;
+	
+	@Column(name = "employee_number")
+	private Integer employeeNumber;
+	
+	@Column(name = "work_phone")
+	private String workPhone;
+	
+	@Column(name = "work_extn")
+	private String workExtn;
+	
+	@Column(name = "work_mobile")
+	private String workMobile;
+	
+	@Column(name = "personal_email")
+	private String personalEmail;
+	
+	@Column(name = "personal_mobile")
+	private String personalMobile;
+	
+	@Column(name = "home_phone")
+	private String homePhone;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "contract_identifier", referencedColumnName = "identifier")
+	private Contract contract;
+	
+	public Contract getContract() {
+		return contract;
+	}
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getKnownAs() {
+		return knownAs;
+	}
+	public void setKnownAs(String knownAs) {
+		this.knownAs = knownAs;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getGenderIdentity() {
+		return genderIdentity;
+	}
+	public void setGenderIdentity(String genderIdentity) {
+		this.genderIdentity = genderIdentity;
+	}
+	public String getPreferredPronoun() {
+		return preferredPronoun;
+	}
+	public void setPreferredPronoun(String preferredPronoun) {
+		this.preferredPronoun = preferredPronoun;
+	}
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+	public Integer getEmployeeNumber() {
+		return employeeNumber;
+	}
+	public void setEmployeeNumber(Integer employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
+	public String getWorkPhone() {
+		return workPhone;
+	}
+	public void setWorkPhone(String workPhone) {
+		this.workPhone = workPhone;
+	}
+	public String getWorkExtn() {
+		return workExtn;
+	}
+	public void setWorkExtn(String workExtn) {
+		this.workExtn = workExtn;
+	}
+	public String getWorkMobile() {
+		return workMobile;
+	}
+	public void setWorkMobile(String workMobile) {
+		this.workMobile = workMobile;
+	}
+	public String getPersonalEmail() {
+		return personalEmail;
+	}
+	public void setPersonalEmail(String personalEmail) {
+		this.personalEmail = personalEmail;
+	}
+	public String getPersonalMobile() {
+		return personalMobile;
+	}
+	public void setPersonalMobile(String personalMobile) {
+		this.personalMobile = personalMobile;
+	}
+	public String getHomePhone() {
+		return homePhone;
+	}
+	public void setHomePhone(String homePhone) {
+		this.homePhone = homePhone;
+	}
 	public String getAvatar() {
 		return avatar;
 	}

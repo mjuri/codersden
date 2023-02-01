@@ -34,6 +34,9 @@ public class ProfileService {
 	@Autowired
 	private ProfileDao profileDao;
 
+	@Autowired
+	private UserDao userDao;
+	
 	public Profile create(Profile profile) {
 		if(profile.getIdentifier() != null) {
 			profile.setIdentifier(generateIdentifier());
@@ -105,6 +108,12 @@ public class ProfileService {
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}		
 		return file.getAbsolutePath();
+		
+	}
+
+	public User createUser(User user) {
+		User u = this.userDao.save(user);
+		return u;
 		
 	}
 	

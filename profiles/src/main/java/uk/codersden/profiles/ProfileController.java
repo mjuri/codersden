@@ -81,6 +81,31 @@ public class ProfileController {
 		
 		return ResponseEntity.ok(p);
 	}
+	@PostMapping("/signup")
+	@CrossOrigin
+	public ResponseEntity<?> createProfileWithoutAvatar(@RequestBody RegistrationPayload payload) 
+	{
+		User user = new User();
+		
+		user.setUserName(payload.getEmail());
+		user.setPassword(payload.getPassword());
+		
+		Profile p = new Profile();
+		p.setFirstName(payload.getFirstName());
+		p.setEmail(payload.getEmail());
+		
+		
+		try {
+			profileService.createUser(user);
+			p = profileService.create(p);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.ok(p);
+	}
 	@PutMapping("/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> updateProfileWithAvatar(@RequestParam("profile") String profilePayload,
