@@ -36,6 +36,9 @@ public class ProfileController {
 	@Autowired
 	private ProfileService profileService;
 	
+	@Autowired
+	private AccountService accountService;
+	
 	@GetMapping
 	public List<Profile> retrieveAllProfiles(){
 		return profileService.findAllProfiles();
@@ -83,25 +86,32 @@ public class ProfileController {
 	}
 	@PostMapping("/signup")
 	@CrossOrigin
-	public ResponseEntity<?> createProfileWithoutAvatar(@RequestBody RegistrationPayload payload) 
+	public ResponseEntity<?> createProfileWithoutAvatar(@RequestBody OneRegistrationPayload payload) 
 	{
+		Account account = new Account();
+		account.setName(payload.getCompanyName());
+		account.setNumberOfEmployees(payload.getNumberOfEmployees());
+		
+		Account newAccount = accountService.createAccount(account);
+		
 		User user = new User();
 		
 		user.setUserName(payload.getEmail());
 		user.setPassword(payload.getPassword());
 		
 		Profile p = new Profile();
+		p.setLastName(payload.getLastName());
 		p.setFirstName(payload.getFirstName());
 		p.setEmail(payload.getEmail());
-		
+		p.setAccountIdentifier(newAccount.getIdentifier());
 		
 		try {
 			profileService.createUser(user);
 			p = profileService.create(p);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		
 		return ResponseEntity.ok(p);

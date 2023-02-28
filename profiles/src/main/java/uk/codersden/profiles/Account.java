@@ -2,6 +2,7 @@ package uk.codersden.profiles;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,6 +24,9 @@ public class Account {
 	private String postcode;
 	private String country;
 	private String telephone;
+	
+	@Column( name="number_of_employees")
+	private String numberOfEmployees;
 	
     @OneToMany(mappedBy="identifier")
     private Set<Profile> profiles;
@@ -65,6 +69,12 @@ public class Account {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public String getNumberOfEmployees() {
+		return numberOfEmployees;
+	}
+	public void setNumberOfEmployees(String numberOfEmployees) {
+		this.numberOfEmployees = numberOfEmployees;
 	}
 	
 	
