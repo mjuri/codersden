@@ -1,5 +1,6 @@
 package uk.codersden.profiles;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -33,6 +34,8 @@ import uk.codersden.profiles.documents.DocumentPayload;
 public class ProfileController {
 
     
+	private static final String HR_ROLE_KEY = "HR-ADMIN";
+
 	@Autowired
 	private ProfileService profileService;
 	
@@ -88,25 +91,33 @@ public class ProfileController {
 	@CrossOrigin
 	public ResponseEntity<?> createProfileWithoutAvatar(@RequestBody OneRegistrationPayload payload) 
 	{
+		// 1) Create Account
 		Account account = new Account();
 		account.setName(payload.getCompanyName());
 		account.setNumberOfEmployees(payload.getNumberOfEmployees());
 		
 		Account newAccount = accountService.createAccount(account);
 		
+		// 2) Create User
 		User user = new User();
 		
 		user.setUserName(payload.getEmail());
 		user.setPassword(payload.getPassword());
 		
 		Profile p = new Profile();
-		p.setLastName(payload.getLastName());
-		p.setFirstName(payload.getFirstName());
-		p.setEmail(payload.getEmail());
-		p.setAccountIdentifier(newAccount.getIdentifier());
 		
 		try {
 			profileService.createUser(user);
+			
+			// 3) Create Profile
+
+			p.setLastName(payload.getLastName());
+			p.setFirstName(payload.getFirstName());
+			
+			p.setEmail(payload.getEmail()); // Link User with Profile
+			
+			p.setAccountIdentifier(newAccount.getIdentifier()); // Link Account with Profile
+			p.setRoles(Arrays.asList(this.profileService.findRoleByKey(HR_ROLE_KEY)));
 			p = profileService.create(p);
 			
 		} catch (Exception e) {

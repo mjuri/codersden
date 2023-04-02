@@ -35,6 +35,9 @@ public class ProfileService {
 	private ProfileDao profileDao;
 
 	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
 	private UserDao userDao;
 	
 	public Profile create(Profile profile) {
@@ -63,6 +66,14 @@ public class ProfileService {
 		
 		return optional.get();
 		
+	}
+	public Role findRoleByKey(String key) throws Exception{
+		Optional<Role> op = roleDao.findById(key);
+		if(op.isEmpty()) {
+			throw new ProfileNotFoundException();
+			
+		}
+		return op.get();
 	}
 	public Profile findProfileByToken(String token) throws ProfileNotFoundException {
 		Application application = eurekaClient.getApplication("Login");

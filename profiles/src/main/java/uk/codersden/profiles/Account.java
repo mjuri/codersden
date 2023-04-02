@@ -25,6 +25,9 @@ public class Account {
 	private String country;
 	private String telephone;
 	
+	@Column(name="users_limit")
+	private int usersLimit;
+	
 	@Column( name="number_of_employees")
 	private String numberOfEmployees;
 	
@@ -34,6 +37,9 @@ public class Account {
 	public Account() {
 		
 	}
+	
+
+
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -73,9 +79,16 @@ public class Account {
 	public String getNumberOfEmployees() {
 		return numberOfEmployees;
 	}
+	
 	public void setNumberOfEmployees(String numberOfEmployees) {
 		this.numberOfEmployees = numberOfEmployees;
 	}
 	
-	
+	public int getUsersLimit() {
+		return usersLimit;
+	}
+
+	public void setUsersLimit(int usersLimit) {
+		this.usersLimit = usersLimit;
+	}
 }
