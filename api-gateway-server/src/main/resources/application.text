@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway-service
+
+ 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+         enabled: true
+      routes:
+        - id: profiles-service
+          uri: lb://profiles-service
+          predicates:
+            - Path=/profiles/**
+                        
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/           
+      
+server:
+  port: 8080
