@@ -62,7 +62,47 @@ public class ProfileController {
 		return ResponseEntity.ok(p);
 	}
 	
-	@PostMapping
+	@PutMapping
+	@CrossOrigin
+	public ResponseEntity<?> updateProfile(@RequestBody Profile profile) 
+	{	
+		try {
+			Profile oldProfile = profileService.findProfileByIdentifier(profile.getIdentifier());
+			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
+			Profile p = profileService.update(profile);
+			
+			return ResponseEntity.ok(p);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}	
+	@PostMapping("/account/{accountIdentifier}")
+	@CrossOrigin
+	public ResponseEntity<?> createProfile(@PathVariable("accountIdentifier") String accountIdentifier, 
+			@RequestBody Profile profile) 
+	{	
+
+		Profile p = null;
+		User user = new User();
+		user.setUserName(profile.getEmail());
+		user.setPassword(profileService.generateInitialPassword());
+		
+		try {
+			user = this.profileService.createUser(user);
+			profile.setAccountIdentifier(accountIdentifier);
+			p = profileService.create(profile);
+					
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		
+		return ResponseEntity.ok(p);
+	}
+	
+	@PostMapping("/profile-with-image")
 	@CrossOrigin
 	public ResponseEntity<?> createProfile(@RequestParam("profile") String profilePayload, @RequestParam("file") String fileBase64) 
 	{
@@ -77,7 +117,7 @@ public class ProfileController {
 			if(null != fileBase64 ) {
 				String fileName = this.profileService.saveAvatar(p.getIdentifier(), fileBase64);
 				p.setAvatar(fileName);
-				p = profileService.update(p.getIdentifier(), p);
+				p = profileService.update(p);
 			}			
 			
 		} catch (JsonProcessingException e) {
@@ -149,24 +189,19 @@ public class ProfileController {
 			String fileName = this.profileService.saveAvatar(id, fileBase64);
 			profile.setAvatar(fileName);
 		}
-		p = profileService.update(id, profile);
+		p.setIdentifier(id);
+		p = profileService.update(profile);
 		return ResponseEntity.ok(p);
 	}
 
 
-	@PutMapping("/old/{id}")
-	@CrossOrigin
-	public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile) throws ProfileNotFoundException {
-		Profile p = profileService.findProfileByIdentifier(id);
-		p = profileService.update(id, profile);
-		return ResponseEntity.ok(p);
-	}
+
 	
 	@DeleteMapping("/{id}")
 	public void deleteProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
 		Profile p = profileService.findProfileByIdentifier(id);
 		p.setDeleted(true);
-		profileService.update(id, p);
+		profileService.update(p);
 	}
 	
 	

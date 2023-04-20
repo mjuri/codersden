@@ -82,8 +82,7 @@ public class Profile {
 	@Column(name = "home_phone")
 	private String homePhone;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "contract_identifier", referencedColumnName = "identifier")
+	@OneToOne(mappedBy = "profile")
 	private Contract contract;
 	
 	public Contract getContract() {

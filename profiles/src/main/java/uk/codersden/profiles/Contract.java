@@ -2,15 +2,18 @@ package uk.codersden.profiles;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "contracts")
 public class Contract {
@@ -71,7 +74,10 @@ public class Contract {
 	@Column(name="right_to_work_expiry")
 	private Date rightToWorkExpiry;
 
-	@OneToOne(mappedBy = "contract")
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@JoinColumn(name = "profile_identifier", referencedColumnName = "identifier")
 	private Profile profile;
 	
 	public Profile getProfile() {

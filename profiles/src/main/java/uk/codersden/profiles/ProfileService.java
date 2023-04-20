@@ -93,7 +93,7 @@ public class ProfileService {
         return p;
         
 	}
-	public Profile update(String id, Profile profile) {
+	public Profile update(Profile profile) {
 		Profile p = this.profileDao.save(profile);
 		return p;
 	}
@@ -126,6 +126,11 @@ public class ProfileService {
 		User u = this.userDao.save(user);
 		return u;
 		
+	}
+
+	public String generateInitialPassword() {
+		return PasswordGenerator.generatePassword();
+
 	}
 	
 }
