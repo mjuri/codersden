@@ -1,6 +1,7 @@
 package uk.codersden.profiles;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +15,13 @@ public class Role {
 	
 	private List<Profile> profiles;
 	
+	public Role(String key) {
+		this.key = key;
+	}
+	
+	protected Role() {
+		
+	}
 	@Id
 	private String key;
 	public List<Profile> getProfiles() {
@@ -27,6 +35,21 @@ public class Role {
 	}
 	public void setKey(String key) {
 		this.key = key;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(key);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		return Objects.equals(key, other.key);
 	}
 	
 }

@@ -295,6 +295,8 @@ public class Profile {
 	public void setEntitlementAbsence(int entitlementAbsence) {
 		this.entitlementAbsence = entitlementAbsence;
 	}
+	
+
 	/*public Set<Document> getSharedDocumentsWith() {
 		return sharedDocumentsWith;
 	}

@@ -44,7 +44,12 @@ public class HolidayController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String identifier){
 		List<Holiday> list = new ArrayList<>();
-		list = holidayService.findAllHolidayByProfileIdentifier(identifier);
+		try {
+			list = holidayService.findAllHolidayByProfileIdentifier(identifier);
+		} catch (ProfileNotFoundException e) {
+			ResponseEntity.notFound();
+			e.printStackTrace();
+		}
 		return ResponseEntity.ok(list);
 		
 	}
