@@ -13,6 +13,9 @@ public class HolidayService {
 	public Holiday requestHoliday(Holiday holiday) {
 		// Save holiday on the DB
 		// Send email
+		if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
+			holiday.setStatus(HolidayStatus.APPROVED.toString());
+		}
 		Holiday h = this.holidayDao.save(holiday);
 		return h;
 	}
