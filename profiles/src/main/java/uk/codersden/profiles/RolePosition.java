@@ -34,11 +34,11 @@ public class RolePosition {
 	
 	private String header;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="date_created")
 	private Date dateCreated;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="start_date")
 	private Date startDate;
 	

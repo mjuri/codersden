@@ -76,7 +76,7 @@ public class ProfileService {
 		return op.get();
 	}
 	public Profile findProfileByToken(String token) throws ProfileNotFoundException {
-		Application application = eurekaClient.getApplication("Login");
+		Application application = eurekaClient.getApplication("login-service");
         InstanceInfo instanceInfo = application.getInstances().get(0);
         String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort()
         + "/access/" + token;
@@ -131,6 +131,10 @@ public class ProfileService {
 	public String generateInitialPassword() {
 		return PasswordGenerator.generatePassword();
 
+	}
+
+	public List<Profile> findProfilesByAccount(String accountIdentifier) {
+		return this.profileDao.findAllByAccountIdentifier(accountIdentifier);
 	}
 	
 }

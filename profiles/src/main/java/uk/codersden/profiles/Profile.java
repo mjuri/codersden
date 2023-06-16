@@ -37,7 +37,7 @@ public class Profile {
 	@Column(name ="lastname")
 	private String lastName;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dob;
 	private String email;
 	

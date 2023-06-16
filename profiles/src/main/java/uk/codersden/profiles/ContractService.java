@@ -47,11 +47,17 @@ public class ContractService {
 
 
 
-	public Contract updateContract(Contract contract) throws ContractNotFoundException {
+	public Contract updateContract(String profileIdentifier, Contract contract) throws ContractNotFoundException, ProfileNotFoundException {
+		Optional<Profile> opProfile = this.profileDao.findById(profileIdentifier);
+		if(opProfile.isEmpty()) {
+			throw new ProfileNotFoundException();
+		}
 		Optional<Contract> op = this.contractDao.findById(contract.getIdentifier());
 		if(op.isEmpty()) {
 			throw new ContractNotFoundException();
 		}
+		Profile profile = opProfile.get();
+		contract.setProfile(profile);
 		Contract updatedContract = this.contractDao.save(contract);
 		return updatedContract;
 	}

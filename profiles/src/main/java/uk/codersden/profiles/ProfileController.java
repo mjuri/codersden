@@ -42,9 +42,9 @@ public class ProfileController {
 	@Autowired
 	private AccountService accountService;
 	
-	@GetMapping
-	public List<Profile> retrieveAllProfiles(){
-		return profileService.findAllProfiles();
+	@GetMapping("/account/{accountIdentifier}")
+	public List<Profile> retrieveAllProfiles(@PathVariable("accountIdentifier") String accountIdentifier){
+		return profileService.findProfilesByAccount(accountIdentifier);
 		
 	}
 	

@@ -15,3 +15,7 @@ spring:
           uri: lb://profiles-service
           predicates:
             - Path=/profiles/**
+        - id: login-service
+          uri: lb://login-service
+          predicates:
+            - Path=/login/**            

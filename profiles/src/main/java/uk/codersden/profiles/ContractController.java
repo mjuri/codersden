@@ -35,13 +35,13 @@ public class ContractController {
 		}
 		return ResponseEntity.ok(newContract);
 	}
-	@PutMapping
+	@PutMapping("/profile/{profileIdentifier}")
 	@CrossOrigin
-	public ResponseEntity<?> updateContract(@RequestBody Contract contract) 
+	public ResponseEntity<?> updateContract(@PathVariable("profileIdentifier") String profileIdentifier, @RequestBody Contract contract) 
 	{
 		Contract updatedContract = null;
 		try {
-			updatedContract = this.contractService.updateContract(contract);
+			updatedContract = this.contractService.updateContract(profileIdentifier, contract);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

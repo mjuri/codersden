@@ -25,30 +25,132 @@ public class Contract {
     )
 	private String identifier;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="length_of_service")
+	private String lengthOfService;
+	
+	@Column(name="notice_period")
+	private String noticePeriod;
+	
+	@Column(name="hours_per_week")
+	private Integer hoursPerWeek;
+	
+	@Column(name="days_per_week")
+	private Integer daysPerWeek;
+	
+	private Integer fte;
+	
+	@Column(name="my_line_manager")
+	private String myLineManager;
+	
+	@Column(name="work_pattern")
+	private String workPattern;
+	
+	public String getLengthOfService() {
+		return lengthOfService;
+	}
+
+	public void setLengthOfService(String lengthOfService) {
+		this.lengthOfService = lengthOfService;
+	}
+
+	public String getNoticePeriod() {
+		return noticePeriod;
+	}
+
+	public void setNoticePeriod(String noticePeriod) {
+		this.noticePeriod = noticePeriod;
+	}
+
+	public Integer getHoursPerWeek() {
+		return hoursPerWeek;
+	}
+
+	public void setHoursPerWeek(Integer hoursPerWeek) {
+		this.hoursPerWeek = hoursPerWeek;
+	}
+
+	public Integer getDaysPerWeek() {
+		return daysPerWeek;
+	}
+
+	public void setDaysPerWeek(Integer daysPerWeek) {
+		this.daysPerWeek = daysPerWeek;
+	}
+
+	public Integer getFte() {
+		return fte;
+	}
+
+	public void setFte(Integer fte) {
+		this.fte = fte;
+	}
+
+	public String getMyLineManager() {
+		return myLineManager;
+	}
+
+	public void setMyLineManager(String myLineManager) {
+		this.myLineManager = myLineManager;
+	}
+
+	public String getWorkPattern() {
+		return workPattern;
+	}
+
+	public void setWorkPattern(String workPattern) {
+		this.workPattern = workPattern;
+	}
+
+	public Integer getHolidayEntitlement() {
+		return holidayEntitlement;
+	}
+
+	public void setHolidayEntitlement(Integer holidayEntitlement) {
+		this.holidayEntitlement = holidayEntitlement;
+	}
+
+	public Integer getHolidayBroughtForward() {
+		return holidayBroughtForward;
+	}
+
+	public void setHolidayBroughtForward(Integer holidayBroughtForward) {
+		this.holidayBroughtForward = holidayBroughtForward;
+	}
+
+	public void setRightToWorkExpires(Date rightToWorkExpires) {
+		this.rightToWorkExpires = rightToWorkExpires;
+	}
+
+	@Column(name="holiday_entitlement")
+	private Integer holidayEntitlement;
+	
+	@Column(name="holiday_brought_forward")
+	private Integer holidayBroughtForward;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="start_date")
 	private Date startDate;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="cont_service")
 	private Date contService;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="contract_end_date")
 	private Date contractEndDate;
 
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="onboard_date")
 	private Date onBoardDate;
 	
 	@Column(name="onboard_contract")
 	private String onBoardContract;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="benefits_start")
 	private Date benefitsStart;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="review_date")
 	private Date reviewDate;
 	
@@ -70,9 +172,9 @@ public class Contract {
 	@Column(name="right_to_work")
 	private String rightToWork;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
-	@Column(name="right_to_work_expiry")
-	private Date rightToWorkExpiry;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@Column(name="right_to_work_expires")
+	private Date rightToWorkExpires;
 
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -216,12 +318,12 @@ public class Contract {
 		this.rightToWork = rightToWork;
 	}
 
-	public Date getRightToWorkExpiry() {
-		return rightToWorkExpiry;
+	public Date getRightToWorkExpires() {
+		return rightToWorkExpires;
 	}
 
-	public void setRightToWorkExpiry(Date rightToWorkExpiry) {
-		this.rightToWorkExpiry = rightToWorkExpiry;
+	public void setRightToWorkExpiry(Date rightToWorkExpires) {
+		this.rightToWorkExpires = rightToWorkExpires;
 	}
 	
 	

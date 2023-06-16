@@ -27,12 +27,24 @@ public class HolidayController {
 		
 		return ResponseEntity.ok(h);
 	}
-	
+	@CrossOrigin
+	@GetMapping("/profile/{profileIdentifier}")
+	public ResponseEntity<?> retrieveHolidaysByProfile(@PathVariable("profileIdentifier") String profileIdentifier){
+		List<Holiday> list = new ArrayList<>();
+		try {
+			list = holidayService.findAllHolidayByProfileIdentifier(profileIdentifier);
+		}catch(Exception e) {
+			ResponseEntity.internalServerError().body(e);
+		}
+		
+		return ResponseEntity.ok(list);
+		
+	}
 	@CrossOrigin
 	@GetMapping("/{id}")
-	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String id){
+	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String identifier){
 		List<Holiday> list = new ArrayList<>();
-		list = holidayService.findAllHolidayByProfileIdentifier(id);
+		list = holidayService.findAllHolidayByProfileIdentifier(identifier);
 		return ResponseEntity.ok(list);
 		
 	}
