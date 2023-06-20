@@ -59,4 +59,21 @@ public class HolidayService {
 	public List<Holiday> findAllRequestedHolidays(String managerIdentifer){
 		return this.holidayDao.findAllByAuthorizedByAndStatus(managerIdentifer, HolidayStatus.REQUESTED.toString());
 	}
+
+	public Holiday findByHolidayIdentifier(String identifier) throws HolidayNotFoundException {
+		Optional<Holiday> op = holidayDao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new HolidayNotFoundException();
+		}
+		Holiday h = op.get();
+		return h;
+	}
+
+	public Holiday approveHolidayRequest(String identifier) throws HolidayNotFoundException {
+		Holiday h = this.findByHolidayIdentifier(identifier);
+		
+		h.setStatus(HolidayStatus.APPROVED.toString());
+		return this.holidayDao.save(h);
+		
+	}
 }

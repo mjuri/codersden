@@ -28,6 +28,16 @@ public class HolidayController {
 		return ResponseEntity.ok(h);
 	}
 	@CrossOrigin
+	@PostMapping("/approve/{holidayIdentifier}")
+	public ResponseEntity<?> approveHoliday(@PathVariable("holidayIdentifier") String identifier) throws HolidayNotFoundException{
+		
+		Holiday holiday = this.holidayService.approveHolidayRequest(identifier);
+		return ResponseEntity.ok(holiday);
+		
+	}
+	
+	
+	@CrossOrigin
 	@GetMapping("/profile/{profileIdentifier}")
 	public ResponseEntity<?> retrieveHolidaysByProfile(@PathVariable("profileIdentifier") String profileIdentifier){
 		List<Holiday> list = new ArrayList<>();
