@@ -36,7 +36,14 @@ public class HolidayController {
 		
 	}
 	
-	
+	@CrossOrigin
+	@PostMapping("/reject/{holidayIdentifier}")
+	public ResponseEntity<?> rejectHoliday(@PathVariable("holidayIdentifier") String identifier) throws HolidayNotFoundException{
+		
+		Holiday holiday = this.holidayService.rejectHolidayRequest(identifier);
+		return ResponseEntity.ok(holiday);
+		
+	}
 	@CrossOrigin
 	@GetMapping("/profile/{profileIdentifier}")
 	public ResponseEntity<?> retrieveHolidaysByProfile(@PathVariable("profileIdentifier") String profileIdentifier){

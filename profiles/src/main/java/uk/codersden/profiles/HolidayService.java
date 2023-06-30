@@ -76,4 +76,11 @@ public class HolidayService {
 		return this.holidayDao.save(h);
 		
 	}
+
+	public Holiday rejectHolidayRequest(String identifier) throws HolidayNotFoundException {
+		Holiday h = this.findByHolidayIdentifier(identifier);
+		
+		h.setStatus(HolidayStatus.REJECTED.toString());
+		return this.holidayDao.save(h);
+	}
 }
