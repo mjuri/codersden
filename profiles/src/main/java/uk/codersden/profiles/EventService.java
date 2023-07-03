@@ -16,7 +16,7 @@ public class EventService {
 	@Autowired
 	private ProfileDao profileDao;
 	
-	public List<Holiday> findAllEventsByProfileIdentifier(String profileIdentifier) throws ProfileNotFoundException {
+	public List<Event> findAllEventsByProfileIdentifier(String profileIdentifier) throws ProfileNotFoundException {
 		Optional<Profile> optional = profileDao.findById(profileIdentifier);
 		if(optional.isEmpty()) {
 			throw new ProfileNotFoundException();
@@ -24,10 +24,37 @@ public class EventService {
 		
 		Profile p = optional.get();
 		
-		List<Holiday> list = this.eventDao.findAllByProfileIdentifier(profileIdentifier);
+		List<Event> list = this.eventDao.findAllByProfileIdentifier(profileIdentifier);
 		
 		
 		return list;
+	}
+
+	public Event createEvent(Event event) {
+		Event newEvent = this.eventDao.save(event);
+		
+		return newEvent;
+	}
+	
+	public Event updateEvent(String eventIdentifier, Event event) throws EventNotFoundException {
+		Optional<Event> optional = eventDao.findById(eventIdentifier);
+		if(optional.isEmpty()) {
+			throw new EventNotFoundException();
+		}
+		
+		Event newEvent = this.eventDao.save(event);
+		
+		return newEvent;
+	}
+
+	public Event findEventIdentifier(String eventIdentifier) throws EventNotFoundException {
+		Optional<Event> optional = eventDao.findById(eventIdentifier);
+		if(optional.isEmpty()) {
+			throw new EventNotFoundException();
+			
+		}
+		
+		return optional.get();
 	}
 
 	

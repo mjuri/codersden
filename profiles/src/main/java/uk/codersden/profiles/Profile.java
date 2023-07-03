@@ -4,7 +4,9 @@ package uk.codersden.profiles;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -296,6 +299,22 @@ public class Profile {
 		this.entitlementAbsence = entitlementAbsence;
 	}
 	
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "event_attendee",
+        joinColumns = @JoinColumn(name = "profile_identifier"),
+        inverseJoinColumns = @JoinColumn(name = "event_identifier")
+    )
+	@JsonIgnoreProperties("attendees")
+    private List<Event> events;
+
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 
 	/*public Set<Document> getSharedDocumentsWith() {
 		return sharedDocumentsWith;

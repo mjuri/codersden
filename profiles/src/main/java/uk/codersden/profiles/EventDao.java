@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventDao extends JpaRepository<Event, String> {
 
-	List<Holiday> findAllByProfileIdentifier(String id);
+	List<Event> findAllByProfileIdentifier(String id);
 }

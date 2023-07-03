@@ -2,17 +2,23 @@ package uk.codersden.profiles;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name = "events")
 public class Event {
@@ -35,24 +41,27 @@ public class Event {
 	}
     
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp start;
+	@Column(name="start")
+	private Timestamp startDate;
 	
 	@Column(name="end_date")
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp end;
+	private Timestamp endDate;
 	
-    private String comments;
-    private String type;
+	private String description;
+	private String label;
     private String status;
     
 	@Column(name="profile_identifier")
 	private String profileIdentifier;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@CreationTimestamp
 	@Column(name="date_created")
 	private Date dateCreated;
 	
 	@Column(name="mod_date")
+	@CreationTimestamp
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date modDate;
 	
@@ -62,16 +71,32 @@ public class Event {
 	@Column(name="includesunday")
 	private boolean includeSunday;
 	
-	@Column(name="halfdaystart")
-	private boolean halfDayStart;
-	
-	@Column(name="halfdayend")
-	private boolean halfDayEnd;
     
-    private String location;
+	@Column(name="all_day")
+	private boolean allDay;
+	
+    public boolean isAllDay() {
+		return allDay;
+	}
+	public void setAllDay(boolean allDay) {
+		this.allDay = allDay;
+	}
+	private String title;
+	private String location;
     private String url;
-   
-    // Default constructor
+    
+    @ManyToMany(mappedBy = "events")
+    private Set<Profile> attendees = new HashSet<>();
+	
+    
+    public Set<Profile> getAttendees() {
+		return attendees;
+	}
+	public void setAttendees(Set<Profile> attendees) {
+		this.attendees = attendees;
+	}
+	
+	// Default constructor
     public Event() {
     }
     
@@ -97,39 +122,38 @@ public class Event {
         this.identifier = identifier;
     }
     
-    public Timestamp getStart() {
-        return start;
+    public Timestamp getStartDate() {
+        return startDate;
     }
     
-    public void setStart(Timestamp start) {
-        this.start = start;
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
     }
     
     public Timestamp getEndDate() {
-        return end;
+        return endDate;
     }
     
     public void setEndDate(Timestamp endDate) {
-        this.end = endDate;
+        this.endDate = endDate;
     }
+        
+    public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
     
-    public String getComments() {
-        return comments;
-    }
+    public String getLabel() {
+		return label;
+	}
     
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-    
-    public String getType() {
-        return type;
-    }
-    
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String getStatus() {
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public String getStatus() {
         return status;
     }
     
@@ -177,21 +201,13 @@ public class Event {
     public void setIncludeSunday(boolean includeSunday) {
         this.includeSunday = includeSunday;
     }
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
     
-    public boolean isHalfDayStart() {
-        return halfDayStart;
-    }
     
-    public void setHalfDayStart(boolean halfDayStart) {
-        this.halfDayStart = halfDayStart;
-    }
-    
-    public boolean isHalfDayEnd() {
-        return halfDayEnd;
-    }
-    
-    public void setHalfDayEnd(boolean halfDayEnd) {
-        this.halfDayEnd = halfDayEnd;
-    }
 }
 
