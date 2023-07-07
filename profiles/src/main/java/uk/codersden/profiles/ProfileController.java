@@ -43,11 +43,12 @@ public class ProfileController {
 	private AccountService accountService;
 	
 	@GetMapping("/account/{accountIdentifier}")
+	@CrossOrigin
 	public List<Profile> retrieveAllProfiles(@PathVariable("accountIdentifier") String accountIdentifier){
 		return profileService.findProfilesByAccount(accountIdentifier);
 		
 	}
-	
+
 	@GetMapping("/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> retrieveProfile(@PathVariable("id") String id) throws ProfileNotFoundException {
