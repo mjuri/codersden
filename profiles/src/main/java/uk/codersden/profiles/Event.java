@@ -2,6 +2,7 @@ package uk.codersden.profiles;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -96,6 +98,16 @@ public class Event {
 		this.attendees = attendees;
 	}
 	
+    @Transient
+    private HashMap<String, String>[] attendeesValues = new HashMap<>();
+    
+
+	public HashMap<String, String>[] getAttendeesValues() {
+		return attendeesValues;
+	}
+	public void setAttendeesValues(HashMap<String, String>[] attendeesValues) {
+		this.attendeesValues = attendeesValues;
+	}
 	// Default constructor
     public Event() {
     }
