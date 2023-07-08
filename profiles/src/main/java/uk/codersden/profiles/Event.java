@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -99,13 +100,13 @@ public class Event {
 	}
 	
     @Transient
-    private HashMap<String, String>[] attendeesValues = new HashMap<>();
+    private List<Map<String, String>> attendeesValues;
     
 
-	public HashMap<String, String>[] getAttendeesValues() {
+	public List<Map<String, String>> getAttendeesValues() {
 		return attendeesValues;
 	}
-	public void setAttendeesValues(HashMap<String, String>[] attendeesValues) {
+	public void setAttendeesValues(List<Map<String, String>> attendeesValues) {
 		this.attendeesValues = attendeesValues;
 	}
 	// Default constructor
@@ -219,7 +220,14 @@ public class Event {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-    
+	public void addAttendee(Profile profile) {
+		attendees.add(profile);
+		profile.getEvents().add(this);
+	}
+	public void removeAttendee(Profile profile) {
+		attendees.remove(profile);
+		profile.getEvents().remove(this);
+	}
     
 }
 

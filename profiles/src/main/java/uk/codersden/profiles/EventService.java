@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,18 +36,30 @@ public class EventService {
 	}
 
 	public Event createEvent(Event event) {
-		
+
 		Set<Profile> attendees = new HashSet<Profile>();
-		HashMap<String, String>[] attendeesValues = event.getAttendeesValues();
-		
-		for (int i = 0; i < attendeesValues.length; i++) {
-			attendeesValues[i].get("value");
+		List<Map<String, String>> attendeesValues = event.getAttendeesValues();
+		Profile profile;
+		for (Map<String, String> map : attendeesValues) {
+			try {
+				Optional<Profile> p = this.profileDao.findById(map.get("value"));
+				if (p.isEmpty()) {
+					throw new ProfileNotFoundException();
+				}
+				profile = p.get();
+				event.addAttendee(profile);
+
+			} catch (ProfileNotFoundException e) {
+				System.out.println(e);
+			}
 		}
 
-		event.setAttendees(attendees);
+
 		Event newEvent = this.eventDao.save(event);
 		return newEvent;
 	}
+
+
 	
 	public Event updateEvent(String eventIdentifier, Event event) throws EventNotFoundException {
 		Optional<Event> optional = eventDao.findById(eventIdentifier);

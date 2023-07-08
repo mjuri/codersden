@@ -307,6 +307,7 @@ public class Profile {
         inverseJoinColumns = @JoinColumn(name = "event_identifier")
     )
 	@JsonIgnoreProperties("attendees")
+	@JsonIgnore
     private List<Event> events;
 
 	public List<Event> getEvents() {
