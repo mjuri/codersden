@@ -46,7 +46,7 @@ public class EventController {
 		Event e;
 		try {
 			e = this.eventService.updateEvent(eventIdentifier, event);
-		} catch (EventNotFoundException e1) {
+		} catch (ProfileNotFoundException | EventNotFoundException e1) {
 			return ResponseEntity.notFound().build();
 		}
 		

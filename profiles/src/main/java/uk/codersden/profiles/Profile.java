@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -300,7 +301,7 @@ public class Profile {
 	}
 	
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinTable(
         name = "event_attendee",
         joinColumns = @JoinColumn(name = "profile_identifier"),
@@ -308,12 +309,12 @@ public class Profile {
     )
 	@JsonIgnoreProperties("attendees")
 	@JsonIgnore
-    private List<Event> events;
+    private Set<Event> events;
 
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return events;
 	}
-	public void setEvents(List<Event> events) {
+	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
 
