@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -316,6 +317,21 @@ public class Profile {
 	}
 	public void setEvents(Set<Event> events) {
 		this.events = events;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(identifier);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Profile other = (Profile) obj;
+		return Objects.equals(identifier, other.identifier);
 	}
 
 	/*public Set<Document> getSharedDocumentsWith() {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -228,6 +229,21 @@ public class Event {
 	public void removeAttendee(Profile profile) {
 		attendees.remove(profile);
 		profile.getEvents().remove(this);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(identifier);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		return Objects.equals(identifier, other.identifier);
 	}
     
 }

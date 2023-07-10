@@ -80,6 +80,7 @@ public class EventService {
 		event.setProfile(opProfile.get());
 		event.setProfileIdentifier(event.getProfile().getIdentifier());
 		*/
+		Set<Profile> updatedAttendees = new HashSet<Profile>();
 		List<Map<String, String>> attendeesValues = event.getAttendeesValues();
 		Profile profile;
 		for (Map<String, String> map : attendeesValues) {
@@ -92,9 +93,15 @@ public class EventService {
 				if(!existingEvent.getAttendees().contains(profile)) {
 					event.addAttendee(profile);
 				}	
-
+				updatedAttendees.add(profile);
+				
 			} catch (ProfileNotFoundException e) {
 				System.out.println(e);
+			}
+		}
+		for(Profile p: existingEvent.getAttendees()) {
+			if(!updatedAttendees.contains(p)) {
+				existingEvent.removeAttendee(p);
 			}
 		}
 
