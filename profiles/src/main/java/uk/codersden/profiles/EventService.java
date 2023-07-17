@@ -72,14 +72,14 @@ public class EventService {
 			throw new EventNotFoundException();
 		}
 		Event existingEvent = optional.get();
-		/*Optional<Profile> opProfile = profileDao.findById(event.getProfileIdentifier());
+		Optional<Profile> opProfile = profileDao.findById(event.getProfileIdentifier());
 		
 		if(opProfile.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
 		event.setProfile(opProfile.get());
 		event.setProfileIdentifier(event.getProfile().getIdentifier());
-		*/
+		
 		Set<Profile> updatedAttendees = new HashSet<Profile>();
 		List<Map<String, String>> attendeesValues = event.getAttendeesValues();
 		Profile profile;
