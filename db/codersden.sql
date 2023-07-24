@@ -320,7 +320,9 @@ CREATE TABLE public.role_positions (
     contract_type character varying(10),
     date_created date DEFAULT now(),
     start_date date DEFAULT now(),
-    header character varying(400) NOT NULL
+    header character varying(400) NOT NULL,
+    status character varying(20) DEFAULT 'REQUESTED'::character varying,
+    assigned character varying(50)
 );
 
 
@@ -485,6 +487,12 @@ COPY public.documents (identifier, img, profile_identifier, name, date_created) 
 --
 
 COPY public.event_attendee (event_identifier, profile_identifier, status) FROM stdin;
+200bd6b6-ac24-4f4c-9c3b-e9328ab6aea0	727910f3-4c49-4b13-b781-efc654044e29	\N
+200bd6b6-ac24-4f4c-9c3b-e9328ab6aea0	7bf56177-8a14-4f07-8d23-246949d65955	\N
+d2d922c4-ae03-4a28-8978-33440fac49b3	7bf56177-8a14-4f07-8d23-246949d65955	\N
+fc6dfdcf-2509-46da-9b3a-d0ba4c888257	727910f3-4c49-4b13-b781-efc654044e29	\N
+22a6547c-2cb0-492e-ab53-81b12ff67e08	727910f3-4c49-4b13-b781-efc654044e29	\N
+22a6547c-2cb0-492e-ab53-81b12ff67e08	7bf56177-8a14-4f07-8d23-246949d65955	\N
 \.
 
 
@@ -493,7 +501,10 @@ COPY public.event_attendee (event_identifier, profile_identifier, status) FROM s
 --
 
 COPY public.events (identifier, start, end_date, description, location, url, label, status, profile_identifier, date_created, mod_date, includesaturday, includesunday, all_day, title) FROM stdin;
-e4fb462c-cd7b-4aab-9d99-3eb10e632a4e	2023-07-07 09:00:39	2023-07-20 09:00:39	Test 1	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-07	2023-07-07	f	f	f	Test 1
+200bd6b6-ac24-4f4c-9c3b-e9328ab6aea0	2023-07-24 08:30:00	2023-07-26 09:00:00	Test with Attendees 33	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-10	2023-07-20	f	f	f	Test with Attendees 44
+d2d922c4-ae03-4a28-8978-33440fac49b3	2023-07-17 09:00:00	2023-07-17 10:00:00	Test with attendees #3	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-10	2023-07-10	f	f	f	Test with attendees #3
+fc6dfdcf-2509-46da-9b3a-d0ba4c888257	2023-07-14 09:00:00	2023-07-21 09:30:00	test1	\N	https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MDY2YTg5YTgtZjczOS00ZGMzLThkYmEtNWQ5YzBkNzhmODhh%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252235c7930b-3d66-461d-9cf9-b0f8b54754a9%2522%252c%2522Oid%2522%253a%2522096eefcc-0762-421d-8078-c7b0e17d07b0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=87dd5432-46a1-4525-94e3-9b9a50f8f43e&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-14	2023-07-14	f	f	f	Title
+22a6547c-2cb0-492e-ab53-81b12ff67e08	2023-07-14 10:00:00	2023-07-26 10:00:00	test	\N	\N	Business	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-14	2023-07-14	f	f	t	Title 35678
 \.
 
 
@@ -728,7 +739,7 @@ c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8f
 -- Data for Name: role_positions; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header) FROM stdin;
+COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned) FROM stdin;
 \.
 
 
@@ -1041,6 +1052,14 @@ ALTER TABLE ONLY public.profile_role
 
 ALTER TABLE ONLY public.profiles
     ADD CONSTRAINT profiles_account_identifier_fkey FOREIGN KEY (account_identifier) REFERENCES public.accounts(identifier);
+
+
+--
+-- Name: role_positions role_positions_assigned_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.role_positions
+    ADD CONSTRAINT role_positions_assigned_fkey FOREIGN KEY (assigned) REFERENCES public.profiles(identifier);
 
 
 --

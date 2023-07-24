@@ -13,7 +13,11 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+/**
+ * It's nice to have the different states of the roles, but this could be developed in the future
+ * @author mvelasco
+ *
+ */
 @Entity(name = "role_positions")
 public class RolePosition {
 	@Id
@@ -25,12 +29,50 @@ public class RolePosition {
 	private String identifier;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "requested_by", referencedColumnName = "identifier")
+	@JoinColumn(name = "requested_by", referencedColumnName = "identifier", insertable = false, updatable = false)
 	private Profile requestedBy;
 	private String grade;
 	private String salaryLevel;
 	private String jobDescription;
+	
+	@Column(name="requested_by")
+	private String requestorIdentifier;
+	
+	@Column(name="assigned")
+	private String assignedIdentifier;
+	
+	
+	public String getAssignedIdentifier() {
+		return assignedIdentifier;
+	}
+	public void setAssignedIdentifier(String assignedIdentifier) {
+		this.assignedIdentifier = assignedIdentifier;
+	}
+	public String getRequestorIdentifier() {
+		return requestorIdentifier;
+	}
+	public void setRequestorIdentifier(String requestorIdentifier) {
+		this.requestorIdentifier = requestorIdentifier;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Profile getAssigned() {
+		return assigned;
+	}
+	public void setAssigned(Profile assigned) {
+		this.assigned = assigned;
+	}
 	private String contractType;
+	private String status;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "assigned", referencedColumnName = "identifier", insertable = false, updatable = false)
+	private Profile assigned;
 	
 	private String header;
 	
