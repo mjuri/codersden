@@ -41,8 +41,10 @@ public class RolePositionService {
     }
 
 	public List<RolePosition> findAllRolePositionsForUser(String identifier) {
-		//return this.rolePositionDao.findAllByAssignedIdentifierOrRequestorIdentifier(identifier);
-		return new ArrayList<RolePosition>();
+		String assignedIdentifier = identifier;
+		String requestorIdentifier = identifier;
+		return this.rolePositionDao.findByAssignedIdentifierOrRequestorIdentifier(assignedIdentifier, requestorIdentifier);
+
 		
 	}
 	

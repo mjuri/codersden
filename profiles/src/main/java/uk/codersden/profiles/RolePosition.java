@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,7 +29,7 @@ public class RolePosition {
     )
 	private String identifier;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "requested_by", referencedColumnName = "identifier", insertable = false, updatable = false)
 	private Profile requestedBy;
 	private String grade;
@@ -70,8 +71,8 @@ public class RolePosition {
 	private String contractType;
 	private String status;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "assigned", referencedColumnName = "identifier", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "assigned", nullable=true, referencedColumnName = "identifier", insertable = false, updatable = false)
 	private Profile assigned;
 	
 	private String header;
