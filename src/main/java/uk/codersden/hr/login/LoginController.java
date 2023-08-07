@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.codersden.hr.profiles.User;
 
-@RestController("/login")
+@RestController
+@RequestMapping("/login")
 public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
 	
 	@PostMapping
-	@CrossOrigin(origins = "https://bright-staff-tool-55b302ad437b.herokuapp.com")
+	@CrossOrigin
 	public ResponseEntity<?> loginUser(@RequestBody User login) {
 		
 		AccountAccess access;
