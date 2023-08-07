@@ -20,7 +20,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@PostMapping
-	@CrossOrigin
+	@CrossOrigin(origins = "https://bright-staff-tool-55b302ad437b.herokuapp.com")
 	public ResponseEntity<?> loginUser(@RequestBody User login) {
 		
 		AccountAccess access;
