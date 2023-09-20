@@ -72,13 +72,13 @@ ALTER TABLE public.accounts OWNER TO mvelasco;
 
 CREATE TABLE public.contracts (
     identifier character varying(50) NOT NULL,
-    start_date date NOT NULL,
-    cont_service date NOT NULL,
-    contract_end_date date,
-    onboard_date date,
+    start_date timestamp without time zone NOT NULL,
+    cont_service timestamp without time zone NOT NULL,
+    contract_end_date timestamp without time zone,
+    onboard_date timestamp without time zone,
     onboard_contract character varying(50),
-    benefits_start date,
-    review_date date,
+    benefits_start timestamp without time zone,
+    review_date timestamp without time zone,
     job_type character varying(120),
     country character varying(100),
     office_role character varying(120),
@@ -96,7 +96,7 @@ CREATE TABLE public.contracts (
     fte character varying(3),
     work_pattern character varying(3),
     my_line_manager character varying(50),
-    right_to_work_expires date,
+    right_to_work_expires timestamp without time zone,
     holiday_entitlement character varying(4),
     holiday_brought_forward character varying(4)
 );
@@ -156,6 +156,21 @@ CREATE TABLE public.events (
 
 
 ALTER TABLE public.events OWNER TO mvelasco;
+
+--
+-- Name: goals; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.goals (
+    identifier character varying(50) NOT NULL,
+    name character varying(200) NOT NULL,
+    target character varying(200),
+    deadline date NOT NULL,
+    profile_identifier character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.goals OWNER TO mvelasco;
 
 --
 -- Name: holidays; Type: TABLE; Schema: public; Owner: mvelasco
@@ -446,6 +461,14 @@ feb7ace9-0a60-42a9-bdda-dd1b7be57b49	mariano.juri@yahoo.co.uk	2023-06-16 19:43:3
 d89a4a50-a889-4b9e-8f41-6ba02e87868d	florence@ndthemachine.com	2023-06-28 10:30:28.097	2023-06-28 11:40:04.146
 82586e09-212a-4f3c-a8d3-d564b0478b47	florence@ndthemachine.com	2023-06-28 13:42:54.131	2023-06-28 13:43:15.777
 39efa7a7-d45c-4254-a8bc-a5a7a1e451ac	mariano.juri@yahoo.co.uk	2023-06-28 13:43:33.635	\N
+9595afca-2ebb-4c05-86bf-e2626cb9541a	mariano.juri@yahoo.co.uk	2023-08-16 16:43:30.529	\N
+fa30fe4f-72e6-4f62-b5e5-8663ef8a7743	alejandro.fantino6666@neura.com.ar	2023-08-16 17:01:44.935	\N
+4c6c86cc-c307-449a-aede-3ee21b2e07e2	alejandro.fantino7777@neura.com.ar	2023-08-16 17:49:11.698	2023-08-18 12:15:05.545
+5088b090-d33c-4f0a-8c63-922ae9f9de74	mariano.juri@yahoo.co.uk	2023-08-23 11:09:57.104	2023-08-23 14:45:38.215
+2438431d-9e59-40d7-9506-5f584cd0c2e5	mariano.juri@yahoo.co.uk	2023-08-23 14:45:43.367	2023-08-23 15:15:42.669
+0765d99e-099b-4707-8769-7151e79e8e7b	mariano.juri@yahoo.co.uk	2023-08-23 15:19:51.047	2023-09-06 09:41:59.523
+6dc5760c-a854-4a89-b11d-0b47559583bd	mariano.juri@yahoo.co.uk	2023-09-06 09:44:13.848	\N
+cadfbdce-b247-41c6-8711-bf406b179887	mariano.juri@yahoo.co.uk	2023-09-08 12:25:59.383	\N
 \.
 
 
@@ -458,6 +481,14 @@ a06dc590-8690-431a-9de0-167905011b47	Sky News	\N	\N	\N	\N	51-100	5
 b81c2aba-b0ee-4642-9f90-7cc435ba2bcf	jorge.pontoriero@gmail.com	\N	\N	\N	\N	\N	5
 8fddb239-8f82-4154-9098-ecf16345a853	John Doe LTD	\N	\N	\N	\N	51-100	0
 69609916-442b-413d-a439-c3e505b9d000	mariano.juri@yahoo.co.uk	\N	\N	\N	\N	\N	0
+2f7dd967-4367-4794-94de-9306612a7854	Libertad Avanza	\N	\N	\N	\N		0
+b2b55608-535e-4274-aff3-332c9bcf5cb5	Libertad Avanza	\N	\N	\N	\N		0
+5164fbf6-b966-4a47-bced-6769713c65ab	Libertad Avanza	\N	\N	\N	\N		0
+cda2ddd2-d9ee-4df0-bd3f-e4c679bb8c55	Libertad Avanza	\N	\N	\N	\N		0
+0dfae1ed-16cb-46b9-aaf5-b5df563cc90a	Libertad Avanza	\N	\N	\N	\N		0
+fea594ef-19f3-490b-a9dc-172d663f874b	Libertad Avanza	\N	\N	\N	\N		0
+04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	Neura	\N	\N	\N	\N		0
+f950ca75-e7c6-44a5-8fcf-28313e727609	Neura	\N	\N	\N	\N		0
 \.
 
 
@@ -466,11 +497,12 @@ b81c2aba-b0ee-4642-9f90-7cc435ba2bcf	jorge.pontoriero@gmail.com	\N	\N	\N	\N	\N	5
 --
 
 COPY public.contracts (identifier, start_date, cont_service, contract_end_date, onboard_date, onboard_contract, benefits_start, review_date, job_type, country, office_role, location, department, team, cost_centre, line_manager, right_to_work, profile_identifier, length_of_service, notice_period, hours_per_week, days_per_week, fte, work_pattern, my_line_manager, right_to_work_expires, holiday_entitlement, holiday_brought_forward) FROM stdin;
-9c5968c3-7f88-49e4-8ece-11c4e6204eb6	1990-01-01	1990-01-01	\N	\N	\N	1990-01-01	\N			\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-df7b8005-ff16-4948-9647-a9dd8723e76a	1990-01-01	1990-01-01	\N	\N	\N	1990-01-01	\N			\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-bdff0272-a623-4c9f-b1d8-f453aee03e05	1990-01-01	1990-01-01	\N	\N	\N	1990-01-01	\N		Endland	\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-17ba9a47-2fde-40fb-aa84-b8ce4b1469fb	2022-03-02	2013-01-01	\N	\N	\N	2013-01-01	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	\N	50	3 months	0	0	0	d	d	2013-01-01	0	0
-972d58cc-009b-4a2e-9a0f-2ab3d4ffc750	2022-03-02	2013-01-01	\N	\N	\N	2013-01-01	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	7bf56177-8a14-4f07-8d23-246949d65955	50	3 months	0	0	0	d	lll	2013-01-01	0	0
+9c5968c3-7f88-49e4-8ece-11c4e6204eb6	1990-01-01 00:00:00	1990-01-01 00:00:00	\N	\N	\N	1990-01-01 00:00:00	\N			\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+df7b8005-ff16-4948-9647-a9dd8723e76a	1990-01-01 00:00:00	1990-01-01 00:00:00	\N	\N	\N	1990-01-01 00:00:00	\N			\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+bdff0272-a623-4c9f-b1d8-f453aee03e05	1990-01-01 00:00:00	1990-01-01 00:00:00	\N	\N	\N	1990-01-01 00:00:00	\N		Endland	\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+17ba9a47-2fde-40fb-aa84-b8ce4b1469fb	2022-03-02 00:00:00	2013-01-01 00:00:00	\N	\N	\N	2013-01-01 00:00:00	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	\N	50	3 months	0	0	0	d	d	2013-01-01 00:00:00	0	0
+972d58cc-009b-4a2e-9a0f-2ab3d4ffc750	2022-03-02 00:00:00	2013-01-01 00:00:00	\N	\N	\N	2013-01-01 00:00:00	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	7bf56177-8a14-4f07-8d23-246949d65955	50	3 months	0	0	0	d	lll	2013-01-01 00:00:00	0	0
+cb55e7a0-d4dc-43a4-8eb4-d66c77bb3c90	2023-08-29 08:10:12	2023-08-30 08:10:12	\N	\N	\N	2023-08-29 00:00:00	\N	12	12	\N	12	12	\N	\N	\N	12	727910f3-4c49-4b13-b781-efc654044e29	1	12	0	0	0	12		\N	30	5
 \.
 
 
@@ -509,6 +541,15 @@ fc6dfdcf-2509-46da-9b3a-d0ba4c888257	2023-07-14 09:00:00	2023-07-21 09:30:00	tes
 
 
 --
+-- Data for Name: goals; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.goals (identifier, name, target, deadline, profile_identifier) FROM stdin;
+b84985b8-d2b0-4e7c-b2c3-cb62a4dc1264	TEST GOAL	50	2023-09-30	727910f3-4c49-4b13-b781-efc654044e29
+\.
+
+
+--
 -- Data for Name: holidays; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
@@ -519,6 +560,7 @@ COPY public.holidays (identifier, start, end_date, comments, type, status, profi
 c43e733f-0620-4299-bd13-11b2990dd783	2023-06-18 00:00:00	2023-07-01 00:00:00	Please please please I need holiday	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	t	t	f	f
 06bbf436-0149-490b-bca8-c778ab4d7663	2023-07-09 00:00:00	2023-07-14 00:00:00	Holidays for Florence	\N	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
 493d37a3-3867-410d-a0f0-12d22a10d838	2023-08-06 00:00:00	2023-08-11 00:00:00	Vacaciones de flor	\N	REJECTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
+d773ed98-e91b-4079-8500-5893ccb882b3	2023-09-04 00:00:00	2023-09-09 00:00:00	test	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	f	f	f	f
 \.
 
 
@@ -613,6 +655,14 @@ edb0a07a-544e-4f5a-8140-06a77b6f8d1a	HR-ADMIN
 d08d7425-d5bf-465a-b98e-12ae2589e171	HR-ADMIN
 af8c81df-5bb4-4184-acf4-149700a75711	HR-ADMIN
 727910f3-4c49-4b13-b781-efc654044e29	HR-ADMIN
+94ce30b3-ecce-44aa-bb48-f6da32921514	HR-ADMIN
+27866d58-2de6-45dd-83a9-4fd5fdad5412	HR-ADMIN
+e1034681-4874-48b0-98f1-c9e7d41d09e2	HR-ADMIN
+057c7b5b-bebd-4ef5-bf56-f3cc43457869	HR-ADMIN
+68a00048-2a7b-41db-a29f-4e18154c6236	HR-ADMIN
+fcaa2341-e98e-4021-a983-db0960b8acd0	HR-ADMIN
+e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	HR-ADMIN
+b81b6de3-6efe-4d2e-8c08-d1c4769e120f	HR-ADMIN
 \.
 
 
@@ -732,6 +782,14 @@ c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8f
 4cabff7a-51e8-48c0-9948-eb590caca53d	Nahuela	Barries	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N
 0d4b0f80-be05-41c5-aa03-97e0de184ecf	Theresa	May	may@theresa.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Theresita	\N	\N	\N	\N	\N	90	\N	\N	\N	may@theresa.com	134rt35432345	\N
 7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	\N	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
+94ce30b3-ecce-44aa-bb48-f6da32921514	Javier	 Milei	javier@libertadavanza.com.ar	f	2f7dd967-4367-4794-94de-9306612a7854	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+27866d58-2de6-45dd-83a9-4fd5fdad5412	Javier 3	Milei 3	javier3@libertadavanza.com.ar	f	b2b55608-535e-4274-aff3-332c9bcf5cb5	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+e1034681-4874-48b0-98f1-c9e7d41d09e2	Javier	 Milei	javier555@libertadavanza.com.ar	f	5164fbf6-b966-4a47-bced-6769713c65ab	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+057c7b5b-bebd-4ef5-bf56-f3cc43457869	Javier	 Milei	javier6543@libertadavanza.com.ar	f	cda2ddd2-d9ee-4df0-bd3f-e4c679bb8c55	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+68a00048-2a7b-41db-a29f-4e18154c6236	Javier	 Milei	javier999999@libertadavanza.com.ar	f	0dfae1ed-16cb-46b9-aaf5-b5df563cc90a	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+fcaa2341-e98e-4021-a983-db0960b8acd0	Javier	 Milei	jaasdfasdfasdfasdvier@libertadavanza.com.ar	f	fea594ef-19f3-490b-a9dc-172d663f874b	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	Alejandro	 Fantino	alejandro.fantino6666@neura.com.ar	f	04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@neura.com.ar	f	f950ca75-e7c6-44a5-8fcf-28313e727609	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -740,6 +798,7 @@ c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8f
 --
 
 COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned) FROM stdin;
+2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955
 \.
 
 
@@ -787,6 +846,14 @@ misstheresa@gmail.com	dQ9nEXYI
 nahuelbarrios@casla.com	BuZGPXFi
 mariano.juri@yahoo.co.uk	password1
 florence@ndthemachine.com	lvemszzQ
+javier@libertadavanza.com.ar	M1lei@2023
+javier3@libertadavanza.com.ar	M1lei@2023
+javier555@libertadavanza.com.ar	M1lei@2023
+javier6543@libertadavanza.com.ar	M1lei@2023
+javier999999@libertadavanza.com.ar	M1lei@2023
+jaasdfasdfasdfasdvier@libertadavanza.com.ar	M1lei@2023
+alejandro.fantino6666@neura.com.ar	password1
+alejandro.fantino7777@neura.com.ar	password1
 \.
 
 
@@ -836,6 +903,14 @@ ALTER TABLE ONLY public.event_attendee
 
 ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_pkey PRIMARY KEY (identifier);
+
+
+--
+-- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.goals
+    ADD CONSTRAINT goals_pkey PRIMARY KEY (identifier);
 
 
 --
@@ -964,6 +1039,14 @@ ALTER TABLE ONLY public.event_attendee
 
 ALTER TABLE ONLY public.events
     ADD CONSTRAINT events_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: goals goals_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.goals
+    ADD CONSTRAINT goals_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
 
 
 --
