@@ -30,6 +30,26 @@ public class Goal {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date deadline;
 	
+	private Integer progress;
+	
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getProgress() {
+		return progress;
+	}
+
+	public void setProgress(Integer progress) {
+		this.progress = progress;
+	}
+
 	public Goal() {}
 
 	public String getIdentifier() {
