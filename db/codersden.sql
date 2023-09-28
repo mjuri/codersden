@@ -280,6 +280,21 @@ CREATE TABLE public.payments (
 ALTER TABLE public.payments OWNER TO mvelasco;
 
 --
+-- Name: performance_reviews; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.performance_reviews (
+    identifier character varying NOT NULL,
+    employee_identifier character varying(50) NOT NULL,
+    reviewer_identifier character varying(50) NOT NULL,
+    comments character varying,
+    reviewdate date
+);
+
+
+ALTER TABLE public.performance_reviews OWNER TO mvelasco;
+
+--
 -- Name: profile_role; Type: TABLE; Schema: public; Owner: mvelasco
 --
 
@@ -651,6 +666,14 @@ cf44888f-0e64-40d2-a448-ff846c0202c0	2	Mariano Velasco	Ref Line 123	2023-02-18	\
 
 
 --
+-- Data for Name: performance_reviews; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.performance_reviews (identifier, employee_identifier, reviewer_identifier, comments, reviewdate) FROM stdin;
+\.
+
+
+--
 -- Data for Name: profile_role; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
@@ -959,6 +982,14 @@ ALTER TABLE ONLY public.payments
 
 
 --
+-- Name: performance_reviews performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.performance_reviews
+    ADD CONSTRAINT performance_reviews_pkey PRIMARY KEY (identifier);
+
+
+--
 -- Name: profile_role profile_role_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
@@ -1116,6 +1147,22 @@ ALTER TABLE ONLY public.organization_chart
 
 ALTER TABLE ONLY public.organization_chart
     ADD CONSTRAINT organization_chart_parent_identifier_fkey FOREIGN KEY (parent_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: performance_reviews performance_reviews_employee_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.performance_reviews
+    ADD CONSTRAINT performance_reviews_employee_identifier_fkey FOREIGN KEY (employee_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: performance_reviews performance_reviews_reviewer_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.performance_reviews
+    ADD CONSTRAINT performance_reviews_reviewer_identifier_fkey FOREIGN KEY (reviewer_identifier) REFERENCES public.profiles(identifier);
 
 
 --
