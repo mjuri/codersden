@@ -2,12 +2,11 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
--- Dumped by pg_dump version 13.1
+-- Dumped from database version 9.5.25
+-- Dumped by pg_dump version 9.5.25
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -17,7 +16,21 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
@@ -32,7 +45,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+SET default_with_oids = false;
 
 --
 -- Name: accesses; Type: TABLE; Schema: public; Owner: mvelasco
@@ -146,8 +159,8 @@ CREATE TABLE public.events (
     label character varying(20),
     status character varying(20),
     profile_identifier character varying(50) NOT NULL,
-    date_created date DEFAULT CURRENT_DATE NOT NULL,
-    mod_date date DEFAULT CURRENT_DATE NOT NULL,
+    date_created date DEFAULT ('now'::text)::date NOT NULL,
+    mod_date date DEFAULT ('now'::text)::date NOT NULL,
     includesaturday boolean DEFAULT false,
     includesunday boolean DEFAULT false,
     all_day boolean DEFAULT false,
@@ -156,6 +169,18 @@ CREATE TABLE public.events (
 
 
 ALTER TABLE public.events OWNER TO mvelasco;
+
+--
+-- Name: goal_performance_review; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.goal_performance_review (
+    goal_identifier character varying(50) NOT NULL,
+    performance_review_identifier character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.goal_performance_review OWNER TO mvelasco;
 
 --
 -- Name: goals; Type: TABLE; Schema: public; Owner: mvelasco
@@ -558,6 +583,14 @@ fc6dfdcf-2509-46da-9b3a-d0ba4c888257	2023-07-14 09:00:00	2023-07-21 09:30:00	tes
 
 
 --
+-- Data for Name: goal_performance_review; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.goal_performance_review (goal_identifier, performance_review_identifier) FROM stdin;
+\.
+
+
+--
 -- Data for Name: goals; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
@@ -566,6 +599,7 @@ COPY public.goals (identifier, name, target, deadline, profile_identifier, progr
 a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	\N
 b84985b8-d2b0-4e7c-b2c3-cb62a4dc1264	TEST GOAL	50	2023-11-08	727910f3-4c49-4b13-b781-efc654044e29	16	<p>This is a<strong> description! </strong>Can you see it?</p>
 1719275f-62ab-483b-bd73-429c91e9a757	TEST 123	70	2023-09-23	727910f3-4c49-4b13-b781-efc654044e29	45	<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Black Friday is almost here, and we want to help you outsell your competition.</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">We want 2023 to be the year when you&nbsp;<strong>break your revenue record</strong>&hellip;</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">So, we put together 4 resources that will help you make this a reality:</p>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=sxZzrHwLIwsfd%2FJShL%2Bnm2L7XOXHIjGthZED5I9kjuQurYgU6wtaV91SQnV0ecNMXXL9IGFjeAhkd9rwdmGdciry1ShjrRUAZa8MaN7eIG7Y6aoytSGd7C5nzQH2XxXkHRrhsVHwx%2F6DVSAwXA3xZoT%2BUayqrFdcOB7x8pEJpZIeEQgAOuLVIPc0vuQNoWF8cc4oXZgxyjA9C9EFiQS7Pw%3D%3D&amp;h=4fc7ea4b07e343d4180aec46d962dab30783f1a6-yot32p6u_87845615541892&amp;l=7b2d8ed2b22ee7334751a558ed5f0867b2319cb0-82716564" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DsxZzrHwLIwsfd%252FJShL%252Bnm2L7XOXHIjGthZED5I9kjuQurYgU6wtaV91SQnV0ecNMXXL9IGFjeAhkd9rwdmGdciry1ShjrRUAZa8MaN7eIG7Y6aoytSGd7C5nzQH2XxXkHRrhsVHwx%252F6DVSAwXA3xZoT%252BUayqrFdcOB7x8pEJpZIeEQgAOuLVIPc0vuQNoWF8cc4oXZgxyjA9C9EFiQS7Pw%253D%253D%26h%3D4fc7ea4b07e343d4180aec46d962dab30783f1a6-yot32p6u_87845615541892%26l%3D7b2d8ed2b22ee7334751a558ed5f0867b2319cb0-82716564&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw1YPX8r-oSl3So7-tobJWFy">Black Friday &amp; Cyber Monday Marketing 2023: Week-by-Week Guide</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=57DuWS02Fb73bfHWcyIIvMTVIUYdIrWdwIrGmYFUtjpmNCOahAcbTiUGs9%2B%2BkwuP6TBkMAcrOVF9VlIFvk1gN0vyTZZM7H1WW4kxEef2rfaTz1pXQB4kYZ%2F9XHjVeeadam9H4xIU7TiEjDZzZjdoSrXtUSRMpGsS7JD0g6mtjO9xEcPGv4h09BO8kDoqFYN6TOrCdnH6PkbgJoHE6TZ0qw%3D%3D&amp;h=a7fbd7ea0001131fb1ec598102f23707c95c739b-yot32p6u_87845615541892&amp;l=2a81e3fbbe1f25231e9aa0f3cddc25602d07a6ab-82716568" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3D57DuWS02Fb73bfHWcyIIvMTVIUYdIrWdwIrGmYFUtjpmNCOahAcbTiUGs9%252B%252BkwuP6TBkMAcrOVF9VlIFvk1gN0vyTZZM7H1WW4kxEef2rfaTz1pXQB4kYZ%252F9XHjVeeadam9H4xIU7TiEjDZzZjdoSrXtUSRMpGsS7JD0g6mtjO9xEcPGv4h09BO8kDoqFYN6TOrCdnH6PkbgJoHE6TZ0qw%253D%253D%26h%3Da7fbd7ea0001131fb1ec598102f23707c95c739b-yot32p6u_87845615541892%26l%3D2a81e3fbbe1f25231e9aa0f3cddc25602d07a6ab-82716568&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw3SuviWGz8HwCdbFwFwc17_">Best 9 Black Friday Marketing Tools</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=D3k2v5IxG8QElPrflPhBeeYc9DfJSvzUxFTGYEiX19U8HUP6RK%2FyYNhU3%2BrfXaD2pEkjmySfPmBKTTO9aYKdrVXPFeeE3%2FNvnY8ejbSU%2BPJMe8meXvD5y2SpA8TN8QypwYFGUecAAx42yRKvbgWVnhfnRGS9ZcAfdArJ0TE8z%2B1aT9KACMXYz%2Bn%2FFzsPozPg&amp;h=4ea7f2c8559dcabc5a09f15cca715e34c69aaeff-yot32p6u_87845615541892&amp;l=8115b647b0502e370a7a2bb55c8c42be677c71be-82716570" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DD3k2v5IxG8QElPrflPhBeeYc9DfJSvzUxFTGYEiX19U8HUP6RK%252FyYNhU3%252BrfXaD2pEkjmySfPmBKTTO9aYKdrVXPFeeE3%252FNvnY8ejbSU%252BPJMe8meXvD5y2SpA8TN8QypwYFGUecAAx42yRKvbgWVnhfnRGS9ZcAfdArJ0TE8z%252B1aT9KACMXYz%252Bn%252FFzsPozPg%26h%3D4ea7f2c8559dcabc5a09f15cca715e34c69aaeff-yot32p6u_87845615541892%26l%3D8115b647b0502e370a7a2bb55c8c42be677c71be-82716570&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw2cV4vIGQyyDWN7zPm72JiL">Black Friday Marketing Ideas That Actually Work</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=In5rzaAaGQX%2B1BQqwYvopIVm631I6oUH2el7LwQ62FvYh5WeYenDspNTk96%2BcyOlCJKmRJTDrBk2gpyOFPCxLTwjf11HDpqmroFQ8nlbLh4vgG67ODAKHEWxXLB29uyvtU28KAreRfS464vIu5xoRWLKDCDfdMHLBE41guXr%2B0pac4Hb7hxxLlQ%2FjZiYoT5h&amp;h=239537e687c6d482127587dcd74d0943965a78ca-yot32p6u_87845615541892&amp;l=6e11e7632d0195dc5327eb3b39ff8ca03629075c-82716579" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DIn5rzaAaGQX%252B1BQqwYvopIVm631I6oUH2el7LwQ62FvYh5WeYenDspNTk96%252BcyOlCJKmRJTDrBk2gpyOFPCxLTwjf11HDpqmroFQ8nlbLh4vgG67ODAKHEWxXLB29uyvtU28KAreRfS464vIu5xoRWLKDCDfdMHLBE41guXr%252B0pac4Hb7hxxLlQ%252FjZiYoT5h%26h%3D239537e687c6d482127587dcd74d0943965a78ca-yot32p6u_87845615541892%26l%3D6e11e7632d0195dc5327eb3b39ff8ca03629075c-82716579&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw2S0dymtLUx_2DNIquy4buq">Black Friday Emails: Best Examples, Top Subject Lines, and Key Takeaways</a></li>\n</ul>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Implement whatever you can, and&nbsp;<em>have a record-breaking Black Friday sale</em>!</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">If you have any questions, just reply to this email.</p>\n<p style="font-size: 15px; color: #525252; background-color: #fefefe; font-family: sans-serif; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Talk again soon,</p>\n<p style="font-size: 15px; color: #525252; background-color: #fefefe; font-family: sans-serif; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Angie Meeker<br />General Manager,<br />OptinMonster</p>
+ed3d36d4-f0fe-4978-9970-05af3e4f9f34	Goal #45	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	<p>Sarada</p>
 \.
 
 
@@ -886,7 +920,7 @@ alejandro.fantino7777@neura.com.ar	password1
 
 
 --
--- Name: accesses accesses_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: accesses_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.accesses
@@ -894,7 +928,7 @@ ALTER TABLE ONLY public.accesses
 
 
 --
--- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.accounts
@@ -902,7 +936,7 @@ ALTER TABLE ONLY public.accounts
 
 
 --
--- Name: contracts contracts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: contracts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.contracts
@@ -910,7 +944,7 @@ ALTER TABLE ONLY public.contracts
 
 
 --
--- Name: documents documents_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.documents
@@ -918,7 +952,7 @@ ALTER TABLE ONLY public.documents
 
 
 --
--- Name: event_attendee event_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -926,7 +960,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.events
@@ -934,7 +968,15 @@ ALTER TABLE ONLY public.events
 
 
 --
--- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goals_performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.goal_performance_review
+    ADD CONSTRAINT goals_performance_reviews_pkey PRIMARY KEY (goal_identifier, performance_review_identifier);
+
+
+--
+-- Name: goals_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goals
@@ -942,7 +984,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: holidays holidays_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -950,7 +992,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: invoice_item invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_item
@@ -958,7 +1000,7 @@ ALTER TABLE ONLY public.invoice_item
 
 
 --
--- Name: invoice_payment invoice_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -966,7 +1008,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoices
@@ -974,7 +1016,7 @@ ALTER TABLE ONLY public.invoices
 
 
 --
--- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.payments
@@ -982,7 +1024,7 @@ ALTER TABLE ONLY public.payments
 
 
 --
--- Name: performance_reviews performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -990,7 +1032,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: profile_role profile_role_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -998,7 +1040,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profiles
@@ -1006,7 +1048,7 @@ ALTER TABLE ONLY public.profiles
 
 
 --
--- Name: role_positions role_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1014,7 +1056,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.roles
@@ -1022,7 +1064,7 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: shareddocument_profile shareddocument_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
@@ -1030,7 +1072,7 @@ ALTER TABLE ONLY public.shareddocument_profile
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.users
@@ -1038,7 +1080,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: contracts contracts_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: contracts_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.contracts
@@ -1046,7 +1088,7 @@ ALTER TABLE ONLY public.contracts
 
 
 --
--- Name: documents documents_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: documents_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.documents
@@ -1054,7 +1096,7 @@ ALTER TABLE ONLY public.documents
 
 
 --
--- Name: event_attendee event_attendee_event_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee_event_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -1062,7 +1104,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: event_attendee event_attendee_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -1070,7 +1112,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: events events_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: events_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.events
@@ -1078,7 +1120,23 @@ ALTER TABLE ONLY public.events
 
 
 --
--- Name: goals goals_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goals_performance_reviews_goal_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.goal_performance_review
+    ADD CONSTRAINT goals_performance_reviews_goal_identifier_fkey FOREIGN KEY (goal_identifier) REFERENCES public.goals(identifier);
+
+
+--
+-- Name: goals_performance_reviews_performance_review_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.goal_performance_review
+    ADD CONSTRAINT goals_performance_reviews_performance_review_identifier_fkey FOREIGN KEY (performance_review_identifier) REFERENCES public.performance_reviews(identifier);
+
+
+--
+-- Name: goals_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goals
@@ -1086,7 +1144,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: holidays holidays_authorized_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays_authorized_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -1094,7 +1152,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: holidays holidays_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -1102,7 +1160,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: invoice_item invoice_item_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_item_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_item
@@ -1110,7 +1168,7 @@ ALTER TABLE ONLY public.invoice_item
 
 
 --
--- Name: invoice_payment invoice_payment_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -1118,7 +1176,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoice_payment invoice_payment_payment_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment_payment_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -1126,7 +1184,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoices invoices_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoices_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoices
@@ -1134,7 +1192,7 @@ ALTER TABLE ONLY public.invoices
 
 
 --
--- Name: organization_chart organization_chart_child_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: organization_chart_child_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.organization_chart
@@ -1142,7 +1200,7 @@ ALTER TABLE ONLY public.organization_chart
 
 
 --
--- Name: organization_chart organization_chart_parent_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: organization_chart_parent_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.organization_chart
@@ -1150,7 +1208,7 @@ ALTER TABLE ONLY public.organization_chart
 
 
 --
--- Name: performance_reviews performance_reviews_employee_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews_employee_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -1158,7 +1216,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: performance_reviews performance_reviews_reviewer_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews_reviewer_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -1166,7 +1224,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: profile_role profile_role_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -1174,7 +1232,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profile_role profile_role_role_key_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role_role_key_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -1182,7 +1240,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profiles profiles_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profiles_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profiles
@@ -1190,7 +1248,7 @@ ALTER TABLE ONLY public.profiles
 
 
 --
--- Name: role_positions role_positions_assigned_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions_assigned_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1198,7 +1256,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: role_positions role_positions_requested_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions_requested_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1206,7 +1264,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: shareddocument_profile shareddocument_profile_document_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile_document_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
@@ -1214,11 +1272,21 @@ ALTER TABLE ONLY public.shareddocument_profile
 
 
 --
--- Name: shareddocument_profile shareddocument_profile_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
     ADD CONSTRAINT shareddocument_profile_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: mvelasco
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM mvelasco;
+GRANT ALL ON SCHEMA public TO mvelasco;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

@@ -13,6 +13,9 @@ public class PerformanceService {
 	@Autowired
 	private GoalDao goalDao;
 	
+	@Autowired
+	private PerformanceDao performanceDao;
+	
 	public Goal createGoal(Goal goal) {
 		Goal newGoal = goalDao.save(goal);
 		return newGoal;
@@ -40,6 +43,11 @@ public class PerformanceService {
 		Goal goalUpdated = goalDao.save(goal);
 		
 		return goalUpdated;
+	}
+
+	public PerformanceReview createPerformance(PerformanceReview performance) {
+		PerformanceReview p = performanceDao.save(performance);
+		return p;
 	}
 
 }

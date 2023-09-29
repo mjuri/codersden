@@ -1,14 +1,18 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="goals")
 public class Goal {
@@ -29,6 +33,11 @@ public class Goal {
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date deadline;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "goals")
+	private Set<PerformanceReview> performanceReviews;
+	
 	
 	private Integer progress;
 	

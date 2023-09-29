@@ -4,10 +4,15 @@ package uk.codersden.hr.profiles;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,8 +31,21 @@ public class PerformanceReview {
 	@Column(name="reviewdate")
 	private Date reviewDate;
 	
+    @ManyToOne
+    @JoinColumn(name="employee_identifier",  nullable=false, insertable=false, updatable=false)
 	private Profile employee;
-	private List<Goal> goals;
+    
+    @ManyToOne
+    @JoinColumn(name="reviewer_identifier",  nullable=false, insertable=false, updatable=false)
+    private Profile reviewer;
+    
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "goal_performance_review", 
+        joinColumns = { @JoinColumn(name = "performance_review_identifier") }, 
+        inverseJoinColumns = { @JoinColumn(name = "review_identifier") })
+    private List<Goal> goals;
+	
 	private String comments;
 	
 	public String getIdentifier() {
@@ -59,6 +77,12 @@ public class PerformanceReview {
 	}
 	public void setGoals(List<Goal> goals) {
 		this.goals = goals;
+	}
+	public Profile getReviewer() {
+		return reviewer;
+	}
+	public void setReviewer(Profile reviewer) {
+		this.reviewer = reviewer;
 	}
 	
 

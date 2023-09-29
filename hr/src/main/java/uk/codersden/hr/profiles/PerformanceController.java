@@ -1,8 +1,11 @@
 package uk.codersden.hr.profiles;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,8 @@ public class PerformanceController {
 
 	@Autowired
 	private PerformanceService performanceService;
+	@Autowired 
+	private ProfileService profileService;
 	
 	@PostMapping("/goal")
 	@CrossOrigin
@@ -38,8 +43,32 @@ public class PerformanceController {
 	
 	@PostMapping
 	@CrossOrigin
-	public ResponseEntity<?> createPerfomanceReview(@RequestBody PerformanceReviewPayload payload){
-		return null;
+	public ResponseEntity<?> createPerfomanceReview(@RequestBody PerformanceReviewPayload payload) throws ProfileNotFoundException, NotFoundException {
+		PerformanceReview performance = new PerformanceReview();
+		
+		performance.setComments(payload.getComments());
+		performance.setReviewDate(payload.getReviewDate());
+		if(null != payload.getIdentifier()) {
+			performance.setIdentifier(payload.getIdentifier());
+		}
+		Profile employee = profileService.findProfileByIdentifier(payload.getEmployee().get("value"));
+		Profile reviewer = profileService.findProfileByIdentifier(payload.getReviewer().get("value"));
+		performance.setEmployee(employee);
+		performance.setReviewer(reviewer);
+		List<Goal> goals = new ArrayList<>();
+		Goal goal = null;
+		for(Map<String,String> map : payload.getGoals()) {
+			goal = performanceService.retrieveGoalByIdentifier(map.get("value"));
+			goals.add(goal);
+		}
+		performance.setGoals(goals);
+		try {
+			performance = performanceService.createPerformance(performance);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(performance);
+
 	}
 	@PutMapping("/goal/{goalIdentifier}")
 	@CrossOrigin
