@@ -31,7 +31,25 @@ public class PerformanceReview {
 	@Column(name="reviewdate")
 	private Date reviewDate;
 	
-    @ManyToOne
+	@Column(name="employee_identifier")
+	private String employeeIdentifier;
+	
+	@Column(name="reviewer_identifier")
+	private String reviewerIdentifier;
+	
+    public String getEmployeeIdentifier() {
+		return employeeIdentifier;
+	}
+	public void setEmployeeIdentifier(String employeeIdentifier) {
+		this.employeeIdentifier = employeeIdentifier;
+	}
+	public String getReviewerIdentifier() {
+		return reviewerIdentifier;
+	}
+	public void setReviewerIdentifier(String reviewerIdentifier) {
+		this.reviewerIdentifier = reviewerIdentifier;
+	}
+	@ManyToOne
     @JoinColumn(name="employee_identifier",  nullable=false, insertable=false, updatable=false)
 	private Profile employee;
     
@@ -43,7 +61,7 @@ public class PerformanceReview {
     @JoinTable(
         name = "goal_performance_review", 
         joinColumns = { @JoinColumn(name = "performance_review_identifier") }, 
-        inverseJoinColumns = { @JoinColumn(name = "review_identifier") })
+        inverseJoinColumns = { @JoinColumn(name = "goal_identifier") })
     private List<Goal> goals;
 	
 	private String comments;

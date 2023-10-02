@@ -50,4 +50,17 @@ public class PerformanceService {
 		return p;
 	}
 
+	public List<PerformanceReview> retrievePerfomanceReviewsByProfileIdentifier(String profileIdentifier) {
+		List<PerformanceReview> reviews = performanceDao.findAllByEmployeeIdentifier(profileIdentifier);
+		return reviews;
+	}
+
+	public PerformanceReview retrievePerfomanceReviewByIdentifier(String identifier) throws NotFoundException {
+		Optional<PerformanceReview> op = performanceDao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new NotFoundException();
+		}
+		return op.get();
+	}
+
 }
