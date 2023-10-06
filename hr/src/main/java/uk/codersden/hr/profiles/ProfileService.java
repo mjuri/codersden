@@ -13,6 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import uk.codersden.hr.login.LoginService;
 
@@ -96,12 +97,12 @@ public class ProfileService {
 		return p;
 	}
 	
-	public String saveAvatar(String profileIdentifier, String fileBase64) {
+	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
 		Path pathFolder = Paths.get("/Users/mvelasco/Documents/uploads/" + profileIdentifier.toString());
 		File file = null;
 		try {
 			Files.createDirectories(pathFolder);
-			byte[] imageByte= Base64.decodeBase64(fileBase64);
+			byte[] imageByte= fileBase64.getBytes();
 			String fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
 			file = new File(fileName);
 			if(file.exists()) {
