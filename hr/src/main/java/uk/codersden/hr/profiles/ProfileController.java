@@ -70,6 +70,7 @@ public class ProfileController {
 		try {
 			Profile oldProfile = profileService.findProfileByIdentifier(profile.getIdentifier());
 			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
+			profile.setRoles(oldProfile.getRoles());
 			Profile p = profileService.update(profile);
 			
 			return ResponseEntity.ok(p);
@@ -197,6 +198,8 @@ public class ProfileController {
 		try {
 			profile = mapper.readValue(profilePayload, Profile.class);
 			oldProfile = profileService.findProfileByIdentifier(id);
+			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
+			profile.setRoles(oldProfile.getRoles());
 			if(null != fileBase64 ) {
 				String fileName = this.profileService.saveAvatar(id, fileBase64);
 				profile.setAvatar(fileName);

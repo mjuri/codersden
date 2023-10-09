@@ -22,8 +22,8 @@ public class ProfileService {
     //@Autowired
     //private RestTemplate restTemplate;
 
-    // @Autowired
-    // private EurekaClient eurekaClient;
+    @Autowired
+    private StaticResourceService resourceService;
     
 	@Autowired
 	private ProfileDao profileDao;
@@ -98,12 +98,13 @@ public class ProfileService {
 	}
 	
 	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
-		Path pathFolder = Paths.get("/Users/mvelasco/Documents/uploads/" + profileIdentifier.toString());
+		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath() + "/" + profileIdentifier.toString());
 		File file = null;
+		String fileName = "";
 		try {
 			Files.createDirectories(pathFolder);
 			byte[] imageByte= fileBase64.getBytes();
-			String fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
+			fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
 			file = new File(fileName);
 			if(file.exists()) {
 				file.delete();
@@ -117,7 +118,8 @@ public class ProfileService {
 			e.printStackTrace();
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}		
-		return file.getAbsolutePath();
+		String returnURL = fileName.replaceAll("static", "");
+		return returnURL;
 		
 	}
 
