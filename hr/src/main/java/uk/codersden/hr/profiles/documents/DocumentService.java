@@ -65,8 +65,8 @@ public class DocumentService {
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}
 		if(documentPayload.getSharedWith() != null && documentPayload.getSharedWith().size() > 0) {
-			documentPayload.getSharedWith().forEach((shared_profile_identifier)->{
-				Optional<Profile> opSharedProfile = profileDao.findById(shared_profile_identifier);
+			documentPayload.getSharedWith().forEach((shared_profile)->{
+				Optional<Profile> opSharedProfile = profileDao.findById(shared_profile.get("value"));
 				if(!opSharedProfile.isEmpty()) {
 					doc.addSharedWith(opSharedProfile.get());
 				}	
