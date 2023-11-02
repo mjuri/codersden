@@ -19,9 +19,6 @@ import uk.codersden.hr.login.LoginService;
 
 @Service
 public class ProfileService {
-    //@Autowired
-    //private RestTemplate restTemplate;
-
     @Autowired
     private StaticResourceService resourceService;
     
@@ -98,7 +95,7 @@ public class ProfileService {
 	}
 	
 	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
-		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath() + "/" + profileIdentifier.toString());
+		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("avatars") + "/" + profileIdentifier.toString());
 		File file = null;
 		String fileName = "";
 		try {

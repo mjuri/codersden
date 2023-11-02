@@ -16,9 +16,31 @@ public class StaticResourceService {
         this.resourceLoader = resourceLoader;
     }
     
-    
-
-    public String getStaticDirectoryPath() {
+    public String getStaticDirectoryFilesPath() {
+        try {
+            // Load the "static" directory as a resource
+        	Resource folderResource = resourceLoader.getResource("classpath:static");
+        	System.out.println(folderResource.getFilename());
+            return folderResource.getFilename() + "/files";
+        } catch (Exception e) {
+            // Handle the exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String getStaticDirectoryPath(String subfolder) {
+        try {
+            // Load the "static" directory as a resource
+        	Resource folderResource = resourceLoader.getResource("classpath:static");
+        	System.out.println(folderResource.getFilename());
+            return folderResource.getFilename() + "/" + subfolder;
+        } catch (Exception e) {
+            // Handle the exception
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String getStaticDirectoryAvatarsPath() {
         try {
             // Load the "static" directory as a resource
         	Resource folderResource = resourceLoader.getResource("classpath:static");
