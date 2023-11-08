@@ -99,12 +99,16 @@ public class EventService {
 				System.out.println(e);
 			}
 		}
-		for(Profile p: existingEvent.getAttendees()) {
-			if(!updatedAttendees.contains(p)) {
-				existingEvent.removeAttendee(p);
+		//Set<Profile> updatedList = existingEvent.getAttendees();
+		try {
+			for(Profile p: existingEvent.getAttendees()) {
+				if(!updatedAttendees.contains(p)) {
+					existingEvent.getAttendees().remove(p);
+				}
 			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-
 		
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		event.setDateCreated(existingEvent.getDateCreated());
