@@ -1,8 +1,11 @@
 package uk.codersden.hr.profiles;
 
-import java.sql.Date;
+
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,6 +18,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.codersden.hr.notifications.Notification;
+import uk.codersden.hr.notifications.NotificationService;
+
 @Service
 public class EventService {
 	@Autowired
@@ -26,6 +32,8 @@ public class EventService {
 	@Autowired
 	private ModelMapper	 modelMapper;
 	
+	@Autowired
+	private NotificationService notificationService;
 	
 	public List<Event> findAllEventsByProfileIdentifier(String profileIdentifier) throws ProfileNotFoundException {
 		Optional<Profile> optional = profileDao.findById(profileIdentifier);
@@ -45,6 +53,8 @@ public class EventService {
 
 		List<Map<String, String>> attendeesValues = event.getAttendeesValues();
 		Profile profile;
+
+		
 		for (Map<String, String> map : attendeesValues) {
 			try {
 				Optional<Profile> p = this.profileDao.findById(map.get("value"));
@@ -53,7 +63,7 @@ public class EventService {
 				}
 				profile = p.get();
 				event.addAttendee(profile);
-
+				
 			} catch (ProfileNotFoundException e) {
 				System.out.println(e);
 			}
@@ -61,10 +71,26 @@ public class EventService {
 
 
 		Event newEvent = this.eventDao.save(event);
+		
+		sendNotification(event);
+		
 		return newEvent;
 	}
 
+	private void sendNotification(Event event) {
+		Set<Profile> attendees = event.getAttendees();
+		for (Profile profile : attendees) {
+			Notification n = new Notification();
+			n.setOwner(event.getProfile());
+			n.setMessage(" has created an event!");
+			n.setTime(new Timestamp(System.currentTimeMillis() ));
+			n.setProfile(profile);
+			notificationService.sendNotification(n);
+			
+		}
 
+		
+	}
 	
 	public Event updateEvent(String eventIdentifier, Event event) throws EventNotFoundException, ProfileNotFoundException {
 		Optional<Event> optional = eventDao.findById(eventIdentifier);
