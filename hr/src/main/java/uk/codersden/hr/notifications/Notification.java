@@ -2,6 +2,7 @@ package uk.codersden.hr.notifications;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -37,6 +38,35 @@ public class Notification {
 	private boolean unread;
 	private boolean deleted;
 	
+	@Column(name="profile_identifier")
+	private String profileIdentifier;
+	
+	@Column(name="owner_identifier")
+	private String ownerIdentifier;
+	public boolean isUnread() {
+		return unread;
+	}
+
+	public void setUnread(boolean unread) {
+		this.unread = unread;
+	}
+
+	public String getProfileIdentifier() {
+		return profileIdentifier;
+	}
+
+	public void setProfileIdentifier(String profileIdentifier) {
+		this.profileIdentifier = profileIdentifier;
+	}
+
+	public String getOwnerIdentifier() {
+		return ownerIdentifier;
+	}
+
+	public void setOwnerIdentifier(String ownerIdentifier) {
+		this.ownerIdentifier = ownerIdentifier;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "profile_identifier", nullable=true, referencedColumnName = "identifier", insertable = false, updatable = false)
 	private Profile profile;

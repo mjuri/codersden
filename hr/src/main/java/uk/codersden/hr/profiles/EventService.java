@@ -85,6 +85,8 @@ public class EventService {
 			n.setMessage(" has created an event!");
 			n.setTime(new Timestamp(System.currentTimeMillis() ));
 			n.setProfile(profile);
+			n.setProfileIdentifier(profile.getIdentifier());
+			n.setOwnerIdentifier(event.getProfileIdentifier());
 			notificationService.sendNotification(n);
 			
 		}
