@@ -113,7 +113,8 @@ CREATE TABLE public.documents (
     img character varying NOT NULL,
     profile_identifier character varying(50) NOT NULL,
     name character varying(200) NOT NULL,
-    date_created date DEFAULT ('now'::text)::date NOT NULL
+    date_created date DEFAULT ('now'::text)::date NOT NULL,
+    status character varying(20) DEFAULT 'ACTIVE'::character varying
 );
 
 
@@ -261,6 +262,23 @@ CREATE TABLE public.invoices (
 ALTER TABLE public.invoices OWNER TO mvelasco;
 
 --
+-- Name: notifications; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.notifications (
+    identifier character varying(50) NOT NULL,
+    profile_identifier character varying(50) NOT NULL,
+    message character varying,
+    "time" timestamp without time zone,
+    deleted boolean DEFAULT false,
+    owner_identifier character varying(50) NOT NULL,
+    unread boolean DEFAULT true
+);
+
+
+ALTER TABLE public.notifications OWNER TO mvelasco;
+
+--
 -- Name: organization_chart; Type: TABLE; Schema: public; Owner: mvelasco
 --
 
@@ -366,7 +384,8 @@ CREATE TABLE public.role_positions (
     start_date date DEFAULT now(),
     header character varying(400) NOT NULL,
     status character varying(20) DEFAULT 'REQUESTED'::character varying,
-    assigned character varying(50)
+    assigned character varying(50),
+    log character varying
 );
 
 
@@ -504,7 +523,9 @@ cadfbdce-b247-41c6-8711-bf406b179887	mariano.juri@yahoo.co.uk	2023-09-08 12:25:5
 ea390e7d-5486-429f-9500-d38241c7bdf9	mariano.juri@yahoo.co.uk	2023-10-06 16:03:00.354	\N
 490c29f7-fa7d-49c1-8dd8-d01e65a1ccdc	mariano.juri@yahoo.co.uk	2023-10-09 15:52:42.495	2023-10-09 16:05:10.371
 140af531-39e3-4a9c-b239-91c30a0a8b16	mariano.juri@yahoo.co.uk	2023-10-09 16:05:29.994	2023-10-09 16:06:12.253
-a215e9e6-4af6-4c14-b015-9d6e037d7f3e	mariano.juri@yahoo.co.uk	2023-10-09 16:06:21.865	\N
+a215e9e6-4af6-4c14-b015-9d6e037d7f3e	mariano.juri@yahoo.co.uk	2023-10-09 16:06:21.865	2023-10-16 14:57:12.286
+f00b1585-ad87-4763-8adc-eaf5e092fc25	mariano.juri@yahoo.co.uk	2023-10-18 10:34:41.821	2023-11-27 12:59:27.797
+414b97e5-2c40-4fa1-8cdb-5651db041d59	mariano.juri@yahoo.co.uk	2023-11-27 14:19:52.113	\N
 \.
 
 
@@ -546,7 +567,16 @@ cb55e7a0-d4dc-43a4-8eb4-d66c77bb3c90	2023-08-29 08:10:12	2023-08-30 08:10:12	\N	
 -- Data for Name: documents; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.documents (identifier, img, profile_identifier, name, date_created) FROM stdin;
+COPY public.documents (identifier, img, profile_identifier, name, date_created, status) FROM stdin;
+592a417f-d9a8-44a8-95df-2fac6b23fa0c	/Users/mvelasco/Documents/uploads/5b03b8e4-e19c-4baf-aa22-3f17f648fbe3/Screenshot 2023-10-26 at 15.46.23.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-26 at 15.46.23.png	2023-10-30	ACTIVE
+42ad4a0c-dcb6-488c-8d0f-04966aa9af08	/Users/mvelasco/Documents/uploads/d362394a-7cb8-4550-884c-a222199e2c88/Screenshot 2023-10-09 at 15.39.17.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-09 at 15.39.17.png	2023-10-25	ACTIVE
+2c2f4fbf-8175-4cac-adc9-69a1e940d197	/Users/mvelasco/Documents/uploads/242e93b1-3aec-42a5-9098-10dda41eb1bb/Screenshot 2023-10-14 at 17.55.22.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-14 at 17.55.22.png	2023-10-30	ACTIVE
+987a17e7-4d3a-4f46-ae59-64e6611d24a7	/Users/mvelasco/Documents/uploads/d7953487-b1af-4aa8-864b-4447a0b29b4d/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
+bdc53017-6316-478c-883f-98ab79b127ca	/Users/mvelasco/Documents/uploads/e063521c-921c-4f76-bde2-1974f4df57a9/Screenshot 2023-10-20 at 15.54.35.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-20 at 15.54.35.png	2023-10-30	ACTIVE
+96309c55-7f71-4d79-827b-d4ba0afc44ee	/Users/mvelasco/Documents/uploads/63933e63-4ca0-4dce-a2c9-84924cef6004/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
+e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9/IMG_8974.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8974.jpg	2023-10-31	ACTIVE
+77578fe6-20c0-4dff-a867-36d5988cd3a6	static/files/81fffa8c-99fb-4dab-bcf9-a00ea5acf83d/CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	727910f3-4c49-4b13-b781-efc654044e29	CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	2023-10-31	ARCHIVED
+99987918-8932-420a-84f1-b5114a7e7068	static/avatars/2d7c3b40-009e-4475-a978-4c636d14fb9a/IMG_8977.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8977.jpg	2023-10-31	ARCHIVED
 \.
 
 
@@ -555,9 +585,21 @@ COPY public.documents (identifier, img, profile_identifier, name, date_created) 
 --
 
 COPY public.event_attendee (event_identifier, profile_identifier, status) FROM stdin;
-200bd6b6-ac24-4f4c-9c3b-e9328ab6aea0	7bf56177-8a14-4f07-8d23-246949d65955	\N
-d2d922c4-ae03-4a28-8978-33440fac49b3	7bf56177-8a14-4f07-8d23-246949d65955	\N
-22a6547c-2cb0-492e-ab53-81b12ff67e08	7bf56177-8a14-4f07-8d23-246949d65955	\N
+899a5eea-4499-4614-b4fd-271766c58b1d	7bf56177-8a14-4f07-8d23-246949d65955	\N
+4a7bd3b3-51a3-46ab-a58d-4b6168859c5c	7bf56177-8a14-4f07-8d23-246949d65955	\N
+eb1cef85-4799-4b22-b5c9-7f7d32947be3	7bf56177-8a14-4f07-8d23-246949d65955	\N
+419cb21a-c019-477f-91ba-84f8fc57ee28	727910f3-4c49-4b13-b781-efc654044e29	\N
+419cb21a-c019-477f-91ba-84f8fc57ee28	7bf56177-8a14-4f07-8d23-246949d65955	\N
+9eb94028-6197-4141-984f-2f9b8a5516c3	727910f3-4c49-4b13-b781-efc654044e29	\N
+9eb94028-6197-4141-984f-2f9b8a5516c3	7bf56177-8a14-4f07-8d23-246949d65955	\N
+ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	727910f3-4c49-4b13-b781-efc654044e29	\N
+ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	7bf56177-8a14-4f07-8d23-246949d65955	\N
+6429a514-d83a-4506-b110-a5b54e925e26	727910f3-4c49-4b13-b781-efc654044e29	\N
+6429a514-d83a-4506-b110-a5b54e925e26	7bf56177-8a14-4f07-8d23-246949d65955	\N
+14f7ed4c-4901-432f-878e-d48f57d12c78	727910f3-4c49-4b13-b781-efc654044e29	\N
+14f7ed4c-4901-432f-878e-d48f57d12c78	7bf56177-8a14-4f07-8d23-246949d65955	\N
+b96f229e-6d2b-4320-88f3-4dd961c5ed93	727910f3-4c49-4b13-b781-efc654044e29	\N
+b96f229e-6d2b-4320-88f3-4dd961c5ed93	7bf56177-8a14-4f07-8d23-246949d65955	\N
 \.
 
 
@@ -566,10 +608,15 @@ d2d922c4-ae03-4a28-8978-33440fac49b3	7bf56177-8a14-4f07-8d23-246949d65955	\N
 --
 
 COPY public.events (identifier, start, end_date, description, location, url, label, status, profile_identifier, date_created, mod_date, includesaturday, includesunday, all_day, title) FROM stdin;
-200bd6b6-ac24-4f4c-9c3b-e9328ab6aea0	2023-07-24 08:30:00	2023-07-26 09:00:00	Test with Attendees 33	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-10	2023-07-20	f	f	f	Test with Attendees 44
-d2d922c4-ae03-4a28-8978-33440fac49b3	2023-07-17 09:00:00	2023-07-17 10:00:00	Test with attendees #3	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-10	2023-07-10	f	f	f	Test with attendees #3
-fc6dfdcf-2509-46da-9b3a-d0ba4c888257	2023-07-14 09:00:00	2023-07-21 09:30:00	test1	\N	https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MDY2YTg5YTgtZjczOS00ZGMzLThkYmEtNWQ5YzBkNzhmODhh%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252235c7930b-3d66-461d-9cf9-b0f8b54754a9%2522%252c%2522Oid%2522%253a%2522096eefcc-0762-421d-8078-c7b0e17d07b0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=87dd5432-46a1-4525-94e3-9b9a50f8f43e&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-14	2023-07-14	f	f	f	Title
-22a6547c-2cb0-492e-ab53-81b12ff67e08	2023-07-14 10:00:00	2023-07-26 10:00:00	test	\N	\N	Business	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-07-14	2023-07-14	f	f	t	Title 35678
+899a5eea-4499-4614-b4fd-271766c58b1d	2023-11-13 09:00:50	2023-11-13 09:30:50	false	\N	\N	\N	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-13	2023-11-13	f	f	f	false
+4a7bd3b3-51a3-46ab-a58d-4b6168859c5c	2023-11-13 09:00:03	2023-11-13 09:30:03	teste	\N	\N	\N	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-13	2023-11-13	f	f	f	test
+eb1cef85-4799-4b22-b5c9-7f7d32947be3	2023-11-13 09:00:27	2023-11-13 09:30:27	test	\N	\N	\N	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-13	2023-11-13	f	f	f	Nia test
+419cb21a-c019-477f-91ba-84f8fc57ee28	2023-11-22 09:00:55	2023-11-22 09:30:00	test	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-22	2023-11-22	f	f	f	Important meeting
+9eb94028-6197-4141-984f-2f9b8a5516c3	2023-11-22 09:00:55	2023-11-22 09:30:00	test	\N	\N	Personal	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-22	2023-11-22	f	f	f	Important meeting
+ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	2023-11-22 09:00:55	2023-11-22 09:30:00	test	\N	\N	Personal	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-22	2023-11-22	f	f	f	Important meeting
+6429a514-d83a-4506-b110-a5b54e925e26	2023-11-22 09:00:55	2023-11-22 09:30:00	test	\N	\N	Personal	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-22	2023-11-22	f	f	f	Important meeting
+14f7ed4c-4901-432f-878e-d48f57d12c78	2023-11-24 09:00:28	2023-11-24 10:00:00	testing	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-24	2023-11-24	f	f	f	Testing
+b96f229e-6d2b-4320-88f3-4dd961c5ed93	2023-11-24 09:00:28	2023-11-24 10:00:00	testing	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-24	2023-11-24	f	f	f	Testing
 \.
 
 
@@ -586,11 +633,11 @@ COPY public.goal_performance_review (goal_identifier, performance_review_identif
 --
 
 COPY public.goals (identifier, name, target, deadline, profile_identifier, progress, description) FROM stdin;
-0be1c20f-e1c7-42d5-9218-6086ae7cd984	Goal 2	50	2023-09-01	727910f3-4c49-4b13-b781-efc654044e29	15	\N
-a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	\N
-b84985b8-d2b0-4e7c-b2c3-cb62a4dc1264	TEST GOAL	50	2023-11-08	727910f3-4c49-4b13-b781-efc654044e29	16	<p>This is a<strong> description! </strong>Can you see it?</p>
 1719275f-62ab-483b-bd73-429c91e9a757	TEST 123	70	2023-09-23	727910f3-4c49-4b13-b781-efc654044e29	45	<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Black Friday is almost here, and we want to help you outsell your competition.</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">We want 2023 to be the year when you&nbsp;<strong>break your revenue record</strong>&hellip;</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">So, we put together 4 resources that will help you make this a reality:</p>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=sxZzrHwLIwsfd%2FJShL%2Bnm2L7XOXHIjGthZED5I9kjuQurYgU6wtaV91SQnV0ecNMXXL9IGFjeAhkd9rwdmGdciry1ShjrRUAZa8MaN7eIG7Y6aoytSGd7C5nzQH2XxXkHRrhsVHwx%2F6DVSAwXA3xZoT%2BUayqrFdcOB7x8pEJpZIeEQgAOuLVIPc0vuQNoWF8cc4oXZgxyjA9C9EFiQS7Pw%3D%3D&amp;h=4fc7ea4b07e343d4180aec46d962dab30783f1a6-yot32p6u_87845615541892&amp;l=7b2d8ed2b22ee7334751a558ed5f0867b2319cb0-82716564" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DsxZzrHwLIwsfd%252FJShL%252Bnm2L7XOXHIjGthZED5I9kjuQurYgU6wtaV91SQnV0ecNMXXL9IGFjeAhkd9rwdmGdciry1ShjrRUAZa8MaN7eIG7Y6aoytSGd7C5nzQH2XxXkHRrhsVHwx%252F6DVSAwXA3xZoT%252BUayqrFdcOB7x8pEJpZIeEQgAOuLVIPc0vuQNoWF8cc4oXZgxyjA9C9EFiQS7Pw%253D%253D%26h%3D4fc7ea4b07e343d4180aec46d962dab30783f1a6-yot32p6u_87845615541892%26l%3D7b2d8ed2b22ee7334751a558ed5f0867b2319cb0-82716564&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw1YPX8r-oSl3So7-tobJWFy">Black Friday &amp; Cyber Monday Marketing 2023: Week-by-Week Guide</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=57DuWS02Fb73bfHWcyIIvMTVIUYdIrWdwIrGmYFUtjpmNCOahAcbTiUGs9%2B%2BkwuP6TBkMAcrOVF9VlIFvk1gN0vyTZZM7H1WW4kxEef2rfaTz1pXQB4kYZ%2F9XHjVeeadam9H4xIU7TiEjDZzZjdoSrXtUSRMpGsS7JD0g6mtjO9xEcPGv4h09BO8kDoqFYN6TOrCdnH6PkbgJoHE6TZ0qw%3D%3D&amp;h=a7fbd7ea0001131fb1ec598102f23707c95c739b-yot32p6u_87845615541892&amp;l=2a81e3fbbe1f25231e9aa0f3cddc25602d07a6ab-82716568" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3D57DuWS02Fb73bfHWcyIIvMTVIUYdIrWdwIrGmYFUtjpmNCOahAcbTiUGs9%252B%252BkwuP6TBkMAcrOVF9VlIFvk1gN0vyTZZM7H1WW4kxEef2rfaTz1pXQB4kYZ%252F9XHjVeeadam9H4xIU7TiEjDZzZjdoSrXtUSRMpGsS7JD0g6mtjO9xEcPGv4h09BO8kDoqFYN6TOrCdnH6PkbgJoHE6TZ0qw%253D%253D%26h%3Da7fbd7ea0001131fb1ec598102f23707c95c739b-yot32p6u_87845615541892%26l%3D2a81e3fbbe1f25231e9aa0f3cddc25602d07a6ab-82716568&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw3SuviWGz8HwCdbFwFwc17_">Best 9 Black Friday Marketing Tools</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=D3k2v5IxG8QElPrflPhBeeYc9DfJSvzUxFTGYEiX19U8HUP6RK%2FyYNhU3%2BrfXaD2pEkjmySfPmBKTTO9aYKdrVXPFeeE3%2FNvnY8ejbSU%2BPJMe8meXvD5y2SpA8TN8QypwYFGUecAAx42yRKvbgWVnhfnRGS9ZcAfdArJ0TE8z%2B1aT9KACMXYz%2Bn%2FFzsPozPg&amp;h=4ea7f2c8559dcabc5a09f15cca715e34c69aaeff-yot32p6u_87845615541892&amp;l=8115b647b0502e370a7a2bb55c8c42be677c71be-82716570" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DD3k2v5IxG8QElPrflPhBeeYc9DfJSvzUxFTGYEiX19U8HUP6RK%252FyYNhU3%252BrfXaD2pEkjmySfPmBKTTO9aYKdrVXPFeeE3%252FNvnY8ejbSU%252BPJMe8meXvD5y2SpA8TN8QypwYFGUecAAx42yRKvbgWVnhfnRGS9ZcAfdArJ0TE8z%252B1aT9KACMXYz%252Bn%252FFzsPozPg%26h%3D4ea7f2c8559dcabc5a09f15cca715e34c69aaeff-yot32p6u_87845615541892%26l%3D8115b647b0502e370a7a2bb55c8c42be677c71be-82716570&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw2cV4vIGQyyDWN7zPm72JiL">Black Friday Marketing Ideas That Actually Work</a></li>\n</ul>\n<ul style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; margin: 0px 0px 20px 40px; padding: 0px;">\n<li style="margin-left: 15px;"><a class="m_-3194041646948202551intercom-content-link" style="line-height: 19.5px; margin: 0px; padding: 0px; color: #1251ba !important;" href="https://optinmonster.intercom-clicks.com/via/e?ob=In5rzaAaGQX%2B1BQqwYvopIVm631I6oUH2el7LwQ62FvYh5WeYenDspNTk96%2BcyOlCJKmRJTDrBk2gpyOFPCxLTwjf11HDpqmroFQ8nlbLh4vgG67ODAKHEWxXLB29uyvtU28KAreRfS464vIu5xoRWLKDCDfdMHLBE41guXr%2B0pac4Hb7hxxLlQ%2FjZiYoT5h&amp;h=239537e687c6d482127587dcd74d0943965a78ca-yot32p6u_87845615541892&amp;l=6e11e7632d0195dc5327eb3b39ff8ca03629075c-82716579" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://optinmonster.intercom-clicks.com/via/e?ob%3DIn5rzaAaGQX%252B1BQqwYvopIVm631I6oUH2el7LwQ62FvYh5WeYenDspNTk96%252BcyOlCJKmRJTDrBk2gpyOFPCxLTwjf11HDpqmroFQ8nlbLh4vgG67ODAKHEWxXLB29uyvtU28KAreRfS464vIu5xoRWLKDCDfdMHLBE41guXr%252B0pac4Hb7hxxLlQ%252FjZiYoT5h%26h%3D239537e687c6d482127587dcd74d0943965a78ca-yot32p6u_87845615541892%26l%3D6e11e7632d0195dc5327eb3b39ff8ca03629075c-82716579&amp;source=gmail&amp;ust=1695672879445000&amp;usg=AOvVaw2S0dymtLUx_2DNIquy4buq">Black Friday Emails: Best Examples, Top Subject Lines, and Key Takeaways</a></li>\n</ul>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Implement whatever you can, and&nbsp;<em>have a record-breaking Black Friday sale</em>!</p>\n<p style="font-size: 15px; color: #525252; font-family: Helvetica, Arial, sans-serif; background-color: #fefefe; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">If you have any questions, just reply to this email.</p>\n<p style="font-size: 15px; color: #525252; background-color: #fefefe; font-family: sans-serif; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Talk again soon,</p>\n<p style="font-size: 15px; color: #525252; background-color: #fefefe; font-family: sans-serif; line-height: 1.5; margin: 0px 0px 17px; padding: 0px;" align="left">Angie Meeker<br />General Manager,<br />OptinMonster</p>
-ed3d36d4-f0fe-4978-9970-05af3e4f9f34	Goal #45	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	<p>Sarada</p>
+0be1c20f-e1c7-42d5-9218-6086ae7cd984	Goal 123	50	2023-08-27	727910f3-4c49-4b13-b781-efc654044e29	15	<p>testing #33</p>
+b84985b8-d2b0-4e7c-b2c3-cb62a4dc1264	TEST GOAL	50	2023-11-08	727910f3-4c49-4b13-b781-efc654044e29	35	<p>This is a<strong> description! </strong>Can you see it?</p>
+ed3d36d4-f0fe-4978-9970-05af3e4f9f34	Goal #45	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	<p>Sarada Sarasa</p>
+a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	100	\N
 \.
 
 
@@ -599,13 +646,7 @@ ed3d36d4-f0fe-4978-9970-05af3e4f9f34	Goal #45	50	2023-10-31	727910f3-4c49-4b13-b
 --
 
 COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend) FROM stdin;
-5006bd32-b202-43de-9388-f96a05f32bff	2023-04-27 00:00:00	2023-04-28 00:00:00	I would need some days off	ANNUAL_LEAVE	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
-83cb9928-99e5-4f88-a3d4-e7701b2a3784	2023-06-04 00:00:00	2023-06-08 00:00:00	\N	\N	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	f	f	f	f
-8cfa1c3a-48e8-4ad0-8e5d-740fa89e092e	2023-07-02 00:00:00	2023-07-06 00:00:00	\N	\N	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	f	f	f	f
-c43e733f-0620-4299-bd13-11b2990dd783	2023-06-18 00:00:00	2023-07-01 00:00:00	Please please please I need holiday	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	t	t	f	f
-06bbf436-0149-490b-bca8-c778ab4d7663	2023-07-09 00:00:00	2023-07-14 00:00:00	Holidays for Florence	\N	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
-493d37a3-3867-410d-a0f0-12d22a10d838	2023-08-06 00:00:00	2023-08-11 00:00:00	Vacaciones de flor	\N	REJECTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
-d773ed98-e91b-4079-8500-5893ccb882b3	2023-09-04 00:00:00	2023-09-09 00:00:00	test	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	f	f	f	f
+98fab79f-ae08-45a4-a8e6-f82f07bd481a	2023-11-13 00:00:00	2023-11-18 00:00:00	testing	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	t	t	t	t
 \.
 
 
@@ -634,10 +675,24 @@ COPY public.invoices (identifier, date, due_date, ref, invoice_number, contact, 
 
 
 --
+-- Data for Name: notifications; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.notifications (identifier, profile_identifier, message, "time", deleted, owner_identifier, unread) FROM stdin;
+b17251f2-5c15-47cf-b96f-8d1302da8436	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2023-11-24 10:43:04.175	f	727910f3-4c49-4b13-b781-efc654044e29	f
+\.
+
+
+--
 -- Data for Name: organization_chart; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
 COPY public.organization_chart (parent_identifier, child_identifier, relationship_type, authorize_holiday) FROM stdin;
+727910f3-4c49-4b13-b781-efc654044e29	7bf56177-8a14-4f07-8d23-246949d65955		t
+727910f3-4c49-4b13-b781-efc654044e29	907fbf29-c720-42f2-9b2a-cc30d4971f3e		t
+727910f3-4c49-4b13-b781-efc654044e29	ffbbd930-53d3-4000-95b4-bf79840a0491		t
+ffbbd930-53d3-4000-95b4-bf79840a0491	b75ae32d-d4c0-4805-b3ef-2e17c45e7ec1		t
+b75ae32d-d4c0-4805-b3ef-2e17c45e7ec1	fd2977e9-10d5-4173-a4b6-21bb09b17b38		t
 \.
 
 
@@ -850,8 +905,10 @@ b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@ne
 -- Data for Name: role_positions; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned) FROM stdin;
-2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955
+COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned, log) FROM stdin;
+f0561690-eb83-40a4-9b72-b3733769dece	727910f3-4c49-4b13-b781-efc654044e29	\N	level3	\N	type4	\N	2023-11-29	this is a test of Header	REQUESTED	727910f3-4c49-4b13-b781-efc654044e29	\N
+2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	ARCHIVED	7bf56177-8a14-4f07-8d23-246949d65955	\N
+c8f3b5d1-05ae-4be6-9c4c-8571575af12b	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p><strong>This is a real test</strong></p>	type4	\N	2023-11-30	Header	ARCHIVED	727910f3-4c49-4b13-b781-efc654044e29	null\nREJECTED on Sun Nov 19 19:53:42 GMT 2023 No for me thank you very much sir\nAPPROVED on Mon Nov 20 16:33:19 GMT 2023 Test!
 \.
 
 
@@ -872,6 +929,14 @@ HR-ADMIN	Admin for HR application
 --
 
 COPY public.shareddocument_profile (profile_identifier, document_identifier) FROM stdin;
+727910f3-4c49-4b13-b781-efc654044e29	42ad4a0c-dcb6-488c-8d0f-04966aa9af08
+7bf56177-8a14-4f07-8d23-246949d65955	987a17e7-4d3a-4f46-ae59-64e6611d24a7
+7bf56177-8a14-4f07-8d23-246949d65955	592a417f-d9a8-44a8-95df-2fac6b23fa0c
+7bf56177-8a14-4f07-8d23-246949d65955	bdc53017-6316-478c-883f-98ab79b127ca
+7bf56177-8a14-4f07-8d23-246949d65955	99987918-8932-420a-84f1-b5114a7e7068
+727910f3-4c49-4b13-b781-efc654044e29	77578fe6-20c0-4dff-a867-36d5988cd3a6
+7bf56177-8a14-4f07-8d23-246949d65955	77578fe6-20c0-4dff-a867-36d5988cd3a6
+7bf56177-8a14-4f07-8d23-246949d65955	e2b7fa6a-44b1-4f7a-87ac-9520355190a7
 \.
 
 
@@ -1004,6 +1069,14 @@ ALTER TABLE ONLY public.invoice_payment
 
 ALTER TABLE ONLY public.invoices
     ADD CONSTRAINT invoices_pkey PRIMARY KEY (identifier);
+
+
+--
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (identifier);
 
 
 --
@@ -1180,6 +1253,22 @@ ALTER TABLE ONLY public.invoice_payment
 
 ALTER TABLE ONLY public.invoices
     ADD CONSTRAINT invoices_account_identifier_fkey FOREIGN KEY (account_identifier) REFERENCES public.accounts(identifier);
+
+
+--
+-- Name: notifications notifications_owner_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_owner_identifier_fkey FOREIGN KEY (owner_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: notifications notifications_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
 
 
 --

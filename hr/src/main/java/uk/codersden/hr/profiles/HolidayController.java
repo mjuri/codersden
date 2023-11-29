@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,34 @@ public class HolidayController {
 	}
 	
 	@CrossOrigin
+	@PostMapping
+	public ResponseEntity<?> createHoliday(@RequestBody Holiday holiday){
+		Holiday newHoliday = null;
+		try {
+			newHoliday = holidayService.saveHoliday(holiday);
+		} catch (HolidayNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(e);
+		}
+		return ResponseEntity.ok(newHoliday);
+		
+	}
+	@CrossOrigin
+	@PutMapping("/{identifier}")
+	public ResponseEntity<?> updateHoliday(@PathVariable("identifier") String identifier, @RequestBody Holiday holiday){
+		Holiday newHoliday = null;
+		holiday.setIdentifier(identifier);
+		try {
+			newHoliday = holidayService.saveHoliday(holiday);
+		} catch (HolidayNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(e);
+		}
+		return ResponseEntity.ok(newHoliday);
+	}
+	@CrossOrigin
 	@PostMapping("/reject/{holidayIdentifier}")
 	public ResponseEntity<?> rejectHoliday(@PathVariable("holidayIdentifier") String identifier) throws HolidayNotFoundException{
 		
@@ -60,14 +89,14 @@ public class HolidayController {
 	@CrossOrigin
 	@GetMapping("/{id}")
 	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String identifier){
-		List<Holiday> list = new ArrayList<>();
+		Holiday holiday = null;
 		try {
-			list = holidayService.findAllHolidayByProfileIdentifier(identifier);
-		} catch (ProfileNotFoundException e) {
+			holiday = holidayService.findByHolidayIdentifier(identifier);
+		} catch (HolidayNotFoundException e) {
 			ResponseEntity.notFound();
 			e.printStackTrace();
 		}
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(holiday);
 		
 	}
 	@CrossOrigin

@@ -83,4 +83,14 @@ public class HolidayService {
 		h.setStatus(HolidayStatus.REJECTED.toString());
 		return this.holidayDao.save(h);
 	}
+
+	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException {
+		Holiday h = null;
+		if(holiday.getIdentifier() != null) {
+			h = findByHolidayIdentifier(holiday.getIdentifier());
+		}
+		// Update h //TODO
+		h = holidayDao.save(holiday);
+		return h;
+	}
 }

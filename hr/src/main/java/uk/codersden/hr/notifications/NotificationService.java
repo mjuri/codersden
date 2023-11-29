@@ -19,6 +19,7 @@ public class NotificationService {
 	
 	@Autowired
 	private ProfileDao profileDao;
+	
 	public Notification sendNotification(Notification notification) {
 		// First I save the notification
 		Notification newNotification = null;
@@ -40,5 +41,15 @@ public class NotificationService {
 		list = dao.findAllByProfile(op.get());
 		
 		return list;
+	}
+	public Notification removeNotification(String identification) throws NotificationNotFoundException {
+		Optional<Notification> op = dao.findById(identification);
+		if(op.isEmpty()) {
+			throw new NotificationNotFoundException(identification + " Not found!");
+		}
+		Notification n = op.get();
+		
+		dao.delete(n);
+		return n;
 	}
 }
