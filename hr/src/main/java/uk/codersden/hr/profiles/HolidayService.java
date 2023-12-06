@@ -82,6 +82,10 @@ public class HolidayService {
 		if(holiday.getDateCreated() == null) {
 			java.sql.Date d = new Date(System.currentTimeMillis());
 			holiday.setDateCreated(d);
+			
+			if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
+				holiday.setStatus(HolidayStatus.APPROVED.toString());
+			}
 		}
 		Holiday h = null;
 		if(holiday.getIdentifier() != null) {
