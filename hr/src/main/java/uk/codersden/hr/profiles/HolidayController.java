@@ -1,6 +1,7 @@
 package uk.codersden.hr.profiles;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class HolidayController {
 	}
 	@CrossOrigin
 	@GetMapping("/{id}")
-	public ResponseEntity<?> retrieveHolidaysByUser(@PathVariable("id") String identifier){
+	public ResponseEntity<?> retrieveHolidaysByIdentifier(@PathVariable("id") String identifier){
 		Holiday holiday = null;
 		try {
 			holiday = holidayService.findByHolidayIdentifier(identifier);

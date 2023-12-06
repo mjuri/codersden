@@ -1,5 +1,6 @@
 package uk.codersden.hr.profiles;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -35,26 +36,19 @@ public class HolidayService {
 		
 		List<Holiday> list = this.holidayDao.findAllByProfileIdentifier(id);
 		
-		if(p.getRoles().contains(ROLE_HR_ADMIN)) {
-			list.addAll(this.getHolidaysAsAHRManager(p));
-		}
+		// Add Holidays of his/her team.
+		List<Profile> children = p.getChildren();
 		
+		if(children.size() > 0) {
+			for (Profile child : children) {
+				list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
+			}
+
+		}
 		
 		return list;
 	}
 
-	
-	private Collection<? extends Holiday> getHolidaysAsAHRManager(Profile p) throws ProfileNotFoundException {
-		List<Holiday> list = new ArrayList<>();
-		List<Profile> children = p.getChildren();
-		
-		for (Profile child : children) {
-			list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
-		}
-		
-		return list;
-		
-	}
 
 	public List<Holiday> findAllRequestedHolidays(String managerIdentifer){
 		return this.holidayDao.findAllByAuthorizedByAndStatus(managerIdentifer, HolidayStatus.REQUESTED.toString());
@@ -85,6 +79,10 @@ public class HolidayService {
 	}
 
 	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException {
+		if(holiday.getDateCreated() == null) {
+			java.sql.Date d = new Date(System.currentTimeMillis());
+			holiday.setDateCreated(d);
+		}
 		Holiday h = null;
 		if(holiday.getIdentifier() != null) {
 			h = findByHolidayIdentifier(holiday.getIdentifier());

@@ -64,7 +64,7 @@ public class Holiday {
 	@Column(name="authorized_by")
 	private String authorizedBy;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="date_created")
 	private Date dateCreated;
 	
