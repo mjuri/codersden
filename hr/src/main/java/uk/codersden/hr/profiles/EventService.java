@@ -90,7 +90,6 @@ public class EventService {
 			notificationService.sendNotification(n);
 			
 		}
-
 		
 	}
 	

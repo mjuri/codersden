@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -21,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import uk.codersden.hr.notifications.Notification;
+import uk.codersden.hr.notifications.NotificationService;
+import uk.codersden.hr.profiles.Event;
 import uk.codersden.hr.profiles.Profile;
 import uk.codersden.hr.profiles.ProfileDao;
 import uk.codersden.hr.profiles.ProfileNotFoundException;
@@ -38,6 +42,9 @@ public class DocumentService {
 	private DocumentDao dao;
 	@Autowired
 	private ProfileDao profileDao;
+	
+	@Autowired
+	private NotificationService notificationService;
 
     @Autowired
     private StaticResourceService resourceService;
@@ -105,11 +112,31 @@ public class DocumentService {
 		doc.setProfile(p);
 
 		Document d = this.dao.save(doc);
-
+		
+		sendNotification(d);
+		
 		return d;
 
 	}
-
+	
+	private void sendNotification(Document doc) {
+		Set<Profile> shared = doc.getSharedWith();
+		for (Profile profile : shared) {
+			if(!doc.getProfile().equals(profile)) {
+				Notification n = new Notification();
+				n.setOwner(doc.getProfile());
+				n.setMessage(" has shared a document with you");
+				n.setTime(new Timestamp(System.currentTimeMillis() ));
+				n.setProfile(profile);
+				n.setProfileIdentifier(profile.getIdentifier());
+				n.setOwnerIdentifier(doc.getProfile().getIdentifier());
+				
+				notificationService.sendNotification(n);
+			}	
+			
+		}
+		
+	}
 	public Resource loadFile(String identifier) throws FileNotFoundException {
 		Optional<Document> op = this.dao.findById(identifier);
 		if (op.isEmpty()) {
