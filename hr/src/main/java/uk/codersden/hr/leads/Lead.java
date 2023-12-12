@@ -53,6 +53,17 @@ public class Lead {
     @JoinColumn(name="account",  nullable=false, insertable=false, updatable=false)
 	private Account account;
 	
+    private String comments;
+    
+    
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public String getIdentifier() {
 		return identifier;
 	}
