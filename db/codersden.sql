@@ -525,7 +525,30 @@ ea390e7d-5486-429f-9500-d38241c7bdf9	mariano.juri@yahoo.co.uk	2023-10-06 16:03:0
 140af531-39e3-4a9c-b239-91c30a0a8b16	mariano.juri@yahoo.co.uk	2023-10-09 16:05:29.994	2023-10-09 16:06:12.253
 a215e9e6-4af6-4c14-b015-9d6e037d7f3e	mariano.juri@yahoo.co.uk	2023-10-09 16:06:21.865	2023-10-16 14:57:12.286
 f00b1585-ad87-4763-8adc-eaf5e092fc25	mariano.juri@yahoo.co.uk	2023-10-18 10:34:41.821	2023-11-27 12:59:27.797
-414b97e5-2c40-4fa1-8cdb-5651db041d59	mariano.juri@yahoo.co.uk	2023-11-27 14:19:52.113	\N
+414b97e5-2c40-4fa1-8cdb-5651db041d59	mariano.juri@yahoo.co.uk	2023-11-27 14:19:52.113	2023-12-04 16:23:37.844
+907a1815-4be6-4d30-88bf-88edc50b886e	florence@ndthemachine.com	2023-12-04 16:23:49.698	2023-12-04 16:24:32.856
+e12cf759-0c14-461a-8811-c166f64e78c3	florence@ndthemachine.com	2023-12-04 16:24:41.732	2023-12-04 16:25:12.52
+951b5961-a87f-4468-9f91-8effc541b0d7	mariano.juri@yahoo.co.uk	2023-12-04 16:25:22.786	2023-12-04 16:37:31.636
+86b64a3d-f9e6-486f-afe6-b9d1298b4a3c	florence@ndthemachine.com	2023-12-04 16:37:40.511	2023-12-04 21:58:21.861
+a4e905d2-fbdd-4cd8-918d-ab9aeaf0192e	mariano.juri@yahoo.co.uk	2023-12-04 21:58:37.733	2023-12-04 22:13:04.528
+2460b2e8-6d50-4de9-89db-eedbf8a8b9f5	florence@ndthemachine.com	2023-12-04 22:13:12.047	2023-12-04 22:13:39.261
+135ef676-00fa-4ff9-8c83-f61ba757c8e0	mariano.juri@yahoo.co.uk	2023-12-04 22:13:49.428	2023-12-06 16:06:12.408
+38590806-078b-40c0-b945-55de6af44f34	florence@ndthemachine.com	2023-12-06 16:06:20.806	2023-12-06 16:17:58.761
+33078174-a8b9-4bae-990f-b772dc540bd1	mariano.juri@yahoo.co.uk	2023-12-06 16:18:09.009	2023-12-07 14:30:51.739
+ff9c4369-6e75-47a9-aac6-289f65916310	florence@ndthemachine.com	2023-12-07 14:31:00.732	2023-12-07 15:18:48.269
+486c326d-80e4-44b5-8be7-0db40ef77b0e	mariano.juri@yahoo.co.uk	2023-12-07 15:19:08.755	2023-12-08 11:16:26.372
+00359f88-ddf5-483d-b190-476c5caa1e13	florence@ndthemachine.com	2023-12-08 11:16:31.64	2023-12-08 11:28:47.856
+8b3c0acf-0003-43ca-a3b6-8edb3f2b7f20	mariano.juri@yahoo.co.uk	2023-12-08 11:29:01.913	2023-12-08 15:10:40.3
+8fc4523a-7adb-46c8-bd8f-b0f8a78d0d69	florence@ndthemachine.com	2023-12-08 15:10:50.067	2023-12-08 15:12:26.634
+ee6dee1e-fd4b-45d9-93a0-dc0c44cd62af	mariano.juri@yahoo.co.uk	2023-12-08 15:13:16.334	2023-12-08 15:15:34.433
+0c42a1ee-7f43-48c1-943d-080ac9a5f3b0	florence@ndthemachine.com	2023-12-08 15:15:43.184	2023-12-08 15:16:15.912
+d83f5e40-20c9-4f1d-b48d-b233ae6aa098	mariano.juri@yahoo.co.uk	2023-12-08 15:16:25.596	2023-12-11 16:35:02.498
+2c54c279-d608-473f-ae3d-b174ff11fef8	florence@ndthemachine.com	2023-12-11 16:42:28.506	2023-12-11 16:42:50.768
+91f04055-3222-44f9-9433-08215c043998	mariano.juri@yahoo.co.uk	2023-12-11 16:43:02.475	2023-12-11 16:43:13.318
+856cfc28-64a9-4d98-aef0-4841250b4c2d	florence@ndthemachine.com	2023-12-11 16:43:18.436	2023-12-13 09:27:03.326
+8bc0f7bd-bcfe-48be-8a5d-656844fb1cf6	mariano.juri@yahoo.co.uk	2023-12-13 09:27:26.149	2023-12-13 10:26:43.994
+c095bb0d-702b-451f-a131-3fe2efe980b1	florence@ndthemachine.com	2023-12-13 10:26:49.571	2023-12-13 10:27:24.514
+2cd9d960-83cb-4606-ade4-fd853fc302a7	mariano.juri@yahoo.co.uk	2023-12-13 10:27:38.005	\N
 \.
 
 
@@ -568,15 +591,23 @@ cb55e7a0-d4dc-43a4-8eb4-d66c77bb3c90	2023-08-29 08:10:12	2023-08-30 08:10:12	\N	
 --
 
 COPY public.documents (identifier, img, profile_identifier, name, date_created, status) FROM stdin;
-592a417f-d9a8-44a8-95df-2fac6b23fa0c	/Users/mvelasco/Documents/uploads/5b03b8e4-e19c-4baf-aa22-3f17f648fbe3/Screenshot 2023-10-26 at 15.46.23.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-26 at 15.46.23.png	2023-10-30	ACTIVE
-42ad4a0c-dcb6-488c-8d0f-04966aa9af08	/Users/mvelasco/Documents/uploads/d362394a-7cb8-4550-884c-a222199e2c88/Screenshot 2023-10-09 at 15.39.17.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-09 at 15.39.17.png	2023-10-25	ACTIVE
-2c2f4fbf-8175-4cac-adc9-69a1e940d197	/Users/mvelasco/Documents/uploads/242e93b1-3aec-42a5-9098-10dda41eb1bb/Screenshot 2023-10-14 at 17.55.22.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-14 at 17.55.22.png	2023-10-30	ACTIVE
-987a17e7-4d3a-4f46-ae59-64e6611d24a7	/Users/mvelasco/Documents/uploads/d7953487-b1af-4aa8-864b-4447a0b29b4d/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
-bdc53017-6316-478c-883f-98ab79b127ca	/Users/mvelasco/Documents/uploads/e063521c-921c-4f76-bde2-1974f4df57a9/Screenshot 2023-10-20 at 15.54.35.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-20 at 15.54.35.png	2023-10-30	ACTIVE
-96309c55-7f71-4d79-827b-d4ba0afc44ee	/Users/mvelasco/Documents/uploads/63933e63-4ca0-4dce-a2c9-84924cef6004/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
-e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9/IMG_8974.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8974.jpg	2023-10-31	ACTIVE
+2c2f4fbf-8175-4cac-adc9-69a1e940d197	/Users/mvelasco/Documents/uploads/242e93b1-3aec-42a5-9098-10dda41eb1bb/Screenshot 2023-10-14 at 17.55.22.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-14 at 17.55.22.png	2023-10-30	ARCHIVED
+987a17e7-4d3a-4f46-ae59-64e6611d24a7	/Users/mvelasco/Documents/uploads/d7953487-b1af-4aa8-864b-4447a0b29b4d/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ARCHIVED
+42ad4a0c-dcb6-488c-8d0f-04966aa9af08	/Users/mvelasco/Documents/uploads/d362394a-7cb8-4550-884c-a222199e2c88/Screenshot 2023-10-09 at 15.39.17.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-09 at 15.39.17.png	2023-10-25	ARCHIVED
+592a417f-d9a8-44a8-95df-2fac6b23fa0c	/Users/mvelasco/Documents/uploads/5b03b8e4-e19c-4baf-aa22-3f17f648fbe3/Screenshot 2023-10-26 at 15.46.23.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-26 at 15.46.23.png	2023-10-30	ARCHIVED
 77578fe6-20c0-4dff-a867-36d5988cd3a6	static/files/81fffa8c-99fb-4dab-bcf9-a00ea5acf83d/CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	727910f3-4c49-4b13-b781-efc654044e29	CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	2023-10-31	ARCHIVED
 99987918-8932-420a-84f1-b5114a7e7068	static/avatars/2d7c3b40-009e-4475-a978-4c636d14fb9a/IMG_8977.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8977.jpg	2023-10-31	ARCHIVED
+e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9/IMG_8974.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8974.jpg	2023-10-31	ARCHIVED
+96309c55-7f71-4d79-827b-d4ba0afc44ee	/Users/mvelasco/Documents/uploads/63933e63-4ca0-4dce-a2c9-84924cef6004/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ARCHIVED
+bdc53017-6316-478c-883f-98ab79b127ca	/Users/mvelasco/Documents/uploads/e063521c-921c-4f76-bde2-1974f4df57a9/Screenshot 2023-10-20 at 15.54.35.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-20 at 15.54.35.png	2023-10-30	ARCHIVED
+dea12577-4e37-4271-a283-fd442948b348	/files/c6d44d35-d074-4cea-8a66-8ac6adc481fb/casinoBanner.jpg	727910f3-4c49-4b13-b781-efc654044e29	casinoBanner.jpg	2023-12-08	ARCHIVED
+9b4f1a5f-454b-488c-bb9f-142f42ef6841	/files/998c0e3d-a0cf-4d41-a02f-b0afb6c8f2a2/Proposal.docx	7bf56177-8a14-4f07-8d23-246949d65955	Proposal.docx	2023-12-08	ACTIVE
+d7a51f9c-909f-4859-9b67-1edcc7534d25	/files/b4bc4b08-924d-46f6-860e-08277290b3eb/sportBanner.jpg	727910f3-4c49-4b13-b781-efc654044e29	sportBanner.jpg	2023-12-08	ARCHIVED
+073edd73-b5d9-4c79-bae0-b02093e64514	/files/2376a228-a2c4-4f43-9e5e-301445d4ccae/oneSizeBanner.jpg	727910f3-4c49-4b13-b781-efc654044e29	oneSizeBanner.jpg	2023-12-08	ARCHIVED
+45ce982d-6f8e-4156-a2d1-f22e00f23f79	/files/505a6084-1dae-458e-913d-c02cf24e5697/First Review.docx	727910f3-4c49-4b13-b781-efc654044e29	First Review.docx	2023-12-08	ARCHIVED
+469f8cbf-7573-43b9-958c-6440cc1814b3	/files/364ab4e6-ab53-42e8-b315-71412ab08fb9/Misterio en Mile End - Angel Juri - 20191129 .doc	727910f3-4c49-4b13-b781-efc654044e29	Misterio en Mile End - Angel Juri - 20191129 .doc	2023-12-08	ARCHIVED
+77f33132-ba5f-4740-8a04-82ab1e86fa2a	/files/52bceb1f-2d36-499c-9f45-73552206b26b/Report on office improvements.docx	727910f3-4c49-4b13-b781-efc654044e29	Report on office improvements.docx	2023-12-08	ACTIVE
+943008ec-107f-4f61-a6dc-716488e0022c	/files/20bf494f-53df-4490-890a-b0ccdfa5d25e/The importance of equality within the domestic environment.docx	7bf56177-8a14-4f07-8d23-246949d65955	The importance of equality within the domestic environment.docx	2023-12-08	ACTIVE
 \.
 
 
@@ -585,21 +616,12 @@ e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9
 --
 
 COPY public.event_attendee (event_identifier, profile_identifier, status) FROM stdin;
-899a5eea-4499-4614-b4fd-271766c58b1d	7bf56177-8a14-4f07-8d23-246949d65955	\N
-4a7bd3b3-51a3-46ab-a58d-4b6168859c5c	7bf56177-8a14-4f07-8d23-246949d65955	\N
-eb1cef85-4799-4b22-b5c9-7f7d32947be3	7bf56177-8a14-4f07-8d23-246949d65955	\N
 419cb21a-c019-477f-91ba-84f8fc57ee28	727910f3-4c49-4b13-b781-efc654044e29	\N
-419cb21a-c019-477f-91ba-84f8fc57ee28	7bf56177-8a14-4f07-8d23-246949d65955	\N
 9eb94028-6197-4141-984f-2f9b8a5516c3	727910f3-4c49-4b13-b781-efc654044e29	\N
-9eb94028-6197-4141-984f-2f9b8a5516c3	7bf56177-8a14-4f07-8d23-246949d65955	\N
 ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	727910f3-4c49-4b13-b781-efc654044e29	\N
-ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	7bf56177-8a14-4f07-8d23-246949d65955	\N
 6429a514-d83a-4506-b110-a5b54e925e26	727910f3-4c49-4b13-b781-efc654044e29	\N
-6429a514-d83a-4506-b110-a5b54e925e26	7bf56177-8a14-4f07-8d23-246949d65955	\N
 14f7ed4c-4901-432f-878e-d48f57d12c78	727910f3-4c49-4b13-b781-efc654044e29	\N
-14f7ed4c-4901-432f-878e-d48f57d12c78	7bf56177-8a14-4f07-8d23-246949d65955	\N
 b96f229e-6d2b-4320-88f3-4dd961c5ed93	727910f3-4c49-4b13-b781-efc654044e29	\N
-b96f229e-6d2b-4320-88f3-4dd961c5ed93	7bf56177-8a14-4f07-8d23-246949d65955	\N
 \.
 
 
@@ -646,7 +668,11 @@ a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49
 --
 
 COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend) FROM stdin;
-98fab79f-ae08-45a4-a8e6-f82f07bd481a	2023-11-13 00:00:00	2023-11-18 00:00:00	testing	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	t	t	t	t
+6f9d4f4c-3385-4374-9473-163f82ae7a86	2023-12-01 00:00:00	2023-12-14 00:00:00	\N	BANK_HOLIDAY	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	2023-12-03	\N	f	f	f	f
+b4f4621a-85ef-43c0-a0ef-afb2d10d1302	2023-12-04 00:00:00	2023-12-08 00:00:00	<p>test</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	2023-12-06	\N	t	f	f	f
+33aa5df1-7b3a-4e54-a4af-a2a364eb2f6a	2023-12-26 00:00:00	2023-12-30 00:00:00	<p>text</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	\N	2023-12-06	\N	t	t	f	f
+89b03428-693f-465e-ab3d-a515f2e7e7c8	2023-12-05 00:00:00	2023-12-09 00:00:00	<p>testing</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	\N	2023-12-04	\N	f	f	f	f
+17a9b94c-f45e-492c-b88e-5fe37c71675c	2024-03-11 00:00:00	2024-03-15 00:00:00	<p>test</p>	ANNUAL_LEAVE	REJECTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	2023-12-13	\N	f	f	f	f
 \.
 
 
@@ -680,6 +706,9 @@ COPY public.invoices (identifier, date, due_date, ref, invoice_number, contact, 
 
 COPY public.notifications (identifier, profile_identifier, message, "time", deleted, owner_identifier, unread) FROM stdin;
 b17251f2-5c15-47cf-b96f-8d1302da8436	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2023-11-24 10:43:04.175	f	727910f3-4c49-4b13-b781-efc654044e29	f
+f5208954-2658-483e-8586-1aecd5114965	727910f3-4c49-4b13-b781-efc654044e29	 has shared a document with you	2023-12-08 15:10:31.463	f	727910f3-4c49-4b13-b781-efc654044e29	f
+9985549b-9369-46c3-b52e-e49d8db2674a	7bf56177-8a14-4f07-8d23-246949d65955	 has shared a document with you	2023-12-08 15:15:24.849	f	727910f3-4c49-4b13-b781-efc654044e29	f
+02e4a1fc-be23-4abd-aab1-2c1994fccad4	727910f3-4c49-4b13-b781-efc654044e29	 has shared a document with you	2023-12-08 15:16:08.612	f	7bf56177-8a14-4f07-8d23-246949d65955	f
 \.
 
 
@@ -888,7 +917,6 @@ c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8f
 8b3f6664-14c1-4f8c-81cc-9a005ddc0d04	Jorge	Ibañez	jorge@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Mr	El Pedo	\N	\N	\N	\N	\N	5	\N	\N	\N	jorge@casla.com	07761318029	\N
 4cabff7a-51e8-48c0-9948-eb590caca53d	Nahuela	Barries	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N
 0d4b0f80-be05-41c5-aa03-97e0de184ecf	Theresa	May	may@theresa.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Theresita	\N	\N	\N	\N	\N	90	\N	\N	\N	may@theresa.com	134rt35432345	\N
-7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	\N	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
 94ce30b3-ecce-44aa-bb48-f6da32921514	Javier	 Milei	javier@libertadavanza.com.ar	f	2f7dd967-4367-4794-94de-9306612a7854	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 27866d58-2de6-45dd-83a9-4fd5fdad5412	Javier 3	Milei 3	javier3@libertadavanza.com.ar	f	b2b55608-535e-4274-aff3-332c9bcf5cb5	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 e1034681-4874-48b0-98f1-c9e7d41d09e2	Javier	 Milei	javier555@libertadavanza.com.ar	f	5164fbf6-b966-4a47-bced-6769713c65ab	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
@@ -898,6 +926,7 @@ fcaa2341-e98e-4021-a983-db0960b8acd0	Javier	 Milei	jaasdfasdfasdfasdvier@liberta
 e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	Alejandro	 Fantino	alejandro.fantino6666@neura.com.ar	f	04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@neura.com.ar	f	f950ca75-e7c6-44a5-8fcf-28313e727609	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 727910f3-4c49-4b13-b781-efc654044e29	Mariano Daniel	Velasco	mariano.juri@yahoo.co.uk	f	69609916-442b-413d-a439-c3e505b9d000	\N	0	/avatars/727910f3-4c49-4b13-b781-efc654044e29/727910f3-4c49-4b13-b781-efc654044e29.jpg	Mr	\N	19B, Longbridge Road\nLongbridge Road	\N	\N	\N	\N	4	\N	\N	\N	mariano.juri@yahoo.co.uk	07761318029	\N
+7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	/avatars/7bf56177-8a14-4f07-8d23-246949d65955/7bf56177-8a14-4f07-8d23-246949d65955.jpg	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
 \.
 
 
@@ -937,6 +966,16 @@ COPY public.shareddocument_profile (profile_identifier, document_identifier) FRO
 727910f3-4c49-4b13-b781-efc654044e29	77578fe6-20c0-4dff-a867-36d5988cd3a6
 7bf56177-8a14-4f07-8d23-246949d65955	77578fe6-20c0-4dff-a867-36d5988cd3a6
 7bf56177-8a14-4f07-8d23-246949d65955	e2b7fa6a-44b1-4f7a-87ac-9520355190a7
+727910f3-4c49-4b13-b781-efc654044e29	073edd73-b5d9-4c79-bae0-b02093e64514
+7bf56177-8a14-4f07-8d23-246949d65955	073edd73-b5d9-4c79-bae0-b02093e64514
+727910f3-4c49-4b13-b781-efc654044e29	dea12577-4e37-4271-a283-fd442948b348
+727910f3-4c49-4b13-b781-efc654044e29	d7a51f9c-909f-4859-9b67-1edcc7534d25
+7bf56177-8a14-4f07-8d23-246949d65955	d7a51f9c-909f-4859-9b67-1edcc7534d25
+727910f3-4c49-4b13-b781-efc654044e29	9b4f1a5f-454b-488c-bb9f-142f42ef6841
+7bf56177-8a14-4f07-8d23-246949d65955	45ce982d-6f8e-4156-a2d1-f22e00f23f79
+727910f3-4c49-4b13-b781-efc654044e29	77f33132-ba5f-4740-8a04-82ab1e86fa2a
+7bf56177-8a14-4f07-8d23-246949d65955	77f33132-ba5f-4740-8a04-82ab1e86fa2a
+727910f3-4c49-4b13-b781-efc654044e29	943008ec-107f-4f61-a6dc-716488e0022c
 \.
 
 
@@ -945,10 +984,9 @@ COPY public.shareddocument_profile (profile_identifier, document_identifier) FRO
 --
 
 COPY public.todo (identifier, profile_identifier, type, text, done, read, date_created, mod_date, status, title) FROM stdin;
-009fe340-5385-47cc-a7c5-41663898fc65	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Do this demo
-7dc33a88-edc8-45ec-af68-06d1d82754bd	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Do another task
-78ce1830-280e-485f-8928-558c5412455c	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Meeting with my manager at 12...
-0309c649-04a9-43ff-8c15-1cc56b79b1e6	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Chatting with Emma now
+7a6ae3ec-41c6-4b36-aa84-41f28e7c203b	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	t	t	2023-12-11	2023-12-11	PENDING	Review ToDo List
+841e24a0-e1fb-4c7b-ac35-06af6c1d3777	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	t	t	2023-12-11	2023-12-11	PENDING	Export list
+7b6413f6-4a93-4409-8afa-1a734d94a572	7bf56177-8a14-4f07-8d23-246949d65955	TASK	\N	f	t	2023-12-11	\N	PENDING	I need to improve this section
 \.
 
 
