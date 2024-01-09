@@ -35,7 +35,15 @@ public class Lead {
 	private String website;
 	private String location;
 	private String industry;
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	private String email;
 	@Column(name = "lead_source")
 	private String leadSource;
 
@@ -50,7 +58,7 @@ public class Lead {
 	private Profile profile;
     
     @ManyToOne
-    @JoinColumn(name="account",  nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="account_identifier",  nullable=false, insertable=false, updatable=false)
 	private Account account;
 	
     private String comments;
