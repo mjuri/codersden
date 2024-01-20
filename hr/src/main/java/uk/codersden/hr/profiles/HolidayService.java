@@ -1,13 +1,12 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class HolidayService {
@@ -21,6 +20,9 @@ public class HolidayService {
 		// Save holiday on the DB
 		// Send email
 		if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
+			holiday.setStatus(HolidayStatus.APPROVED.toString());
+		}
+		if(holiday.getProfileIdentifier().equals(holiday.getAuthorizedBy())) {
 			holiday.setStatus(HolidayStatus.APPROVED.toString());
 		}
 		Holiday h = this.holidayDao.save(holiday);
@@ -84,6 +86,9 @@ public class HolidayService {
 			holiday.setDateCreated(d);
 			
 			if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
+				holiday.setStatus(HolidayStatus.APPROVED.toString());
+			}
+			if(holiday.getProfileIdentifier().equals(holiday.getAuthorizedBy())) {
 				holiday.setStatus(HolidayStatus.APPROVED.toString());
 			}
 		}
