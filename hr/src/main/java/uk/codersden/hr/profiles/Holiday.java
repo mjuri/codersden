@@ -47,6 +47,7 @@ public class Holiday {
 	
 	private String comments;
 	private String type;
+	private boolean draft;
 	
 	@Column(name="includesaturday")
 	private boolean includeSaturday;
@@ -181,6 +182,12 @@ public class Holiday {
 	}
 	public void setHalfDayEnd(boolean halfDayEnd) {
 		this.halfDayEnd = halfDayEnd;
+	}
+	public boolean isDraft() {
+		return draft;
+	}
+	public void setDraft(boolean draft) {
+		this.draft = draft;
 	}
 	
 }
