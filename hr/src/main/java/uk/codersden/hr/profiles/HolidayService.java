@@ -100,4 +100,13 @@ public class HolidayService {
 		h = holidayDao.save(holiday);
 		return h;
 	}
+
+	public Holiday archiveHoliday(String identifier) {
+
+		Optional<Holiday> op = holidayDao.findById(identifier);
+		Holiday holiday = op.get();
+		holiday.setStatus("ARCHIVED");
+		return holidayDao.save(holiday);
+
+	}
 }
