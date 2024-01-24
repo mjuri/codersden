@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.25
--- Dumped by pg_dump version 9.5.25
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -16,21 +17,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
---
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
@@ -45,7 +32,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: accesses; Type: TABLE; Schema: public; Owner: mvelasco
@@ -78,6 +65,52 @@ CREATE TABLE public.accounts (
 
 
 ALTER TABLE public.accounts OWNER TO mvelasco;
+
+--
+-- Name: annoucement_audience; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.annoucement_audience (
+    annoucement_identifier character varying(50) NOT NULL,
+    profile_identifier character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.annoucement_audience OWNER TO mvelasco;
+
+--
+-- Name: annoucement_comments; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.annoucement_comments (
+    identifier character varying(50) NOT NULL,
+    annoucement_identifier character varying(50) NOT NULL,
+    profile_identifier character varying(50) NOT NULL,
+    date_created timestamp without time zone DEFAULT now(),
+    comment character varying
+);
+
+
+ALTER TABLE public.annoucement_comments OWNER TO mvelasco;
+
+--
+-- Name: annoucements; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.annoucements (
+    identifier character varying(50) NOT NULL,
+    body character varying,
+    topic character varying(50),
+    draft boolean DEFAULT false,
+    profile_identifier character varying(50),
+    audience character varying(50),
+    email_notification boolean DEFAULT false,
+    ping_to_the_top boolean DEFAULT false,
+    date_created timestamp without time zone DEFAULT now()
+);
+
+
+ALTER TABLE public.annoucements OWNER TO mvelasco;
 
 --
 -- Name: contracts; Type: TABLE; Schema: public; Owner: mvelasco
@@ -218,7 +251,8 @@ CREATE TABLE public.holidays (
     includesaturday boolean DEFAULT false,
     includesunday boolean DEFAULT false,
     halfdaystart boolean DEFAULT false,
-    halfdayend boolean DEFAULT false
+    halfdayend boolean DEFAULT false,
+    draft boolean DEFAULT false
 );
 
 
@@ -490,82 +524,17 @@ ALTER TABLE public.users OWNER TO mvelasco;
 --
 
 COPY public.accesses (token, user_name, start, ends) FROM stdin;
-7d6ca95b-896a-4163-addb-bf76fc3edede	johndoe@gmail.com	2023-04-20 16:25:29.266	\N
-dd208ce6-5d8e-4077-bbba-bca01bf73c95	mariano.juri@yahoo.co.uk	2023-04-20 16:27:19.788	\N
-0c53482b-fe2b-44d9-8e78-38fdd46c5483	florence@ndthemachine.com	2023-04-26 21:04:54.548	\N
-e3b34185-539e-4d96-84ed-91eaa9c9f750	florence@ndthemachine.com	2023-04-26 21:05:03.533	\N
-ac703011-97be-40bd-a2d9-84ae64a208d9	florence@ndthemachine.com	2023-04-26 21:05:48.204	\N
-2e1b5e43-ee5e-45f8-a459-f738bcde0116	mariano.juri@yahoo.co.uk	2023-05-07 17:25:37.903	\N
-93586011-a949-4c44-ba53-335140f2fe83	mariano.juri@yahoo.co.uk	2023-05-07 17:26:19.704	\N
-b162801e-507a-4e20-925d-eb6ce6c84c7f	florence@ndthemachine.com	2023-05-07 17:28:23.916	\N
-3856b995-1361-465d-a03c-0dfb5b1342f3	jorgep@gmail.com	2023-05-07 17:29:16.907	\N
-24fd549c-16d6-4566-b75a-1cbeeadddd18	mariano.juri@yahoo.co.uk	2023-05-07 17:31:28.721	\N
-4e6766cd-0097-4048-94bf-7f4e0a4fde9f	florence@ndthemachine.com	2023-04-26 20:46:07.371	\N
-a4c98aa0-ca13-49e9-a7e6-20a017fb719e	florence@ndthemachine.com	2023-04-26 20:46:23.318	\N
-50767bd7-6e79-409b-81b1-0212d13257aa	florence@ndthemachine.com	2023-04-26 21:28:14.568	\N
-b8ffcab4-cf02-4821-ada8-468d1cf959c3	mariano.juri@yahoo.co.uk	2023-04-26 21:29:30.058	\N
-1a54606e-91d3-4b8f-adf6-58e07b50833b	mariano.juri@yahoo.co.uk	2023-05-30 16:28:52.304	\N
-ed4c6bcc-311c-4b06-85b4-672eda7c368d	johndoe@gmail.com	2023-04-20 16:23:52.878	\N
-86e00511-9839-415a-af1c-97b868a7c807	mariano.juri@yahoo.co.uk	2023-06-16 16:30:55.549	\N
-497a27c0-5f2b-4a39-80ee-bfad62a48df3	mariano.juri@yahoo.co.uk	2023-06-16 16:31:12.221	\N
-d9533c3e-a691-40a8-9184-ff05f5a17cc6	mariano.juri@yahoo.co.uk	2023-06-16 16:31:23.473	\N
-2878517c-69ff-42f5-a6dd-3c12791cbb32	mariano.juri@yahoo.co.uk	2023-06-16 16:37:21.192	\N
-66451fa4-f2cb-4c30-90e3-512251f51387	mariano.juri@yahoo.co.uk	2023-06-16 16:37:30.422	\N
-20ce002a-3ccc-4b22-aa49-7f273a5d236f	mariano.juri@yahoo.co.uk	2023-06-16 16:38:46.458	\N
-6236f37b-c6df-4abf-844b-0ea5d3a470fe	mariano.juri@yahoo.co.uk	2023-06-16 16:39:26.866	\N
-9b5e9cab-8f8d-4e0a-8856-960b37f90b49	mariano.juri@yahoo.co.uk	2023-06-16 16:40:35.571	\N
-ca13422c-7e8c-46e8-abb8-75b872ab7f94	mariano.juri@yahoo.co.uk	2023-06-16 16:40:40.579	\N
-c864ce6b-01b9-494b-aa1e-81729ffa4131	mariano.juri@yahoo.co.uk	2023-06-16 16:41:11.055	\N
-ff67e71b-fdb1-4ad3-9c68-35ff9c78b9e1	mariano.juri@yahoo.co.uk	2023-06-16 16:42:35.166	\N
-31255e58-d57c-4a8e-85a1-feb3fe723789	mariano.juri@yahoo.co.uk	2023-06-16 16:42:51.787	\N
-fb78b6dc-3497-4ab0-99f3-3f4ebd5cbc02	mariano.juri@yahoo.co.uk	2023-06-16 16:46:46.186	\N
-105c9a54-edbd-4a57-bd08-24fdef8ca1ea	mariano.juri@yahoo.co.uk	2023-06-16 17:01:59.36	\N
-344a1c4c-51e9-482d-89e1-7b82a85df11f	mariano.juri@yahoo.co.uk	2023-06-16 17:06:57.833	\N
-04c96449-5797-4d90-b3ae-035abe6a4430	mariano.juri@yahoo.co.uk	2023-06-16 17:07:02.456	\N
-0c79fead-f8fc-4f13-87e1-f3962e7b86a5	mariano.juri@yahoo.co.uk	2023-06-16 17:07:15.703	\N
-529f9d61-c6d9-421b-ac49-f79c1fd3cda3	mariano.juri@yahoo.co.uk	2023-06-16 17:07:24.082	\N
-bb4c901b-352b-4889-a667-91916a108558	mariano.juri@yahoo.co.uk	2023-06-16 17:07:30.193	\N
-21d7b825-b6fa-47a3-a94f-9594a7cebae8	mariano.juri@yahoo.co.uk	2023-06-16 17:07:54.826	\N
-a8c98529-0de0-4538-98cc-b9c1dbf45e7a	mariano.juri@yahoo.co.uk	2023-06-16 17:08:47.254	\N
-75294417-3c20-4bc0-a0ab-80f175710c52	mariano.juri@yahoo.co.uk	2023-06-16 17:09:41.071	\N
-2c779ead-682d-46dd-81ac-c51942b9035a	mariano.juri@yahoo.co.uk	2023-06-28 11:40:17.881	2023-06-28 13:41:51.409
-3ead7f19-c379-4146-9660-c462be5d34e3	mariano.juri@yahoo.co.uk	2023-06-28 13:42:18.423	2023-06-28 13:42:46.417
-e1b1f86f-9460-4ce6-907a-e0efa927830c	mariano.juri@yahoo.co.uk	2023-06-16 17:11:34.973	2023-06-16 18:05:02.846
-0fb2b011-93ee-4d5b-8e65-d3928c601a9f	mariano.juri@yahoo.co.uk	2023-06-16 18:06:14.96	2023-06-16 18:06:25.355
-f6e278f3-ca6b-4569-93d6-2385d870312b	mariano.juri@yahoo.co.uk	2023-06-16 18:07:00.89	2023-06-16 18:07:13.51
-c6e94925-5425-4b26-a756-1d90d49c84ea	mariano.juri@yahoo.co.uk	2023-06-16 18:08:09.298	2023-06-16 18:14:45.079
-e3bbbab5-2c81-4c05-bac2-dc5f53f2fc82	mariano.juri@yahoo.co.uk	2023-06-16 18:14:58.748	2023-06-16 18:15:11.356
-84a909b0-a962-49af-9392-2c64e047af1e	mariano.juri@yahoo.co.uk	2023-06-16 18:15:29.023	2023-06-16 18:17:11.535
-8af87da8-175c-465a-8cfc-d6194e5b6f92	mariano.juri@yahoo.co.uk	2023-06-16 18:48:54.087	2023-06-16 18:50:37.941
-ea3a80c1-3638-4194-9e9b-926541b752f6	florence@ndthemachine.com	2023-06-16 18:50:55.784	2023-06-16 18:53:46.697
-a8c3da6f-1a90-43c2-bf77-25fe36318038	mariano.juri@yahoo.co.uk	2023-06-16 18:53:58.193	2023-06-16 19:25:37.484
-366715e5-7e0a-4b75-b0df-590ae5267ebc	florence@ndthemachine.com	2023-06-16 19:25:45.348	2023-06-16 19:27:53.291
-cddc5e5e-a451-4ea8-bbaa-3fb179d31856	mariano.juri@yahoo.co.uk	2023-06-16 19:28:04.228	2023-06-16 19:43:26.042
-feb7ace9-0a60-42a9-bdda-dd1b7be57b49	mariano.juri@yahoo.co.uk	2023-06-16 19:43:36.138	2023-06-28 09:55:36.707
-37a17868-2ff8-4f6e-bda4-14d53baba193	florence@ndthemachine.com	2023-06-28 09:55:46.482	2023-06-28 09:56:38.628
-7b905d1b-4401-46fa-b587-72eef8072e47	mariano.juri@yahoo.co.uk	2023-06-28 09:56:49.727	2023-06-28 10:30:18.943
-d89a4a50-a889-4b9e-8f41-6ba02e87868d	florence@ndthemachine.com	2023-06-28 10:30:28.097	2023-06-28 11:40:04.146
-82586e09-212a-4f3c-a8d3-d564b0478b47	florence@ndthemachine.com	2023-06-28 13:42:54.131	2023-06-28 13:43:15.777
-39efa7a7-d45c-4254-a8bc-a5a7a1e451ac	mariano.juri@yahoo.co.uk	2023-06-28 13:43:33.635	\N
-9595afca-2ebb-4c05-86bf-e2626cb9541a	mariano.juri@yahoo.co.uk	2023-08-16 16:43:30.529	\N
-fa30fe4f-72e6-4f62-b5e5-8663ef8a7743	alejandro.fantino6666@neura.com.ar	2023-08-16 17:01:44.935	\N
-4c6c86cc-c307-449a-aede-3ee21b2e07e2	alejandro.fantino7777@neura.com.ar	2023-08-16 17:49:11.698	2023-08-18 12:15:05.545
-5088b090-d33c-4f0a-8c63-922ae9f9de74	mariano.juri@yahoo.co.uk	2023-08-23 11:09:57.104	2023-08-23 14:45:38.215
-2438431d-9e59-40d7-9506-5f584cd0c2e5	mariano.juri@yahoo.co.uk	2023-08-23 14:45:43.367	2023-08-23 15:15:42.669
-0765d99e-099b-4707-8769-7151e79e8e7b	mariano.juri@yahoo.co.uk	2023-08-23 15:19:51.047	2023-09-06 09:41:59.523
-6dc5760c-a854-4a89-b11d-0b47559583bd	mariano.juri@yahoo.co.uk	2023-09-06 09:44:13.848	\N
-cadfbdce-b247-41c6-8711-bf406b179887	mariano.juri@yahoo.co.uk	2023-09-08 12:25:59.383	\N
-1115a1b6-a71d-41a8-83fe-501ba4dc5dad	mariano.juri@yahoo.co.uk	2023-10-06 15:36:08.182	2023-10-06 15:57:50.553
-6b563cb8-7f0f-4ca0-b6f9-8ad2b2849617	mariano.juri@yahoo.co.uk	2023-10-06 15:58:08.351	\N
-58cc85a3-b711-4886-bea0-44a6cb898580	mariano.juri@yahoo.co.uk	2023-10-06 16:01:40.281	\N
-ea390e7d-5486-429f-9500-d38241c7bdf9	mariano.juri@yahoo.co.uk	2023-10-06 16:03:00.354	\N
-490c29f7-fa7d-49c1-8dd8-d01e65a1ccdc	mariano.juri@yahoo.co.uk	2023-10-09 15:52:42.495	2023-10-09 16:05:10.371
-140af531-39e3-4a9c-b239-91c30a0a8b16	mariano.juri@yahoo.co.uk	2023-10-09 16:05:29.994	2023-10-09 16:06:12.253
-a215e9e6-4af6-4c14-b015-9d6e037d7f3e	mariano.juri@yahoo.co.uk	2023-10-09 16:06:21.865	2023-10-16 14:57:12.286
-f00b1585-ad87-4763-8adc-eaf5e092fc25	mariano.juri@yahoo.co.uk	2023-10-18 10:34:41.821	2023-11-27 12:59:27.797
-414b97e5-2c40-4fa1-8cdb-5651db041d59	mariano.juri@yahoo.co.uk	2023-11-27 14:19:52.113	\N
-57c8902c-0dfc-40e4-82b7-309172e91b8e	mariano.juri@yahoo.co.uk	2023-12-06 13:00:16.791	\N
-7bb9972d-ed6c-4aee-a0c9-5f98b07c1695	florence@ndthemachine.com	2023-12-06 14:53:43.8	\N
+060fd7d8-c7df-43c3-8471-255573ba94d6	florence@ndthemachine.com	2024-01-21 16:40:57.277	2024-01-21 16:41:39.252
+169e1202-4a00-46ad-b21f-7ea3442a0d9d	florence@ndthemachine.com	2024-01-21 16:41:49.798	2024-01-21 16:43:35.471
+07aaa77f-61e0-410b-b074-e770ed561b69	florence@ndthemachine.com	2024-01-21 16:53:15.325	2024-01-21 16:54:14.22
+4cb471b0-8d28-45b6-b832-1642bcc82203	mariano.juri@yahoo.co.uk	2024-01-21 16:54:27.076	2024-01-22 11:45:31.69
+0724c779-b516-40a2-8866-b1ab06ef1739	florence@ndthemachine.com	2024-01-22 11:45:38.97	2024-01-22 11:46:57.473
+be73cee5-e330-4c17-83aa-9923f166b157	mariano.juri@yahoo.co.uk	2024-01-22 11:47:27.779	2024-01-22 16:03:21.891
+19a7f829-2727-4080-bd8e-72b92e4c1955	florence@ndthemachine.com	2024-01-22 16:03:29.896	2024-01-22 16:06:01.136
+eefe0697-d9a7-4f16-9b74-b49b2a8558c3	florence@ndthemachine.com	2024-01-22 16:06:08.286	2024-01-22 16:06:24.32
+43ae17e7-5b69-4b5d-9838-6f04c37a3cbf	mariano.juri@yahoo.co.uk	2024-01-22 16:06:40.572	2024-01-22 16:13:43.521
+3d7fa8b1-a7d0-49c6-8b5c-5ffc8825e79e	florence@ndthemachine.com	2024-01-22 16:13:52.746	2024-01-22 16:15:19.665
+bf897f1d-d5c0-4d8c-9a89-bf45b1bb5770	florence@ndthemachine.com	2024-01-22 16:15:24.673	\N
 \.
 
 
@@ -590,6 +559,30 @@ f950ca75-e7c6-44a5-8fcf-28313e727609	Neura	\N	\N	\N	\N		0
 
 
 --
+-- Data for Name: annoucement_audience; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.annoucement_audience (annoucement_identifier, profile_identifier) FROM stdin;
+\.
+
+
+--
+-- Data for Name: annoucement_comments; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.annoucement_comments (identifier, annoucement_identifier, profile_identifier, date_created, comment) FROM stdin;
+\.
+
+
+--
+-- Data for Name: annoucements; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.annoucements (identifier, body, topic, draft, profile_identifier, audience, email_notification, ping_to_the_top, date_created) FROM stdin;
+\.
+
+
+--
 -- Data for Name: contracts; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
@@ -598,8 +591,8 @@ COPY public.contracts (identifier, start_date, cont_service, contract_end_date, 
 df7b8005-ff16-4948-9647-a9dd8723e76a	1990-01-01 00:00:00	1990-01-01 00:00:00	\N	\N	\N	1990-01-01 00:00:00	\N			\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 bdff0272-a623-4c9f-b1d8-f453aee03e05	1990-01-01 00:00:00	1990-01-01 00:00:00	\N	\N	\N	1990-01-01 00:00:00	\N		Endland	\N			\N	\N	\N		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 17ba9a47-2fde-40fb-aa84-b8ce4b1469fb	2022-03-02 00:00:00	2013-01-01 00:00:00	\N	\N	\N	2013-01-01 00:00:00	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	\N	50	3 months	0	0	0	d	d	2013-01-01 00:00:00	0	0
-972d58cc-009b-4a2e-9a0f-2ab3d4ffc750	2022-03-02 00:00:00	2013-01-01 00:00:00	\N	\N	\N	2013-01-01 00:00:00	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	7bf56177-8a14-4f07-8d23-246949d65955	50	3 months	0	0	0	d	lll	2013-01-01 00:00:00	0	0
 cb55e7a0-d4dc-43a4-8eb4-d66c77bb3c90	2023-08-29 08:10:12	2023-08-30 08:10:12	\N	\N	\N	2023-08-29 00:00:00	\N	12	12	\N	12	12	\N	\N	\N	12	727910f3-4c49-4b13-b781-efc654044e29	1	12	0	0	0	12		\N	30	5
+972d58cc-009b-4a2e-9a0f-2ab3d4ffc750	2022-03-02 00:00:00	2013-01-01 00:00:00	\N	\N	\N	2013-01-01 00:00:00	\N	Singer	United Kingdom	\N	South London	Music	\N	\N	\N	d	7bf56177-8a14-4f07-8d23-246949d65955	50	3 months	0	0	0	d	lll	2013-01-01 00:00:00	25	2
 \.
 
 
@@ -611,12 +604,13 @@ COPY public.documents (identifier, img, profile_identifier, name, date_created, 
 592a417f-d9a8-44a8-95df-2fac6b23fa0c	/Users/mvelasco/Documents/uploads/5b03b8e4-e19c-4baf-aa22-3f17f648fbe3/Screenshot 2023-10-26 at 15.46.23.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-26 at 15.46.23.png	2023-10-30	ACTIVE
 42ad4a0c-dcb6-488c-8d0f-04966aa9af08	/Users/mvelasco/Documents/uploads/d362394a-7cb8-4550-884c-a222199e2c88/Screenshot 2023-10-09 at 15.39.17.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-09 at 15.39.17.png	2023-10-25	ACTIVE
 2c2f4fbf-8175-4cac-adc9-69a1e940d197	/Users/mvelasco/Documents/uploads/242e93b1-3aec-42a5-9098-10dda41eb1bb/Screenshot 2023-10-14 at 17.55.22.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-14 at 17.55.22.png	2023-10-30	ACTIVE
-987a17e7-4d3a-4f46-ae59-64e6611d24a7	/Users/mvelasco/Documents/uploads/d7953487-b1af-4aa8-864b-4447a0b29b4d/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
-bdc53017-6316-478c-883f-98ab79b127ca	/Users/mvelasco/Documents/uploads/e063521c-921c-4f76-bde2-1974f4df57a9/Screenshot 2023-10-20 at 15.54.35.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-20 at 15.54.35.png	2023-10-30	ACTIVE
-96309c55-7f71-4d79-827b-d4ba0afc44ee	/Users/mvelasco/Documents/uploads/63933e63-4ca0-4dce-a2c9-84924cef6004/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ACTIVE
-e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9/IMG_8974.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8974.jpg	2023-10-31	ACTIVE
 77578fe6-20c0-4dff-a867-36d5988cd3a6	static/files/81fffa8c-99fb-4dab-bcf9-a00ea5acf83d/CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	727910f3-4c49-4b13-b781-efc654044e29	CUSTOM PERIOD Taxonomies for DotCMS - MAIN.xlsx	2023-10-31	ARCHIVED
 99987918-8932-420a-84f1-b5114a7e7068	static/avatars/2d7c3b40-009e-4475-a978-4c636d14fb9a/IMG_8977.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8977.jpg	2023-10-31	ARCHIVED
+96309c55-7f71-4d79-827b-d4ba0afc44ee	/Users/mvelasco/Documents/uploads/63933e63-4ca0-4dce-a2c9-84924cef6004/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ARCHIVED
+e2b7fa6a-44b1-4f7a-87ac-9520355190a7	/files/7df970a5-7cc4-4b58-b54a-593d54ba0ea9/IMG_8974.jpg	727910f3-4c49-4b13-b781-efc654044e29	IMG_8974.jpg	2023-10-31	ARCHIVED
+bdc53017-6316-478c-883f-98ab79b127ca	/Users/mvelasco/Documents/uploads/e063521c-921c-4f76-bde2-1974f4df57a9/Screenshot 2023-10-20 at 15.54.35.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-20 at 15.54.35.png	2023-10-30	ARCHIVED
+4d674bb3-b5f5-4977-8238-a47119c681a6	/files/e0cbd64d-0329-47d4-b592-d3e0c911b6f2/PolicySchedule.pdf	727910f3-4c49-4b13-b781-efc654044e29	PolicySchedule.pdf	2024-01-15	ARCHIVED
+987a17e7-4d3a-4f46-ae59-64e6611d24a7	/Users/mvelasco/Documents/uploads/d7953487-b1af-4aa8-864b-4447a0b29b4d/Screenshot 2023-10-27 at 13.01.50.png	727910f3-4c49-4b13-b781-efc654044e29	Screenshot 2023-10-27 at 13.01.50.png	2023-10-30	ARCHIVED
 \.
 
 
@@ -632,9 +626,8 @@ ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	727910f3-4c49-4b13-b781-efc654044e29	\N
 14f7ed4c-4901-432f-878e-d48f57d12c78	727910f3-4c49-4b13-b781-efc654044e29	\N
 b96f229e-6d2b-4320-88f3-4dd961c5ed93	727910f3-4c49-4b13-b781-efc654044e29	\N
 d588e4c8-9638-40a8-8597-31dc7759ac11	727910f3-4c49-4b13-b781-efc654044e29	\N
-d588e4c8-9638-40a8-8597-31dc7759ac11	7bf56177-8a14-4f07-8d23-246949d65955	\N
-4d8a13f0-89df-42a8-86a0-1bdc05c176f2	7bf56177-8a14-4f07-8d23-246949d65955	\N
 4d8a13f0-89df-42a8-86a0-1bdc05c176f2	727910f3-4c49-4b13-b781-efc654044e29	\N
+4d166a5d-9563-46a0-9319-598b1f4f4c6c	727910f3-4c49-4b13-b781-efc654044e29	\N
 \.
 
 
@@ -654,6 +647,7 @@ ef44bd36-9c38-4a5a-9164-af2ca1f63ad9	2023-11-22 09:00:55	2023-11-22 09:30:00	tes
 b96f229e-6d2b-4320-88f3-4dd961c5ed93	2023-11-24 09:00:28	2023-11-24 10:00:00	testing	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2023-11-24	2023-11-24	f	f	f	Testing
 d588e4c8-9638-40a8-8597-31dc7759ac11	2023-12-18 09:00:18	2023-12-18 10:00:00	<p>testing</p>	\N	\N	\N	\N	7bf56177-8a14-4f07-8d23-246949d65955	2023-12-12	2023-12-12	f	f	f	Testing Florence #1
 4d8a13f0-89df-42a8-86a0-1bdc05c176f2	2023-12-26 09:00:16	2023-12-26 11:00:00	<p>Testing #2</p>	\N	\N	\N	\N	7bf56177-8a14-4f07-8d23-246949d65955	2023-12-12	2023-12-12	f	f	f	Testing #2
+4d166a5d-9563-46a0-9319-598b1f4f4c6c	2024-01-15 09:00:59	2024-01-15 10:00:00	Test	\N	\N	Important	\N	727910f3-4c49-4b13-b781-efc654044e29	2024-01-15	2024-01-15	f	f	f	test #1
 \.
 
 
@@ -682,14 +676,8 @@ a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49
 -- Data for Name: holidays; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend) FROM stdin;
-98fab79f-ae08-45a4-a8e6-f82f07bd481a	2023-11-13 00:00:00	2023-11-18 00:00:00	testing	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	\N	t	t	t	t
-98ff460c-bab7-445c-beaa-d6b96b3b2591	2023-12-19 00:00:00	2023-12-22 00:00:00	<p>I would need some holidays from 19-22 of Dec.</p>	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	2023-12-06	\N	t	t	f	f
-8e4c75b7-1f40-4b1f-ad28-5b2b27deb89f	2023-12-27 00:00:00	2023-12-29 00:00:00	<p>I want to take some holidays between Christmas and New Year Eve</p>	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	2023-12-06	\N	t	t	f	f
-5631f072-e018-4977-860b-12e5fad2bab8	2023-12-11 00:00:00	2023-12-15 00:00:00	<p>Holidays from 11-15 of Dec 2023</p>	ANNUAL_LEAVE	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	\N	2023-12-06	\N	t	t	f	f
-aa888cc2-022d-40a4-ad5f-abfb5e4a0283	2023-12-05 00:00:00	2023-12-09 00:00:00	\N	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	\N	2023-12-06	\N	t	t	f	f
-f0d552cc-07d0-45eb-8407-d257ac1dd6e9	2023-12-10 00:00:00	2023-12-11 00:00:00	Test	\N	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	t	f	f	f
-462fcb93-a4ca-423b-aaea-5c680e00b3b3	2023-12-17 00:00:00	2023-12-18 00:00:00	test 2	ANNUAL_LEAVE	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	\N	\N	f	f	f	f
+COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend, draft) FROM stdin;
+5dd4a734-b289-42fb-8637-d2cd9abc0b40	2024-01-29 00:00:00	2024-02-02 00:00:00	<p>test</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	2024-01-22	\N	t	t	f	f	f
 \.
 
 
@@ -735,6 +723,8 @@ d6d27abd-d02f-440f-92b9-42805d898309	727910f3-4c49-4b13-b781-efc654044e29	 has c
 b0bc8e13-65b5-498c-bc80-fadf6140262f	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2023-12-12 13:29:03.131	f	7bf56177-8a14-4f07-8d23-246949d65955	f
 606c778b-4090-49f5-8e4c-0b4665e8a26a	727910f3-4c49-4b13-b781-efc654044e29	 has created an event!	2023-12-12 13:48:06.271	f	7bf56177-8a14-4f07-8d23-246949d65955	f
 11faa6b3-c5bd-4aaf-bac7-013052bfb0e8	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2023-12-12 13:48:06.284	f	7bf56177-8a14-4f07-8d23-246949d65955	f
+270d11e5-3269-48eb-aa43-9cfc75d78a57	727910f3-4c49-4b13-b781-efc654044e29	 has created an event!	2024-01-15 15:52:22.644	f	727910f3-4c49-4b13-b781-efc654044e29	f
+c45b32b4-8cef-4dc8-b15f-e4bda6879ec4	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2024-01-15 15:52:22.649	f	727910f3-4c49-4b13-b781-efc654044e29	f
 \.
 
 
@@ -952,7 +942,7 @@ fcaa2341-e98e-4021-a983-db0960b8acd0	Javier	 Milei	jaasdfasdfasdfasdvier@liberta
 e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	Alejandro	 Fantino	alejandro.fantino6666@neura.com.ar	f	04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@neura.com.ar	f	f950ca75-e7c6-44a5-8fcf-28313e727609	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 727910f3-4c49-4b13-b781-efc654044e29	Mariano Daniel	Velasco	mariano.juri@yahoo.co.uk	f	69609916-442b-413d-a439-c3e505b9d000	\N	0	/avatars/727910f3-4c49-4b13-b781-efc654044e29/727910f3-4c49-4b13-b781-efc654044e29.jpg	Mr	\N	19B, Longbridge Road\nLongbridge Road	\N	\N	\N	\N	4	\N	\N	\N	mariano.juri@yahoo.co.uk	07761318029	\N
-7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	/avatars/7bf56177-8a14-4f07-8d23-246949d65955/7bf56177-8a14-4f07-8d23-246949d65955.jpg	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
+7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	\N	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
 \.
 
 
@@ -961,9 +951,9 @@ b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@ne
 --
 
 COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned, log) FROM stdin;
-f0561690-eb83-40a4-9b72-b3733769dece	727910f3-4c49-4b13-b781-efc654044e29	\N	level3	\N	type4	\N	2023-11-29	this is a test of Header	REQUESTED	727910f3-4c49-4b13-b781-efc654044e29	\N
 2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	ARCHIVED	7bf56177-8a14-4f07-8d23-246949d65955	\N
 c8f3b5d1-05ae-4be6-9c4c-8571575af12b	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p><strong>This is a real test</strong></p>	type4	\N	2023-11-30	Header	ARCHIVED	727910f3-4c49-4b13-b781-efc654044e29	null\nREJECTED on Sun Nov 19 19:53:42 GMT 2023 No for me thank you very much sir\nAPPROVED on Mon Nov 20 16:33:19 GMT 2023 Test!
+f0561690-eb83-40a4-9b72-b3733769dece	727910f3-4c49-4b13-b781-efc654044e29	\N	level3	\N	type4	\N	2023-11-29	this is a test of Header	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	null\nAPPROVED on Sun Jan 21 17:04:35 GMT 2024 test
 \.
 
 
@@ -992,6 +982,7 @@ COPY public.shareddocument_profile (profile_identifier, document_identifier) FRO
 727910f3-4c49-4b13-b781-efc654044e29	77578fe6-20c0-4dff-a867-36d5988cd3a6
 7bf56177-8a14-4f07-8d23-246949d65955	77578fe6-20c0-4dff-a867-36d5988cd3a6
 7bf56177-8a14-4f07-8d23-246949d65955	e2b7fa6a-44b1-4f7a-87ac-9520355190a7
+727910f3-4c49-4b13-b781-efc654044e29	4d674bb3-b5f5-4977-8238-a47119c681a6
 \.
 
 
@@ -1004,6 +995,8 @@ COPY public.todo (identifier, profile_identifier, type, text, done, read, date_c
 7dc33a88-edc8-45ec-af68-06d1d82754bd	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Do another task
 78ce1830-280e-485f-8928-558c5412455c	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Meeting with my manager at 12...
 0309c649-04a9-43ff-8c15-1cc56b79b1e6	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Chatting with Emma now
+2fa5f4b2-4320-44fd-9e84-6e007dce459c	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	f	t	2024-01-15	\N	PENDING	Test #2
+79589871-4abf-425b-af8d-6486f0ad43fd	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	t	t	2024-01-15	2024-01-20	PENDING	Test #1
 \.
 
 
@@ -1031,7 +1024,7 @@ alejandro.fantino7777@neura.com.ar	password1
 
 
 --
--- Name: accesses_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: accesses accesses_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.accesses
@@ -1039,7 +1032,7 @@ ALTER TABLE ONLY public.accesses
 
 
 --
--- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.accounts
@@ -1047,7 +1040,31 @@ ALTER TABLE ONLY public.accounts
 
 
 --
--- Name: contracts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: annoucement_audience annoucement_audience_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_audience
+    ADD CONSTRAINT annoucement_audience_pkey PRIMARY KEY (annoucement_identifier, profile_identifier);
+
+
+--
+-- Name: annoucement_comments annoucement_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_comments
+    ADD CONSTRAINT annoucement_comments_pkey PRIMARY KEY (identifier);
+
+
+--
+-- Name: annoucements annoucements_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucements
+    ADD CONSTRAINT annoucements_pkey PRIMARY KEY (identifier);
+
+
+--
+-- Name: contracts contracts_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.contracts
@@ -1055,7 +1072,7 @@ ALTER TABLE ONLY public.contracts
 
 
 --
--- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: documents documents_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.documents
@@ -1063,7 +1080,7 @@ ALTER TABLE ONLY public.documents
 
 
 --
--- Name: event_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee event_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -1071,7 +1088,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.events
@@ -1079,7 +1096,7 @@ ALTER TABLE ONLY public.events
 
 
 --
--- Name: goals_performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goal_performance_review goals_performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goal_performance_review
@@ -1087,7 +1104,7 @@ ALTER TABLE ONLY public.goal_performance_review
 
 
 --
--- Name: goals_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goals
@@ -1095,7 +1112,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: holidays_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays holidays_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -1103,7 +1120,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_item invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_item
@@ -1111,7 +1128,7 @@ ALTER TABLE ONLY public.invoice_item
 
 
 --
--- Name: invoice_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment invoice_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -1119,7 +1136,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoices
@@ -1127,7 +1144,7 @@ ALTER TABLE ONLY public.invoices
 
 
 --
--- Name: leads_email_key; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: leads leads_email_key; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.leads
@@ -1135,7 +1152,7 @@ ALTER TABLE ONLY public.leads
 
 
 --
--- Name: leads_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: leads leads_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.leads
@@ -1143,7 +1160,7 @@ ALTER TABLE ONLY public.leads
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.notifications
@@ -1151,7 +1168,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.payments
@@ -1159,7 +1176,7 @@ ALTER TABLE ONLY public.payments
 
 
 --
--- Name: performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews performance_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -1167,7 +1184,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: profile_role_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role profile_role_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -1175,7 +1192,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profiles
@@ -1183,7 +1200,7 @@ ALTER TABLE ONLY public.profiles
 
 
 --
--- Name: role_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions role_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1191,7 +1208,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.roles
@@ -1199,7 +1216,7 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: shareddocument_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile shareddocument_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
@@ -1207,7 +1224,7 @@ ALTER TABLE ONLY public.shareddocument_profile
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.users
@@ -1215,7 +1232,39 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: contracts_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: annoucement_audience annoucement_audience_annoucement_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_audience
+    ADD CONSTRAINT annoucement_audience_annoucement_identifier_fkey FOREIGN KEY (annoucement_identifier) REFERENCES public.annoucements(identifier);
+
+
+--
+-- Name: annoucement_audience annoucement_audience_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_audience
+    ADD CONSTRAINT annoucement_audience_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: annoucement_comments annoucement_comments_annoucement_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_comments
+    ADD CONSTRAINT annoucement_comments_annoucement_identifier_fkey FOREIGN KEY (annoucement_identifier) REFERENCES public.annoucements(identifier);
+
+
+--
+-- Name: annoucement_comments annoucement_comments_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.annoucement_comments
+    ADD CONSTRAINT annoucement_comments_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: contracts contracts_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.contracts
@@ -1223,7 +1272,7 @@ ALTER TABLE ONLY public.contracts
 
 
 --
--- Name: documents_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: documents documents_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.documents
@@ -1231,7 +1280,7 @@ ALTER TABLE ONLY public.documents
 
 
 --
--- Name: event_attendee_event_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee event_attendee_event_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -1239,7 +1288,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: event_attendee_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: event_attendee event_attendee_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.event_attendee
@@ -1247,7 +1296,7 @@ ALTER TABLE ONLY public.event_attendee
 
 
 --
--- Name: events_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: events events_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.events
@@ -1255,7 +1304,7 @@ ALTER TABLE ONLY public.events
 
 
 --
--- Name: goals_performance_reviews_goal_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goal_performance_review goals_performance_reviews_goal_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goal_performance_review
@@ -1263,7 +1312,7 @@ ALTER TABLE ONLY public.goal_performance_review
 
 
 --
--- Name: goals_performance_reviews_performance_review_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goal_performance_review goals_performance_reviews_performance_review_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goal_performance_review
@@ -1271,7 +1320,7 @@ ALTER TABLE ONLY public.goal_performance_review
 
 
 --
--- Name: goals_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: goals goals_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.goals
@@ -1279,7 +1328,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: holidays_authorized_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays holidays_authorized_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -1287,7 +1336,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: holidays_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: holidays holidays_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.holidays
@@ -1295,7 +1344,7 @@ ALTER TABLE ONLY public.holidays
 
 
 --
--- Name: invoice_item_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_item invoice_item_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_item
@@ -1303,7 +1352,7 @@ ALTER TABLE ONLY public.invoice_item
 
 
 --
--- Name: invoice_payment_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment invoice_payment_invoice_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -1311,7 +1360,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoice_payment_payment_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoice_payment invoice_payment_payment_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoice_payment
@@ -1319,7 +1368,7 @@ ALTER TABLE ONLY public.invoice_payment
 
 
 --
--- Name: invoices_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: invoices invoices_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.invoices
@@ -1327,7 +1376,7 @@ ALTER TABLE ONLY public.invoices
 
 
 --
--- Name: leads_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: leads leads_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.leads
@@ -1335,7 +1384,7 @@ ALTER TABLE ONLY public.leads
 
 
 --
--- Name: leads_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: leads leads_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.leads
@@ -1343,7 +1392,7 @@ ALTER TABLE ONLY public.leads
 
 
 --
--- Name: notifications_owner_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: notifications notifications_owner_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.notifications
@@ -1351,7 +1400,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: notifications_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: notifications notifications_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.notifications
@@ -1359,7 +1408,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: organization_chart_child_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: organization_chart organization_chart_child_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.organization_chart
@@ -1367,7 +1416,7 @@ ALTER TABLE ONLY public.organization_chart
 
 
 --
--- Name: organization_chart_parent_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: organization_chart organization_chart_parent_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.organization_chart
@@ -1375,7 +1424,7 @@ ALTER TABLE ONLY public.organization_chart
 
 
 --
--- Name: performance_reviews_employee_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews performance_reviews_employee_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -1383,7 +1432,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: performance_reviews_reviewer_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: performance_reviews performance_reviews_reviewer_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.performance_reviews
@@ -1391,7 +1440,7 @@ ALTER TABLE ONLY public.performance_reviews
 
 
 --
--- Name: profile_role_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role profile_role_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -1399,7 +1448,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profile_role_role_key_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profile_role profile_role_role_key_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profile_role
@@ -1407,7 +1456,7 @@ ALTER TABLE ONLY public.profile_role
 
 
 --
--- Name: profiles_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: profiles profiles_account_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.profiles
@@ -1415,7 +1464,7 @@ ALTER TABLE ONLY public.profiles
 
 
 --
--- Name: role_positions_assigned_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions role_positions_assigned_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1423,7 +1472,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: role_positions_requested_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: role_positions role_positions_requested_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.role_positions
@@ -1431,7 +1480,7 @@ ALTER TABLE ONLY public.role_positions
 
 
 --
--- Name: shareddocument_profile_document_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile shareddocument_profile_document_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
@@ -1439,21 +1488,11 @@ ALTER TABLE ONLY public.shareddocument_profile
 
 
 --
--- Name: shareddocument_profile_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+-- Name: shareddocument_profile shareddocument_profile_profile_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
 --
 
 ALTER TABLE ONLY public.shareddocument_profile
     ADD CONSTRAINT shareddocument_profile_profile_identifier_fkey FOREIGN KEY (profile_identifier) REFERENCES public.profiles(identifier);
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: mvelasco
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM mvelasco;
-GRANT ALL ON SCHEMA public TO mvelasco;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
