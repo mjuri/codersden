@@ -32,6 +32,9 @@ public class ProfileService {
 	private UserDao userDao;
 	
 	@Autowired
+	private HolidayDao holidayDao;
+	
+	@Autowired
 	private LoginService loginService;
 	
 	public Profile create(Profile profile) {
@@ -133,6 +136,10 @@ public class ProfileService {
 
 	public List<Profile> findProfilesByAccount(String accountIdentifier) {
 		return this.profileDao.findAllByAccountIdentifier(accountIdentifier);
+	}
+
+	public List<Profile> findProfilesOutOfOffice(String accountIdentifier) {
+		return holidayDao.findAllProfilesOutOfOffice(accountIdentifier);
 	}
 	
 }

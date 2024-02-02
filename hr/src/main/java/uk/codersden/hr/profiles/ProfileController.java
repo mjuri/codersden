@@ -48,6 +48,13 @@ public class ProfileController {
 		return profileService.findProfilesByAccount(accountIdentifier);
 		
 	}
+	
+	@GetMapping("/account/{accountIdentifier}/off")
+	@CrossOrigin
+	public List<Profile> retrieveOutOfOfficeProfiles(@PathVariable("accountIdentifier") String accountIdentifier){
+		return profileService.findProfilesOutOfOffice(accountIdentifier);
+		
+	}
 
 	@GetMapping("/{id}")
 	@CrossOrigin

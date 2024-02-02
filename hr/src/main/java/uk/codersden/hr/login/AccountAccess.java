@@ -16,8 +16,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class AccountAccess {
 	@Column(name = "user_name")
 	private String userName;
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+
+	private String application;
 	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp start;
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name = "ends")
@@ -26,6 +28,7 @@ public class AccountAccess {
 		this.setUserName(userName);
 		this.setStart(new Timestamp(System.currentTimeMillis()));
 	}
+
 	@Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -34,8 +37,10 @@ public class AccountAccess {
 	private String token;
 	
 	public AccountAccess() {
-			
+		this.setStart(new Timestamp(System.currentTimeMillis()));
 	}
+	
+	
 
 	public String getUserName() {
 		return userName;
@@ -62,4 +67,11 @@ public class AccountAccess {
 		this.token = token;
 	}
 
+	public String getApplication() {
+		return application;
+	}
+
+	public void setApplication(String application) {
+		this.application = application;
+	}
 }

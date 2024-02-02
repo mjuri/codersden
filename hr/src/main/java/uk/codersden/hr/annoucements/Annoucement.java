@@ -1,14 +1,22 @@
 package uk.codersden.hr.annoucements;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -33,7 +41,34 @@ public class Annoucement {
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp dateCreated;
 	
-	
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "annoucement_audience", 
+        joinColumns = { @JoinColumn(name = "annoucement_identifier") }, 
+        inverseJoinColumns = { @JoinColumn(name = "profile_identifier") }
+    )
+    Set<Profile> audience = new HashSet<>();
+    
+    @Transient
+    private List<Map<String, String>> audienceValues;
+    
+	public List<Map<String, String>> getAudienceValues() {
+		return audienceValues;
+	}
+
+
+	public void setAudienceValues(List<Map<String, String>> audienceValues) {
+		this.audienceValues = audienceValues;
+	}
+
+	public Set<Profile> getAudience() {
+		return audience;
+	}
+
+	public void setAudience(Set<Profile> audience) {
+		this.audience = audience;
+	}
+
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
@@ -109,6 +144,12 @@ public class Annoucement {
 	}
 	public void setEmailNotification(boolean emailNotification) {
 		this.emailNotification = emailNotification;
+	}
+
+
+	public void addAudience(Profile p) {
+		this.audience.add(p);
+		
 	}
 	
 }
