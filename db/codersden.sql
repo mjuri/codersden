@@ -42,7 +42,8 @@ CREATE TABLE public.accesses (
     token character varying(50) NOT NULL,
     user_name character varying(50) NOT NULL,
     start timestamp without time zone DEFAULT now() NOT NULL,
-    ends timestamp without time zone
+    ends timestamp without time zone,
+    application character varying(50) DEFAULT 'HR'::character varying
 );
 
 
@@ -435,7 +436,8 @@ CREATE TABLE public.profiles (
     work_mobile character varying(20),
     personal_email character varying(100),
     personal_mobile character varying(20),
-    home_phone character varying(20)
+    home_phone character varying(20),
+    online boolean DEFAULT false
 );
 
 
@@ -523,18 +525,39 @@ ALTER TABLE public.users OWNER TO mvelasco;
 -- Data for Name: accesses; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.accesses (token, user_name, start, ends) FROM stdin;
-060fd7d8-c7df-43c3-8471-255573ba94d6	florence@ndthemachine.com	2024-01-21 16:40:57.277	2024-01-21 16:41:39.252
-169e1202-4a00-46ad-b21f-7ea3442a0d9d	florence@ndthemachine.com	2024-01-21 16:41:49.798	2024-01-21 16:43:35.471
-07aaa77f-61e0-410b-b074-e770ed561b69	florence@ndthemachine.com	2024-01-21 16:53:15.325	2024-01-21 16:54:14.22
-4cb471b0-8d28-45b6-b832-1642bcc82203	mariano.juri@yahoo.co.uk	2024-01-21 16:54:27.076	2024-01-22 11:45:31.69
-0724c779-b516-40a2-8866-b1ab06ef1739	florence@ndthemachine.com	2024-01-22 11:45:38.97	2024-01-22 11:46:57.473
-be73cee5-e330-4c17-83aa-9923f166b157	mariano.juri@yahoo.co.uk	2024-01-22 11:47:27.779	2024-01-22 16:03:21.891
-19a7f829-2727-4080-bd8e-72b92e4c1955	florence@ndthemachine.com	2024-01-22 16:03:29.896	2024-01-22 16:06:01.136
-eefe0697-d9a7-4f16-9b74-b49b2a8558c3	florence@ndthemachine.com	2024-01-22 16:06:08.286	2024-01-22 16:06:24.32
-43ae17e7-5b69-4b5d-9838-6f04c37a3cbf	mariano.juri@yahoo.co.uk	2024-01-22 16:06:40.572	2024-01-22 16:13:43.521
-3d7fa8b1-a7d0-49c6-8b5c-5ffc8825e79e	florence@ndthemachine.com	2024-01-22 16:13:52.746	2024-01-22 16:15:19.665
-bf897f1d-d5c0-4d8c-9a89-bf45b1bb5770	florence@ndthemachine.com	2024-01-22 16:15:24.673	\N
+COPY public.accesses (token, user_name, start, ends, application) FROM stdin;
+060fd7d8-c7df-43c3-8471-255573ba94d6	florence@ndthemachine.com	2024-01-21 16:40:57.277	2024-01-21 16:41:39.252	HR
+169e1202-4a00-46ad-b21f-7ea3442a0d9d	florence@ndthemachine.com	2024-01-21 16:41:49.798	2024-01-21 16:43:35.471	HR
+07aaa77f-61e0-410b-b074-e770ed561b69	florence@ndthemachine.com	2024-01-21 16:53:15.325	2024-01-21 16:54:14.22	HR
+4cb471b0-8d28-45b6-b832-1642bcc82203	mariano.juri@yahoo.co.uk	2024-01-21 16:54:27.076	2024-01-22 11:45:31.69	HR
+0724c779-b516-40a2-8866-b1ab06ef1739	florence@ndthemachine.com	2024-01-22 11:45:38.97	2024-01-22 11:46:57.473	HR
+be73cee5-e330-4c17-83aa-9923f166b157	mariano.juri@yahoo.co.uk	2024-01-22 11:47:27.779	2024-01-22 16:03:21.891	HR
+19a7f829-2727-4080-bd8e-72b92e4c1955	florence@ndthemachine.com	2024-01-22 16:03:29.896	2024-01-22 16:06:01.136	HR
+eefe0697-d9a7-4f16-9b74-b49b2a8558c3	florence@ndthemachine.com	2024-01-22 16:06:08.286	2024-01-22 16:06:24.32	HR
+43ae17e7-5b69-4b5d-9838-6f04c37a3cbf	mariano.juri@yahoo.co.uk	2024-01-22 16:06:40.572	2024-01-22 16:13:43.521	HR
+3d7fa8b1-a7d0-49c6-8b5c-5ffc8825e79e	florence@ndthemachine.com	2024-01-22 16:13:52.746	2024-01-22 16:15:19.665	HR
+bf897f1d-d5c0-4d8c-9a89-bf45b1bb5770	florence@ndthemachine.com	2024-01-22 16:15:24.673	2024-01-29 11:44:50.936	HR
+e3aae828-cd55-47c4-b396-1816d92c2bad	florence@ndthemachine.com	2024-01-29 11:44:55.887	2024-01-29 11:45:27.748	HR
+a942eea7-7732-4b0e-bef4-7cfaf7ae890d	mariano.juri@yahoo.co.uk	2024-01-29 11:45:37.621	2024-01-29 11:46:16.26	HR
+7693b787-b26d-4c50-93cf-a61b0fc2bcc5	mariano.juri@yahoo.co.uk	2024-01-29 11:48:27.789	2024-01-29 11:48:47.839	HR
+91f6bd07-0da7-4f83-9685-4df540fa61fd	florence@ndthemachine.com	2024-01-29 11:48:53.413	2024-01-29 15:05:58.432	HR
+e35e60ea-8717-44ab-abb5-65af72e9e474	mariano.juri@yahoo.co.uk	2024-01-29 15:06:09.44	2024-01-29 15:11:06.241	HR
+af17e81d-1395-496a-a3a6-868c2933f74d	florence@ndthemachine.com	2024-01-29 15:11:14.477	2024-01-29 15:14:07.94	HR
+e909a5a5-1240-4409-8183-36f43b1ef902	mariano.juri@yahoo.co.uk	2024-01-29 15:14:19.117	2024-01-29 15:15:56.66	HR
+f4c43acb-9190-4da2-974f-5bd55960917e	florence@ndthemachine.com	2024-01-29 15:16:05.297	2024-01-29 15:24:34.051	HR
+6c4fdbfe-51c7-4d6a-9d18-0cefe2e9359c	mariano.juri@yahoo.co.uk	2024-01-29 15:25:14.158	2024-01-29 15:37:46.949	HR
+42d3e27d-4f61-4cdc-a286-cf905bdf8f7d	florence@ndthemachine.com	2024-01-29 15:38:01.036	2024-01-29 15:39:42.862	HR
+3473487b-31b0-4f98-ae1e-728e175d8571	florence@ndthemachine.com	2024-01-29 15:44:43.014	2024-01-30 12:36:21.969	HR
+4abb3f6b-ea7f-4d85-a22e-0de48660df5a	mariano.juri@yahoo.co.uk	2024-01-30 12:36:30.227	2024-01-30 12:36:55.153	HR
+a1f93d81-095e-4712-9ecf-828e95cf9961	florence@ndthemachine.com	2024-01-30 12:37:01.867	2024-01-30 12:37:43.315	HR
+2efc7b0d-76be-4910-862f-8331dad9a9e4	mariano.juri@yahoo.co.uk	2024-01-30 12:37:51.804	2024-01-30 15:31:33.37	HR
+99062c24-c8b3-4350-adc4-bf27fe314731	mariano.juri@yahoo.co.uk	2024-01-30 15:31:37.974	2024-01-30 22:03:23.601	HR
+06c7f52b-03fb-48cb-8000-7959a1e6a15b	mariano.juri@yahoo.co.uk	2024-01-30 22:14:44.92	2024-01-30 22:30:34.699	\N
+1fbccbe4-7ef6-45c9-9bb9-11fc29bbc0ba	mariano.juri@yahoo.co.uk	2024-01-30 22:38:45.938	2024-01-30 22:39:14.893	\N
+68a29184-b6e7-4c4e-a6b7-d5fdf0179ee3	florence@ndthemachine.com	2024-01-31 14:24:42.757	2024-01-31 14:25:17.176	\N
+b030e32d-66a2-44b5-ba63-b6971ba5791a	mariano.juri@yahoo.co.uk	2024-01-30 22:41:05.113	2024-02-02 17:10:41.387	\N
+d5de80b8-4a08-4185-8973-8829d38cca89	mariano.juri@yahoo.co.uk	2024-02-02 17:10:46.213	2024-02-02 17:10:51.484	\N
+2fa3ec8b-2f50-4085-8ca4-f455a5aa8cec	mariano.juri@yahoo.co.uk	2024-02-02 17:10:55.08	\N	\N
 \.
 
 
@@ -563,6 +586,10 @@ f950ca75-e7c6-44a5-8fcf-28313e727609	Neura	\N	\N	\N	\N		0
 --
 
 COPY public.annoucement_audience (annoucement_identifier, profile_identifier) FROM stdin;
+31f05bb3-2b43-4992-a9ee-c4c03cdd833c	727910f3-4c49-4b13-b781-efc654044e29
+31f05bb3-2b43-4992-a9ee-c4c03cdd833c	7bf56177-8a14-4f07-8d23-246949d65955
+f0b824a9-f2e0-4c6b-ac42-ad51cdef5adc	727910f3-4c49-4b13-b781-efc654044e29
+f0b824a9-f2e0-4c6b-ac42-ad51cdef5adc	7bf56177-8a14-4f07-8d23-246949d65955
 \.
 
 
@@ -579,6 +606,8 @@ COPY public.annoucement_comments (identifier, annoucement_identifier, profile_id
 --
 
 COPY public.annoucements (identifier, body, topic, draft, profile_identifier, audience, email_notification, ping_to_the_top, date_created) FROM stdin;
+31f05bb3-2b43-4992-a9ee-c4c03cdd833c	<p>Body #2 (updated)</p>	Topic #2	f	727910f3-4c49-4b13-b781-efc654044e29	\N	t	t	\N
+f0b824a9-f2e0-4c6b-ac42-ad51cdef5adc	<p>Body #1</p>	Topic #1	f	727910f3-4c49-4b13-b781-efc654044e29	\N	f	t	\N
 \.
 
 
@@ -669,6 +698,8 @@ COPY public.goals (identifier, name, target, deadline, profile_identifier, progr
 b84985b8-d2b0-4e7c-b2c3-cb62a4dc1264	TEST GOAL	50	2023-11-08	727910f3-4c49-4b13-b781-efc654044e29	35	<p>This is a<strong> description! </strong>Can you see it?</p>
 ed3d36d4-f0fe-4978-9970-05af3e4f9f34	Goal #45	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	20	<p>Sarada Sarasa</p>
 a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49-4b13-b781-efc654044e29	100	\N
+ffe8ed90-d19b-4067-ae87-14c53df98b3c	Goal 1	50	2024-01-27	7bf56177-8a14-4f07-8d23-246949d65955	20	<p>test</p>
+ae98ff9b-fa57-414d-adec-8952c4d1eaa3	Goal 2	20	2024-01-31	7bf56177-8a14-4f07-8d23-246949d65955	10	<p>Test 2</p>
 \.
 
 
@@ -678,6 +709,7 @@ a72fa753-dcb6-4307-952c-6af15a0b42ab	MD JURI VELASCO	50	2023-10-31	727910f3-4c49
 
 COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend, draft) FROM stdin;
 5dd4a734-b289-42fb-8637-d2cd9abc0b40	2024-01-29 00:00:00	2024-02-02 00:00:00	<p>test</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	2024-01-22	\N	t	t	f	f	f
+639dbabb-7435-4d2c-afa1-ded9ed435806	2024-02-01 00:00:00	2024-02-03 00:00:00	<p>test 2</p>	\N	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	727910f3-4c49-4b13-b781-efc654044e29	2024-02-02	\N	t	t	f	f	f
 \.
 
 
@@ -725,6 +757,8 @@ b0bc8e13-65b5-498c-bc80-fadf6140262f	7bf56177-8a14-4f07-8d23-246949d65955	 has c
 11faa6b3-c5bd-4aaf-bac7-013052bfb0e8	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2023-12-12 13:48:06.284	f	7bf56177-8a14-4f07-8d23-246949d65955	f
 270d11e5-3269-48eb-aa43-9cfc75d78a57	727910f3-4c49-4b13-b781-efc654044e29	 has created an event!	2024-01-15 15:52:22.644	f	727910f3-4c49-4b13-b781-efc654044e29	f
 c45b32b4-8cef-4dc8-b15f-e4bda6879ec4	7bf56177-8a14-4f07-8d23-246949d65955	 has created an event!	2024-01-15 15:52:22.649	f	727910f3-4c49-4b13-b781-efc654044e29	f
+cacb156b-f40e-4418-99be-6e5821d84407	727910f3-4c49-4b13-b781-efc654044e29	 has created a new annoucement!	2024-01-29 15:37:42.101	f	727910f3-4c49-4b13-b781-efc654044e29	f
+acb01d7d-6865-405f-aae5-37786c9c9796	7bf56177-8a14-4f07-8d23-246949d65955	 has created a new annoucement!	2024-01-29 15:37:42.108	f	727910f3-4c49-4b13-b781-efc654044e29	f
 \.
 
 
@@ -823,126 +857,126 @@ b81b6de3-6efe-4d2e-8c08-d1c4769e120f	HR-ADMIN
 -- Data for Name: profiles; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.profiles (identifier, firstname, lastname, email, deleted, account_identifier, dob, entitlement_absence, avatar, title, known_as, address, gender, gender_identity, preferred_pronoun, marital_status, employee_number, work_phone, work_extn, work_mobile, personal_email, personal_mobile, home_phone) FROM stdin;
-804b3839-9e29-45f7-a60e-e8aabe87d06f	Alisa	Davis	alisa.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Dr		430 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Single	182				alisa.davis@gmail.com		
-c8de4b3f-daa6-4fc1-9a0e-aa6bdf8b1658	Alisa	Garcia	alisa.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Mr		450 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			In a relationship	83				alisa.garcia@gmail.com		
-d6f3051f-ebb1-4029-9b14-1f4754a1d45a	Alisa	Gonzalez	alisa.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		477 456 Elm St 123 Main St 321 Maple Ave 789 Oak St 654 Pine St	Male			Widowed	869				alisa.gonzalez@gmail.com		
-e78a3279-0b15-40a2-95e0-fa10ee81b222	Alisa	Johnson	alisa.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Miss		920 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Married	658				alisa.johnson@gmail.com		
-f6ce5190-ab6f-4d2c-b2da-9f71cf7e99ea	Alisa	Jones	alisa.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Dr		719 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			In a relationship	149				alisa.jones@gmail.com		
-fd2977e9-10d5-4173-a4b6-21bb09b17b38	Marisa	Brown	alisa.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-03-28	0	\N	Miss		737 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female	\N		\N	335	\N	\N	\N	alisa.brown@gmail.com	111111	\N
-ffbbd930-53d3-4000-95b4-bf79840a0491	Jordan	Peterson	jordan@gmail.com	f	a06dc590-8690-431a-9de0-167905011b47	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-edb0a07a-544e-4f5a-8140-06a77b6f8d1a	Jorge	Pontoriero	jorgep@gmail.com	f	b81c2aba-b0ee-4642-9f90-7cc435ba2bcf	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-907fbf29-c720-42f2-9b2a-cc30d4971f3e	Alisa	Miller	alisa.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-02	0	\N	Miss		711 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male	\N		\N	187	\N	\N	\N	alisa.miller@gmail.com	123132131231	\N
-b75ae32d-d4c0-4805-b3ef-2e17c45e7ec1	Charles	Johnson	charles.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-05	17	\N	Miss		16 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	804				charles.johnson@gmail.com		
-41dc513b-d1f3-444e-bd79-32413fe34572	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-d08d7425-d5bf-465a-b98e-12ae2589e171	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-af8c81df-5bb4-4184-acf4-149700a75711	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-9acdbc78-03ef-4dc8-87f0-8237517b57fc	Alisa	Martinez	alisa.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		122 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	571				alisa.martinez@gmail.com		
-f6590305-dae7-445e-9704-4f2a98d711a8	Alisa	Rodriguez	alisa.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	8	\N	Mr		485 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	406				alisa.rodriguez@gmail.com		
-3fa489f5-e1fd-48b4-b133-0a9af55f531c	Alisa	Smith	alisa.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	28	\N	Mr		154 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			Single	872				alisa.smith@gmail.com		
-60dd53d7-49be-4a51-873a-9edd30e1babb	Charles	Brown	charles.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	29	\N	Mr		788 321 Maple Ave 123 Main St 456 Elm St 789 Oak St 654 Pine St	Male			Married	909				charles.brown@gmail.com		
-de8e455b-8401-49ec-916a-52cd0c72d023	Charles	Davis	charles.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mrs		240 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Single	951				charles.davis@gmail.com		
-c31d63c8-cb10-4cc3-a50a-f183b9d39be4	Charles	Garcia	charles.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mr		574 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Single	59				charles.garcia@gmail.com		
-0b463d13-182e-4739-9f1f-ff23386ba2f8	Charles	Gonzalez	charles.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Mrs		480 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	633				charles.gonzalez@gmail.com		
-1ecd0b43-239f-46c8-b174-ea1b00d58536	Charles	Jones	charles.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Miss		528 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Single	768				charles.jones@gmail.com		
-de7ee51a-70d7-46c3-9d34-96b5806b9c5d	Charles	Martinez	charles.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	9	\N	Miss		838 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			In a relationship	411				charles.martinez@gmail.com		
-48499941-b60c-4efc-ac90-ba3abd377a09	Charles	Miller	charles.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	1	\N	Mrs		702 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			In a relationship	182				charles.miller@gmail.com		
-d814a647-c650-423e-af8a-f33080aec6a6	Charles	Rodriguez	charles.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	13	\N	Dr		746 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Married	761				charles.rodriguez@gmail.com		
-fd41c0dc-f9c0-4b4c-9741-08387eb91045	Charles	Smith	charles.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Miss		212 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Married	740				charles.smith@gmail.com		
-7ed11d84-40d6-4188-9368-29c68600b8b6	David	Brown	david.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Miss		71 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Married	908				david.brown@gmail.com		
-472446eb-fa49-488d-80a9-6bfecf32202b	David	Davis	david.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		81 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Widowed	783				david.davis@gmail.com		
-540f58b2-a202-419f-b8f1-456365aed565	David	Garcia	david.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	21	\N	Dr		921 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	667				david.garcia@gmail.com		
-877e88ee-460b-47de-ad7b-17b8c2389300	David	Gonzalez	david.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mrs		859 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			In a relationship	70				david.gonzalez@gmail.com		
-0ce7effd-0bd1-4aca-9b36-df627cc42ab3	David	Johnson	david.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	8	\N	Dr		88 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	158				david.johnson@gmail.com		
-17d84458-a97c-4dd2-8399-f815ca848930	David	Jones	david.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mr		466 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	546				david.jones@gmail.com		
-d9aafddd-bcbb-4ea2-88ee-f92e085d743d	David	Martinez	david.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mrs		881 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	802				david.martinez@gmail.com		
-93149061-396c-48b6-a88b-5837b45dc4e9	David	Miller	david.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		352 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			In a relationship	210				david.miller@gmail.com		
-2194a720-cfc2-42b4-94bb-3d1f697ddb87	David	Rodriguez	david.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Mrs		832 789 Oak St 456 Elm St 123 Main St 321 Maple Ave 654 Pine St	Male			Single	919				david.rodriguez@gmail.com		
-1f6bb8a7-aa6e-4c14-a8fb-64fce11a6f9e	David	Smith	david.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mr		473 789 Oak St 654 Pine St 321 Maple Ave 456 Elm St 123 Main St	Female			Single	939				david.smith@gmail.com		
-fbd6b472-efc7-4e49-996b-aa73238f370c	Diana	Brown	diana.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mrs		366 456 Elm St 789 Oak St 123 Main St 654 Pine St 321 Maple Ave	Female			In a relationship	247				diana.brown@gmail.com		
-a53c6bc4-5f9a-45a4-b3d0-8b0617f8736a	Diana	Davis	diana.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mr		726 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			Divorced	77				diana.davis@gmail.com		
-460f7f4d-5bfc-4387-96b9-1d7f18309829	Diana	Garcia	diana.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mrs		512 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Divorced	344				diana.garcia@gmail.com		
-3fcb5f54-f395-48d7-9a00-6fe987474fbe	Diana	Gonzalez	diana.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		399 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Male			Married	872				diana.gonzalez@gmail.com		
-4839e156-342e-4470-9214-1b32bc05a50b	Diana	Johnson	diana.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Dr		625 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Male			Married	991				diana.johnson@gmail.com		
-e25d603a-ea43-4492-9a6d-519dbbbfcdb9	Diana	Jones	diana.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mr		355 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	80				diana.jones@gmail.com		
-7ff15af1-7f00-4b62-a878-e15b4bfd73f2	Diana	Martinez	diana.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Mr		787 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Divorced	300				diana.martinez@gmail.com		
-3a27ebb0-2b72-4f8c-9a48-a0be99a07c93	Diana	Miller	diana.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Miss		22 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			In a relationship	421				diana.miller@gmail.com		
-c78d016c-9987-4ad3-9906-74b4c6794029	Diana	Rodriguez	diana.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mrs		786 789 Oak St 654 Pine St 321 Maple Ave 456 Elm St 123 Main St	Female			Single	411				diana.rodriguez@gmail.com		
-3a1dbfe6-4aa8-4715-adec-6c4efe7341fd	Diana	Smith	diana.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mrs		491 789 Oak St 456 Elm St 654 Pine St 123 Main St 321 Maple Ave	Female			Widowed	845				diana.smith@gmail.com		
-b1382743-b915-4d0f-87be-57a1c9ca2cfc	Ellen	Brown	ellen.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		159 789 Oak St 123 Main St 654 Pine St 321 Maple Ave 456 Elm St	Female			Single	946				ellen.brown@gmail.com		
-5d5599ef-5388-4bcf-9044-690678b16b73	Ellen	Davis	ellen.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mr		506 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			In a relationship	527				ellen.davis@gmail.com		
-3576bd7a-cd25-4457-9672-3ce571f08035	Ellen	Garcia	ellen.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Dr		978 654 Pine St 123 Main St 321 Maple Ave 789 Oak St 456 Elm St	Male			Married	765				ellen.garcia@gmail.com		
-968766b5-5efe-41f8-9167-0818789cf158	Ellen	Gonzalez	ellen.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	10	\N	Mr		548 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Female			Divorced	39				ellen.gonzalez@gmail.com		
-9ce5bd88-5e51-4420-a2b3-6c615776ebf1	Ellen	Johnson	ellen.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Dr		10 789 Oak St 123 Main St 654 Pine St 321 Maple Ave 456 Elm St	Male			In a relationship	167				ellen.johnson@gmail.com		
-ba994b5d-8bd2-433d-a76d-f8687f1a641c	Ellen	Jones	ellen.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Mr		855 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	361				ellen.jones@gmail.com		
-82dbac84-574f-4e14-a38b-111ef7e0e5f9	Ellen	Martinez	ellen.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Dr		198 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			In a relationship	176				ellen.martinez@gmail.com		
-b6cb2f43-966c-4935-80c2-37fe35f943d0	Ellen	Miller	ellen.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Dr		894 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Single	442				ellen.miller@gmail.com		
-c50cd87e-c5bd-4e8b-8d7b-5d3a1f801b81	Ellen	Rodriguez	ellen.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	20	\N	Mrs		444 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Married	453				ellen.rodriguez@gmail.com		
-321fbf57-82e5-491f-9159-ef74acd95941	Ellen	Smith	ellen.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Miss		962 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	817				ellen.smith@gmail.com		
-557367d9-70a7-475f-8ec6-54f3a72d04c9	Iryna	Brown	iryna.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mr		470 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Male			Single	667				iryna.brown@gmail.com		
-bb69508b-de40-445d-8204-b9b73ccd157a	Iryna	Davis	iryna.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		501 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Widowed	395				iryna.davis@gmail.com		
-3da6f403-50c1-4349-93a6-d74bb94d0970	Iryna	Garcia	iryna.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		590 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Female			Married	34				iryna.garcia@gmail.com		
-82c6e43a-b14c-4c41-83be-d8ffe68ade57	Iryna	Gonzalez	iryna.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	20	\N	Mrs		597 789 Oak St 123 Main St 456 Elm St 654 Pine St 321 Maple Ave	Female			Single	559				iryna.gonzalez@gmail.com		
-c3a7fccc-2aaa-48a1-8f0a-35caaf84dc32	Iryna	Johnson	iryna.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mrs		432 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	901				iryna.johnson@gmail.com		
-a48b5d30-d3be-4473-8079-4d302fb9909d	Iryna	Jones	iryna.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	18	\N	Miss		683 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Female			Divorced	184				iryna.jones@gmail.com		
-280d98c4-3889-4e2f-8a47-c4962c5053e2	Iryna	Martinez	iryna.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Miss		927 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St 123 Main St	Male			Divorced	517				iryna.martinez@gmail.com		
-96927dd3-3004-4f1d-aa6e-2222b5be146c	Iryna	Miller	iryna.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	22	\N	Miss		236 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Single	832				iryna.miller@gmail.com		
-3423c243-7841-41b6-bd15-497e0b1b98b4	Iryna	Rodriguez	iryna.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Mrs		220 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Widowed	650				iryna.rodriguez@gmail.com		
-3cd4a123-d441-4885-8ecb-f1128313644b	Iryna	Smith	iryna.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	9	\N	Miss		220 654 Pine St 789 Oak St 456 Elm St 123 Main St 321 Maple Ave	Female			Single	902				iryna.smith@gmail.com		
-37db7de6-e93c-4aa2-a139-ad21d1346049	James	Brown	james.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mr		991 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Female			Widowed	918				james.brown@gmail.com		
-28a0b592-4b6f-4720-b8d0-0c463ee0be54	James	Davis	james.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		554 789 Oak St 456 Elm St 123 Main St 654 Pine St 321 Maple Ave	Female			In a relationship	789				james.davis@gmail.com		
-763ce1ce-fde2-4b6f-b0e5-f0bea495f8fa	James	Garcia	james.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Miss		532 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Single	751				james.garcia@gmail.com		
-39308f01-017e-4d04-95ca-95a875e0de4e	James	Gonzalez	james.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mrs		108 654 Pine St 321 Maple Ave 789 Oak St 123 Main St 456 Elm St	Male			In a relationship	326				james.gonzalez@gmail.com		
-59e18f10-7031-4f2e-8825-fe8b66832252	James	Johnson	james.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mr		533 456 Elm St 321 Maple Ave 654 Pine St 123 Main St 789 Oak St	Female			Married	524				james.johnson@gmail.com		
-a8d9c349-12c4-4fc3-be94-1486a013dc3f	James	Jones	james.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	29	\N	Mrs		190 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			In a relationship	743				james.jones@gmail.com		
-5c698ce2-8124-4843-b7ac-4250870bf039	James	Martinez	james.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Miss		144 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Single	675				james.martinez@gmail.com		
-4b5a7d24-0ca4-4d1c-8c7b-9f9c3fffa03a	James	Miller	james.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mrs		251 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	357				james.miller@gmail.com		
-3f52dc6a-fcdb-4d44-86f4-da00c3c0d88e	James	Rodriguez	james.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Miss		120 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	652				james.rodriguez@gmail.com		
-371b7409-bf41-4dd3-90f6-4270cc99305f	James	Smith	james.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Mr		815 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	4				james.smith@gmail.com		
-4a71e349-65ec-40b6-8ac9-29f2a12c224e	John	Brown	john.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Miss		188 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	331				john.brown@gmail.com		
-8bba2c46-8e97-4679-ba24-57923bc749ca	John	Davis	john.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	13	\N	Mr		342 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	592				john.davis@gmail.com		
-80d4517a-d93e-413a-95ab-3e8657f9c9ba	John	Garcia	john.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Dr		628 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	747				john.garcia@gmail.com		
-f500ed07-c7e6-488c-8ef9-abfbe24f6025	John	Gonzalez	john.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mrs		367 123 Main St 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St	Female			Divorced	182				john.gonzalez@gmail.com		
-c9f5c618-4e3c-41ef-80d2-07b170b83cfc	John	Johnson	john.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mr		292 321 Maple Ave 654 Pine St 123 Main St 789 Oak St 456 Elm St	Female			In a relationship	479				john.johnson@gmail.com		
-74809a86-1a76-48d7-9f16-25ac86079df6	John	Jones	john.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Dr		328 123 Main St 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	669				john.jones@gmail.com		
-7c3762af-6592-4ff4-8438-84daddf0d090	John	Martinez	john.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mrs		831 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Married	459				john.martinez@gmail.com		
-78a2671f-5cb1-4285-ae99-7b7047b2e595	John	Miller	john.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mr		450 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	817				john.miller@gmail.com		
-d57bca63-490a-470b-a02a-a32efb809ffe	John	Rodriguez	john.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Dr		180 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Single	470				john.rodriguez@gmail.com		
-38cab2ee-f788-4f5a-90dd-abe27d5106fc	John	Smith	john.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Dr		141 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	468				john.smith@gmail.com		
-833d1844-aeda-4d06-8ccb-45bf5bd006b9	Joseph	Brown	joseph.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	17	\N	Mr		265 123 Main St 789 Oak St 321 Maple Ave 654 Pine St 456 Elm St	Female			Divorced	96				joseph.brown@gmail.com		
-416953a1-b447-4b7c-805d-fe5758327e8f	Joseph	Davis	joseph.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	18	\N	Miss		885 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	335				joseph.davis@gmail.com		
-cb2c4830-3609-404c-82a8-2681934b1f3d	Joseph	Garcia	joseph.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	11	\N	Mr		36 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Single	215				joseph.garcia@gmail.com		
-6cc67b9f-a8fc-4537-b0a8-2adaca870b4e	Joseph	Gonzalez	joseph.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	10	\N	Miss		15 654 Pine St 123 Main St 321 Maple Ave 789 Oak St 456 Elm St	Male			Widowed	155				joseph.gonzalez@gmail.com		
-484ac8f0-0e4b-47b4-874c-acae6490185a	Joseph	Johnson	joseph.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	11	\N	Miss		801 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Widowed	66				joseph.johnson@gmail.com		
-98ca2b5e-3735-439d-b8f4-57a2ccec6e29	Joseph	Jones	joseph.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Mr		132 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Widowed	17				joseph.jones@gmail.com		
-4f654698-7ad9-4dcf-8ecd-d4adc91a8c60	Joseph	Martinez	joseph.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Mrs		92 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Divorced	127				joseph.martinez@gmail.com		
-4a04f12c-8c18-4046-a98c-da763ee734da	Joseph	Miller	joseph.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		344 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Female			Single	358				joseph.miller@gmail.com		
-cede8108-cd5b-4d76-a859-a8cba9e86288	Joseph	Rodriguez	joseph.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Miss		264 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St 123 Main St	Male			Single	64				joseph.rodriguez@gmail.com		
-454eb5d5-63cc-4c46-84f0-97ac8d699d64	Joseph	Smith	joseph.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Mr		830 789 Oak St 654 Pine St 321 Maple Ave 123 Main St 456 Elm St	Male			Married	962				joseph.smith@gmail.com		
-0d45bc2b-f4b9-4177-870a-5042d3c357d2	Kate	Brown	kate.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Dr		73 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Male			Married	163				kate.brown@gmail.com		
-841b1fd3-7f03-41e0-8795-1ce6ba69d768	Kate	Davis	kate.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mrs		753 321 Maple Ave 123 Main St 456 Elm St 789 Oak St 654 Pine St	Male			Widowed	97				kate.davis@gmail.com		
-7fd7fe7c-d723-4f0a-966b-d93f582f6d59	Kate	Garcia	kate.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		957 789 Oak St 654 Pine St 123 Main St 456 Elm St 321 Maple Ave	Male			In a relationship	221				kate.garcia@gmail.com		
-7b14ad12-d0b0-4283-a706-e3716acc650f	Kate	Gonzalez	kate.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mrs		420 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Divorced	250				kate.gonzalez@gmail.com		
-f94d7f3a-2c12-422c-93cc-2767929543b6	Kate	Johnson	kate.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	21	\N	Mr		909 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St 123 Main St	Female			Single	982				kate.johnson@gmail.com		
-f5853dca-2b68-4337-956c-8b5a80d8bca6	Kate	Jones	kate.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mr		561 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Male			Divorced	314				kate.jones@gmail.com		
-36c34ed6-097b-4e82-8694-1da551f64910	Kate	Martinez	kate.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		358 789 Oak St 321 Maple Ave 654 Pine St 123 Main St 456 Elm St	Female			In a relationship	315				kate.martinez@gmail.com		
-8cc8a41a-1308-4231-829e-a502704fd790	Kate	Miller	kate.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Miss		448 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Female			In a relationship	867				kate.miller@gmail.com		
-f109ae06-a73b-4c29-a1e9-1d62f66c4bd9	Kate	Rodriguez	kate.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mr		30 456 Elm St 123 Main St 654 Pine St 789 Oak St 321 Maple Ave	Female			Married	938				kate.rodriguez@gmail.com		
-4fb50b52-7c02-42f4-b648-6d6426a32db5	Kate	Smith	kate.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Dr		884 654 Pine St 321 Maple Ave 789 Oak St 123 Main St 456 Elm St	Male			Single	445				kate.smith@gmail.com		
-c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2000-01-01	0	\N	Mr	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N
-8b3f6664-14c1-4f8c-81cc-9a005ddc0d04	Jorge	Ibañez	jorge@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Mr	El Pedo	\N	\N	\N	\N	\N	5	\N	\N	\N	jorge@casla.com	07761318029	\N
-4cabff7a-51e8-48c0-9948-eb590caca53d	Nahuela	Barries	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N
-0d4b0f80-be05-41c5-aa03-97e0de184ecf	Theresa	May	may@theresa.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Theresita	\N	\N	\N	\N	\N	90	\N	\N	\N	may@theresa.com	134rt35432345	\N
-94ce30b3-ecce-44aa-bb48-f6da32921514	Javier	 Milei	javier@libertadavanza.com.ar	f	2f7dd967-4367-4794-94de-9306612a7854	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-27866d58-2de6-45dd-83a9-4fd5fdad5412	Javier 3	Milei 3	javier3@libertadavanza.com.ar	f	b2b55608-535e-4274-aff3-332c9bcf5cb5	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-e1034681-4874-48b0-98f1-c9e7d41d09e2	Javier	 Milei	javier555@libertadavanza.com.ar	f	5164fbf6-b966-4a47-bced-6769713c65ab	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-057c7b5b-bebd-4ef5-bf56-f3cc43457869	Javier	 Milei	javier6543@libertadavanza.com.ar	f	cda2ddd2-d9ee-4df0-bd3f-e4c679bb8c55	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-68a00048-2a7b-41db-a29f-4e18154c6236	Javier	 Milei	javier999999@libertadavanza.com.ar	f	0dfae1ed-16cb-46b9-aaf5-b5df563cc90a	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-fcaa2341-e98e-4021-a983-db0960b8acd0	Javier	 Milei	jaasdfasdfasdfasdvier@libertadavanza.com.ar	f	fea594ef-19f3-490b-a9dc-172d663f874b	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	Alejandro	 Fantino	alejandro.fantino6666@neura.com.ar	f	04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@neura.com.ar	f	f950ca75-e7c6-44a5-8fcf-28313e727609	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-727910f3-4c49-4b13-b781-efc654044e29	Mariano Daniel	Velasco	mariano.juri@yahoo.co.uk	f	69609916-442b-413d-a439-c3e505b9d000	\N	0	/avatars/727910f3-4c49-4b13-b781-efc654044e29/727910f3-4c49-4b13-b781-efc654044e29.jpg	Mr	\N	19B, Longbridge Road\nLongbridge Road	\N	\N	\N	\N	4	\N	\N	\N	mariano.juri@yahoo.co.uk	07761318029	\N
-7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	\N	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N
+COPY public.profiles (identifier, firstname, lastname, email, deleted, account_identifier, dob, entitlement_absence, avatar, title, known_as, address, gender, gender_identity, preferred_pronoun, marital_status, employee_number, work_phone, work_extn, work_mobile, personal_email, personal_mobile, home_phone, online) FROM stdin;
+804b3839-9e29-45f7-a60e-e8aabe87d06f	Alisa	Davis	alisa.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Dr		430 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Single	182				alisa.davis@gmail.com			f
+c8de4b3f-daa6-4fc1-9a0e-aa6bdf8b1658	Alisa	Garcia	alisa.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Mr		450 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			In a relationship	83				alisa.garcia@gmail.com			f
+d6f3051f-ebb1-4029-9b14-1f4754a1d45a	Alisa	Gonzalez	alisa.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		477 456 Elm St 123 Main St 321 Maple Ave 789 Oak St 654 Pine St	Male			Widowed	869				alisa.gonzalez@gmail.com			f
+e78a3279-0b15-40a2-95e0-fa10ee81b222	Alisa	Johnson	alisa.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Miss		920 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Married	658				alisa.johnson@gmail.com			f
+f6ce5190-ab6f-4d2c-b2da-9f71cf7e99ea	Alisa	Jones	alisa.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Dr		719 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			In a relationship	149				alisa.jones@gmail.com			f
+fd2977e9-10d5-4173-a4b6-21bb09b17b38	Marisa	Brown	alisa.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-03-28	0	\N	Miss		737 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female	\N		\N	335	\N	\N	\N	alisa.brown@gmail.com	111111	\N	f
+ffbbd930-53d3-4000-95b4-bf79840a0491	Jordan	Peterson	jordan@gmail.com	f	a06dc590-8690-431a-9de0-167905011b47	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+edb0a07a-544e-4f5a-8140-06a77b6f8d1a	Jorge	Pontoriero	jorgep@gmail.com	f	b81c2aba-b0ee-4642-9f90-7cc435ba2bcf	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+907fbf29-c720-42f2-9b2a-cc30d4971f3e	Alisa	Miller	alisa.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-02	0	\N	Miss		711 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male	\N		\N	187	\N	\N	\N	alisa.miller@gmail.com	123132131231	\N	f
+b75ae32d-d4c0-4805-b3ef-2e17c45e7ec1	Charles	Johnson	charles.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-05	17	\N	Miss		16 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	804				charles.johnson@gmail.com			f
+41dc513b-d1f3-444e-bd79-32413fe34572	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+d08d7425-d5bf-465a-b98e-12ae2589e171	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+af8c81df-5bb4-4184-acf4-149700a75711	John	Doe	johndoe@gmail.com	f	8fddb239-8f82-4154-9098-ecf16345a853	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+9acdbc78-03ef-4dc8-87f0-8237517b57fc	Alisa	Martinez	alisa.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		122 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	571				alisa.martinez@gmail.com			f
+f6590305-dae7-445e-9704-4f2a98d711a8	Alisa	Rodriguez	alisa.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	8	\N	Mr		485 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	406				alisa.rodriguez@gmail.com			f
+3fa489f5-e1fd-48b4-b133-0a9af55f531c	Alisa	Smith	alisa.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	28	\N	Mr		154 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			Single	872				alisa.smith@gmail.com			f
+60dd53d7-49be-4a51-873a-9edd30e1babb	Charles	Brown	charles.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	29	\N	Mr		788 321 Maple Ave 123 Main St 456 Elm St 789 Oak St 654 Pine St	Male			Married	909				charles.brown@gmail.com			f
+de8e455b-8401-49ec-916a-52cd0c72d023	Charles	Davis	charles.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mrs		240 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Single	951				charles.davis@gmail.com			f
+c31d63c8-cb10-4cc3-a50a-f183b9d39be4	Charles	Garcia	charles.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mr		574 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Single	59				charles.garcia@gmail.com			f
+0b463d13-182e-4739-9f1f-ff23386ba2f8	Charles	Gonzalez	charles.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Mrs		480 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	633				charles.gonzalez@gmail.com			f
+1ecd0b43-239f-46c8-b174-ea1b00d58536	Charles	Jones	charles.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Miss		528 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Single	768				charles.jones@gmail.com			f
+de7ee51a-70d7-46c3-9d34-96b5806b9c5d	Charles	Martinez	charles.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	9	\N	Miss		838 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			In a relationship	411				charles.martinez@gmail.com			f
+48499941-b60c-4efc-ac90-ba3abd377a09	Charles	Miller	charles.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	1	\N	Mrs		702 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			In a relationship	182				charles.miller@gmail.com			f
+d814a647-c650-423e-af8a-f33080aec6a6	Charles	Rodriguez	charles.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	13	\N	Dr		746 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Married	761				charles.rodriguez@gmail.com			f
+fd41c0dc-f9c0-4b4c-9741-08387eb91045	Charles	Smith	charles.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Miss		212 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Married	740				charles.smith@gmail.com			f
+7ed11d84-40d6-4188-9368-29c68600b8b6	David	Brown	david.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Miss		71 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Married	908				david.brown@gmail.com			f
+472446eb-fa49-488d-80a9-6bfecf32202b	David	Davis	david.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		81 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			Widowed	783				david.davis@gmail.com			f
+540f58b2-a202-419f-b8f1-456365aed565	David	Garcia	david.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	21	\N	Dr		921 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	667				david.garcia@gmail.com			f
+877e88ee-460b-47de-ad7b-17b8c2389300	David	Gonzalez	david.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mrs		859 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			In a relationship	70				david.gonzalez@gmail.com			f
+0ce7effd-0bd1-4aca-9b36-df627cc42ab3	David	Johnson	david.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	8	\N	Dr		88 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	158				david.johnson@gmail.com			f
+17d84458-a97c-4dd2-8399-f815ca848930	David	Jones	david.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mr		466 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	546				david.jones@gmail.com			f
+d9aafddd-bcbb-4ea2-88ee-f92e085d743d	David	Martinez	david.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mrs		881 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Married	802				david.martinez@gmail.com			f
+93149061-396c-48b6-a88b-5837b45dc4e9	David	Miller	david.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		352 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Male			In a relationship	210				david.miller@gmail.com			f
+2194a720-cfc2-42b4-94bb-3d1f697ddb87	David	Rodriguez	david.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Mrs		832 789 Oak St 456 Elm St 123 Main St 321 Maple Ave 654 Pine St	Male			Single	919				david.rodriguez@gmail.com			f
+1f6bb8a7-aa6e-4c14-a8fb-64fce11a6f9e	David	Smith	david.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mr		473 789 Oak St 654 Pine St 321 Maple Ave 456 Elm St 123 Main St	Female			Single	939				david.smith@gmail.com			f
+fbd6b472-efc7-4e49-996b-aa73238f370c	Diana	Brown	diana.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mrs		366 456 Elm St 789 Oak St 123 Main St 654 Pine St 321 Maple Ave	Female			In a relationship	247				diana.brown@gmail.com			f
+a53c6bc4-5f9a-45a4-b3d0-8b0617f8736a	Diana	Davis	diana.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mr		726 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Male			Divorced	77				diana.davis@gmail.com			f
+460f7f4d-5bfc-4387-96b9-1d7f18309829	Diana	Garcia	diana.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mrs		512 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Divorced	344				diana.garcia@gmail.com			f
+3fcb5f54-f395-48d7-9a00-6fe987474fbe	Diana	Gonzalez	diana.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		399 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Male			Married	872				diana.gonzalez@gmail.com			f
+4839e156-342e-4470-9214-1b32bc05a50b	Diana	Johnson	diana.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Dr		625 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Male			Married	991				diana.johnson@gmail.com			f
+e25d603a-ea43-4492-9a6d-519dbbbfcdb9	Diana	Jones	diana.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mr		355 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	80				diana.jones@gmail.com			f
+7ff15af1-7f00-4b62-a878-e15b4bfd73f2	Diana	Martinez	diana.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Mr		787 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Divorced	300				diana.martinez@gmail.com			f
+3a27ebb0-2b72-4f8c-9a48-a0be99a07c93	Diana	Miller	diana.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Miss		22 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			In a relationship	421				diana.miller@gmail.com			f
+c78d016c-9987-4ad3-9906-74b4c6794029	Diana	Rodriguez	diana.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mrs		786 789 Oak St 654 Pine St 321 Maple Ave 456 Elm St 123 Main St	Female			Single	411				diana.rodriguez@gmail.com			f
+3a1dbfe6-4aa8-4715-adec-6c4efe7341fd	Diana	Smith	diana.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	12	\N	Mrs		491 789 Oak St 456 Elm St 654 Pine St 123 Main St 321 Maple Ave	Female			Widowed	845				diana.smith@gmail.com			f
+b1382743-b915-4d0f-87be-57a1c9ca2cfc	Ellen	Brown	ellen.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		159 789 Oak St 123 Main St 654 Pine St 321 Maple Ave 456 Elm St	Female			Single	946				ellen.brown@gmail.com			f
+5d5599ef-5388-4bcf-9044-690678b16b73	Ellen	Davis	ellen.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mr		506 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			In a relationship	527				ellen.davis@gmail.com			f
+3576bd7a-cd25-4457-9672-3ce571f08035	Ellen	Garcia	ellen.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	24	\N	Dr		978 654 Pine St 123 Main St 321 Maple Ave 789 Oak St 456 Elm St	Male			Married	765				ellen.garcia@gmail.com			f
+968766b5-5efe-41f8-9167-0818789cf158	Ellen	Gonzalez	ellen.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	10	\N	Mr		548 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Female			Divorced	39				ellen.gonzalez@gmail.com			f
+9ce5bd88-5e51-4420-a2b3-6c615776ebf1	Ellen	Johnson	ellen.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Dr		10 789 Oak St 123 Main St 654 Pine St 321 Maple Ave 456 Elm St	Male			In a relationship	167				ellen.johnson@gmail.com			f
+ba994b5d-8bd2-433d-a76d-f8687f1a641c	Ellen	Jones	ellen.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Mr		855 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	361				ellen.jones@gmail.com			f
+82dbac84-574f-4e14-a38b-111ef7e0e5f9	Ellen	Martinez	ellen.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Dr		198 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			In a relationship	176				ellen.martinez@gmail.com			f
+b6cb2f43-966c-4935-80c2-37fe35f943d0	Ellen	Miller	ellen.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Dr		894 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Single	442				ellen.miller@gmail.com			f
+c50cd87e-c5bd-4e8b-8d7b-5d3a1f801b81	Ellen	Rodriguez	ellen.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	20	\N	Mrs		444 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Married	453				ellen.rodriguez@gmail.com			f
+321fbf57-82e5-491f-9159-ef74acd95941	Ellen	Smith	ellen.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Miss		962 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	817				ellen.smith@gmail.com			f
+557367d9-70a7-475f-8ec6-54f3a72d04c9	Iryna	Brown	iryna.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mr		470 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Male			Single	667				iryna.brown@gmail.com			f
+bb69508b-de40-445d-8204-b9b73ccd157a	Iryna	Davis	iryna.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		501 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Widowed	395				iryna.davis@gmail.com			f
+3da6f403-50c1-4349-93a6-d74bb94d0970	Iryna	Garcia	iryna.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Dr		590 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Female			Married	34				iryna.garcia@gmail.com			f
+82c6e43a-b14c-4c41-83be-d8ffe68ade57	Iryna	Gonzalez	iryna.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	20	\N	Mrs		597 789 Oak St 123 Main St 456 Elm St 654 Pine St 321 Maple Ave	Female			Single	559				iryna.gonzalez@gmail.com			f
+c3a7fccc-2aaa-48a1-8f0a-35caaf84dc32	Iryna	Johnson	iryna.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mrs		432 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	901				iryna.johnson@gmail.com			f
+a48b5d30-d3be-4473-8079-4d302fb9909d	Iryna	Jones	iryna.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	18	\N	Miss		683 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Female			Divorced	184				iryna.jones@gmail.com			f
+280d98c4-3889-4e2f-8a47-c4962c5053e2	Iryna	Martinez	iryna.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Miss		927 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St 123 Main St	Male			Divorced	517				iryna.martinez@gmail.com			f
+96927dd3-3004-4f1d-aa6e-2222b5be146c	Iryna	Miller	iryna.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	22	\N	Miss		236 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Single	832				iryna.miller@gmail.com			f
+3423c243-7841-41b6-bd15-497e0b1b98b4	Iryna	Rodriguez	iryna.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Mrs		220 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St 123 Main St	Female			Widowed	650				iryna.rodriguez@gmail.com			f
+3cd4a123-d441-4885-8ecb-f1128313644b	Iryna	Smith	iryna.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	9	\N	Miss		220 654 Pine St 789 Oak St 456 Elm St 123 Main St 321 Maple Ave	Female			Single	902				iryna.smith@gmail.com			f
+37db7de6-e93c-4aa2-a139-ad21d1346049	James	Brown	james.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mr		991 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Female			Widowed	918				james.brown@gmail.com			f
+28a0b592-4b6f-4720-b8d0-0c463ee0be54	James	Davis	james.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		554 789 Oak St 456 Elm St 123 Main St 654 Pine St 321 Maple Ave	Female			In a relationship	789				james.davis@gmail.com			f
+763ce1ce-fde2-4b6f-b0e5-f0bea495f8fa	James	Garcia	james.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Miss		532 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Single	751				james.garcia@gmail.com			f
+39308f01-017e-4d04-95ca-95a875e0de4e	James	Gonzalez	james.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Mrs		108 654 Pine St 321 Maple Ave 789 Oak St 123 Main St 456 Elm St	Male			In a relationship	326				james.gonzalez@gmail.com			f
+59e18f10-7031-4f2e-8825-fe8b66832252	James	Johnson	james.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mr		533 456 Elm St 321 Maple Ave 654 Pine St 123 Main St 789 Oak St	Female			Married	524				james.johnson@gmail.com			f
+a8d9c349-12c4-4fc3-be94-1486a013dc3f	James	Jones	james.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	29	\N	Mrs		190 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			In a relationship	743				james.jones@gmail.com			f
+5c698ce2-8124-4843-b7ac-4250870bf039	James	Martinez	james.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	26	\N	Miss		144 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Single	675				james.martinez@gmail.com			f
+4b5a7d24-0ca4-4d1c-8c7b-9f9c3fffa03a	James	Miller	james.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mrs		251 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	357				james.miller@gmail.com			f
+3f52dc6a-fcdb-4d44-86f4-da00c3c0d88e	James	Rodriguez	james.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	23	\N	Miss		120 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	652				james.rodriguez@gmail.com			f
+371b7409-bf41-4dd3-90f6-4270cc99305f	James	Smith	james.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Mr		815 456 Elm St 123 Main St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	4				james.smith@gmail.com			f
+4a71e349-65ec-40b6-8ac9-29f2a12c224e	John	Brown	john.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Miss		188 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Married	331				john.brown@gmail.com			f
+8bba2c46-8e97-4679-ba24-57923bc749ca	John	Davis	john.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	13	\N	Mr		342 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Female			Divorced	592				john.davis@gmail.com			f
+80d4517a-d93e-413a-95ab-3e8657f9c9ba	John	Garcia	john.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Dr		628 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	747				john.garcia@gmail.com			f
+f500ed07-c7e6-488c-8ef9-abfbe24f6025	John	Gonzalez	john.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	16	\N	Mrs		367 123 Main St 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St	Female			Divorced	182				john.gonzalez@gmail.com			f
+c9f5c618-4e3c-41ef-80d2-07b170b83cfc	John	Johnson	john.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Mr		292 321 Maple Ave 654 Pine St 123 Main St 789 Oak St 456 Elm St	Female			In a relationship	479				john.johnson@gmail.com			f
+74809a86-1a76-48d7-9f16-25ac86079df6	John	Jones	john.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	6	\N	Dr		328 123 Main St 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St	Female			In a relationship	669				john.jones@gmail.com			f
+7c3762af-6592-4ff4-8438-84daddf0d090	John	Martinez	john.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mrs		831 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Married	459				john.martinez@gmail.com			f
+78a2671f-5cb1-4285-ae99-7b7047b2e595	John	Miller	john.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mr		450 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	817				john.miller@gmail.com			f
+d57bca63-490a-470b-a02a-a32efb809ffe	John	Rodriguez	john.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	5	\N	Dr		180 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Male			Single	470				john.rodriguez@gmail.com			f
+38cab2ee-f788-4f5a-90dd-abe27d5106fc	John	Smith	john.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Dr		141 123 Main St 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St	Male			Widowed	468				john.smith@gmail.com			f
+833d1844-aeda-4d06-8ccb-45bf5bd006b9	Joseph	Brown	joseph.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	17	\N	Mr		265 123 Main St 789 Oak St 321 Maple Ave 654 Pine St 456 Elm St	Female			Divorced	96				joseph.brown@gmail.com			f
+416953a1-b447-4b7c-805d-fe5758327e8f	Joseph	Davis	joseph.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	18	\N	Miss		885 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Widowed	335				joseph.davis@gmail.com			f
+cb2c4830-3609-404c-82a8-2681934b1f3d	Joseph	Garcia	joseph.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	11	\N	Mr		36 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Female			Single	215				joseph.garcia@gmail.com			f
+6cc67b9f-a8fc-4537-b0a8-2adaca870b4e	Joseph	Gonzalez	joseph.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	10	\N	Miss		15 654 Pine St 123 Main St 321 Maple Ave 789 Oak St 456 Elm St	Male			Widowed	155				joseph.gonzalez@gmail.com			f
+484ac8f0-0e4b-47b4-874c-acae6490185a	Joseph	Johnson	joseph.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	11	\N	Miss		801 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Widowed	66				joseph.johnson@gmail.com			f
+98ca2b5e-3735-439d-b8f4-57a2ccec6e29	Joseph	Jones	joseph.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	4	\N	Mr		132 123 Main St 654 Pine St 321 Maple Ave 789 Oak St 456 Elm St	Female			Widowed	17				joseph.jones@gmail.com			f
+4f654698-7ad9-4dcf-8ecd-d4adc91a8c60	Joseph	Martinez	joseph.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	14	\N	Mrs		92 456 Elm St 123 Main St 654 Pine St 321 Maple Ave 789 Oak St	Female			Divorced	127				joseph.martinez@gmail.com			f
+4a04f12c-8c18-4046-a98c-da763ee734da	Joseph	Miller	joseph.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		344 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Female			Single	358				joseph.miller@gmail.com			f
+cede8108-cd5b-4d76-a859-a8cba9e86288	Joseph	Rodriguez	joseph.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Miss		264 321 Maple Ave 654 Pine St 789 Oak St 456 Elm St 123 Main St	Male			Single	64				joseph.rodriguez@gmail.com			f
+454eb5d5-63cc-4c46-84f0-97ac8d699d64	Joseph	Smith	joseph.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	27	\N	Mr		830 789 Oak St 654 Pine St 321 Maple Ave 123 Main St 456 Elm St	Male			Married	962				joseph.smith@gmail.com			f
+0d45bc2b-f4b9-4177-870a-5042d3c357d2	Kate	Brown	kate.brown@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	0	\N	Dr		73 321 Maple Ave 654 Pine St 123 Main St 456 Elm St 789 Oak St	Male			Married	163				kate.brown@gmail.com			f
+841b1fd3-7f03-41e0-8795-1ce6ba69d768	Kate	Davis	kate.davis@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Mrs		753 321 Maple Ave 123 Main St 456 Elm St 789 Oak St 654 Pine St	Male			Widowed	97				kate.davis@gmail.com			f
+7fd7fe7c-d723-4f0a-966b-d93f582f6d59	Kate	Garcia	kate.garcia@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	19	\N	Mrs		957 789 Oak St 654 Pine St 123 Main St 456 Elm St 321 Maple Ave	Male			In a relationship	221				kate.garcia@gmail.com			f
+7b14ad12-d0b0-4283-a706-e3716acc650f	Kate	Gonzalez	kate.gonzalez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	3	\N	Mrs		420 654 Pine St 123 Main St 456 Elm St 789 Oak St 321 Maple Ave	Male			Divorced	250				kate.gonzalez@gmail.com			f
+f94d7f3a-2c12-422c-93cc-2767929543b6	Kate	Johnson	kate.johnson@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	21	\N	Mr		909 456 Elm St 789 Oak St 321 Maple Ave 654 Pine St 123 Main St	Female			Single	982				kate.johnson@gmail.com			f
+f5853dca-2b68-4337-956c-8b5a80d8bca6	Kate	Jones	kate.jones@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Mr		561 456 Elm St 654 Pine St 321 Maple Ave 789 Oak St 123 Main St	Male			Divorced	314				kate.jones@gmail.com			f
+36c34ed6-097b-4e82-8694-1da551f64910	Kate	Martinez	kate.martinez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	2	\N	Mrs		358 789 Oak St 321 Maple Ave 654 Pine St 123 Main St 456 Elm St	Female			In a relationship	315				kate.martinez@gmail.com			f
+8cc8a41a-1308-4231-829e-a502704fd790	Kate	Miller	kate.miller@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	25	\N	Miss		448 123 Main St 654 Pine St 456 Elm St 789 Oak St 321 Maple Ave	Female			In a relationship	867				kate.miller@gmail.com			f
+f109ae06-a73b-4c29-a1e9-1d62f66c4bd9	Kate	Rodriguez	kate.rodriguez@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	7	\N	Mr		30 456 Elm St 123 Main St 654 Pine St 789 Oak St 321 Maple Ave	Female			Married	938				kate.rodriguez@gmail.com			f
+4fb50b52-7c02-42f4-b648-6d6426a32db5	Kate	Smith	kate.smith@example.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2023-04-06	15	\N	Dr		884 654 Pine St 321 Maple Ave 789 Oak St 123 Main St 456 Elm St	Male			Single	445				kate.smith@gmail.com			f
+c20656d9-f1db-41ef-8225-8b57335dc60d	Nahuel	Barrios	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	2000-01-01	0	\N	Mr	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N	f
+8b3f6664-14c1-4f8c-81cc-9a005ddc0d04	Jorge	Ibañez	jorge@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Mr	El Pedo	\N	\N	\N	\N	\N	5	\N	\N	\N	jorge@casla.com	07761318029	\N	f
+4cabff7a-51e8-48c0-9948-eb590caca53d	Nahuela	Barries	nahuelbarrios@casla.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Perrito	\N	\N	\N	\N	\N	5	\N	\N	\N	nahuelbarrios@casla.com	07761318029	\N	f
+0d4b0f80-be05-41c5-aa03-97e0de184ecf	Theresa	May	may@theresa.com	f	8fddb239-8f82-4154-9098-ecf16345a853	1959-01-01	0	\N	Miss	Theresita	\N	\N	\N	\N	\N	90	\N	\N	\N	may@theresa.com	134rt35432345	\N	f
+94ce30b3-ecce-44aa-bb48-f6da32921514	Javier	 Milei	javier@libertadavanza.com.ar	f	2f7dd967-4367-4794-94de-9306612a7854	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+27866d58-2de6-45dd-83a9-4fd5fdad5412	Javier 3	Milei 3	javier3@libertadavanza.com.ar	f	b2b55608-535e-4274-aff3-332c9bcf5cb5	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+e1034681-4874-48b0-98f1-c9e7d41d09e2	Javier	 Milei	javier555@libertadavanza.com.ar	f	5164fbf6-b966-4a47-bced-6769713c65ab	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+057c7b5b-bebd-4ef5-bf56-f3cc43457869	Javier	 Milei	javier6543@libertadavanza.com.ar	f	cda2ddd2-d9ee-4df0-bd3f-e4c679bb8c55	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+68a00048-2a7b-41db-a29f-4e18154c6236	Javier	 Milei	javier999999@libertadavanza.com.ar	f	0dfae1ed-16cb-46b9-aaf5-b5df563cc90a	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+fcaa2341-e98e-4021-a983-db0960b8acd0	Javier	 Milei	jaasdfasdfasdfasdvier@libertadavanza.com.ar	f	fea594ef-19f3-490b-a9dc-172d663f874b	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+e4442e63-7a74-47ad-9ab6-047ed7e6e2c6	Alejandro	 Fantino	alejandro.fantino6666@neura.com.ar	f	04a01fa8-f9d2-4a3a-a7c1-e73de7f1ebca	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@neura.com.ar	f	f950ca75-e7c6-44a5-8fcf-28313e727609	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f
+727910f3-4c49-4b13-b781-efc654044e29	Mariano Daniel	Velasco	mariano.juri@yahoo.co.uk	f	69609916-442b-413d-a439-c3e505b9d000	\N	0	/avatars/727910f3-4c49-4b13-b781-efc654044e29/727910f3-4c49-4b13-b781-efc654044e29.jpg	Mr	\N	19B, Longbridge Road\nLongbridge Road	\N	\N	\N	\N	4	\N	\N	\N	mariano.juri@yahoo.co.uk	07761318029	\N	t
+7bf56177-8a14-4f07-8d23-246949d65955	Florence	Welch	florence@ndthemachine.com	f	69609916-442b-413d-a439-c3e505b9d000	1983-01-01	0	/avatars/7bf56177-8a14-4f07-8d23-246949d65955/7bf56177-8a14-4f07-8d23-246949d65955.jpg	Miss	Flo	SULBY COTTAGE\n6 ASHLEY ROAD	female	\N	she/her	\N	22	\N	\N	\N	florence@ndthemachine.com	07966614392	\N	f
 \.
 
 
@@ -995,8 +1029,8 @@ COPY public.todo (identifier, profile_identifier, type, text, done, read, date_c
 7dc33a88-edc8-45ec-af68-06d1d82754bd	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Do another task
 78ce1830-280e-485f-8928-558c5412455c	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Meeting with my manager at 12...
 0309c649-04a9-43ff-8c15-1cc56b79b1e6	ca9994ee-ffe9-4c0a-8466-a321011d9e64	TASK	\N	t	t	\N	\N	PENDING	Chatting with Emma now
-2fa5f4b2-4320-44fd-9e84-6e007dce459c	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	f	t	2024-01-15	\N	PENDING	Test #2
 79589871-4abf-425b-af8d-6486f0ad43fd	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	t	t	2024-01-15	2024-01-20	PENDING	Test #1
+2fa5f4b2-4320-44fd-9e84-6e007dce459c	727910f3-4c49-4b13-b781-efc654044e29	TASK	\N	t	t	2024-01-15	2024-02-02	PENDING	Test #2
 \.
 
 
