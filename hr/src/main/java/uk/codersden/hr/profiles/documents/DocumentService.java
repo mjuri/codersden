@@ -67,7 +67,7 @@ public class DocumentService {
 	public Document archiveDocument(String identifier) {
 		Optional<Document> op = dao.findById(identifier);
 		Document doc = op.get();
-		doc.setStatus(DocumentStatus.ARCHIVED);
+		doc.setStatus(DocumentStatus.ARCHIVED.toString());
 		Document updatedDocument = dao.save(doc);
 		
 		return updatedDocument;
@@ -77,8 +77,7 @@ public class DocumentService {
 			throws ProfileNotFoundException {
 		Document doc = new Document();
 		UUID identifier = UUID.randomUUID();
-		String status = DocumentStatus.ACTIVE;
-		doc.setStatus(status);
+		doc.setStatus(DocumentStatus.ACTIVE.toString());
 		
 		doc.setIdentifier(identifier.toString());
 		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("files") + '/' + identifier.toString());
