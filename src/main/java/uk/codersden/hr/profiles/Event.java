@@ -47,11 +47,11 @@ public class Event {
     
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="start")
-	private Timestamp startDate;
+	private Timestamp start;
 	
 	@Column(name="end_date")
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp endDate;
+	private Timestamp end;
 	
 	private String description;
 	private String label;
@@ -137,31 +137,28 @@ public class Event {
         this.identifier = identifier;
     }
     
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-    
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-    
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-    
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
+
         
-    public String getDescription() {
+    public Timestamp getStart() {
+		return start;
+	}
+	public void setStart(Timestamp start) {
+		this.start = start;
+	}
+	public Timestamp getEnd() {
+		return end;
+	}
+	public void setEnd(Timestamp end) {
+		this.end = end;
+	}
+	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-    
-    public String getLabel() {
+	public String getLabel() {
 		return label;
 	}
     

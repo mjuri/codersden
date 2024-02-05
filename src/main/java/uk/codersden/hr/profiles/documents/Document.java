@@ -29,6 +29,7 @@ public class Document {
 		return identifier;
 	}
 
+	
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
@@ -83,6 +84,10 @@ public class Document {
 	
 	private String img;
 	private String name;
+	private String status;
+	
+	
+	
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="date_created")
@@ -114,4 +119,16 @@ public class Document {
 	public void setSharedWith(Set<Profile> sharedWith) {
 		this.sharedWith = sharedWith;
 	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 }

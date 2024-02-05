@@ -13,16 +13,14 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import uk.codersden.hr.login.LoginService;
 
 @Service
 public class ProfileService {
-    //@Autowired
-    //private RestTemplate restTemplate;
-
-    // @Autowired
-    // private EurekaClient eurekaClient;
+    @Autowired
+    private StaticResourceService resourceService;
     
 	@Autowired
 	private ProfileDao profileDao;
@@ -32,6 +30,9 @@ public class ProfileService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private HolidayDao holidayDao;
 	
 	@Autowired
 	private LoginService loginService;
@@ -96,13 +97,14 @@ public class ProfileService {
 		return p;
 	}
 	
-	public String saveAvatar(String profileIdentifier, String fileBase64) {
-		Path pathFolder = Paths.get("/Users/mvelasco/Documents/uploads/" + profileIdentifier.toString());
+	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
+		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("avatars") + "/" + profileIdentifier.toString());
 		File file = null;
+		String fileName = "";
 		try {
 			Files.createDirectories(pathFolder);
-			byte[] imageByte= Base64.decodeBase64(fileBase64);
-			String fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
+			byte[] imageByte= fileBase64.getBytes();
+			fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
 			file = new File(fileName);
 			if(file.exists()) {
 				file.delete();
@@ -116,7 +118,8 @@ public class ProfileService {
 			e.printStackTrace();
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}		
-		return file.getAbsolutePath();
+		String returnURL = fileName.replaceAll("static", "");
+		return returnURL;
 		
 	}
 
@@ -133,6 +136,10 @@ public class ProfileService {
 
 	public List<Profile> findProfilesByAccount(String accountIdentifier) {
 		return this.profileDao.findAllByAccountIdentifier(accountIdentifier);
+	}
+
+	public List<Profile> findProfilesOutOfOffice(String accountIdentifier) {
+		return holidayDao.findAllProfilesOutOfOffice(accountIdentifier);
 	}
 	
 }

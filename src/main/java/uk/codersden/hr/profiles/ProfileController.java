@@ -48,6 +48,13 @@ public class ProfileController {
 		return profileService.findProfilesByAccount(accountIdentifier);
 		
 	}
+	
+	@GetMapping("/account/{accountIdentifier}/off")
+	@CrossOrigin
+	public List<Profile> retrieveOutOfOfficeProfiles(@PathVariable("accountIdentifier") String accountIdentifier){
+		return profileService.findProfilesOutOfOffice(accountIdentifier);
+		
+	}
 
 	@GetMapping("/{id}")
 	@CrossOrigin
@@ -70,6 +77,7 @@ public class ProfileController {
 		try {
 			Profile oldProfile = profileService.findProfileByIdentifier(profile.getIdentifier());
 			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
+			profile.setRoles(oldProfile.getRoles());
 			Profile p = profileService.update(profile);
 			
 			return ResponseEntity.ok(p);
@@ -103,9 +111,11 @@ public class ProfileController {
 		return ResponseEntity.ok(p);
 	}
 	
-	@PostMapping("/profile-with-image")
+	@PostMapping("/profile-with-avatar")
 	@CrossOrigin
-	public ResponseEntity<?> createProfile(@RequestParam("profile") String profilePayload, @RequestParam("file") String fileBase64) 
+	public ResponseEntity<?> createProfile(@RequestParam("profile") String profilePayload, 
+			@RequestParam("accountIdentifier") String accountIdentifier,
+			@RequestParam("file") MultipartFile fileBase64) 
 	{
 		Profile profile = null;
 		Profile p = null;
@@ -114,6 +124,20 @@ public class ProfileController {
 		try {
 			profile = mapper.readValue(profilePayload, Profile.class);
 			p = profileService.create(profile);
+			
+			User user = new User();
+			user.setUserName(p.getEmail());
+			user.setPassword(profileService.generateInitialPassword());
+			try {
+				user = this.profileService.createUser(user);
+				profile.setAccountIdentifier(accountIdentifier);
+				p = profileService.create(profile);
+						
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
 			
 			if(null != fileBase64 ) {
 				String fileName = this.profileService.saveAvatar(p.getIdentifier(), fileBase64);
@@ -171,28 +195,31 @@ public class ProfileController {
 	@PutMapping("/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> updateProfileWithAvatar(@RequestParam("profile") String profilePayload,
-			@RequestParam("file") String fileBase64, 
+			@RequestParam("file") MultipartFile fileBase64, 
 			@PathVariable("id") String id){
 
+		Profile oldProfile = null;
+		Profile profileUpdated = null;
 		Profile profile = null;
-		Profile p = null;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			profile = mapper.readValue(profilePayload, Profile.class);
-			profileService.findProfileByIdentifier(id);
+			oldProfile = profileService.findProfileByIdentifier(id);
+			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
+			profile.setRoles(oldProfile.getRoles());
+			if(null != fileBase64 ) {
+				String fileName = this.profileService.saveAvatar(id, fileBase64);
+				profile.setAvatar(fileName);
+			}
+			profileUpdated = profileService.update(profile);
 		} catch (ProfileNotFoundException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(null != fileBase64 ) {
-			String fileName = this.profileService.saveAvatar(id, fileBase64);
-			profile.setAvatar(fileName);
-		}
-		p.setIdentifier(id);
-		p = profileService.update(profile);
-		return ResponseEntity.ok(p);
+		
+		return ResponseEntity.ok(profileUpdated);
 	}
 
 

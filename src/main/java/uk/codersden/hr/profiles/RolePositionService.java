@@ -36,7 +36,11 @@ public class RolePositionService {
 
     public RolePosition saveRolePosition(RolePosition rolePosition) throws ProfileNotFoundException {
         validateRolePosition(rolePosition);
-
+        if(rolePosition.getLog() == null) {
+        	String log = rolePosition.getStatus().toUpperCase() + " by " + rolePosition.getRequestedBy().getEmail();
+        	rolePosition.setLog(log);
+        }
+        
         return rolePositionDao.save(rolePosition);
     }
 
@@ -46,6 +50,15 @@ public class RolePositionService {
 		return this.rolePositionDao.findByAssignedIdentifierOrRequestorIdentifier(assignedIdentifier, requestorIdentifier);
 
 		
+	}
+
+	public RolePosition archiveRolePosition(String identifier) {
+
+		Optional<RolePosition> op = rolePositionDao.findById(identifier);
+		RolePosition role = op.get();
+		role.setStatus("ARCHIVED");
+		return rolePositionDao.save(role);
+
 	}
 	
 }

@@ -3,11 +3,13 @@ package uk.codersden.hr.profiles.documents;
 
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +38,26 @@ public class DocumentController {
 	private DocumentService service;
 	
 	@CrossOrigin
-	@GetMapping
-	public ResponseEntity<?> retrieveDocumentsByProfile() {
-		List<Document> list = service.findAllDocumentsByProfile();
-		
+	@GetMapping("/profile/{profileIdentifier}")
+	public ResponseEntity<?> retrieveDocumentsByProfile(@PathVariable("profileIdentifier") String profileIdentifier) {
+		List<Document> list = service.findAllActiveDocumentsByProfile(profileIdentifier);
 		return ResponseEntity.ok(list);
 		
+	}
+	@CrossOrigin
+	@DeleteMapping("/{identifier}")
+	public ResponseEntity<?> archiveDocument(@PathVariable("identifier") String identifier){
+		Document doc = null;
+		String message = "";
+		try {
+			doc = service.archiveDocument(identifier);
+		}catch(Exception e) {
+			message = "Could not archive the file: " + doc.getName() + "!";
+			e.printStackTrace();
+		     return ResponseEntity.internalServerError().build();
+		}
+
+		return ResponseEntity.ok(identifier);
 	}
 	
 	@CrossOrigin
@@ -64,6 +80,7 @@ public class DocumentController {
 		}
 	      return ResponseEntity.ok(message);
 	}
+	
 	
 	@CrossOrigin
 	@PostMapping("/profile/{profileIdentifier}")

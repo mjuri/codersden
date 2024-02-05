@@ -9,13 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name = "holidays")
+@Entity
+@Table(name = "holidays")
 public class Holiday {
 	@Id
     @GeneratedValue(generator = "UUID")
@@ -47,6 +49,7 @@ public class Holiday {
 	
 	private String comments;
 	private String type;
+	private boolean draft;
 	
 	@Column(name="includesaturday")
 	private boolean includeSaturday;
@@ -64,7 +67,7 @@ public class Holiday {
 	@Column(name="authorized_by")
 	private String authorizedBy;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="date_created")
 	private Date dateCreated;
 	
@@ -181,6 +184,12 @@ public class Holiday {
 	}
 	public void setHalfDayEnd(boolean halfDayEnd) {
 		this.halfDayEnd = halfDayEnd;
+	}
+	public boolean isDraft() {
+		return draft;
+	}
+	public void setDraft(boolean draft) {
+		this.draft = draft;
 	}
 	
 }

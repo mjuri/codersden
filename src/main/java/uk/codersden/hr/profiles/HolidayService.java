@@ -1,12 +1,12 @@
 package uk.codersden.hr.profiles;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class HolidayService {
@@ -22,6 +22,9 @@ public class HolidayService {
 		if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
 			holiday.setStatus(HolidayStatus.APPROVED.toString());
 		}
+		if(holiday.getProfileIdentifier().equals(holiday.getAuthorizedBy())) {
+			holiday.setStatus(HolidayStatus.APPROVED.toString());
+		}
 		Holiday h = this.holidayDao.save(holiday);
 		return h;
 	}
@@ -35,26 +38,19 @@ public class HolidayService {
 		
 		List<Holiday> list = this.holidayDao.findAllByProfileIdentifier(id);
 		
-		if(p.getRoles().contains(ROLE_HR_ADMIN)) {
-			list.addAll(this.getHolidaysAsAHRManager(p));
-		}
+		// Add Holidays of his/her team.
+		List<Profile> children = p.getChildren();
 		
+		if(children.size() > 0) {
+			for (Profile child : children) {
+				list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
+			}
+
+		}
 		
 		return list;
 	}
 
-	
-	private Collection<? extends Holiday> getHolidaysAsAHRManager(Profile p) throws ProfileNotFoundException {
-		List<Holiday> list = new ArrayList<>();
-		List<Profile> children = p.getChildren();
-		
-		for (Profile child : children) {
-			list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
-		}
-		
-		return list;
-		
-	}
 
 	public List<Holiday> findAllRequestedHolidays(String managerIdentifer){
 		return this.holidayDao.findAllByAuthorizedByAndStatus(managerIdentifer, HolidayStatus.REQUESTED.toString());
@@ -82,5 +78,35 @@ public class HolidayService {
 		
 		h.setStatus(HolidayStatus.REJECTED.toString());
 		return this.holidayDao.save(h);
+	}
+
+	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException {
+		if(holiday.getDateCreated() == null) {
+			java.sql.Date d = new Date(System.currentTimeMillis());
+			holiday.setDateCreated(d);
+			
+			if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
+				holiday.setStatus(HolidayStatus.APPROVED.toString());
+			}
+			if(holiday.getProfileIdentifier().equals(holiday.getAuthorizedBy())) {
+				holiday.setStatus(HolidayStatus.APPROVED.toString());
+			}
+		}
+		Holiday h = null;
+		if(holiday.getIdentifier() != null) {
+			h = findByHolidayIdentifier(holiday.getIdentifier());
+		}
+		// Update h //TODO
+		h = holidayDao.save(holiday);
+		return h;
+	}
+
+	public Holiday archiveHoliday(String identifier) {
+
+		Optional<Holiday> op = holidayDao.findById(identifier);
+		Holiday holiday = op.get();
+		holiday.setStatus("ARCHIVED");
+		return holidayDao.save(holiday);
+
 	}
 }

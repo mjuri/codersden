@@ -50,6 +50,7 @@ public class Profile {
 	
 	private boolean deleted;
 	private String avatar;
+	private boolean online;
 	
 	private String title;
 	
@@ -317,6 +318,13 @@ public class Profile {
 	}
 	public void setEvents(Set<Event> events) {
 		this.events = events;
+	}
+	
+	public boolean isOnline() {
+		return online;
+	}
+	public void setOnline(boolean online) {
+		this.online = online;
 	}
 	@Override
 	public int hashCode() {

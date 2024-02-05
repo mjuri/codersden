@@ -35,6 +35,7 @@ public class RolePosition {
 	private String grade;
 	private String salaryLevel;
 	private String jobDescription;
+	private String log;
 	
 	@Column(name="requested_by")
 	private String requestorIdentifier;
@@ -139,6 +140,12 @@ public class RolePosition {
 	}
 	public void setContractType(String contractType) {
 		this.contractType = contractType;
+	}
+	public String getLog() {
+		return log;
+	}
+	public void setLog(String log) {
+		this.log = log;
 	}
 	
 	

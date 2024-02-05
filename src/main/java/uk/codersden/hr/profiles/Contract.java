@@ -1,6 +1,7 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -127,13 +128,13 @@ public class Contract {
 	@Column(name="holiday_brought_forward")
 	private Integer holidayBroughtForward;
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="start_date")
-	private Date startDate;
+	private Timestamp startDate;
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="cont_service")
-	private Date contService;
+	private Timestamp contService;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="contract_end_date")
@@ -146,7 +147,7 @@ public class Contract {
 	@Column(name="onboard_contract")
 	private String onBoardContract;
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="benefits_start")
 	private Date benefitsStart;
 	
@@ -198,19 +199,19 @@ public class Contract {
 		this.identifier = identifier;
 	}
 
-	public Date getStartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getContService() {
+	public Timestamp getContService() {
 		return contService;
 	}
 
-	public void setContService(Date contService) {
+	public void setContService(Timestamp contService) {
 		this.contService = contService;
 	}
 

@@ -20,11 +20,11 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
-	
+
 	@PostMapping
 	@CrossOrigin
 	public ResponseEntity<?> loginUser(@RequestBody User login) {
-		
+
 		AccountAccess access;
 		try {
 			access = loginService.loginUser(login);
@@ -33,23 +33,31 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(login);
 
 		} catch (PasswordsDoesNotMatchException e) {
-			
+
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.valueOf(403)).body(login);
 		}
 		return ResponseEntity.ok(access);
-		
+
 	}
+
 	@PostMapping("/logout")
 	@CrossOrigin
-	public ResponseEntity<?> logoutUser(@RequestBody String token){
-		AccountAccess access = this.loginService.logoutUser(token);
+	public ResponseEntity<?> logoutUser(@RequestBody String token) {
+		AccountAccess access; 
+
+		try {
+			access = this.loginService.logoutUser(token);
+		} catch (NotFoundUserException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(token);
+		}	
 		return ResponseEntity.ok(access);
 	}
-	
+
 	@GetMapping("/access/{token}")
 	@CrossOrigin
-	public ResponseEntity<?> retrieveAccessByToken(@PathVariable("token") String token){
+	public ResponseEntity<?> retrieveAccessByToken(@PathVariable("token") String token) {
 		AccountAccess access = this.loginService.findAccountAccessByToken(token);
 		return ResponseEntity.ok(access);
 	}
