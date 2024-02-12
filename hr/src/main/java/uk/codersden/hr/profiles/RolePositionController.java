@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.codersden.hr.profiles.documents.Document;
+import uk.codersden.hr.profiles.documents.DocumentPayload;
 
 @RestController
 @RequestMapping("/roleposition")
@@ -36,6 +43,18 @@ public class RolePositionController {
     @PostMapping
     public ResponseEntity<RolePosition> saveRolePosition(@RequestBody RolePosition rolePosition) throws ProfileNotFoundException {
         RolePosition savedRolePosition = rolePositionService.saveRolePosition(rolePosition);
+        return ResponseEntity.ok(savedRolePosition);
+    }
+    @CrossOrigin
+    @PostMapping("/pdf")
+	public ResponseEntity<RolePosition> saveRolePosition(@RequestParam("payload") String rolePayload,
+			@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file)
+			throws ProfileNotFoundException, JsonMappingException, JsonProcessingException {
+    	System.out.println(rolePayload);
+		ObjectMapper mapper = new ObjectMapper();
+	    RolePosition rolePosition = mapper.readValue(rolePayload, RolePosition.class);
+    	RolePosition savedRolePosition = rolePositionService.saveRolePosition(rolePosition, file);
+    	
         return ResponseEntity.ok(savedRolePosition);
     }
     
