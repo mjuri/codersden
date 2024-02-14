@@ -57,7 +57,33 @@ public class RolePositionController {
     	
         return ResponseEntity.ok(savedRolePosition);
     }
-    
+    @CrossOrigin
+    @PutMapping("/{identifier}/pdf")
+	public ResponseEntity<RolePosition> updateRolePosition(@PathVariable("identifier") String identifier, @RequestParam("payload") String rolePayload,
+			@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file)
+			throws ProfileNotFoundException, JsonMappingException, JsonProcessingException {
+        Optional<RolePosition> op = rolePositionService.findRolePositionByIdentifier(identifier);
+        if (op.isEmpty() ) {
+            return ResponseEntity.notFound().build();
+        }
+        
+		ObjectMapper mapper = new ObjectMapper();
+	    RolePosition updatedRolePosition = mapper.readValue(rolePayload, RolePosition.class);
+        RolePosition role = op.get();
+        
+        role.setGrade(updatedRolePosition.getGrade());
+        role.setSalaryLevel(updatedRolePosition.getSalaryLevel());
+        role.setJobDescription(updatedRolePosition.getJobDescription());
+        role.setContractType(updatedRolePosition.getContractType());
+        role.setStartDate(updatedRolePosition.getStartDate());
+        role.setHeader(updatedRolePosition.getHeader());
+        role.setStatus(updatedRolePosition.getStatus());
+        role.setFileName(updatedRolePosition.getFileName());
+        
+    	RolePosition savedRolePosition = rolePositionService.saveRolePosition(role, file);
+    	
+        return ResponseEntity.ok(savedRolePosition);
+    }
     @CrossOrigin
     @DeleteMapping("/{identifier}")
     public ResponseEntity<?> archiveRolePosition(@PathVariable("identifier") String identifier){

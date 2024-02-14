@@ -5,6 +5,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,7 +59,7 @@ public class RolePositionService {
 
 		try {
 			Files.createDirectories(pathFolder);
-			Files.copy(file.getInputStream(), pathFolder.resolve(file.getOriginalFilename()));
+			Files.copy(file.getInputStream(), pathFolder.resolve(file.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
