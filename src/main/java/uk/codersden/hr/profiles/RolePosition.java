@@ -36,7 +36,15 @@ public class RolePosition {
 	private String salaryLevel;
 	private String jobDescription;
 	private String log;
+	private String file;
+	private String fileName;
 	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	@Column(name="requested_by")
 	private String requestorIdentifier;
 	
@@ -146,6 +154,12 @@ public class RolePosition {
 	}
 	public void setLog(String log) {
 		this.log = log;
+	}
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
 	}
 	
 	

@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.codersden.hr.profiles.documents.Document;
+import uk.codersden.hr.profiles.documents.DocumentPayload;
 
 @RestController
 @RequestMapping("/roleposition")
@@ -38,7 +45,45 @@ public class RolePositionController {
         RolePosition savedRolePosition = rolePositionService.saveRolePosition(rolePosition);
         return ResponseEntity.ok(savedRolePosition);
     }
-    
+    @CrossOrigin
+    @PostMapping("/pdf")
+	public ResponseEntity<RolePosition> saveRolePosition(@RequestParam("payload") String rolePayload,
+			@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file)
+			throws ProfileNotFoundException, JsonMappingException, JsonProcessingException {
+    	System.out.println(rolePayload);
+		ObjectMapper mapper = new ObjectMapper();
+	    RolePosition rolePosition = mapper.readValue(rolePayload, RolePosition.class);
+    	RolePosition savedRolePosition = rolePositionService.saveRolePosition(rolePosition, file);
+    	
+        return ResponseEntity.ok(savedRolePosition);
+    }
+    @CrossOrigin
+    @PutMapping("/{identifier}/pdf")
+	public ResponseEntity<RolePosition> updateRolePosition(@PathVariable("identifier") String identifier, @RequestParam("payload") String rolePayload,
+			@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file)
+			throws ProfileNotFoundException, JsonMappingException, JsonProcessingException {
+        Optional<RolePosition> op = rolePositionService.findRolePositionByIdentifier(identifier);
+        if (op.isEmpty() ) {
+            return ResponseEntity.notFound().build();
+        }
+        
+		ObjectMapper mapper = new ObjectMapper();
+	    RolePosition updatedRolePosition = mapper.readValue(rolePayload, RolePosition.class);
+        RolePosition role = op.get();
+        
+        role.setGrade(updatedRolePosition.getGrade());
+        role.setSalaryLevel(updatedRolePosition.getSalaryLevel());
+        role.setJobDescription(updatedRolePosition.getJobDescription());
+        role.setContractType(updatedRolePosition.getContractType());
+        role.setStartDate(updatedRolePosition.getStartDate());
+        role.setHeader(updatedRolePosition.getHeader());
+        role.setStatus(updatedRolePosition.getStatus());
+        role.setFileName(updatedRolePosition.getFileName());
+        
+    	RolePosition savedRolePosition = rolePositionService.saveRolePosition(role, file);
+    	
+        return ResponseEntity.ok(savedRolePosition);
+    }
     @CrossOrigin
     @DeleteMapping("/{identifier}")
     public ResponseEntity<?> archiveRolePosition(@PathVariable("identifier") String identifier){
@@ -99,7 +144,7 @@ public class RolePositionController {
         role.setStartDate(updatedRolePosition.getStartDate());
         role.setHeader(updatedRolePosition.getHeader());
         role.setStatus(updatedRolePosition.getStatus());
-        
+
         updatedRolePosition = rolePositionService.saveRolePosition(role);
         return ResponseEntity.ok(updatedRolePosition);
     }
