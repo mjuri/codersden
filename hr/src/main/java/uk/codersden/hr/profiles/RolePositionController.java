@@ -144,7 +144,7 @@ public class RolePositionController {
         role.setStartDate(updatedRolePosition.getStartDate());
         role.setHeader(updatedRolePosition.getHeader());
         role.setStatus(updatedRolePosition.getStatus());
-        
+
         updatedRolePosition = rolePositionService.saveRolePosition(role);
         return ResponseEntity.ok(updatedRolePosition);
     }
