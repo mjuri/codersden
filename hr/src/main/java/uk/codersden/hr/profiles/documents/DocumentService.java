@@ -1,6 +1,5 @@
 package uk.codersden.hr.profiles.documents;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,15 +15,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import org.hibernate.boot.model.naming.Identifier;
-import org.hibernate.type.IdentifierType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import uk.codersden.hr.notifications.Notification;
 import uk.codersden.hr.notifications.NotificationService;
-import uk.codersden.hr.profiles.Event;
 import uk.codersden.hr.profiles.Profile;
 import uk.codersden.hr.profiles.ProfileDao;
 import uk.codersden.hr.profiles.ProfileNotFoundException;
