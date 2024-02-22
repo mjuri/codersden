@@ -459,7 +459,9 @@ CREATE TABLE public.role_positions (
     header character varying(400) NOT NULL,
     status character varying(20) DEFAULT 'REQUESTED'::character varying,
     assigned character varying(50),
-    log character varying
+    log character varying,
+    file character varying(2000),
+    file_name character varying(300)
 );
 
 
@@ -476,6 +478,23 @@ CREATE TABLE public.roles (
 
 
 ALTER TABLE public.roles OWNER TO mvelasco;
+
+--
+-- Name: settings; Type: TABLE; Schema: public; Owner: mvelasco
+--
+
+CREATE TABLE public.settings (
+    identifier character varying(50) NOT NULL,
+    mailsmtphost character varying(300),
+    mailsmtpport character varying(10),
+    mailsmtpauth boolean DEFAULT true,
+    mailsmtpstarttlsenable boolean DEFAULT true,
+    mailusername character varying(50),
+    mailpassword character varying(100)
+);
+
+
+ALTER TABLE public.settings OWNER TO mvelasco;
 
 --
 -- Name: shareddocument_profile; Type: TABLE; Schema: public; Owner: mvelasco
@@ -557,7 +576,11 @@ a1f93d81-095e-4712-9ecf-828e95cf9961	florence@ndthemachine.com	2024-01-30 12:37:
 68a29184-b6e7-4c4e-a6b7-d5fdf0179ee3	florence@ndthemachine.com	2024-01-31 14:24:42.757	2024-01-31 14:25:17.176	\N
 b030e32d-66a2-44b5-ba63-b6971ba5791a	mariano.juri@yahoo.co.uk	2024-01-30 22:41:05.113	2024-02-02 17:10:41.387	\N
 d5de80b8-4a08-4185-8973-8829d38cca89	mariano.juri@yahoo.co.uk	2024-02-02 17:10:46.213	2024-02-02 17:10:51.484	\N
-2fa3ec8b-2f50-4085-8ca4-f455a5aa8cec	mariano.juri@yahoo.co.uk	2024-02-02 17:10:55.08	\N	\N
+2fa3ec8b-2f50-4085-8ca4-f455a5aa8cec	mariano.juri@yahoo.co.uk	2024-02-02 17:10:55.08	2024-02-21 12:25:41.855	\N
+7f3019d1-2bae-47ff-9b34-61a5cd9566f8	mariano.juri@yahoo.co.uk	2024-02-21 12:25:53.366	2024-02-21 14:41:39.726	\N
+3ad1c4db-2cf4-4b7f-841a-8e4969f3780c	mariano.juri@yahoo.co.uk	2024-02-21 14:41:45.215	2024-02-21 16:33:22.521	\N
+fc408a72-02bc-4156-beae-d3320f9904ee	florence@ndthemachine.com	2024-02-21 16:33:29.028	2024-02-21 16:36:03.463	\N
+5cf328a9-bbbc-40cc-a2da-eaff463e6208	mariano.juri@yahoo.co.uk	2024-02-21 16:36:13.816	\N	\N
 \.
 
 
@@ -710,6 +733,7 @@ ae98ff9b-fa57-414d-adec-8952c4d1eaa3	Goal 2	20	2024-01-31	7bf56177-8a14-4f07-8d2
 COPY public.holidays (identifier, start, end_date, comments, type, status, profile_identifier, authorized_by, date_created, mod_date, includesaturday, includesunday, halfdaystart, halfdayend, draft) FROM stdin;
 5dd4a734-b289-42fb-8637-d2cd9abc0b40	2024-01-29 00:00:00	2024-02-02 00:00:00	<p>test</p>	ANNUAL_LEAVE	APPROVED	7bf56177-8a14-4f07-8d23-246949d65955	727910f3-4c49-4b13-b781-efc654044e29	2024-01-22	\N	t	t	f	f	f
 639dbabb-7435-4d2c-afa1-ded9ed435806	2024-02-01 00:00:00	2024-02-03 00:00:00	<p>test 2</p>	\N	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	727910f3-4c49-4b13-b781-efc654044e29	2024-02-02	\N	t	t	f	f	f
+c058122d-a6f1-481c-a2d7-73d96a71a1a0	2024-02-05 00:00:00	2024-02-23 00:00:00	<p>test</p>	Unwell	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	727910f3-4c49-4b13-b781-efc654044e29	2024-02-07	\N	t	t	f	f	f
 \.
 
 
@@ -742,6 +766,7 @@ COPY public.invoices (identifier, date, due_date, ref, invoice_number, contact, 
 --
 
 COPY public.leads (identifier, firstname, lastname, company, email, phone_number, website, location, industry, lead_source, created_at, updated_at, profile_identifier, account_identifier, comments) FROM stdin;
+9a96375a-b34d-4462-b36b-8554b60e5307	Javier	Milei	11635296	javier@libertadavanza.com.ar	+447761318029	\N	\N	\N	Email marketing	2024-02-16 10:33:11.350797	2024-02-16 10:33:11.350797	727910f3-4c49-4b13-b781-efc654044e29	69609916-442b-413d-a439-c3e505b9d000	<p>test</p>
 \.
 
 
@@ -984,10 +1009,14 @@ b81b6de3-6efe-4d2e-8c08-d1c4769e120f	Alejandro	 Fantino	alejandro.fantino7777@ne
 -- Data for Name: role_positions; Type: TABLE DATA; Schema: public; Owner: mvelasco
 --
 
-COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned, log) FROM stdin;
-2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	ARCHIVED	7bf56177-8a14-4f07-8d23-246949d65955	\N
-c8f3b5d1-05ae-4be6-9c4c-8571575af12b	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p><strong>This is a real test</strong></p>	type4	\N	2023-11-30	Header	ARCHIVED	727910f3-4c49-4b13-b781-efc654044e29	null\nREJECTED on Sun Nov 19 19:53:42 GMT 2023 No for me thank you very much sir\nAPPROVED on Mon Nov 20 16:33:19 GMT 2023 Test!
-f0561690-eb83-40a4-9b72-b3733769dece	727910f3-4c49-4b13-b781-efc654044e29	\N	level3	\N	type4	\N	2023-11-29	this is a test of Header	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	null\nAPPROVED on Sun Jan 21 17:04:35 GMT 2024 test
+COPY public.role_positions (identifier, requested_by, grade, salary_level, job_description, contract_type, date_created, start_date, header, status, assigned, log, file, file_name) FROM stdin;
+2e619330-d0d0-47aa-83b0-73dba533b612	727910f3-4c49-4b13-b781-efc654044e29	\N	3	<p>This is a Job Description test</p>	3	\N	2023-07-17	this is a test of Header	ARCHIVED	7bf56177-8a14-4f07-8d23-246949d65955	\N	\N	\N
+c8f3b5d1-05ae-4be6-9c4c-8571575af12b	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p><strong>This is a real test</strong></p>	type4	\N	2023-11-30	Header	ARCHIVED	727910f3-4c49-4b13-b781-efc654044e29	null\nREJECTED on Sun Nov 19 19:53:42 GMT 2023 No for me thank you very much sir\nAPPROVED on Mon Nov 20 16:33:19 GMT 2023 Test!	\N	\N
+f0561690-eb83-40a4-9b72-b3733769dece	727910f3-4c49-4b13-b781-efc654044e29	\N	level3	\N	type4	\N	2023-11-29	this is a test of Header	APPROVED	727910f3-4c49-4b13-b781-efc654044e29	null\nAPPROVED on Sun Jan 21 17:04:35 GMT 2024 test	\N	\N
+607ca287-9d67-41aa-8a01-a249d4b21ac0	727910f3-4c49-4b13-b781-efc654044e29	\N	level1	<p>test</p>	type2	\N	2024-02-07	this is a test of Header	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	REQUESTED by mariano.juri@yahoo.co.uk	\N	\N
+ac347335-edd0-402d-abe3-0ce97b45c4e7	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p>test</p>	type2	\N	2024-02-28	teton teton que grande sos	REQUESTED	7bf56177-8a14-4f07-8d23-246949d65955	REQUESTED by mariano.juri@yahoo.co.uk	/files/9d66c9f8-46e4-4a2c-8855-87efc96922e4/Games-2024-02-05.xlsx	\N
+2e936c73-b818-4877-be65-6930381dcfac	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p>Test #2 - New Role with Attachement</p>	type2	\N	2024-02-28	Test #2	REJECTED	727910f3-4c49-4b13-b781-efc654044e29	 by mariano.juri@yahoo.co.uk\nREJECTED on Wed Feb 14 11:31:34 GMT 2024 Reject	/files/a01d2cf3-2cc0-4cae-ae86-93846688e961/Progress.xlsx	\N
+a689b689-0ffa-46e6-a0b7-6cd96eeef2c3	727910f3-4c49-4b13-b781-efc654044e29	\N	level2	<p>Test #1 Header (New Role No Attachement)</p>	type2	\N	2024-02-01	Test #1 Header	REJECTED	727910f3-4c49-4b13-b781-efc654044e29	 by mariano.juri@yahoo.co.uk\nREJECTED on Wed Feb 14 11:54:28 GMT 2024 I reject this Role	/files/a689b689-0ffa-46e6-a0b7-6cd96eeef2c3/LasHuellasDelPecado.png	\N
 \.
 
 
@@ -1000,6 +1029,15 @@ HR-USER	\N
 MANAGER	\N
 ROOT	Super user
 HR-ADMIN	Admin for HR application
+\.
+
+
+--
+-- Data for Name: settings; Type: TABLE DATA; Schema: public; Owner: mvelasco
+--
+
+COPY public.settings (identifier, mailsmtphost, mailsmtpport, mailsmtpauth, mailsmtpstarttlsenable, mailusername, mailpassword) FROM stdin;
+69609916-442b-413d-a439-c3e505b9d000	smtp.gmail.com	587	t	t	mariano.juri@gmail.com	H4ngth3DJ
 \.
 
 
@@ -1247,6 +1285,14 @@ ALTER TABLE ONLY public.role_positions
 
 ALTER TABLE ONLY public.roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.settings
+    ADD CONSTRAINT settings_pkey PRIMARY KEY (identifier);
 
 
 --
@@ -1511,6 +1557,14 @@ ALTER TABLE ONLY public.role_positions
 
 ALTER TABLE ONLY public.role_positions
     ADD CONSTRAINT role_positions_requested_by_fkey FOREIGN KEY (requested_by) REFERENCES public.profiles(identifier);
+
+
+--
+-- Name: settings settings_identifier_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mvelasco
+--
+
+ALTER TABLE ONLY public.settings
+    ADD CONSTRAINT settings_identifier_fkey FOREIGN KEY (identifier) REFERENCES public.accounts(identifier);
 
 
 --
