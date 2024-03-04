@@ -92,7 +92,7 @@ public class RolePositionService {
 	public List<RolePosition> findAllRolePositionsForUser(String identifier) {
 		String assignedIdentifier = identifier;
 		String requestorIdentifier = identifier;
-		return this.rolePositionDao.findByAssignedIdentifierOrRequestorIdentifier(assignedIdentifier, requestorIdentifier);
+		return this.rolePositionDao.findByAssignedIdentifier(assignedIdentifier);
 
 		
 	}
