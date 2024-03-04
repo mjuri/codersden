@@ -101,8 +101,13 @@ public class RolePositionController {
     
     @CrossOrigin
     @GetMapping("/profile/{identifier}")
-    public ResponseEntity<List<RolePosition>> retrieveAllRolePositionsForUser(@PathVariable("identifier") String identifier){
-    	List<RolePosition> roles = rolePositionService.findAllRolePositionsForUser(identifier);
+    public ResponseEntity<?> retrieveAllRolePositionsForUser(@PathVariable("identifier") String identifier){
+    	List<RolePosition> roles = null;
+    	try{
+    		rolePositionService.findAllRolePositionsForUser(identifier);
+    	}catch(Exception e) {
+    		return ResponseEntity.internalServerError().body(e.getMessage());
+    	}
     	return ResponseEntity.ok(roles);
     	
     }
