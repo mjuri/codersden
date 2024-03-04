@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RolePositionDao extends JpaRepository<RolePosition, String>{
 
-	// List<RolePosition> findByAssignedIdentifierOrRequestorIdentifier(String assignedIdentifier, String requestorIdentifier);
-	List<RolePosition> findByAssignedIdentifier(String assignedIdentifier);
-	List<RolePosition> findByRequestorIdentifier(String requestorIdentifier);
+	List<RolePosition> findByAssignedIdentifierOrRequestorIdentifier(String assignedIdentifier, String requestorIdentifier);
 }
