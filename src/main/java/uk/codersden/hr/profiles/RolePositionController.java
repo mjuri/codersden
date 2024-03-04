@@ -106,7 +106,7 @@ public class RolePositionController {
     	try{
     		rolePositionService.findAllRolePositionsForUser(identifier);
     	}catch(Exception e) {
-    		return ResponseEntity.internalServerError().body(e.getMessage());
+    		return ResponseEntity.internalServerError().body(e.getStackTrace());
     	}
     	return ResponseEntity.ok(roles);
     	
