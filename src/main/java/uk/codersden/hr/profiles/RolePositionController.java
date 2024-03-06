@@ -104,9 +104,9 @@ public class RolePositionController {
     public ResponseEntity<?> retrieveAllRolePositionsForUser(@PathVariable("identifier") String identifier){
     	List<RolePosition> roles = null;
     	try{
-    		rolePositionService.findAllRolePositionsForUser(identifier);
+    		roles = rolePositionService.findAllRolePositionsForUser(identifier);
     	}catch(Exception e) {
-    		return ResponseEntity.internalServerError().build()
+    		return ResponseEntity.internalServerError().build();
     	}
     	return ResponseEntity.ok(roles);
     	
