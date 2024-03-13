@@ -92,9 +92,13 @@ public class ProfileService {
         return p;
         
 	}
-	public Profile update(Profile profile) {
-		Profile p = this.profileDao.save(profile);
-		return p;
+	public Profile update(Profile profile) throws ProfileNotFoundException {
+		Profile oldProfile = this.findProfileByIdentifier(profile.getIdentifier());
+		
+		if(null == profile.getAvatar()) {
+			profile.setAvatar(oldProfile.getAvatar());
+		}
+		return this.profileDao.save(profile);
 	}
 	
 	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
