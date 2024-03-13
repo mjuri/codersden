@@ -77,7 +77,6 @@ public class ProfileController {
 		try {
 			Profile oldProfile = profileService.findProfileByIdentifier(profile.getIdentifier());
 			profile.setAccountIdentifier(oldProfile.getAccountIdentifier());
-			profile.setRoles(oldProfile.getRoles());
 			Profile p = profileService.update(profile);
 			
 			return ResponseEntity.ok(p);
