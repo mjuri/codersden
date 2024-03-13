@@ -114,7 +114,7 @@ public class ProfileController {
 	@CrossOrigin
 	public ResponseEntity<?> createProfile(@RequestParam("profile") String profilePayload, 
 			@RequestParam("accountIdentifier") String accountIdentifier,
-			@RequestParam("file") MultipartFile fileBase64) 
+			@RequestParam("file") MultipartFile fileBase64) throws ProfileNotFoundException 
 	{
 		Profile profile = null;
 		Profile p = null;

@@ -25,6 +25,9 @@ public class Settings {
 	@Column(name = "mailusername")
 	private String mailUsername;
 	
+	@Column(name = "linkelntoken")
+	private String linkeinToken;
+	
 	@Column(name = "mailpassword")
 	private String mailPassword;
 	
@@ -73,6 +76,12 @@ public class Settings {
 	}
 	public void setMailSmtpStarttlsEnable(boolean mailSmtpStarttlsEnable) {
 		this.mailSmtpStarttlsEnable = mailSmtpStarttlsEnable;
+	}
+	public String getLinkeinToken() {
+		return linkeinToken;
+	}
+	public void setLinkeinToken(String linkeinToken) {
+		this.linkeinToken = linkeinToken;
 	}
 	
 }
