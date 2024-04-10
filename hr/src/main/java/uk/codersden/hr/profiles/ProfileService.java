@@ -145,5 +145,9 @@ public class ProfileService {
 	public List<Profile> findProfilesOutOfOffice(String accountIdentifier) {
 		return holidayDao.findAllProfilesOutOfOffice(accountIdentifier);
 	}
+
+	public User updatePasswordForUser(User user) {
+		return userDao.save(user);
+	}
 	
 }
