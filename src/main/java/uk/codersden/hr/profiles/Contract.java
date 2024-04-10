@@ -118,7 +118,7 @@ public class Contract {
 		this.holidayBroughtForward = holidayBroughtForward;
 	}
 
-	public void setRightToWorkExpires(Date rightToWorkExpires) {
+	public void setRightToWorkExpires(String rightToWorkExpires) {
 		this.rightToWorkExpires = rightToWorkExpires;
 	}
 
@@ -128,13 +128,11 @@ public class Contract {
 	@Column(name="holiday_brought_forward")
 	private Integer holidayBroughtForward;
 	
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="start_date")
-	private Timestamp startDate;
+	private String startDate;
 	
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="cont_service")
-	private Timestamp contService;
+	private String contService;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="contract_end_date")
@@ -147,9 +145,8 @@ public class Contract {
 	@Column(name="onboard_contract")
 	private String onBoardContract;
 	
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="benefits_start")
-	private Date benefitsStart;
+	private String benefitsStart;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="review_date")
@@ -173,9 +170,9 @@ public class Contract {
 	@Column(name="right_to_work")
 	private String rightToWork;
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
+
 	@Column(name="right_to_work_expires")
-	private Date rightToWorkExpires;
+	private String rightToWorkExpires;
 
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -199,19 +196,19 @@ public class Contract {
 		this.identifier = identifier;
 	}
 
-	public Timestamp getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getContService() {
+	public String getContService() {
 		return contService;
 	}
 
-	public void setContService(Timestamp contService) {
+	public void setContService(String contService) {
 		this.contService = contService;
 	}
 
@@ -239,11 +236,11 @@ public class Contract {
 		this.onBoardContract = onBoardContract;
 	}
 
-	public Date getBenefitsStart() {
+	public String getBenefitsStart() {
 		return benefitsStart;
 	}
 
-	public void setBenefitsStart(Date benefitsStart) {
+	public void setBenefitsStart(String benefitsStart) {
 		this.benefitsStart = benefitsStart;
 	}
 
@@ -319,11 +316,11 @@ public class Contract {
 		this.rightToWork = rightToWork;
 	}
 
-	public Date getRightToWorkExpires() {
+	public String getRightToWorkExpires() {
 		return rightToWorkExpires;
 	}
 
-	public void setRightToWorkExpiry(Date rightToWorkExpires) {
+	public void setRightToWorkExpiry(String rightToWorkExpires) {
 		this.rightToWorkExpires = rightToWorkExpires;
 	}
 	

@@ -48,6 +48,21 @@ public class ProfileController {
 		return profileService.findProfilesByAccount(accountIdentifier);
 		
 	}
+	@PutMapping("/password/{identifier}")
+	@CrossOrigin
+	public ResponseEntity<?> updatePassword(@PathVariable("identifier") String identifier, @RequestBody User user) 
+	{	
+		User userUpdated = profileService.updatePasswordForUser(user);
+		// Add validations here
+		return ResponseEntity.ok(userUpdated);
+	}
+	
+	@PostMapping("/password/request/{identifier}")
+	@CrossOrigin
+	public ResponseEntity<?> requestChangePassword(@PathVariable("identifier") String identifier){
+		//TODO Send Email to user
+		return ResponseEntity.ok(identifier);
+	}
 	
 	@GetMapping("/account/{accountIdentifier}/off")
 	@CrossOrigin
