@@ -1,9 +1,7 @@
-package uk.codersden.hr.groups;
+package uk.codersden.hr.supporttickets;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,51 +16,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.codersden.hr.NotFoundException;
-import uk.codersden.hr.profiles.Contract;
-import uk.codersden.hr.profiles.Event;
-import uk.codersden.hr.profiles.Profile;
+
 
 @RestController
-@RequestMapping("/group")
-public class GroupController {
-	
+@RequestMapping
+public class SupportTicketController {
 	@Autowired
-	private GroupService groupService;
+	private SupportTicketService supportService;
 	
 	@PostMapping
 	@CrossOrigin
-	public ResponseEntity<?> createGroup(@RequestBody Group group) 
+	public ResponseEntity<?> createSupportTicket(@RequestBody SupportTicket ticket) 
 	{
-		Group newGroup = null;
+		SupportTicket newSupportTicket = null;
 		try {
-			newGroup = this.groupService.createGroup(group);
+			newSupportTicket = this.supportService.createSupportTicket(ticket);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(e);
 		}
-		return ResponseEntity.ok(newGroup);
+		return ResponseEntity.ok(newSupportTicket);
 	}
 	@PutMapping("/{identifier}")
 	@CrossOrigin
-	public ResponseEntity<?> updateGroup(@PathVariable("identifier") String identifier, @RequestBody Group group) 
+	public ResponseEntity<?> updateSupportTicket(@PathVariable("identifier") String identifier, @RequestBody SupportTicket ticket) 
 	{
-		Group updatedGroup = null;
+		SupportTicket updatedSupportTicket = null;
 		try {
-			updatedGroup = this.groupService.updateGroup(identifier, group);
+			updatedSupportTicket = this.supportService.updateSupportTicket(identifier, ticket);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(e);
 		}
-		return ResponseEntity.ok(updatedGroup);
+		return ResponseEntity.ok(updatedSupportTicket);
 	}
 	@CrossOrigin
 	@GetMapping("/account/{accountIdentifier}")
-	public ResponseEntity<?> retrieveGroupsByProfile(@PathVariable("accountIdentifier") String accountIdentifier){
-		List<Group> list = new ArrayList<>();
+	public ResponseEntity<?> retrieveSupportTicketsByProfile(@PathVariable("accountIdentifier") String accountIdentifier){
+		List<SupportTicket> list = new ArrayList<>();
 		try {
-			list = groupService.findAllGroupsByAccountIdentifier(accountIdentifier);
+			list = supportService.findAllSupportTicketsByAccountIdentifier(accountIdentifier);
 		}catch(Exception e) {
 			return ResponseEntity.internalServerError().body(e);
 		}
@@ -73,10 +68,10 @@ public class GroupController {
 
 	@CrossOrigin
 	@GetMapping("/{identifier}")
-	public ResponseEntity<?> retrieveGroup(@PathVariable("identifier") String identifier){
-		Group g = null;
+	public ResponseEntity<?> retrieveSupportTicket(@PathVariable("identifier") String identifier){
+		SupportTicket g = null;
 		try {
-			g = groupService.findGroupByIdentifier(identifier);
+			g = supportService.findSupportTicketByIdentifier(identifier);
 		}catch(Exception e) {
 			return ResponseEntity.internalServerError().body(e);
 		}
@@ -86,10 +81,10 @@ public class GroupController {
 	}
 	@CrossOrigin
 	@DeleteMapping("/{identifier}")
-	public ResponseEntity<?> deleteGroup(@PathVariable("identifier") String identifier){
-		Group g = null;
+	public ResponseEntity<?> deleteSupportTicket(@PathVariable("identifier") String identifier){
+		SupportTicket g = null;
 		try {
-			g = groupService.deleteGroup(identifier);
+			g = supportService.deleteSupportTicket(identifier);
 			
 		}catch(NotFoundException e) {
 			return ResponseEntity.notFound().build();

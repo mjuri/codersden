@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.hibernate.collection.internal.PersistentSet;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.codersden.hr.NotFoundException;
 import uk.codersden.hr.groups.Group;
 import uk.codersden.hr.groups.GroupNotFoundException;
 import uk.codersden.hr.profiles.Profile;
@@ -63,6 +65,8 @@ public class GroupService {
 		if(op.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
+
+		
 		return op.get();
 		
 	}
@@ -113,5 +117,20 @@ public class GroupService {
 		Group newGroup = this.dao.save(existingGroup);
 		
 		return newGroup;
+	}
+
+	public Group deleteGroup(String identifier) throws NotFoundException {
+		Optional<Group> op = dao.findById(identifier);
+
+		if(op.isEmpty()) {
+			throw new NotFoundException(identifier);
+		}
+		Group group = op.get();
+		
+		dao.delete(group);
+		
+		
+		return group;
+		
 	}
 }

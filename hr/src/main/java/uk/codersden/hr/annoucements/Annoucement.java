@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import uk.codersden.hr.groups.Group;
 import uk.codersden.hr.profiles.Profile;
 
 @Entity
@@ -49,9 +51,33 @@ public class Annoucement {
     )
     Set<Profile> audience = new HashSet<>();
     
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "annoucement_group", 
+        joinColumns = { @JoinColumn(name = "annoucement_identifier") }, 
+        inverseJoinColumns = { @JoinColumn(name = "group_identifier") }
+    )
+    Set<Group> groups = new HashSet<>();
+    
     @Transient
     private List<Map<String, String>> audienceValues;
     
+    @Transient
+    private List<Map<String, String>> groupsValues;
+    
+    
+    
+    
+	public List<Map<String, String>> getGroupsValues() {
+		return groupsValues;
+	}
+
+
+	public void setGroupsValues(List<Map<String, String>> groupsValues) {
+		this.groupsValues = groupsValues;
+	}
+
+
 	public List<Map<String, String>> getAudienceValues() {
 		return audienceValues;
 	}
@@ -150,6 +176,38 @@ public class Annoucement {
 	public void addAudience(Profile p) {
 		this.audience.add(p);
 		
+	}
+
+	public void addGroup(Group g) {
+		this.groups.add(g);
+	}
+
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(identifier);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Annoucement other = (Annoucement) obj;
+		return Objects.equals(identifier, other.identifier);
 	}
 	
 }

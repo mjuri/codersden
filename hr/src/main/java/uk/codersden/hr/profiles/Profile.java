@@ -304,15 +304,8 @@ public class Profile {
 		this.entitlementAbsence = entitlementAbsence;
 	}
 	
-	@ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "profile_group",
-        joinColumns = @JoinColumn(name = "profile_identifier"),
-        inverseJoinColumns = @JoinColumn(name = "group_identifier")
-    )
-	@JsonIgnoreProperties("members")
-	@JsonIgnore
-    private Set<Group> groups;
+    @ManyToMany(mappedBy = "members")
+    private Set<Group> groups = new HashSet<>();
 	
 	public Set<Group> getGroups() {
 		return groups;

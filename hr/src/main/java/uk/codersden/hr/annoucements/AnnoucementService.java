@@ -11,6 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.codersden.hr.NotFoundException;
+import uk.codersden.hr.groups.Group;
+import uk.codersden.hr.groups.GroupDao;
 import uk.codersden.hr.notifications.Notification;
 import uk.codersden.hr.notifications.NotificationService;
 import uk.codersden.hr.profiles.AccountDao;
@@ -32,12 +35,17 @@ public class AnnoucementService {
 	private ProfileDao profileDao;
 	
 	@Autowired
-	private AccountDao accountDao;
+	private GroupDao groupDao;
 	
 	@Autowired
 	private ModelMapper	 modelMapper;
 
 	public Annoucement createAnnoucement(Annoucement annoucement) {
+		
+		Optional<Profile> opProfile = profileDao.findById(annoucement.getProfileIdentifier());
+		
+		annoucement.setProfile(opProfile.get());
+		
 		// Check audience
 		List<Map<String, String>> audienceValues = annoucement.getAudienceValues();
 		Profile profile;
@@ -57,6 +65,28 @@ public class AnnoucementService {
 			}
 		}
 		annoucement.setAudience(profiles);
+		
+		List<Map<String, String>> groupsValues = annoucement.getGroupsValues();
+		Group group;
+		Set<Group> groups = new HashSet<>();
+		
+		for (Map<String, String> map : groupsValues) {
+			try {
+				Optional<Group> g = this.groupDao.findById(map.get("value"));
+				if (g.isEmpty()) {
+					throw new NotFoundException(map.get("value"));
+				}
+				group = g.get();
+				groups.add(group);
+				
+			} catch (NotFoundException e) {
+				System.out.println(e);
+			}
+		}
+		annoucement.setGroups(groups);
+		
+
+		
 		Annoucement a = dao.save(annoucement);
 		
 		
@@ -66,6 +96,13 @@ public class AnnoucementService {
 	}
 	private void sendNotification(Annoucement a) {
 		Set<Profile> attendees = a.getAudience();
+		Set<Group> groups = a.getGroups();
+		
+		for (Group group : groups) {
+			attendees.addAll(group.getMembers());
+		}
+		
+		
 		for (Profile profile : attendees) {
 			Notification n = new Notification();
 			n.setOwner(a.getProfile());
@@ -74,7 +111,7 @@ public class AnnoucementService {
 			n.setProfile(profile);
 			n.setProfileIdentifier(profile.getIdentifier());
 			n.setOwnerIdentifier(a.getProfileIdentifier());
-			
+			n.setOwner(n.getOwner());
 			notificationService.sendNotification(n);
 			
 		}
@@ -88,10 +125,43 @@ public class AnnoucementService {
 		}
 		annoucement.setIdentifier(identifier);
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
-
-		return dao.save(this.validateAudience(annoucement, op.get()));
+		
+		return dao.save(this.validateGroups(validateAudience(annoucement, op.get()), op.get()) );
 	}
+	private Annoucement validateGroups(Annoucement updatedAnnoucement, Annoucement existentAnnoucement) {
+		Group group;
+	    Set<Group> updatedGroups = new HashSet<>();
+		for (Map<String, String> map : updatedAnnoucement.getGroupsValues()) {
+			try {
+				Optional<Group> g = this.groupDao.findById(map.get("value"));
+				if (g.isEmpty()) {
+					throw new NotFoundException(map.get("value"));
+				}
+				group = g.get();
+				if(!existentAnnoucement.getGroups().contains(group)) {
+					existentAnnoucement.addGroup(group);
+				}	
+				updatedGroups.add(group);
+				
+			} catch (NotFoundException e) {
+				System.out.println(e);
+			}
+		}
 
+		try {
+			for(Group g: existentAnnoucement.getGroups()) {
+				if(!updatedGroups.contains(g)) {
+					existentAnnoucement.getGroups().remove(g);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		modelMapper.map(updatedAnnoucement, existentAnnoucement); // To copy all the attributes from event to the existing one.
+		
+		return existentAnnoucement;
+	}
+	
 	private Annoucement validateAudience(Annoucement updatedAnnoucement, Annoucement existentAnnoucement) {
 
 		Profile profile;
@@ -141,7 +211,12 @@ public class AnnoucementService {
 		if(op.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
-		List<Annoucement> list = dao.findAllSharedWithUser(profileIdentifier);
-		return list;
+		List<Annoucement> shareList = dao.findAllSharedWithUser(profileIdentifier);
+		List<Annoucement> createdBy = dao.findAllByProfileIdentifier(profileIdentifier);
+		
+		shareList.removeAll(createdBy);
+		createdBy.addAll(shareList);
+		
+		return createdBy;
 	}
 }

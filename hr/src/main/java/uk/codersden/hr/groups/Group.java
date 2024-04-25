@@ -1,19 +1,28 @@
 package uk.codersden.hr.groups;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import uk.codersden.hr.profiles.Profile;
 
 @Entity
@@ -41,8 +50,15 @@ public class Group {
 	@Column(name="account_identifier")
 	private String accountIdentifier;
 	
-    @ManyToMany(mappedBy = "groups")
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "profile_group",
+        joinColumns = @JoinColumn(name = "group_identifier"),
+        inverseJoinColumns = @JoinColumn(name = "profile_identifier")
+    )
+	@JsonIgnoreProperties("groups")
     private Set<Profile> members = new HashSet<>();
+	
 	
     @Transient
     private List<Map<String, String>> membersValues;
