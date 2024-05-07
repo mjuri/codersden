@@ -1,5 +1,7 @@
 package uk.codersden.hr.supporttickets;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,10 @@ public class SupportTicketService {
 	@Autowired
 	private SupportTicketDao dao;
 	public SupportTicket createSupportTicket(SupportTicket ticket) {
+		ticket.setStatus("REQUESTED");
+		Timestamp ts = new Timestamp((new Date()).getTime());
+		ticket.setDateCreated(ts);
+		ticket.setModDate(ts);
 		return this.dao.save(ticket);
 	}
 
@@ -30,7 +36,7 @@ public class SupportTicketService {
 	}
 
 	public List<SupportTicket> findAllSupportTicketsByAccountIdentifier(String accountIdentifier) {
-		return this.dao.findAllByAccountdentifier(accountIdentifier);
+		return this.dao.findAllByAccountIdentifier(accountIdentifier);
 	}
 
 	public List<SupportTicket> findAllSupportTicketsByProfileIdentifier(String profileIdentifier) {

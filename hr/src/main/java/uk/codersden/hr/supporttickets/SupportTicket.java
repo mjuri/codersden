@@ -32,11 +32,22 @@ public class SupportTicket {
 	private String title;
 	private String status;
 	private String answer;
+	private String type;
+	
+	@Column(name="moddate")
+	private Timestamp modDate;
 	
 	@Column(name="date")
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp dateCreated;
 	
+	public Timestamp getModDate() {
+		return modDate;
+	}
+
+	public void setModDate(Timestamp modDate) {
+		this.modDate = modDate;
+	}
+
 	@Column(name="account_identifier")
 	private String accountIdentifier;
 	
@@ -44,7 +55,7 @@ public class SupportTicket {
 	private String profileIdentifier;
 
     @ManyToOne
-    @JoinColumn(name="profile_identifier",  nullable=true)
+    @JoinColumn(name="profile_identifier",  nullable=true, insertable=false, updatable=false)
 	private Profile profile;
     
 	public Profile getProfile() {
@@ -123,6 +134,14 @@ public class SupportTicket {
 
 	public void setDateCreated(Timestamp dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SupportTicketDao extends JpaRepository<SupportTicket, String>{
 	List<SupportTicket> findAllByProfileIdentifier(String profileIdentifier);
-	List<SupportTicket> findAllByAccountdentifier(String accountIdentifier);
+	List<SupportTicket> findAllByAccountIdentifier(String accountIdentifier);
 }

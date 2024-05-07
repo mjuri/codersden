@@ -19,7 +19,7 @@ import uk.codersden.hr.NotFoundException;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/support/ticket")
 public class SupportTicketController {
 	@Autowired
 	private SupportTicketService supportService;
