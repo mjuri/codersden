@@ -22,6 +22,7 @@ public class HolidayService {
 		if(holiday.getAuthorizedBy() == null || "".equals(holiday.getAuthorizedBy()) ) {
 			holiday.setStatus(HolidayStatus.APPROVED.toString());
 		}
+
 		Holiday h = this.holidayDao.save(holiday);
 		return h;
 	}
