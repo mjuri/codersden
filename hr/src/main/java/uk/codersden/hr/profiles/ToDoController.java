@@ -35,13 +35,26 @@ public class ToDoController {
 		
 	}
 	@CrossOrigin
-	@PostMapping("/{id}")
+	@PostMapping("/profile/{id}")
 	public ResponseEntity<?> createToDoItem(@PathVariable("id") String profileIdentifier, 
 			@RequestBody ToDo item) {
 		ToDo toDo;
 		try {
 			toDo = toDoService.create(profileIdentifier, item);
 		} catch (ProfileNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(toDo);
+		
+	}
+	@CrossOrigin
+	@PostMapping("/{identifier}")
+	public ResponseEntity<?> removeToDoItem(@PathVariable("identifier") String identifier, 
+			@RequestBody ToDo item) {
+		ToDo toDo;
+		try {
+			toDo = toDoService.removeToDoItem(identifier);
+		} catch (Not e) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(toDo);

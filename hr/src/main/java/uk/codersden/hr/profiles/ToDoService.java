@@ -57,4 +57,10 @@ public class ToDoService {
         LocalDate twentyDaysAgo = LocalDate.now().minusDays(20);
         return Date.valueOf(twentyDaysAgo);
     }
+	public ToDo removeToDoItem(String identifier) throws TaskNotFoundException {
+		Optional<ToDo> op = this.toDoDao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new TaskNotFoundException();
+		}
+	}
 }
