@@ -34,7 +34,7 @@ public class NotificationService {
 		
         // Runnable to execute the email sending part in a separate thread
         Runnable emailSendingTask = () -> {
-		String accountIdentifier = notification.getOwner().getAccountIdentifier();
+		String accountIdentifier = notification.getProfile().getAccountIdentifier();
 		String to = notification.getProfile().getEmail();
 		String from = notification.getOwner().getEmail();
 		

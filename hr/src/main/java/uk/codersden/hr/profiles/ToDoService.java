@@ -59,8 +59,13 @@ public class ToDoService {
     }
 	public ToDo removeToDoItem(String identifier) throws TaskNotFoundException {
 		Optional<ToDo> op = this.toDoDao.findById(identifier);
+
 		if(op.isEmpty()) {
 			throw new TaskNotFoundException();
 		}
+		ToDo t = op.get();
+		
+		this.toDoDao.delete(t);
+		return t;
 	}
 }

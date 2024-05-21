@@ -192,4 +192,10 @@ public class Holiday {
 		this.draft = draft;
 	}
 	
+	public int calculateDays() {
+		int diffInDays = (int)( (this.end.getTime() - this.start.getTime()) 
+                / (1000 * 60 * 60 * 24) );
+		
+		return diffInDays;
+	}
 }

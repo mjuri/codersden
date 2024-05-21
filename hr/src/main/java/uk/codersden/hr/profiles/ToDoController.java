@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,13 +49,12 @@ public class ToDoController {
 		
 	}
 	@CrossOrigin
-	@PostMapping("/{identifier}")
-	public ResponseEntity<?> removeToDoItem(@PathVariable("identifier") String identifier, 
-			@RequestBody ToDo item) {
+	@DeleteMapping("/{identifier}")
+	public ResponseEntity<?> removeToDoItem(@PathVariable("identifier") String identifier) {
 		ToDo toDo;
 		try {
 			toDo = toDoService.removeToDoItem(identifier);
-		} catch (Not e) {
+		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(toDo);

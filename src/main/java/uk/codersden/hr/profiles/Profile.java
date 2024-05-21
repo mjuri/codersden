@@ -28,6 +28,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import uk.codersden.hr.groups.Group;
+
 @Entity(name = "profiles")
 public class Profile {
 	@Id
@@ -302,7 +304,15 @@ public class Profile {
 		this.entitlementAbsence = entitlementAbsence;
 	}
 	
+    @ManyToMany(mappedBy = "members")
+    private Set<Group> groups = new HashSet<>();
 	
+	public Set<Group> getGroups() {
+		return groups;
+	}
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
 	@ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinTable(
         name = "event_attendee",

@@ -41,11 +41,11 @@ public class HolidayController {
 	
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<?> createHoliday(@RequestBody Holiday holiday){
+	public ResponseEntity<?> createHoliday(@RequestBody Holiday holiday) throws ProfileNotFoundException {
 		Holiday newHoliday = null;
 		try {
 			newHoliday = holidayService.saveHoliday(holiday);
-		} catch (HolidayNotFoundException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(e);
@@ -69,12 +69,12 @@ public class HolidayController {
     }
 	@CrossOrigin
 	@PutMapping("/{identifier}")
-	public ResponseEntity<?> updateHoliday(@PathVariable("identifier") String identifier, @RequestBody Holiday holiday){
+	public ResponseEntity<?> updateHoliday(@PathVariable("identifier") String identifier, @RequestBody Holiday holiday) throws ProfileNotFoundException {
 		Holiday newHoliday = null;
 		holiday.setIdentifier(identifier);
 		try {
 			newHoliday = holidayService.saveHoliday(holiday);
-		} catch (HolidayNotFoundException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(e);

@@ -79,8 +79,39 @@ public class HolidayService {
 		h.setStatus(HolidayStatus.REJECTED.toString());
 		return this.holidayDao.save(h);
 	}
+	
+	private long calculateRemainingDays(Holiday holiday) throws ProfileNotFoundException, HolidayDaysException {
+	    int currentHolidayDays = holiday.calculateDays();
+	    Profile profile = profileDao.getById(holiday.getProfileIdentifier());
+	    // Fetching the list of holidays for the profile
+	    List<Holiday> holidaysForProfile = this.findAllHolidayByProfileIdentifier(holiday.getProfileIdentifier());
 
-	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException {
+	    // Calculate the total number of days already taken
+	    int totalTakenDays = 0;
+	    for (Holiday h : holidaysForProfile) {
+	        totalTakenDays += h.calculateDays();
+	    }
+
+	    // Adding the current holiday days to the total taken days
+	    totalTakenDays += currentHolidayDays;
+
+	    // Fetching the entitled absence days
+	    int entitledDays = profile.getEntitlementAbsence();
+
+	    // Calculate the remaining days
+	    int remainingDays = entitledDays - totalTakenDays;
+
+	    // If remaining days are negative, throw an exception
+	    if (remainingDays < 0) {
+	        throw new HolidayDaysException("Remaining days cannot be negative.");
+	    }
+
+	    return remainingDays;
+	}
+
+
+	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException, ProfileNotFoundException, HolidayDaysException {
+		calculateRemainingDays(holiday);
 		if(holiday.getDateCreated() == null) {
 			java.sql.Date d = new Date(System.currentTimeMillis());
 			holiday.setDateCreated(d);
