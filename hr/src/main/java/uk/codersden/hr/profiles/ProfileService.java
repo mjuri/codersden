@@ -38,10 +38,13 @@ public class ProfileService {
 	private LoginService loginService;
 	
 	public Profile create(Profile profile) {
+
 		if(profile.getIdentifier() != null) {
 			profile.setIdentifier(generateIdentifier());
 		}
+
 		Profile newProfile = this.profileDao.save(profile);
+
 		return newProfile;
 	}
 
