@@ -96,7 +96,7 @@ public class HolidayService {
 	    totalTakenDays += currentHolidayDays;
 
 	    // Fetching the entitled absence days
-	    int entitledDays = profile.getEntitlementAbsence();
+	    int entitledDays = profile.getContract().getHolidayEntitlement();
 
 	    // Calculate the remaining days
 	    int remainingDays = entitledDays - totalTakenDays;

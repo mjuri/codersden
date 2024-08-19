@@ -92,7 +92,7 @@ public class Profile {
 	@Column(name = "home_phone")
 	private String homePhone;
 	
-	@OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "profile")
 	private Contract contract;
 	
 	public Contract getContract() {

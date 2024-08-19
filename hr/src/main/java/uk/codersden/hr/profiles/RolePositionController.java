@@ -125,7 +125,7 @@ public class RolePositionController {
         if(!role.getStatus().equalsIgnoreCase(statusLog.getStatus())) {
         	String log = new String();
         	log = role.getLog() + System.lineSeparator();
-        	log += statusLog.getStatus() + " on " + new Date() + " " + statusLog.getLog();
+        	log += statusLog.getStatus() + " on " + new Date() + " " + statusLog.getLog() + '\n';
         	role.setLog(log);
         	role.setStatus(statusLog.getStatus());
         }
