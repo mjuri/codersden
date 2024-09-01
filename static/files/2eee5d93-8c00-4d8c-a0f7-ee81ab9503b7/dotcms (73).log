@@ -1,0 +1,999 @@
+[24/03/24 11:59:29:480 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO            OOOO                            7777777   7777       7777     77777777   -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO            OOOO                 OO       777777777  77777      77777    77777777    -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO            OOOO                OOO      77777       777777     77777   7777         -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO      OOOOOOOOOO   OOOOOOOO   OOOOOOOOO 7777         7777777   777777   7777         -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO     OOOO  OOOOO  OOOO  OOOO    OOOO    7777         7777777  7777777    777777      -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO    OOOO    OOOO  OOO    OOOO   OOOO    7777         77777777 777 7777     777777    -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO    OOOO    OOOO OOOO    OOOO   OOOO    7777         777  777 777 7777        7777   -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO    OOOO    OOOO  OOO    OOOO   OOOO    77777        777  777777  7777         7777  -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO     OOOO   OOOO  OOOO   OOO    OOOO     77777       777   7777   7777        7777   -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO      OOOOOOOOOO   OOOOOOOO      OOOOO    777777777  777   7777   7777  777777777    -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                          Content Management System  -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:29:481 GMT]  INFO                                                                                     -
+			  
+[24/03/24 11:59:30:529 GMT]  INFO Initializing in-memory repository... -
+			  
+[24/03/24 11:59:30:572 GMT]  INFO ...initialized in-memory repository. -
+			  
+[24/03/24 11:59:30:572 GMT]  INFO Initialized Services Factory: com.dotcms.enterprise.cmis.server.CMISServiceFactoryImpl -
+			  
+[24/03/24 11:59:30:900 GMT]  INFO loading cache administrator: com.dotmarketing.business.ChainableCacheAdministratorImpl -
+			  
+[24/03/24 11:59:31:028 GMT]  WARN No Valid License Found : /apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/dotsecure/license/license.dat -
+			  
+[24/03/24 11:59:31:028 GMT]  INFO Setting up default license -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : default: 1000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : adminconfigpool: 100 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : companypool: 10 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : contentletcache: 5000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : csscache: 2500 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : fileassetmetadatacache: 200 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : identifiercache: 50000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : indiciescache: 8 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : logmappercache: 10 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : navcache: 1000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : parentpermissionablecache: 10000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : permissioncache: 50000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : portletpool: 100 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : publishingendpointcache: 100 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : pushedassetscache: 5000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : structurecache: 500 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : templatecache: 500 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : translatedquerycache: 5000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : versioncache: 50000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : versioninfocache: 50000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : workflowactioncache: 10000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : workflowtaskcache: 10000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : shorty: 25000 -
+			  
+[24/03/24 11:59:31:032 GMT]  INFO ***	 Cache Config Memory : identifier404cache: 5000 -
+			  
+[24/03/24 11:59:31:033 GMT]  INFO ***	 Cache Config Memory : virtuallinkscache: 25000 -
+			  
+[24/03/24 11:59:31:033 GMT]  INFO ***	 Cache Config Memory : velocitycache: 1000 -
+			  
+[24/03/24 11:59:31:814 GMT]  INFO ***	 Building Cache : contenttypecache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:32:233 GMT]  INFO Loading file:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/classes/system.properties -
+			  
+[24/03/24 11:59:32:233 GMT]  INFO Loading file:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/classes/system-ext.properties -
+			  
+[24/03/24 11:59:32:245 GMT]  INFO Loading file:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/classes/portal.properties -
+			  
+[24/03/24 11:59:32:245 GMT]  INFO Loading file:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/classes/portal-ext.properties -
+			  
+[24/03/24 11:59:34:683 GMT]  INFO Tiles definition factory loaded for module ''. -
+			  
+[24/03/24 11:59:34:687 GMT]  INFO Loading validation rules file from '/WEB-INF/validator-rules.xml' -
+			  
+[24/03/24 11:59:34:688 GMT]  INFO Loading validation rules file from '/WEB-INF/validation.xml' -
+			  
+[24/03/24 11:59:34:986 GMT]  INFO Starting startup tasks. -
+			  
+[24/03/24 11:59:35:004 GMT]  INFO Hibernate 2.1.8 -
+			  
+[24/03/24 11:59:35:004 GMT]  INFO hibernate.properties not found -
+			  
+[24/03/24 11:59:35:006 GMT]  INFO using JDK 1.4 java.sql.Timestamp handling -
+			  
+[24/03/24 11:59:35:007 GMT]  INFO configuring from resource: /hibernate.cfg.xml -
+			  
+[24/03/24 11:59:35:007 GMT]  INFO Configuration resource: /hibernate.cfg.xml -
+			  
+[24/03/24 11:59:35:101 GMT]  INFO Configured SessionFactory: null -
+			  
+[24/03/24 11:59:35:102 GMT]  INFO Mapping resource: com/dotmarketing/beans/DotCMSSeq.hbm.xml -
+			  
+[24/03/24 11:59:35:207 GMT]  INFO Mapping class: com.dotmarketing.beans.Inode -> inode -
+			  
+[24/03/24 11:59:35:264 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.categories.model.Category -> category -
+			  
+[24/03/24 11:59:35:265 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.contentlet.business.Contentlet -> contentlet -
+			  
+[24/03/24 11:59:35:268 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.containers.model.Container -> dot_containers -
+			  
+[24/03/24 11:59:35:269 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.folders.model.Folder -> folder -
+			  
+[24/03/24 11:59:35:269 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.templates.model.Template -> template -
+			  
+[24/03/24 11:59:35:269 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.links.model.Link -> links -
+			  
+[24/03/24 11:59:35:269 GMT]  INFO Mapping joined-subclass: com.dotmarketing.beans.UserProxy -> user_proxy -
+			  
+[24/03/24 11:59:35:271 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.structure.model.Relationship -> relationship -
+			  
+[24/03/24 11:59:35:271 GMT]  INFO Mapping joined-subclass: com.dotmarketing.portlets.structure.model.Field -> field -
+			  
+[24/03/24 11:59:35:273 GMT]  INFO Mapping class: com.dotmarketing.portlets.workflows.model.WorkflowTask -> workflow_task -
+			  
+[24/03/24 11:59:35:274 GMT]  INFO Mapping class: com.dotmarketing.portlets.workflows.model.WorkflowComment -> workflow_comment -
+			  
+[24/03/24 11:59:35:275 GMT]  INFO Mapping class: com.dotmarketing.portlets.workflows.model.WorkflowHistory -> workflow_history -
+			  
+[24/03/24 11:59:35:276 GMT]  INFO Mapping class: com.dotmarketing.portlets.workflows.model.WorkFlowTaskFiles -> workflowtask_files -
+			  
+[24/03/24 11:59:35:276 GMT]  INFO Mapping class: com.dotmarketing.beans.Permission -> permission -
+			  
+[24/03/24 11:59:35:276 GMT]  INFO Mapping class: com.dotmarketing.beans.PermissionReference -> permission_reference -
+			  
+[24/03/24 11:59:35:277 GMT]  INFO Mapping class: com.dotmarketing.beans.Tree -> tree -
+			  
+[24/03/24 11:59:35:355 GMT]  INFO Mapping class: com.dotmarketing.beans.MultiTree -> multi_tree -
+			  
+[24/03/24 11:59:35:360 GMT]  INFO Mapping class: com.dotmarketing.portlets.user.model.UserPreference -> user_preferences -
+			  
+[24/03/24 11:59:35:360 GMT]  INFO Mapping class: com.dotmarketing.portlets.languagesmanager.model.Language -> language -
+			  
+[24/03/24 11:59:35:362 GMT]  INFO Mapping class: com.dotmarketing.beans.Clickstream -> clickstream -
+			  
+[24/03/24 11:59:35:369 GMT]  INFO Mapping class: com.dotmarketing.beans.ClickstreamRequest -> clickstream_request -
+			  
+[24/03/24 11:59:35:370 GMT]  INFO Mapping class: com.dotmarketing.beans.Clickstream404 -> clickstream_404 -
+			  
+[24/03/24 11:59:35:372 GMT]  INFO Mapping class: com.dotmarketing.portlets.webforms.model.WebForm -> web_form -
+			  
+[24/03/24 11:59:35:373 GMT]  INFO Mapping class: com.dotmarketing.beans.Rating -> content_rating -
+			  
+[24/03/24 11:59:35:373 GMT]  INFO Mapping class: com.dotmarketing.tag.model.Tag -> tag -
+			  
+[24/03/24 11:59:35:373 GMT]  INFO Mapping class: com.dotmarketing.tag.model.TagInode -> tag_inode -
+			  
+[24/03/24 11:59:35:377 GMT]  INFO Mapping class: com.dotmarketing.beans.ChallengeQuestion -> challenge_question -
+			  
+[24/03/24 11:59:35:378 GMT]  INFO Mapping class: com.dotmarketing.beans.UsersToDelete -> users_to_delete -
+			  
+[24/03/24 11:59:35:378 GMT]  INFO Mapping class: com.dotmarketing.plugin.model.Plugin -> plugin -
+			  
+[24/03/24 11:59:35:378 GMT]  INFO Mapping class: com.dotmarketing.business.Role -> cms_role -
+			  
+[24/03/24 11:59:35:379 GMT]  INFO Mapping class: com.dotmarketing.business.UsersRoles -> users_cms_roles -
+			  
+[24/03/24 11:59:35:380 GMT]  INFO Mapping class: com.dotmarketing.business.LayoutsRoles -> layouts_cms_roles -
+			  
+[24/03/24 11:59:35:381 GMT]  INFO Mapping class: com.dotmarketing.business.Layout -> cms_layout -
+			  
+[24/03/24 11:59:35:381 GMT]  INFO Mapping class: com.dotmarketing.business.PortletsLayouts -> cms_layouts_portlets -
+			  
+[24/03/24 11:59:35:382 GMT]  INFO Mapping class: com.dotmarketing.portlets.hostvariable.model.HostVariable -> host_variable -
+			  
+[24/03/24 11:59:35:383 GMT]  INFO Mapping class: com.dotmarketing.beans.FixAudit -> fixes_audit -
+			  
+[24/03/24 11:59:35:383 GMT]  INFO Mapping class: com.dotmarketing.beans.Identifier -> identifier -
+			  
+[24/03/24 11:59:35:384 GMT]  INFO Mapping class: com.dotmarketing.beans.TemplateContainers -> template_containers -
+			  
+[24/03/24 11:59:35:386 GMT]  INFO Mapping class: com.dotmarketing.beans.ContainerStructure -> container_structures -
+			  
+[24/03/24 11:59:35:387 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardWorkStream -> analytic_summary_workstream -
+			  
+[24/03/24 11:59:35:388 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummaryPeriod -> analytic_summary_period -
+			  
+[24/03/24 11:59:35:389 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummaryVisits -> analytic_summary_visits -
+			  
+[24/03/24 11:59:35:391 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummary404 -> analytic_summary_404 -
+			  
+[24/03/24 11:59:35:393 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardUserPreferences -> dashboard_user_preferences -
+			  
+[24/03/24 11:59:35:395 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummary -> analytic_summary -
+			  
+[24/03/24 11:59:35:396 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummaryReferer -> analytic_summary_referer -
+			  
+[24/03/24 11:59:35:397 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummaryPage -> analytic_summary_pages -
+			  
+[24/03/24 11:59:35:398 GMT]  INFO Mapping class: com.dotmarketing.portlets.dashboard.model.DashboardSummaryContent -> analytic_summary_content -
+			  
+[24/03/24 11:59:35:399 GMT]  INFO Mapping class: com.dotmarketing.portlets.contentlet.model.ContentletVersionInfo -> contentlet_version_info -
+			  
+[24/03/24 11:59:35:405 GMT]  INFO Mapping class: com.dotmarketing.portlets.templates.model.TemplateVersionInfo -> template_version_info -
+			  
+[24/03/24 11:59:35:407 GMT]  INFO Mapping class: com.dotmarketing.portlets.containers.model.ContainerVersionInfo -> container_version_info -
+			  
+[24/03/24 11:59:35:408 GMT]  INFO Mapping class: com.dotmarketing.portlets.links.model.LinkVersionInfo -> link_version_info -
+			  
+[24/03/24 11:59:35:409 GMT]  INFO Mapping class: com.dotcms.rest.UserDomain -> user_domain -
+			  
+[24/03/24 11:59:35:412 GMT]  INFO Mapping class: com.dotcms.rest.DomainFeature -> domain_feature -
+			  
+[24/03/24 11:59:35:416 GMT]  INFO Mapping class: com.dotcms.rest.DomainEnvironment -> domain_environment -
+			  
+[24/03/24 11:59:35:419 GMT]  INFO Mapping class: com.dotcms.rest.promotions.FeatureOrder -> feature_order -
+			  
+[24/03/24 11:59:35:422 GMT]  INFO Mapping class: com.dotcms.rest.UserFeature -> user_feature -
+			  
+[24/03/24 11:59:35:425 GMT]  INFO Mapping class: com.dotcms.rest.FeatureEnvironment -> feature_environment -
+			  
+[24/03/24 11:59:35:428 GMT]  INFO Mapping class: com.dotcms.rest.CustomNotification -> notifications -
+			  
+[24/03/24 11:59:35:428 GMT]  INFO Mapping resource: com/dotmarketing/beans/DotCMSSeq_NOSQLGEN.hbm.xml -
+			  
+[24/03/24 11:59:35:446 GMT]  INFO Mapping class: com.dotmarketing.plugin.model.PluginProperty -> plugin_property -
+			  
+[24/03/24 11:59:35:463 GMT]  INFO processing one-to-many association mappings -
+			  
+[24/03/24 11:59:35:463 GMT]  INFO Mapping collection: com.dotmarketing.beans.Clickstream.clickstreamRequests -> clickstream_request -
+			  
+[24/03/24 11:59:35:464 GMT]  INFO Mapping collection: com.dotmarketing.portlets.dashboard.model.DashboardSummary404.userPreferences -> dashboard_user_preferences -
+			  
+[24/03/24 11:59:35:464 GMT]  INFO processing one-to-one association property references -
+			  
+[24/03/24 11:59:35:464 GMT]  INFO processing foreign key constraints -
+			  
+[24/03/24 11:59:35:491 GMT]  INFO Using dialect: com.dotcms.repackage.net.sf.hibernate.dialect.PostgreSQLDialect -
+			  
+[24/03/24 11:59:35:498 GMT]  INFO Use outer join fetching: true -
+			  
+[24/03/24 11:59:35:500 GMT]  INFO Initializing connection provider: com.liferay.util.dao.hibernate.DSConnectionProvider -
+			  
+[24/03/24 11:59:35:507 GMT]  INFO No TransactionManagerLookup configured (in JTA environment, use of process level read-write cache is not recommended) -
+			  
+[24/03/24 11:59:35:512 GMT]  INFO Use scrollable result sets: true -
+			  
+[24/03/24 11:59:35:512 GMT]  INFO Use JDBC3 getGeneratedKeys(): false -
+			  
+[24/03/24 11:59:35:512 GMT]  INFO Optimize cache for minimal puts: false -
+			  
+[24/03/24 11:59:35:512 GMT]  INFO Query language substitutions: {} -
+			  
+[24/03/24 11:59:35:512 GMT]  INFO cache provider: com.dotmarketing.db.NoCacheProvider -
+			  
+[24/03/24 11:59:35:513 GMT]  INFO instantiating and configuring caches -
+			  
+[24/03/24 11:59:35:525 GMT]  INFO building session factory -
+			  
+[24/03/24 11:59:36:038 GMT]  INFO Not binding factory to JNDI, no JNDI name configured -
+			  
+[24/03/24 11:59:36:060 GMT]  INFO Not running: Task00001LoadSchema -
+			  
+[24/03/24 11:59:36:064 GMT]  INFO Running: Task00003CreateSystemRoles -
+			  
+[24/03/24 11:59:36:076 GMT]  INFO Not running: Task00004LoadStarter -
+			  
+[24/03/24 11:59:36:077 GMT]  INFO Not running: Task00005LoadFixassets -
+			  
+[24/03/24 11:59:36:078 GMT]  INFO Running: Task00006CreateSystemLayout -
+			  
+[24/03/24 11:59:36:121 GMT]  INFO ***	 Building Cache : dotcmslayoutcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:36:165 GMT]  INFO Not running: Task00007RemoveSitesearchQuartzJob -
+			  
+[24/03/24 11:59:36:169 GMT]  INFO Not running: Task00020LoadClusterLicenses -
+			  
+[24/03/24 11:59:36:174 GMT]  INFO Running: Task00030ClusterInitialize -
+			  
+[24/03/24 11:59:36:198 GMT]  WARN ENABLE_SERVER_HEARTBEAT is set to false to we do not need to write to Disk  -
+			  
+[24/03/24 11:59:36:223 GMT]  INFO ***	 Starting Cluster Setup -
+			  
+[24/03/24 11:59:36:223 GMT]  INFO Using automatic port placement as AUTOWIRE_CLUSTER_TRANSPORT is ON -
+			  
+[24/03/24 11:59:36:223 GMT]  INFO ***	 Using 10.16.0.84 as the bindaddress -
+			  
+[24/03/24 11:59:36:223 GMT]  INFO ***	 Using 5760 as the bindport -
+			  
+[24/03/24 11:59:36:223 GMT]  INFO ***	 Setting up TCP initial hosts: 10.16.0.84[5760] -
+			  
+[24/03/24 11:59:36:224 GMT]  INFO ***	 Prefer IPv4: enabled -
+			  
+[24/03/24 11:59:36:224 GMT]  INFO Starting Hazelcast Cache Transport -
+			  
+[24/03/24 11:59:36:226 GMT]  INFO Setting Up HazelCast (EMBEDDED) -
+			  
+[24/03/24 11:59:36:227 GMT]  INFO discovery.zen.ping.unicast.hosts: 10.16.0.84:9309 -
+			  
+[24/03/24 11:59:36:690 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] version[1.7.3], pid[58888], build[05d4530/2015-10-15T09:14:17Z] -
+			  
+[24/03/24 11:59:36:690 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] initializing ... -
+			  
+[24/03/24 11:59:36:872 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] loaded [], sites [] -
+			  
+[24/03/24 11:59:36:950 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] using [1] data paths, mounts [[/apps (/dev/mapper/apps_vg-apps_lv)]], net usable_space [7.4gb], net total_space [19.9gb], types [xfs] -
+			  
+[24/03/24 11:59:41:237 GMT]  WARN JNA not found. native methods will be disabled. -
+			  
+[24/03/24 11:59:42:129 GMT]  INFO Initialized Hazelcast member HazelcastInstance{name='_hzInstance_1_dev', node=[10.16.0.84]:5760} -
+			  
+[24/03/24 11:59:42:151 GMT]  WARN [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] deprecated setting [script.disable_dynamic] is set, replace with fine-grained scripting settings (e.g. script.inline, script.indexed, script.file) -
+			  
+[24/03/24 11:59:42:169 GMT]  INFO Sending Ping to Cluster Sun Mar 24 11:59:42 GMT 2024 -
+			  
+[24/03/24 11:59:42:187 GMT]  INFO Received Message Ping Sun Mar 24 11:59:42 GMT 2024 -
+			  
+[24/03/24 11:59:42:187 GMT]  INFO ACK Received Sun Mar 24 11:59:42 GMT 2024 -
+			  
+[24/03/24 11:59:42:402 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] initialized -
+			  
+[24/03/24 11:59:42:402 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] starting ... -
+			  
+[24/03/24 11:59:42:470 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] bound_address {inet[/10.16.0.84:9309]}, publish_address {inet[/10.16.0.84:9309]} -
+			  
+[24/03/24 11:59:42:482 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] dotCMSContentIndex_3x/XLgAVVi1S9uds8KDtRviuA -
+			  
+[24/03/24 11:59:47:531 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] new_master [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4][XLgAVVi1S9uds8KDtRviuA][dvl-cmsbr05.sbetenv.ads][inet[/10.16.0.84:9309]], reason: zen-disco-join (elected_as_master) -
+			  
+[24/03/24 11:59:47:564 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] started -
+			  
+[24/03/24 11:59:47:654 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] recovered [0] indices into cluster_state -
+			  
+[24/03/24 11:59:52:575 GMT]  INFO Running: Task00040CheckAnonymousUser -
+			  
+[24/03/24 11:59:52:577 GMT]  INFO Finishing startup tasks. -
+			  
+[24/03/24 11:59:52:577 GMT]  INFO Starting upgrade tasks. -
+			  
+[24/03/24 11:59:52:577 GMT]  INFO Database version: 4215 -
+			  
+[24/03/24 11:59:52:591 GMT] ERROR No ContentIndexationThread available -
+			  
+[24/03/24 11:59:52:593 GMT]  INFO Finishing upgrade tasks. -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name rules is described in portlet.xml but does not have a matching entry in liferay-portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name dot-browser is described in portlet.xml but does not have a matching entry in liferay-portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name content-types-angular is described in portlet.xml but does not have a matching entry in liferay-portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name EXT_2 is described in liferay-portlet.xml but does not have a matching entry in portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name EXT_EXPCONTENT_TOOL is described in liferay-portlet.xml but does not have a matching entry in portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name EXT_1 is described in liferay-portlet.xml but does not have a matching entry in portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name EXT_WEBEVENTS is described in liferay-portlet.xml but does not have a matching entry in portlet.xml -
+			  
+[24/03/24 11:59:52:677 GMT]  WARN Portlet with the name EXT_DISCOUNTCODE is described in liferay-portlet.xml but does not have a matching entry in portlet.xml -
+			  
+[24/03/24 11:59:52:723 GMT]  INFO ***	 Building Cache : companypool, size:10,Concurrency:32 -
+			  
+[24/03/24 11:59:52:753 GMT]  INFO Mapping class: com.dotcms.repackage.com.liferay.counter.ejb.CounterHBM -> Counter -
+			  
+[24/03/24 11:59:52:777 GMT]  INFO Mapping class: com.liferay.portal.ejb.AddressHBM -> Address -
+			  
+[24/03/24 11:59:52:803 GMT]  INFO Mapping class: com.liferay.portal.ejb.CompanyHBM -> Company -
+			  
+[24/03/24 11:59:52:807 GMT]  INFO Mapping class: com.liferay.portal.ejb.ImageHBM -> Image -
+			  
+[24/03/24 11:59:52:809 GMT]  INFO Mapping class: com.liferay.portal.ejb.PasswordTrackerHBM -> PasswordTracker -
+			  
+[24/03/24 11:59:52:811 GMT]  INFO Mapping class: com.liferay.portal.ejb.PortletHBM -> Portlet -
+			  
+[24/03/24 11:59:52:817 GMT]  INFO Mapping class: com.liferay.portal.ejb.PortletPreferencesHBM -> PortletPreferences -
+			  
+[24/03/24 11:59:52:824 GMT]  INFO Mapping class: com.liferay.portal.ejb.ReleaseHBM -> Release_ -
+			  
+[24/03/24 11:59:52:827 GMT]  INFO Mapping class: com.liferay.portal.ejb.UserHBM -> User_ -
+			  
+[24/03/24 11:59:52:831 GMT]  INFO Mapping class: com.liferay.portal.ejb.UserTrackerHBM -> UserTracker -
+			  
+[24/03/24 11:59:52:833 GMT]  INFO Mapping class: com.liferay.portal.ejb.UserTrackerPathHBM -> UserTrackerPath -
+			  
+[24/03/24 11:59:52:835 GMT]  INFO Mapping class: com.liferay.portlet.admin.ejb.AdminConfigHBM -> AdminConfig -
+			  
+[24/03/24 11:59:52:836 GMT]  INFO processing one-to-many association mappings -
+			  
+[24/03/24 11:59:52:836 GMT]  INFO processing one-to-one association property references -
+			  
+[24/03/24 11:59:52:836 GMT]  INFO processing foreign key constraints -
+			  
+[24/03/24 11:59:52:844 GMT]  INFO Using dialect: null -
+			  
+[24/03/24 11:59:52:851 GMT]  INFO Using dialect: com.dotcms.repackage.net.sf.hibernate.dialect.PostgreSQLDialect -
+			  
+[24/03/24 11:59:52:851 GMT]  INFO Use outer join fetching: true -
+			  
+[24/03/24 11:59:52:851 GMT]  INFO Initializing connection provider: com.liferay.util.dao.hibernate.DSConnectionProvider -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO No TransactionManagerLookup configured (in JTA environment, use of process level read-write cache is not recommended) -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO Use scrollable result sets: true -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO Use JDBC3 getGeneratedKeys(): false -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO Optimize cache for minimal puts: false -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO Query language substitutions: {} -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO cache provider: com.dotmarketing.db.NoCacheProvider -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO instantiating and configuring caches -
+			  
+[24/03/24 11:59:52:852 GMT]  INFO building session factory -
+			  
+[24/03/24 11:59:52:906 GMT]  INFO Not binding factory to JNDI, no JNDI name configured -
+			  
+[24/03/24 11:59:52:949 GMT]  INFO ***	 Building Cache : userdotcmscache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:52:949 GMT]  INFO ***	 Building Cache : useremaildotcmscache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:52:992 GMT]  INFO Initializing DotCMS services -
+			  
+[24/03/24 11:59:52:994 GMT]  INFO Initializing :com.dotcms.api.system.event.SystemEventProcessorFactoryInitializer -
+			  
+[24/03/24 11:59:53:004 GMT]  INFO Initializing Done:com.dotcms.api.system.event.SystemEventProcessorFactoryInitializer, duration:0 seconds -
+			  
+[24/03/24 11:59:53:004 GMT]  INFO Initializing :com.dotcms.api.system.event.PayloadVerifierFactoryInitializer -
+			  
+[24/03/24 11:59:53:049 GMT]  INFO Initializing Done:com.dotcms.api.system.event.PayloadVerifierFactoryInitializer, duration:0 seconds -
+			  
+[24/03/24 11:59:53:049 GMT]  INFO Initializing :com.dotcms.system.event.local.business.LocalSystemEventSubscribersInitializer -
+			  
+[24/03/24 11:59:53:116 GMT]  INFO Initializing Done:com.dotcms.system.event.local.business.LocalSystemEventSubscribersInitializer, duration:0 seconds -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO InitServlet: Setting Default Timezone: Greenwich Mean Time -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO  -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Initializing dotCMS -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Using database: PostgreSQL -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Using dialect : com.dotcms.repackage.net.sf.hibernate.dialect.PostgreSQLDialect -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Company Name  : dotcms.org -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO  -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    License       : COMMUNITY EDITION -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Licensed to   : dotCMS Community License -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Server id     : e0ff8326 -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    License id    : COMMUNITY EDITION -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO    Expires       : never -
+			  
+[24/03/24 11:59:53:155 GMT]  INFO  -
+			  
+[24/03/24 11:59:53:164 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 11:59:53:166 GMT]  INFO  -
+			  
+[24/03/24 11:59:53:166 GMT]  INFO  -
+			  
+[24/03/24 11:59:53:173 GMT]  INFO ***	 Building Cache : plugincache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:176 GMT]  INFO ***	 Building Cache : propertycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:186 GMT]  INFO ***	 Building Cache : propertycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:211 GMT]  INFO ***	 Building Cache : languagecacheimpl, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:223 GMT]  INFO ***	 Building Cache : dotcmsrolecache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:223 GMT]  INFO ***	 Building Cache : dotcmsrolekeycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:252 GMT]  INFO ***	 Building Cache : translatedquerycache, size:5000,Concurrency:32 -
+			  
+[24/03/24 11:59:53:278 GMT] ERROR Error when initializing Vanity URLs, no index found  -
+			  
+[24/03/24 11:59:53:360 GMT]  INFO Using default implementation for ThreadExecutor -
+			  
+[24/03/24 11:59:53:361 GMT]  INFO Job execution threads will use class loader of thread: localhost1-startStop-1 -
+			  
+[24/03/24 11:59:53:406 GMT]  INFO Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl -
+			  
+[24/03/24 11:59:53:408 GMT]  INFO Quartz Scheduler v.1.8.6 created. -
+			  
+[24/03/24 11:59:53:412 GMT]  INFO Using db table-based data access locking (synchronization). -
+			  
+[24/03/24 11:59:53:415 GMT]  INFO JobStoreCMT initialized. -
+			  
+[24/03/24 11:59:53:417 GMT]  INFO Scheduler meta-data: Quartz Scheduler (v1.8.6) 'DotMarketingQuartzExclusiveScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 50 threads.
+  Using job-store 'com.dotmarketing.quartz.DotJobStore' - which supports persistence. and is clustered.
+ -
+			  
+[24/03/24 11:59:53:417 GMT]  INFO Quartz scheduler 'DotMarketingQuartzExclusiveScheduler' initialized from an externally provided properties instance. -
+			  
+[24/03/24 11:59:53:417 GMT]  INFO Quartz scheduler version: 1.8.6 -
+			  
+[24/03/24 11:59:53:417 GMT]  INFO Using default implementation for ThreadExecutor -
+			  
+[24/03/24 11:59:53:417 GMT]  INFO Job execution threads will use class loader of thread: localhost1-startStop-1 -
+			  
+[24/03/24 11:59:53:430 GMT]  INFO Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl -
+			  
+[24/03/24 11:59:53:430 GMT]  INFO Quartz Scheduler v.1.8.6 created. -
+			  
+[24/03/24 11:59:53:431 GMT]  INFO Using db table-based data access locking (synchronization). -
+			  
+[24/03/24 11:59:53:431 GMT]  INFO JobStoreCMT initialized. -
+			  
+[24/03/24 11:59:53:431 GMT]  INFO Scheduler meta-data: Quartz Scheduler (v1.8.6) 'DotMarketingQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 50 threads.
+  Using job-store 'com.dotmarketing.quartz.DotJobStore' - which supports persistence. and is clustered.
+ -
+			  
+[24/03/24 11:59:53:431 GMT]  INFO Quartz scheduler 'DotMarketingQuartzScheduler' initialized from an externally provided properties instance. -
+			  
+[24/03/24 11:59:53:431 GMT]  INFO Quartz scheduler version: 1.8.6 -
+			  
+[24/03/24 11:59:53:441 GMT]  INFO Using default implementation for ThreadExecutor -
+			  
+[24/03/24 11:59:53:441 GMT]  INFO Job execution threads will use class loader of thread: localhost1-startStop-1 -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Quartz Scheduler v.1.8.6 created. -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO RAMJobStore initialized. -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Scheduler meta-data: Quartz Scheduler (v1.8.6) 'DotMarketingQuartzLocalScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 50 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+ -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Quartz scheduler 'DotMarketingQuartzLocalScheduler' initialized from an externally provided properties instance. -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Quartz scheduler version: 1.8.6 -
+			  
+[24/03/24 11:59:53:455 GMT]  INFO Content Review Cron Thread schedule disabled on this server -
+			  
+[24/03/24 11:59:53:456 GMT]  INFO Deleting ContentReviewJob Job -
+			  
+[24/03/24 11:59:53:487 GMT]  INFO Users To Delete Cron Thread schedule disabled on this server -
+			  
+[24/03/24 11:59:53:487 GMT]  INFO Deleting UsersToDeleteJob Job -
+			  
+[24/03/24 11:59:53:489 GMT]  INFO Calendar Reminder Cron Thread schedule disabled on this server -
+			  
+[24/03/24 11:59:53:489 GMT]  INFO Deleting CalendarReminderJob Job -
+			  
+[24/03/24 11:59:53:583 GMT]  INFO ReindexJournalCleanupJob Cron Job schedule disabled on this server -
+			  
+[24/03/24 11:59:53:583 GMT]  INFO Deleting ReindexJournalCleanupJob Job -
+			  
+[24/03/24 11:59:53:584 GMT]  INFO ReindexJournalCleanupJob2 Cron Job schedule disabled on this server -
+			  
+[24/03/24 11:59:53:584 GMT]  INFO Deleting ReindexJournalCleanupJob2 Job -
+			  
+[24/03/24 11:59:53:603 GMT]  INFO Content From Email Job schedule disabled on this server -
+			  
+[24/03/24 11:59:53:603 GMT]  INFO Deleting ContentFromEmailJob Job -
+			  
+[24/03/24 11:59:53:655 GMT]  INFO XMLSitemapJob Cron Job schedule disabled on this server -
+			  
+[24/03/24 11:59:53:732 GMT]  INFO ClusterManager: detected 1 failed or restarted instances. -
+			  
+[24/03/24 11:59:53:732 GMT]  INFO ClusterManager: Scanning for instance "73de342a-d6d6-48a5-a6b1-fbfd725b4dbc"'s failed in-progress jobs. -
+			  
+[24/03/24 11:59:53:738 GMT]  INFO ClusterManager: ......Freed 1 acquired trigger(s). -
+			  
+[24/03/24 11:59:53:755 GMT]  INFO Scheduler DotMarketingQuartzScheduler_$_NON_CLUSTERED started. -
+			  
+[24/03/24 11:59:53:770 GMT]  INFO ClusterManager: detected 1 failed or restarted instances. -
+			  
+[24/03/24 11:59:53:770 GMT]  INFO ClusterManager: Scanning for instance "e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4"'s failed in-progress jobs. -
+			  
+[24/03/24 11:59:53:772 GMT]  INFO Scheduler DotMarketingQuartzExclusiveScheduler_$_NON_CLUSTERED started. -
+			  
+[24/03/24 11:59:54:164 GMT]  INFO ***	 Building Cache : foldercache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:54:166 GMT]  INFO ***	 Building Cache : identifiercache, size:50000,Concurrency:32 -
+			  
+[24/03/24 11:59:54:166 GMT]  INFO ***	 Building Cache : identifier404cache, size:5000,Concurrency:32 -
+			  
+[24/03/24 11:59:54:288 GMT]  INFO ***	 Building Cache : velocitycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:54:329 GMT]  INFO ***	 Building Cache : velocitymacrocache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:54:389 GMT]  INFO Exporter "Content Image Fields Resizer" registered for path /resize-image -
+			  
+[24/03/24 11:59:54:390 GMT]  INFO Exporter "Export Field Content" registered for path /raw-data -
+			  
+[24/03/24 11:59:54:391 GMT]  INFO Exporter "Image Filter Exporter" registered for path /image -
+			  
+[24/03/24 11:59:54:391 GMT]  INFO Exporter "Image Thumbnail Field Exporter" registered for path /image-thumbnail -
+			  
+[24/03/24 11:59:54:641 GMT]  INFO Felix base dir: /apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/felix -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  felix.auto.deploy.action=install,start -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  felix.fileinstall.start.level=1 -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  felix.fileinstall.log.level=3 -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  org.osgi.framework.startlevel.beginning=2 -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  org.osgi.framework.storage.clean=onFirstInit -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Found property  felix.log.level=4 -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Building Directory:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/felix/load -
+			  
+[24/03/24 11:59:54:644 GMT]  INFO Building Directory:/apps/tomcat1/apache-tomcat-8.0.47/webapps/ROOT/WEB-INF/felix/felix-cache -
+			  
+[24/03/24 11:59:55:313 GMT]  INFO Loading Factory org.apache.felix.framework.FrameworkFactory -
+			  
+[24/03/24 11:59:56:812 GMT]  INFO osgi felix framework started -
+			  
+[24/03/24 11:59:59:797 GMT]  INFO ***	 Building Cache : hostcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:59:840 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 11:59:59:862 GMT]  INFO ***	 Building Cache : contentletcache, size:5000,Concurrency:32 -
+			  
+[24/03/24 11:59:59:951 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:59:961 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 11:59:59:957 GMT] ERROR org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:00:416 GMT]  INFO ***	 Building Cache : publishingendpointcache, size:100,Concurrency:32 -
+			  
+[24/03/24 12:00:05:501 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:532 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:591 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:601 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:614 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:616 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:618 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:619 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:05:657 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:721 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:735 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:736 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:736 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:810 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:817 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:857 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:857 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:864 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:876 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:878 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:05:878 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:253 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:268 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:302 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:547 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:550 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:570 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:648 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:652 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:658 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:661 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:663 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:667 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:06:667 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:679 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:691 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:697 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:718 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:729 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:06:883 GMT]  INFO ***	 Building Cache : keyvaluecachebylanguagecontenttype, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:07:021 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:07:023 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:07:036 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:021 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:025 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:16:031 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:268 GMT]  INFO HV000001: Hibernate Validator 4.3.2.Final -
+			  
+[24/03/24 12:00:16:730 GMT]  INFO ***	 Building Cache : userproxycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:764 GMT]  INFO ***	 Building Cache : adminconfigpool, size:100,Concurrency:32 -
+			  
+[24/03/24 12:00:16:862 GMT]  INFO ***	 Building Cache : dotcmsuserrolecache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:917 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:16:919 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:16:942 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:17:762 GMT]  WARN getName null -
+			  
+[24/03/24 12:00:17:773 GMT]  INFO ***	 Building Cache : logmappercache, size:10,Concurrency:32 -
+			  
+[24/03/24 12:00:17:790 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:18:080 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:18:083 GMT]  WARN Content Index is fouled up, need to try db: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:18:086 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:18:094 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:18:094 GMT]  INFO ***	 Building Cache : hostaliascache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:18:295 GMT]  INFO ***	 Building Cache : portletpool, size:100,Concurrency:32 -
+			  
+[24/03/24 12:00:18:354 GMT] ERROR org.elasticsearch.indices.IndexMissingException: [live_20240324115318] missing -
+			  
+[24/03/24 12:00:18:495 GMT]  INFO ***	 Building Cache : versioninfocache, size:50000,Concurrency:32 -
+			  
+[24/03/24 12:00:18:501 GMT]  INFO ***	 Building Cache : versioncache, size:50000,Concurrency:32 -
+			  
+[24/03/24 12:00:23:119 GMT]  INFO Tiles definition factory found for request processor ''. -
+			  
+[24/03/24 12:00:23:175 GMT]  INFO Using serializer class com.dotcms.repackage.com.oroad.stxx.transform.document.DefaultSAXSerializer -
+			  
+[24/03/24 12:00:23:176 GMT]  INFO Using serializer class com.dotcms.repackage.com.oroad.stxx.transform.document.DefaultSAXSerializer -
+			  
+[24/03/24 12:00:23:271 GMT]  INFO Tiles definition factory found for request processor ''. -
+			  
+[24/03/24 12:00:23:485 GMT]  INFO Trying to reindex all the content -
+			  
+[24/03/24 12:00:23:489 GMT]  INFO createIndex : Trying to create index: working_20240324120023 with shards: 0 -
+			  
+[24/03/24 12:00:24:007 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] creating index, cause [api], templates [], shards [1]/[0], mappings [] -
+			  
+[24/03/24 12:00:24:643 GMT]  INFO createIndex : Index created: working_20240324120023 with shards: 1 -
+			  
+[24/03/24 12:00:24:923 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] create_mapping [content] -
+			  
+[24/03/24 12:00:24:966 GMT]  INFO createIndex : Trying to create index: live_20240324120023 with shards: 0 -
+			  
+[24/03/24 12:00:24:988 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] creating index, cause [api], templates [], shards [1]/[0], mappings [] -
+			  
+[24/03/24 12:00:25:050 GMT]  INFO createIndex : Index created: live_20240324120023 with shards: 1 -
+			  
+[24/03/24 12:00:25:055 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] create_mapping [content] -
+			  
+[24/03/24 12:00:25:200 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:00:25:202 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [working_20240324120023] -
+			  
+[24/03/24 12:00:25:243 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [live_20240324120023] -
+			  
+[24/03/24 12:00:26:650 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:00:26:654 GMT] ERROR org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:26:655 GMT] ERROR Unable to list Hosts: org.elasticsearch.indices.IndexMissingException: [working_20240324115318] missing -
+			  
+[24/03/24 12:00:26:909 GMT]  INFO Starting: DwrWrapperServlet v3.0.0-RC2-final-312 on Apache Tomcat/8.0.47 / JDK 1.8.0_131 from Oracle Corporation at  -
+			  
+[24/03/24 12:00:35:345 GMT]  INFO ContentIndexationThread ordered to start processing -
+			  
+[24/03/24 12:00:35:358 GMT]  INFO Reindexation is in progress -
+			  
+[24/03/24 12:00:35:363 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:00:35:402 GMT]  INFO Reindex Thread start delayed for 5000 millis. -
+			  
+[24/03/24 12:00:40:402 GMT]  INFO Reindex Thread started with a sleep of 500 -
+			  
+[24/03/24 12:00:40:621 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:00:40:674 GMT]  INFO ***	 Building Cache : permissioncache, size:50000,Concurrency:32 -
+			  
+[24/03/24 12:00:40:688 GMT]  INFO ***	 Building Cache : relationshipcachebyname, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:40:705 GMT]  INFO ***	 Building Cache : relationshipcachebyinode, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:40:708 GMT]  INFO ***	 Building Cache : workflowtaskcache, size:10000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:055 GMT]  INFO ***	 Building Cache : categoryparentscache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:058 GMT]  INFO ***	 Building Cache : tagsbyinodecache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:418 GMT]  INFO ***	 Building Cache : tagcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:418 GMT]  INFO ***	 Building Cache : tagsbynamecache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:418 GMT]  INFO ***	 Building Cache : tagsbyhostcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:418 GMT]  INFO ***	 Building Cache : tagbynameandhostcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:41:485 GMT]  INFO ***	 Building Cache : categorycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:42:663 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:42:738 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:43:250 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:43:360 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:43:833 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:43:856 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:44:342 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:44:433 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:44:897 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:44:943 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:45:388 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:45:945 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:45:978 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:46:360 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:46:415 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:46:956 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:46:989 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:47:371 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:47:427 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:47:617 GMT]  INFO ***	 Building Cache : categorybykeycache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:00:47:757 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:47:783 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:48:245 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:021 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:080 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:501 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:533 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:839 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:49:877 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:50:264 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:50:361 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:50:717 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:50:746 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:52:013 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:52:064 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:52:436 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:52:508 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:56:438 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [working_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:00:56:488 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] [live_20240324120023] update_mapping [content] (dynamic) -
+			  
+[24/03/24 12:01:07:348 GMT]  INFO Running Reindex Switchover -
+			  
+[24/03/24 12:01:09:349 GMT]  INFO Executing switchover from old index [working_20240324115318,live_20240324115318] and new index [working_20240324120023,live_20240324120023] -
+			  
+[24/03/24 12:01:09:353 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:09:355 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:09:375 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [working_20240324120023] -
+			  
+[24/03/24 12:01:09:383 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [live_20240324120023] -
+			  
+[24/03/24 12:01:09:564 GMT]  INFO Optimizing [working_20240324120023, live_20240324120023] :2/2 shards optimized -
+			  
+[24/03/24 12:01:10:586 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:11:672 GMT]  INFO ***	 Building Cache : newnotificationcache, size:1000,Concurrency:32 -
+			  
+[24/03/24 12:01:16:631 GMT]  INFO Running Reindex Switchover -
+			  
+[24/03/24 12:01:18:631 GMT]  INFO Executing switchover from old index [working_20240324115318,live_20240324115318] and new index [working_20240324120023,live_20240324120023] -
+			  
+[24/03/24 12:01:18:635 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:18:636 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:18:638 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [working_20240324120023] -
+			  
+[24/03/24 12:01:18:651 GMT]  INFO [e0ff8326-fcd1-4d5e-bbb9-80fb405f4ed4] updating number_of_replicas to [0] for indices [live_20240324120023] -
+			  
+[24/03/24 12:01:18:673 GMT]  INFO Optimizing [working_20240324120023, live_20240324120023] :2/2 shards optimized -
+			  
+[24/03/24 12:01:20:676 GMT]  WARN Somewhat slow query, total time: 3079.3584ms, query preparation time: 0.013092ms, query execution time: 3079.3433ms, metadata time: 7.17E-4ms, SQL: select count(*) as count from dist_reindex_journal, parameters: [] -
+			  
+[24/03/24 12:01:20:678 GMT]  INFO ***	 Building Cache : indiciescache, size:8,Concurrency:32 -
+			  
+[24/03/24 12:01:26:181 GMT]  INFO ***	 Building Cache : taginodesbyinodecache, size:1000,Concurrency:32 -
+			  
