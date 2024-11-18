@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +26,9 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity(name = "events")
+
+@Entity
+@Table(name = "events")
 public class Event {
 	@Id
     @GeneratedValue(generator = "UUID")
