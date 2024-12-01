@@ -48,12 +48,12 @@ public class Event {
 		this.profile = profile;
 	}
     
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	//@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name="start")
 	private Timestamp start;
 	
 	@Column(name="end_date")
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	//@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp end;
 	
 	private String description;
