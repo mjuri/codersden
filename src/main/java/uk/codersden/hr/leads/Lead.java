@@ -35,6 +35,16 @@ public class Lead {
 	private String website;
 	private String location;
 	private String industry;
+	private boolean draft;
+	
+	public boolean isDraft() {
+		return draft;
+	}
+
+	public void setDraft(boolean draft) {
+		this.draft = draft;
+	}
+
 	public String getEmail() {
 		return email;
 	}
