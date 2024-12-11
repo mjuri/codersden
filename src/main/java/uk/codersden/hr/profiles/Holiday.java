@@ -75,6 +75,9 @@ public class Holiday {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date modDate;
 
+	@Column(name="total_days")
+	private double totalDays;
+	
 	private String status = HolidayStatus.REQUESTED.toString();
 
 
@@ -191,11 +194,12 @@ public class Holiday {
 	public void setDraft(boolean draft) {
 		this.draft = draft;
 	}
-	
-	public int calculateDays() {
-		int diffInDays = (int)( (this.end.getTime() - this.start.getTime()) 
-                / (1000 * 60 * 60 * 24) );
-		
-		return diffInDays;
+	public double getTotalDays() {
+		return totalDays;
 	}
+	public void setTotalDays(double totalDays) {
+		this.totalDays = totalDays;
+	}
+	
+	
 }
