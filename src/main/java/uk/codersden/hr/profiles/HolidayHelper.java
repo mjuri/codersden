@@ -22,7 +22,7 @@ public class HolidayHelper {
 		double currentHolidayDays = holiday.getTotalDays();
 
 		// Fetching the list of holidays for the profile
-		List<Holiday> holidaysForProfile = findAllHolidayByProfileIdentifier(holiday.getProfileIdentifier());
+		List<Holiday> holidaysForProfile = findAllHolidayByProfileIdentifierAndYear(holiday.getProfileIdentifier(), holiday.getStart().toLocalDateTime().getYear());
 
 		// Calculate the total number of days already taken
 		double totalTakenDays = 0;
@@ -110,4 +110,25 @@ public class HolidayHelper {
 
 		return list;
 	}
+	public List<Holiday> findAllHolidayByProfileIdentifierAndYear(String identifier, int year) throws ProfileNotFoundException {
+		Optional<Profile> optional = profileDao.findById(identifier);
+		if (optional.isEmpty()) {
+			throw new ProfileNotFoundException();
+		}
+		Profile p = optional.get();
+
+		List<Holiday> list = holidayDao.findAllByProfileIdentifierAndYear(identifier, year);
+
+		// Add Holidays of his/her team.
+		List<Profile> children = p.getChildren();
+
+		if (children.size() > 0) {
+			for (Profile child : children) {
+				list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
+			}
+
+		}
+
+		return list;
+	}	
 }

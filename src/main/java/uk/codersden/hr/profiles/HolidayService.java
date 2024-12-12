@@ -64,12 +64,15 @@ public class HolidayService {
 	
 	
 
-	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException, ProfileNotFoundException, HolidayDaysException {
-		// calculateRemainingDays(holiday);
+	public Holiday saveHoliday(Holiday holiday) 
+			throws HolidayNotFoundException, ProfileNotFoundException, HolidayDaysException {
+		
 	    Profile profile = profileDao.getById(holiday.getProfileIdentifier());
 		holiday.setTotalDays(HolidayHelper.calculateHolidaysTaken(holiday));
 	    holidayHelper.calculateRemainingDays(holiday, profile);
-		if(holiday.getDateCreated() == null) {
+		
+	    if(holiday.getDateCreated() == null) 
+		{
 			java.sql.Date d = new Date(System.currentTimeMillis());
 			holiday.setDateCreated(d);
 			
@@ -86,7 +89,6 @@ public class HolidayService {
 			h = findByHolidayIdentifier(holiday.getIdentifier());
 		}
 		
-		// Update h //TODO
 		h = holidayDao.save(holiday);
 		return h;
 	}
