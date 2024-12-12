@@ -1,5 +1,6 @@
 package uk.codersden.hr.profiles;
 
+import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,7 +19,23 @@ public class HolidayHelper {
 	private HolidayDao holidayDao;
 
 	public double calculateRemainingDays(Holiday holiday, Profile profile)
-			throws ProfileNotFoundException, HolidayDaysException {
+			throws ProfileNotFoundException, HolidayDaysException 
+	{
+	    // Check if the holiday spans across years
+	    if (holiday.getStart().toLocalDateTime().getYear() < holiday.getEnd().toLocalDateTime().getYear()) 
+	    {
+	        // Adjust the end date to the last day of the start year
+	        LocalDate endOfYear = holiday.getStart().toLocalDateTime()
+	                                      .toLocalDate()
+	                                      .withMonth(12)
+	                                      .withDayOfMonth(31);
+	        
+	        holiday.setEnd(Timestamp.valueOf(endOfYear.atStartOfDay()));
+
+	        // Recalculate total holiday days
+	        holiday.setTotalDays(HolidayHelper.calculateHolidaysTaken(holiday));
+	    }
+	    
 		double currentHolidayDays = holiday.getTotalDays();
 
 		// Fetching the list of holidays for the profile
@@ -26,6 +43,7 @@ public class HolidayHelper {
 
 		// Calculate the total number of days already taken
 		double totalTakenDays = 0;
+		
 		for (Holiday h : holidaysForProfile) {
 			totalTakenDays += h.getTotalDays();
 		}
@@ -34,7 +52,9 @@ public class HolidayHelper {
 		totalTakenDays += currentHolidayDays;
 
 		// Fetching the entitled absence days
-		int entitledDays = profile.getContract().getHolidayEntitlement();
+		int entitledDays = profile.getContract().getHolidayEntitlement() + profile.getContract().getHolidayBroughtForward();
+		
+
 
 		// Calculate the remaining days
 		double remainingDays = entitledDays - totalTakenDays;

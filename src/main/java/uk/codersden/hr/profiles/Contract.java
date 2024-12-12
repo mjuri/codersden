@@ -46,6 +46,9 @@ public class Contract {
 	@Column(name="work_pattern")
 	private String workPattern;
 	
+	@Column(name="brought_forward_scheme")
+	private Double broughtForwardScheme;
+	
 	public String getLengthOfService() {
 		return lengthOfService;
 	}
@@ -322,6 +325,14 @@ public class Contract {
 
 	public void setRightToWorkExpiry(String rightToWorkExpires) {
 		this.rightToWorkExpires = rightToWorkExpires;
+	}
+
+	public Double getBroughtForwardScheme() {
+		return broughtForwardScheme;
+	}
+
+	public void setBroughtForwardScheme(Double broughtForwardScheme) {
+		this.broughtForwardScheme = broughtForwardScheme;
 	}
 	
 	
