@@ -52,7 +52,7 @@ public class HolidayHelper {
 		totalTakenDays += currentHolidayDays;
 
 		// Fetching the entitled absence days
-		int entitledDays = profile.getContract().getHolidayEntitlement() + profile.getContract().getHolidayBroughtForward();
+		double entitledDays = profile.getContract().getHolidayEntitlement() + profile.getContract().getHolidayBroughtForward();
 		
 
 
@@ -150,5 +150,23 @@ public class HolidayHelper {
 		}
 
 		return list;
+	}
+
+
+	public Double calculateHolidaysTakenLastYear(Contract contract) {
+		String profileIdentifier =  contract.getProfile().getIdentifier();
+		
+		LocalDate currentDate = LocalDate.now();
+		int lastYear = currentDate.getYear() - 1;
+		
+		List<Holiday> holidaysLastYear = 
+				holidayDao.findAllByProfileIdentifierAndYear(profileIdentifier, lastYear);
+		
+		Double totalDaysLastYear = 0.0;
+		for (Holiday holiday : holidaysLastYear) {
+			totalDaysLastYear += holiday.getTotalDays();
+		}
+		
+		return totalDaysLastYear;
 	}	
 }

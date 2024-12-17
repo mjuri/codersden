@@ -105,19 +105,21 @@ public class Contract {
 		this.workPattern = workPattern;
 	}
 
-	public Integer getHolidayEntitlement() {
+	public Double getHolidayEntitlement() {
 		return holidayEntitlement;
 	}
 
-	public void setHolidayEntitlement(Integer holidayEntitlement) {
+	public void setHolidayEntitlement(Double holidayEntitlement) {
 		this.holidayEntitlement = holidayEntitlement;
 	}
 
-	public Integer getHolidayBroughtForward() {
+	public Double getHolidayBroughtForward() {
+
 		return holidayBroughtForward;
+	
 	}
 
-	public void setHolidayBroughtForward(Integer holidayBroughtForward) {
+	public void setHolidayBroughtForward(Double holidayBroughtForward) {
 		this.holidayBroughtForward = holidayBroughtForward;
 	}
 
@@ -126,10 +128,10 @@ public class Contract {
 	}
 
 	@Column(name="holiday_entitlement")
-	private Integer holidayEntitlement;
+	private Double holidayEntitlement;
 	
 	@Column(name="holiday_brought_forward")
-	private Integer holidayBroughtForward;
+	private Double holidayBroughtForward;
 	
 	@Column(name="start_date")
 	private String startDate;

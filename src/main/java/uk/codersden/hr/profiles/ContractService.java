@@ -15,6 +15,9 @@ public class ContractService {
 	@Autowired
 	private ProfileDao profileDao;
 	
+	@Autowired
+	private HolidayHelper holidayHelper;
+	
 	public Contract createContract(String profileIdentifier, Contract contract) throws ProfileNotFoundException {
 		Contract newContract = null;
 		Optional<Profile> op = this.profileDao.findById(profileIdentifier);
@@ -30,24 +33,28 @@ public class ContractService {
 
 
 
-	public Contract findContractByIdentifier(String contractIdentifier) throws ContractNotFoundException {
+	public Contract findContractByIdentifier(String contractIdentifier) 
+			throws ContractNotFoundException 
+	{	
 		Optional<Contract> op = this.contractDao.findById(contractIdentifier);
 		if(op.isEmpty()) {
 			throw new ContractNotFoundException();
 		}
-		return op.get();
+		Contract contract = op.get();
+		
+		Double holidayBroughtForward = contract.getHolidayEntitlement() - holidayHelper.calculateHolidaysTakenLastYear(contract);
+		holidayBroughtForward = holidayBroughtForward > contract.getBroughtForwardScheme() ? contract.getBroughtForwardScheme() : holidayBroughtForward;
+		
+		contract.setHolidayBroughtForward(holidayBroughtForward);
+		
+		return contract;
 	}
 
-	//This method has no any sense
-	public List<Contract> findAllContracts() {
-		List<Contract> contracts = new ArrayList<>();
-		contracts = this.contractDao.findAll();
-		return contracts;
-	}
 
 
-
-	public Contract updateContract(String profileIdentifier, Contract contract) throws ContractNotFoundException, ProfileNotFoundException {
+	public Contract updateContract(String profileIdentifier, Contract contract) 
+			throws ContractNotFoundException, ProfileNotFoundException 
+	{
 		Optional<Profile> opProfile = this.profileDao.findById(profileIdentifier);
 		if(opProfile.isEmpty()) {
 			throw new ProfileNotFoundException();
