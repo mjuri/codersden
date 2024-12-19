@@ -91,17 +91,31 @@ public class HolidayController {
 	}
 	@CrossOrigin
 	@GetMapping("/profile/{profileIdentifier}")
-	public ResponseEntity<?> retrieveHolidaysByProfile(@PathVariable("profileIdentifier") String profileIdentifier){
+	public ResponseEntity<?> retrieveHolidaysByProfileThisYear(@PathVariable("profileIdentifier") String profileIdentifier){
 		List<Holiday> list = new ArrayList<>();
 		try {
-			list = holidayService.findAllHolidayByProfileIdentifier(profileIdentifier);
+			list = holidayService.findHolidaysByProfileIdentifierForThisYear(profileIdentifier);
 		}catch(Exception e) {
-			ResponseEntity.internalServerError().body(e);
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(e);
 		}
 		
 		return ResponseEntity.ok(list);
 		
 	}
+	@CrossOrigin
+	@GetMapping("/profile/{profileIdentifier}/all")
+	public ResponseEntity<?> retrieveHolidaysByProfile(@PathVariable("profileIdentifier") String profileIdentifier){
+		List<Holiday> list = new ArrayList<>();
+		try {
+			list = holidayService.findHolidaysByProfileIdentifier(profileIdentifier);
+		}catch(Exception e) {
+			return ResponseEntity.internalServerError().body(e);
+		}
+		
+		return ResponseEntity.ok(list);
+		
+	}	
 	@CrossOrigin
 	@GetMapping("/{id}")
 	public ResponseEntity<?> retrieveHolidaysByIdentifier(@PathVariable("id") String identifier){

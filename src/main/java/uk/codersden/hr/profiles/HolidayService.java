@@ -103,8 +103,11 @@ public class HolidayService {
 
 	}
 
-
-	public List<Holiday> findAllHolidayByProfileIdentifier(String profileIdentifier) 
+	public List<Holiday> findHolidaysByProfileIdentifier(String profileIdentifier) 
+			throws ProfileNotFoundException {
+		return holidayHelper.findAllHolidayByProfileIdentifier(profileIdentifier);
+	}
+	public List<Holiday> findHolidaysByProfileIdentifierForThisYear(String profileIdentifier) 
 			throws ProfileNotFoundException {
 		return holidayHelper.findAllHolidayByProfileIdentifierAndYear(profileIdentifier, LocalDate.now().getYear());
 	}

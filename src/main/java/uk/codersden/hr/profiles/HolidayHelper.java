@@ -144,7 +144,7 @@ public class HolidayHelper {
 
 		if (children.size() > 0) {
 			for (Profile child : children) {
-				list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
+				list.addAll(this.findAllHolidayByProfileIdentifierAndYear(child.getIdentifier(),year));
 			}
 
 		}
