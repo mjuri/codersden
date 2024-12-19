@@ -1,6 +1,7 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,7 +104,8 @@ public class HolidayService {
 	}
 
 
-	public List<Holiday> findAllHolidayByProfileIdentifier(String profileIdentifier) throws ProfileNotFoundException {
-		return holidayHelper.findAllHolidayByProfileIdentifier(profileIdentifier);
+	public List<Holiday> findAllHolidayByProfileIdentifier(String profileIdentifier) 
+			throws ProfileNotFoundException {
+		return holidayHelper.findAllHolidayByProfileIdentifierAndYear(profileIdentifier, LocalDate.now().getYear());
 	}
 }

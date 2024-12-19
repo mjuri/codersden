@@ -46,6 +46,8 @@ public class ProfileService {
 	@Autowired
 	private HolidayDao holidayDao;
 	
+	@Autowired
+	private HolidayHelper holidayHelper;
 	
 	@Autowired
 	private LoginService loginService;
@@ -87,8 +89,16 @@ public class ProfileService {
 		if(optional.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
+		Profile p = optional.get();
+		Contract contract = p.getContract();
 		
-		return optional.get();
+		Double holidayBroughtForward = contract.getHolidayEntitlement() - holidayHelper.calculateHolidaysTakenLastYear(contract);
+		holidayBroughtForward = holidayBroughtForward > contract.getBroughtForwardScheme() ? contract.getBroughtForwardScheme() : holidayBroughtForward;
+		
+		contract.setHolidayBroughtForward(holidayBroughtForward);
+		p.setContract(contract);
+		
+		return p;
 		
 	}
 	public Role findRoleByKey(String key) throws Exception{
