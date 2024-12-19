@@ -31,23 +31,23 @@ public class Equipment {
 	
 	private String item;
 	
+	private String accountIdentifier;
+	
 	@Column(name="profile_identifier")
 	private String profileIdentifier;
 	
-    @ManyToOne
-    @JoinColumn(name="profile_identifier",  nullable=false, insertable=false, updatable=false)
-	private Profile profile;
-
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
 
 	public String getIdentifier() {
 		return identifier;
+	}
+
+	
+	public String getAccountIdentifier() {
+		return accountIdentifier;
+	}
+
+	public void setAccountIdentifier(String accountIdentifier) {
+		this.accountIdentifier = accountIdentifier;
 	}
 
 	public void setIdentifier(String identifier) {

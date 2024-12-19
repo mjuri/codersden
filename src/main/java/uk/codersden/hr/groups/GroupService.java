@@ -89,9 +89,9 @@ public class GroupService {
 					throw new ProfileNotFoundException();
 				}
 				profile = p.get();
-				if(!existingGroup.getMembers().contains(profile)) {
+				//if(!existingGroup.getMembers().contains(profile)) {
 					group.addMember(profile);
-				}	
+				//}	
 				updatedMembers.add(profile);
 				
 			} catch (ProfileNotFoundException e) {

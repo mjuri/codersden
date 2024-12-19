@@ -40,6 +40,25 @@ public class LoginController {
 		return ResponseEntity.ok(access);
 
 	}
+	@PostMapping("/azure/{userName}")
+	@CrossOrigin
+	public ResponseEntity<?> loginUser(@PathVariable("userName") String userName) {
+
+		AccountAccess access;
+		try {
+			access = loginService.loginAzureUser(userName);
+		} catch (NotFoundUserException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userName);
+
+		} catch (PasswordsDoesNotMatchException e) {
+
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.valueOf(403)).body(userName);
+		}
+		return ResponseEntity.ok(access);
+
+	}
 
 	@PostMapping("/logout")
 	@CrossOrigin

@@ -69,6 +69,25 @@ public class LoginService {
 		}
 		AccountAccess access = op.get();
 		return access;
+	}
+	public AccountAccess loginAzureUser(String userName) throws NotFoundUserException, PasswordsDoesNotMatchException {
+		Optional<User> op = this.loginDao.findById(userName);
+		if(op.isEmpty()) {
+			throw new NotFoundUserException(userName);
+		}
+
+		Optional<Profile> opProfile = this.profileDao.findByEmail(userName);
+		
+		//TODO Needs re-factoring...
+		if(opProfile.isEmpty()) {
+			throw new NotFoundUserException(userName);
+		}
+		Profile profile = opProfile.get();
+		profile.setOnline(true);
+		profileDao.save(profile);
+		AccountAccess access = accountAccessDao.save(new AccountAccess(userName));
+
+		return access;
 	}	
 
 }

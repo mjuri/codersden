@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import uk.codersden.hr.groups.Group;
+import uk.codersden.hr.profiles.equipments.Equipment;
 
 @Entity
 @Table(name = "profiles")
@@ -55,7 +57,7 @@ public class Profile {
 	private boolean deleted;
 	private String avatar;
 	private boolean online;
-	
+		
 	private String title;
 	
 	@Column(name = "known_as")
@@ -338,6 +340,9 @@ public class Profile {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
+	
+
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(identifier);
