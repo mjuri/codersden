@@ -1,10 +1,13 @@
 package uk.codersden.hr.profiles;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,5 +65,15 @@ public class PerformanceService {
 		}
 		return op.get();
 	}
+
+	public PerformanceReview updatePerformance(String performanceIdentifier, PerformanceReview performanceReview) throws NotFoundException {
+		Optional<PerformanceReview> op = performanceDao.findById(performanceIdentifier);
+		if(op.isEmpty()) {
+			throw new NotFoundException();
+		}
+		performanceReview.setIdentifier(performanceIdentifier);
+		return performanceDao.save(performanceReview);
+	}
+
 
 }
