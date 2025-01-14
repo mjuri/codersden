@@ -30,4 +30,22 @@ public class SalaryLevelService {
 		salaryLevel.setIdentifier(identifier);
 		return dao.save(salaryLevel);
 	}
+
+	public SalaryLevel retrieveSalaryLevel(String identifier) throws NotFoundException {
+		Optional<SalaryLevel> op = dao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new NotFoundException(identifier);
+		}
+		return op.get();
+	}
+
+	public SalaryLevel deleteSalaryLevel(String identifier) throws NotFoundException {
+		Optional<SalaryLevel> op = dao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new NotFoundException(identifier);
+		}
+		SalaryLevel level = op.get();
+		dao.delete(level);
+		return level;
+	}
 }
