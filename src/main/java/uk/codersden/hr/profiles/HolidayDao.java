@@ -13,4 +13,7 @@ public interface HolidayDao extends JpaRepository<Holiday, String>{
 
 	@Query("SELECT h.profile FROM Holiday h WHERE CURRENT_TIMESTAMP BETWEEN h.start AND h.end AND h.status = 'APPROVED' AND h.profile.accountIdentifier = :accountIdentifier")
 	List<Profile> findAllProfilesOutOfOffice(@Param("accountIdentifier")  String accountIdentifier);
+	
+	@Query("SELECT h FROM Holiday h WHERE EXTRACT(YEAR FROM h.start) = :year AND h.status = 'APPROVED' AND h.profile.identifier = :identifier")
+	List<Holiday> findAllByProfileIdentifierAndYear(@Param("identifier") String identifier, @Param("year") int year);
 }

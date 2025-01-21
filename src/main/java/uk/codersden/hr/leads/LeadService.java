@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uk.codersden.hr.NotFoundException;
+import uk.codersden.hr.groups.Group;
 import uk.codersden.hr.profiles.Account;
 import uk.codersden.hr.profiles.AccountDao;
 import uk.codersden.hr.profiles.AccountNotFoundException;
@@ -65,6 +67,20 @@ public class LeadService {
 			throw new LeadNotFoundException(leadIdentifier + " not found");
 		}
 		return op.get();
+	}
+
+	public Lead deleteLead(String identifier) throws NotFoundException {
+		Optional<Lead> op = dao.findById(identifier);
+
+		if(op.isEmpty()) {
+			throw new NotFoundException(identifier);
+		}
+		Lead group = op.get();
+		
+		dao.delete(group);
+		
+		
+		return group;
 	}
 
 }

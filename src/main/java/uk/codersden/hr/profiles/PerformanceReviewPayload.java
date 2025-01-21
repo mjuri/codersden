@@ -14,9 +14,10 @@ public class PerformanceReviewPayload {
 	private String comments;
 	private Map<String,String> employee;
 	private Map<String,String> reviewer;
+	private String reviewerIdentifier;
+	private String employeeIdentifier;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date reviewDate;
+	private String reviewDate;
 	
 	private List<Map<String,String>> goals;
 	
@@ -33,10 +34,10 @@ public class PerformanceReviewPayload {
 		this.employee = employee;
 	}
 
-	public Date getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Date reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	public List<Map<String, String>> getGoals() {
@@ -56,6 +57,18 @@ public class PerformanceReviewPayload {
 	}
 	public void setReviewer(Map<String, String> reviewer) {
 		this.reviewer = reviewer;
+	}
+	public String getReviewerIdentifier() {
+		return reviewerIdentifier;
+	}
+	public void setReviewerIdentifier(String reviewerIdentifier) {
+		this.reviewerIdentifier = reviewerIdentifier;
+	}
+	public String getEmployeeIdentifier() {
+		return employeeIdentifier;
+	}
+	public void setEmployeeIdentifier(String employeeIdentifier) {
+		this.employeeIdentifier = employeeIdentifier;
 	}
 	
 	

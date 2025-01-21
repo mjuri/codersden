@@ -31,8 +31,7 @@ public class Goal {
 	@Column(name="profile_identifier")
 	private String profileIdentifier;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date deadline;
+	private String deadline;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "goals")
@@ -85,11 +84,11 @@ public class Goal {
 		this.targetValue = targetValue;
 	}
 
-	public Date getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 

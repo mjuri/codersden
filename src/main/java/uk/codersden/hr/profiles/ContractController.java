@@ -49,23 +49,7 @@ public class ContractController {
 		}
 		return ResponseEntity.ok(updatedContract);
 	}
-	
-	@GetMapping
-	@CrossOrigin
-	public ResponseEntity<?> retrieveAllContracts(){
-		List<Contract> contracts = null;
-		
-		try {
-			contracts = this.contractService.findAllContracts();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().body(e);
-			
-		}
-		
-		return ResponseEntity.ok(contracts);
-		
-	}
+
 	
 	@GetMapping("/{contractIdentifier}")
 	@CrossOrigin

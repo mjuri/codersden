@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.codersden.hr.NotFoundException;
+import uk.codersden.hr.groups.Group;
 import uk.codersden.hr.profiles.ProfileNotFoundException;
 
 @RestController
@@ -66,5 +69,17 @@ public class LeadController {
 		}
 		
 		return ResponseEntity.ok(e);
+	}
+	@CrossOrigin
+	@DeleteMapping("/{identifier}")
+	public ResponseEntity<?> deleteGroup(@PathVariable("identifier") String identifier){
+		Lead lead = null;
+		try {
+			lead = leadService.deleteLead(identifier);
+			
+		}catch(NotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(lead);
 	}
 }

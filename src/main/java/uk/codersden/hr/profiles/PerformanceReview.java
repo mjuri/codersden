@@ -27,9 +27,8 @@ public class PerformanceReview {
         strategy = "org.hibernate.id.UUIDGenerator")
 	private String identifier;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="reviewdate")
-	private Date reviewDate;
+	private String reviewDate;
 	
 	@Column(name="employee_identifier")
 	private String employeeIdentifier;
@@ -78,10 +77,10 @@ public class PerformanceReview {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public Date getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(Date reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	public Profile getEmployee() {

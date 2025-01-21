@@ -1,6 +1,7 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,9 @@ public class HolidayService {
 	@Autowired
 	private ProfileDao profileDao;
 	
+	@Autowired
+	private HolidayHelper holidayHelper;
+	
 	public Holiday requestHoliday(Holiday holiday) {
 		// Save holiday on the DB
 		// Send email
@@ -25,30 +29,9 @@ public class HolidayService {
 		if(holiday.getProfileIdentifier().equals(holiday.getAuthorizedBy())) {
 			holiday.setStatus(HolidayStatus.APPROVED.toString());
 		}
+		
 		Holiday h = this.holidayDao.save(holiday);
 		return h;
-	}
-
-	public List<Holiday> findAllHolidayByProfileIdentifier(String id) throws ProfileNotFoundException {
-		Optional<Profile> optional = profileDao.findById(id);
-		if(optional.isEmpty()) {
-			throw new ProfileNotFoundException();
-		}
-		Profile p = optional.get();
-		
-		List<Holiday> list = this.holidayDao.findAllByProfileIdentifier(id);
-		
-		// Add Holidays of his/her team.
-		List<Profile> children = p.getChildren();
-		
-		if(children.size() > 0) {
-			for (Profile child : children) {
-				list.addAll(this.findAllHolidayByProfileIdentifier(child.getIdentifier()));
-			}
-
-		}
-		
-		return list;
 	}
 
 
@@ -80,39 +63,17 @@ public class HolidayService {
 		return this.holidayDao.save(h);
 	}
 	
-	private long calculateRemainingDays(Holiday holiday) throws ProfileNotFoundException, HolidayDaysException {
-	    int currentHolidayDays = holiday.calculateDays();
+	
+
+	public Holiday saveHoliday(Holiday holiday) 
+			throws HolidayNotFoundException, ProfileNotFoundException, HolidayDaysException {
+		
 	    Profile profile = profileDao.getById(holiday.getProfileIdentifier());
-	    // Fetching the list of holidays for the profile
-	    List<Holiday> holidaysForProfile = this.findAllHolidayByProfileIdentifier(holiday.getProfileIdentifier());
-
-	    // Calculate the total number of days already taken
-	    int totalTakenDays = 0;
-	    for (Holiday h : holidaysForProfile) {
-	        totalTakenDays += h.calculateDays();
-	    }
-
-	    // Adding the current holiday days to the total taken days
-	    totalTakenDays += currentHolidayDays;
-
-	    // Fetching the entitled absence days
-	    int entitledDays = profile.getContract().getHolidayEntitlement();
-
-	    // Calculate the remaining days
-	    int remainingDays = entitledDays - totalTakenDays;
-
-	    // If remaining days are negative, throw an exception
-	    if (remainingDays < 0) {
-	        throw new HolidayDaysException("Remaining days cannot be negative.");
-	    }
-
-	    return remainingDays;
-	}
-
-
-	public Holiday saveHoliday(Holiday holiday) throws HolidayNotFoundException, ProfileNotFoundException, HolidayDaysException {
-		calculateRemainingDays(holiday);
-		if(holiday.getDateCreated() == null) {
+		holiday.setTotalDays(HolidayHelper.calculateHolidaysTaken(holiday));
+	    holidayHelper.calculateRemainingDays(holiday, profile);
+		
+	    if(holiday.getDateCreated() == null) 
+		{
 			java.sql.Date d = new Date(System.currentTimeMillis());
 			holiday.setDateCreated(d);
 			
@@ -123,11 +84,12 @@ public class HolidayService {
 				holiday.setStatus(HolidayStatus.APPROVED.toString());
 			}
 		}
+
 		Holiday h = null;
 		if(holiday.getIdentifier() != null) {
 			h = findByHolidayIdentifier(holiday.getIdentifier());
 		}
-		// Update h //TODO
+		
 		h = holidayDao.save(holiday);
 		return h;
 	}
@@ -139,5 +101,14 @@ public class HolidayService {
 		holiday.setStatus("ARCHIVED");
 		return holidayDao.save(holiday);
 
+	}
+
+	public List<Holiday> findHolidaysByProfileIdentifier(String profileIdentifier) 
+			throws ProfileNotFoundException {
+		return holidayHelper.findAllHolidayByProfileIdentifier(profileIdentifier);
+	}
+	public List<Holiday> findHolidaysByProfileIdentifierForThisYear(String profileIdentifier) 
+			throws ProfileNotFoundException {
+		return holidayHelper.findAllHolidayByProfileIdentifierAndYear(profileIdentifier, LocalDate.now().getYear());
 	}
 }
