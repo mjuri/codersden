@@ -135,8 +135,8 @@ public class PerformanceController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found");
 	    } catch (Exception e) {
 	        // Log and handle other exceptions
-	        //logger.error("Error creating performance review", e);
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating performance review");
+	    	System.out.println(e);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating performance review" + e.getMessage());
 	    }
 	}
 	@PutMapping("/goal/{goalIdentifier}")
