@@ -136,7 +136,7 @@ public class PerformanceController {
 	    } catch (Exception e) {
 	        // Log and handle other exceptions
 	    	System.out.println(e);
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating performance review" + e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating performance review " + e.getStackTrace());
 	    }
 	}
 	@PutMapping("/goal/{goalIdentifier}")
