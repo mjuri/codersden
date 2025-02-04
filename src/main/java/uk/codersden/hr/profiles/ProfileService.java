@@ -91,13 +91,14 @@ public class ProfileService {
 		}
 		Profile p = optional.get();
 		Contract contract = p.getContract();
+		if(null != contract) {
+			Double holidayBroughtForward = contract.getHolidayEntitlement() - holidayHelper.calculateHolidaysTakenLastYear(contract);
+			holidayBroughtForward = holidayBroughtForward > contract.getBroughtForwardScheme() ? contract.getBroughtForwardScheme() : holidayBroughtForward;
 		
-		Double holidayBroughtForward = contract.getHolidayEntitlement() - holidayHelper.calculateHolidaysTakenLastYear(contract);
-		holidayBroughtForward = holidayBroughtForward > contract.getBroughtForwardScheme() ? contract.getBroughtForwardScheme() : holidayBroughtForward;
+			contract.setHolidayBroughtForward(holidayBroughtForward);
 		
-		contract.setHolidayBroughtForward(holidayBroughtForward);
-		p.setContract(contract);
-		
+			p.setContract(contract);
+		}
 		return p;
 		
 	}
