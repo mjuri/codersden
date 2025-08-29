@@ -19,16 +19,17 @@ public class ContractService {
 	private HolidayHelper holidayHelper;
 	
 	public Contract createContract(String profileIdentifier, Contract contract) throws ProfileNotFoundException {
-		Contract newContract = null;
 		Optional<Profile> op = this.profileDao.findById(profileIdentifier);
 		if(op.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
 		Profile profiile = op.get();
 		contract.setProfile(profiile);
-		newContract = this.contractDao.save(contract);
+		contract.setHolidayTotalThisYear(contract.getHolidayBroughtForward() + contract.getHolidayEntitlement());
+		contract.setNetPay(contract.getGrossSalary() - contract.getPayeDeduction());
+		Contract newContract = this.contractDao.save(contract);
 		
-		return contract;
+		return newContract;
 	}
 
 
@@ -65,6 +66,10 @@ public class ContractService {
 		}
 		Profile profile = opProfile.get();
 		contract.setProfile(profile);
+		if(null == contract.getHoursPerWeek()) {
+			contract.setHolidayTotalThisYear(contract.getHolidayBroughtForward() + contract.getHolidayEntitlement());
+		}
+
 		Contract updatedContract = this.contractDao.save(contract);
 		return updatedContract;
 	}

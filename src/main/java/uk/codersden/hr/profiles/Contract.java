@@ -2,19 +2,25 @@ package uk.codersden.hr.profiles;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import uk.codersden.hr.payroll.EmployeePayment;
 
 @Entity(name = "contracts")
 public class Contract {
@@ -35,6 +41,9 @@ public class Contract {
 	@Column(name="hours_per_week")
 	private Integer hoursPerWeek;
 	
+	@Column(name="holiday_total_this_year")
+	private Double holidayTotalThisYear;
+	
 	@Column(name="days_per_week")
 	private Integer daysPerWeek;
 	
@@ -49,6 +58,106 @@ public class Contract {
 	@Column(name="brought_forward_scheme")
 	private Double broughtForwardScheme;
 	
+	@Column(name="national_insurance_no")
+	private String nationalInsuranceNo;
+	
+	@Column(name="salary_type")
+	private String salaryType;
+	
+	@Column(name="gross_salary")
+	private Double grossSalary;
+	
+	@Column(name="tax_code")
+	private String taxCode;
+	
+	@Column(name="paye_deduction")
+	private Double payeDeduction;
+	
+	@Column(name="national_insurance")
+	private Double nationalInsurance;
+	
+	@Column(name="pension_contribution")
+	private Double pensionContribution;
+	
+	@Column(name="other_deductions")
+	private Double otherDeductions;
+	
+	@Column(name="net_pay")
+	private Double netPay;
+	
+	
+	public String getNationalInsuranceNo() {
+		return nationalInsuranceNo;
+	}
+
+	public void setNationalInsuranceNo(String nationalInsuranceNo) {
+		this.nationalInsuranceNo = nationalInsuranceNo;
+	}
+
+	public String getSalaryType() {
+		return salaryType;
+	}
+
+	public void setSalaryType(String salaryType) {
+		this.salaryType = salaryType;
+	}
+
+	public Double getGrossSalary() {
+		return grossSalary;
+	}
+
+	public void setGrossSalary(Double grossSalary) {
+		this.grossSalary = grossSalary;
+	}
+
+	public String getTaxCode() {
+		return taxCode;
+	}
+
+	public void setTaxCode(String taxCode) {
+		this.taxCode = taxCode;
+	}
+
+	public Double getPayeDeduction() {
+		return payeDeduction;
+	}
+
+	public void setPayeDeduction(Double payeDeduction) {
+		this.payeDeduction = payeDeduction;
+	}
+
+	public Double getNationalInsurance() {
+		return nationalInsurance;
+	}
+
+	public void setNationalInsurance(Double nationalInsurance) {
+		this.nationalInsurance = nationalInsurance;
+	}
+
+	public Double getPensionContribution() {
+		return pensionContribution;
+	}
+
+	public void setPensionContribution(Double pensionContribution) {
+		this.pensionContribution = pensionContribution;
+	}
+
+	public Double getOtherDeductions() {
+		return otherDeductions;
+	}
+
+	public void setOtherDeductions(Double otherDeductions) {
+		this.otherDeductions = otherDeductions;
+	}
+
+	public Double getNetPay() {
+		return netPay;
+	}
+
+	public void setNetPay(Double netPay) {
+		this.netPay = netPay;
+	}
+
 	public String getLengthOfService() {
 		return lengthOfService;
 	}
@@ -180,6 +289,17 @@ public class Contract {
 	private String rightToWorkExpires;
 
 	
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contract")
+    private Set<EmployeePayment> payments = new HashSet<>();
+	
+	public Set<EmployeePayment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<EmployeePayment> payments) {
+		this.payments = payments;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	@JoinColumn(name = "profile_identifier", referencedColumnName = "identifier")
@@ -335,6 +455,14 @@ public class Contract {
 
 	public void setBroughtForwardScheme(Double broughtForwardScheme) {
 		this.broughtForwardScheme = broughtForwardScheme;
+	}
+
+	public Double getHolidayTotalThisYear() {
+		return holidayTotalThisYear;
+	}
+
+	public void setHolidayTotalThisYear(Double holidayTotalThisYear) {
+		this.holidayTotalThisYear = holidayTotalThisYear;
 	}
 	
 	
