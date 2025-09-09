@@ -169,4 +169,30 @@ public class EventService {
 		return this.updateEvent(identifier, event);
 	}
 
+	public Double calculateCost(String identifier) throws EventNotFoundException {
+		Optional<Event> op = eventDao.findById(identifier);
+		if (op.isEmpty()) {
+			throw new EventNotFoundException();
+		}
+		Event event = op.get();
+
+		Double cost = 0.0;
+		for(Profile employee : event.getAttendees()) {
+			if(null != employee.getContract()) {
+				if(null != employee.getContract().getGrossSalary()) {
+					if("weekly".equals(employee.getContract().getSalaryType()) ){
+						cost += employee.getContract().getGrossSalary() / 40;
+					}
+					if("monthly".equals(employee.getContract().getSalaryType()) ) {
+						cost += employee.getContract().getGrossSalary() / 172;
+					}
+					if("annual".equals(employee.getContract().getSalaryType())) {
+						cost += employee.getContract().getGrossSalary() / 2080;
+					}
+				}
+			}
+		}
+;		return cost;
+	}
+
 }

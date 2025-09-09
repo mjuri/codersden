@@ -2,6 +2,8 @@ package uk.codersden.hr.profiles;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -48,13 +50,13 @@ public class Event {
 		this.profile = profile;
 	}
     
-	//@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	@Column(name="start")
-	private Timestamp start;
+	@Column(name = "start", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSX")
+	private OffsetDateTime start;
 	
-	@Column(name="end_date")
-	//@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp end;
+	@Column(name="end_date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSX")
+	private OffsetDateTime end;
 	
 	private String description;
 	private String label;
@@ -92,6 +94,9 @@ public class Event {
 	private String title;
 	private String location;
     private String url;
+    
+    @Column(name="estimated_cost")
+    private Double estimatedCost;
     
     @ManyToMany(mappedBy = "events")
     private Set<Profile> attendees = new HashSet<>();
@@ -141,19 +146,6 @@ public class Event {
     }
     
 
-        
-    public Timestamp getStart() {
-		return start;
-	}
-	public void setStart(Timestamp start) {
-		this.start = start;
-	}
-	public Timestamp getEnd() {
-		return end;
-	}
-	public void setEnd(Timestamp end) {
-		this.end = end;
-	}
 	public String getDescription() {
 		return description;
 	}
@@ -230,10 +222,32 @@ public class Event {
 		attendees.remove(profile);
 		profile.getEvents().remove(this);
 	}
+		
+	
+	public Double getEstimatedCost() {
+		return estimatedCost;
+	}
+	public void setEstimatedCost(Double estimatedCost) {
+		this.estimatedCost = estimatedCost;
+	}
+	
+	public OffsetDateTime getStart() {
+		return start;
+	}
+	public void setStart(OffsetDateTime start) {
+		this.start = start;
+	}
+	public OffsetDateTime getEnd() {
+		return end;
+	}
+	public void setEnd(OffsetDateTime end) {
+		this.end = end;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identifier);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

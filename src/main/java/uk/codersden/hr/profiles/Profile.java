@@ -21,6 +21,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.TransactionScoped;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -59,7 +61,7 @@ public class Profile {
 	private boolean online;
 		
 	private String title;
-	
+		
 	@Column(name = "known_as")
 	private String knownAs;
 	
@@ -309,6 +311,7 @@ public class Profile {
 	}
 	
     @ManyToMany(mappedBy = "members")
+    
     private Set<Group> groups = new HashSet<>();
 	
 	public Set<Group> getGroups() {

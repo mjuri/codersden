@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -46,6 +47,9 @@ public class Contract {
 	
 	@Column(name="days_per_week")
 	private Integer daysPerWeek;
+	
+	@Transient
+	private Double salaryPerHour; 
 	
 	private Integer fte;
 	
@@ -464,7 +468,14 @@ public class Contract {
 	public void setHolidayTotalThisYear(Double holidayTotalThisYear) {
 		this.holidayTotalThisYear = holidayTotalThisYear;
 	}
-	
+
+	public Double getSalaryPerHour() {
+		return salaryPerHour;
+	}
+
+	public void setSalaryPerHour(Double salaryPerHour) {
+		this.salaryPerHour = salaryPerHour;
+	}
 	
 	
 }

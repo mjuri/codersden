@@ -177,9 +177,37 @@ public class ProfileService {
 	}
 
 	public List<Profile> findProfilesByAccount(String accountIdentifier) {
-		return this.profileDao.findAllByAccountIdentifier(accountIdentifier);
+		
+		List<Profile> profiles = this.profileDao.findAllByAccountIdentifier(accountIdentifier);
+		
+		for(Profile p : profiles) {
+			if(null != p.getContract()) {
+				p.getContract().setSalaryPerHour(this.calculateSalaryPerHour(p));
+			}	
+		}
+		
+		return profiles;
 	}
 
+	private Double calculateSalaryPerHour(Profile employee) {
+		Double cost = 0.0;
+		if(null != employee.getContract()) {
+			if(null != employee.getContract().getGrossSalary()) {
+				if("weekly".equals(employee.getContract().getSalaryType()) ){
+					cost += employee.getContract().getGrossSalary() / 40;
+				}
+				if("monthly".equals(employee.getContract().getSalaryType()) ) {
+					cost += employee.getContract().getGrossSalary() / 172;
+				}
+				if("annual".equals(employee.getContract().getSalaryType())) {
+					cost += employee.getContract().getGrossSalary() / 2080;
+				}
+			}
+		}
+		
+		return cost;
+	}
+	
 	public List<Profile> findProfilesOutOfOffice(String accountIdentifier) {
 		return holidayDao.findAllProfilesOutOfOffice(accountIdentifier);
 	}

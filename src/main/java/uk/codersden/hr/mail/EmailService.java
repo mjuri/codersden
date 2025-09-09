@@ -34,7 +34,13 @@ public class EmailService {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-		
+        
+        props.put("mail.smtp.starttls.required", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.connectiontimeout", "10000");
+        props.put("mail.smtp.timeout", "10000");
+        props.put("mail.smtp.writetimeout", "10000");
+        
         Optional<Settings> op = settingsDao.findById(accountIdentifier);
 		Settings settings;
 		if(!op.isEmpty()) {
@@ -43,9 +49,16 @@ public class EmailService {
 	        props.put("mail.smtp.starttls.enable", settings.isMailSmtpStarttlsEnable());
 	        props.put("mail.smtp.host", settings.getMailSmtpHost());
 	        props.put("mail.smtp.port", settings.getMailSmtpPort());
+	        props.put("mail.smtp.starttls.required", "true");
+	        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+	        props.put("mail.smtp.connectiontimeout", "10000");
+	        props.put("mail.smtp.timeout", "10000");
+	        props.put("mail.smtp.writetimeout", "10000");
 	        
-	        username = settings.getMailUsername();
-	        password = settings.getMailPassword();
+	        // username = settings.getMailUsername();
+	        username = "info@codersden.uk";
+	        password = "jack2012";
+	        // password = settings.getMailPassword();
 		}
 		
 		final String mailUsername = username;

@@ -34,6 +34,19 @@ public class EventController {
 		return ResponseEntity.ok(list);
 		
 	}
+	/*@CrossOrigin
+	@GetMapping("/{identifier}/calculate-cost")
+	public ResponseEntity<?> calculateCost(@PathVariable("identifier") String identifier) {
+		Double cost = null;
+		try {
+			cost = eventService.calculateCost(identifier);
+		} catch ( EventNotFoundException e1) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(cost);
+	}*/
+	
 	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<?> createEvent(@RequestBody Event event) {
