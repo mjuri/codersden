@@ -26,8 +26,9 @@ public class ContractService {
 		Profile profiile = op.get();
 		contract.setProfile(profiile);
 		contract.setHolidayTotalThisYear(contract.getHolidayBroughtForward() + contract.getHolidayEntitlement());
-		//contract.setNetPay(contract.getGrossSalary() - contract.getPayeDeduction());
-		contract.setNetPay(contract.getGrossSalary());
+		Double payeDeduction = contract.getPayeDeduction() != null ? contract.getPayeDeduction() : 0.0;
+		contract.setNetPay(contract.getGrossSalary() - payeDeduction);
+
 		Contract newContract = this.contractDao.save(contract);
 		
 		return newContract;
