@@ -143,10 +143,11 @@ public class ProfileService {
 		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("avatars") + "/" + profileIdentifier.toString());
 		File file = null;
 		String fileName = "";
+
 		try {
 			Files.createDirectories(pathFolder);
 			byte[] imageByte= fileBase64.getBytes();
-			fileName = pathFolder.toString() + "/" + profileIdentifier + ".jpg";
+			fileName = pathFolder.toString() + "/" + UUID.randomUUID() + ".jpg";
 			file = new File(fileName);
 			if(file.exists()) {
 				file.delete();
