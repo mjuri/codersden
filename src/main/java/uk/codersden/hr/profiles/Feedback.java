@@ -67,6 +67,9 @@ public class Feedback {
 	
 	private String comments;
 	
+	@Column(name="sentiment_score")
+	private Integer sentimentScore;
+	
 	private String status;
 
 	public String getIdentifier() {
@@ -203,6 +206,14 @@ public class Feedback {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getSentimentScore() {
+		return sentimentScore;
+	}
+
+	public void setSentimentScore(Integer sentimentScore) {
+		this.sentimentScore = sentimentScore;
 	}
 
 	@Override
