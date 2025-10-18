@@ -37,6 +37,16 @@ public class Lead {
 	private String industry;
 	private boolean draft;
 	
+	private String position;
+	private String department;
+	
+	@Column(name="social_media")
+	private String socialMedia;
+	
+	@Column(name="linkedin_profile")
+	private String linkedlnProfile;
+	
+	
 	public boolean isDraft() {
 		return draft;
 	}
@@ -184,6 +194,38 @@ public class Lead {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getSocialMedia() {
+		return socialMedia;
+	}
+
+	public void setSocialMedia(String socialMedia) {
+		this.socialMedia = socialMedia;
+	}
+
+	public String getLinkedlnProfile() {
+		return linkedlnProfile;
+	}
+
+	public void setLinkedlnProfile(String linkedlnProfile) {
+		this.linkedlnProfile = linkedlnProfile;
 	}
 	
 	
