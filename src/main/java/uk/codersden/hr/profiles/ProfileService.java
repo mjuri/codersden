@@ -25,12 +25,13 @@ import uk.codersden.hr.settings.SettingsDao;
 
 @Service
 public class ProfileService {
-    @Autowired
-    private StaticResourceService resourceService;
     
 	@Autowired
 	private ProfileDao profileDao;
 
+	@Autowired
+	private StorageService storageService;
+	
 	@Autowired
 	private ContractDao contractDao;
 	
@@ -140,7 +141,15 @@ public class ProfileService {
 	}
 	
 	public String saveAvatar(String profileIdentifier, MultipartFile fileBase64) {
-		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("avatars") + "/" + profileIdentifier.toString());
+		String returnURL;
+		try {
+			returnURL = storageService.save("avatars", profileIdentifier, fileBase64);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+		}
+
+		/*Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("avatars") + "/" + profileIdentifier.toString());
 		File file = null;
 		String fileName = "";
 
@@ -162,10 +171,11 @@ public class ProfileService {
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}		
 		String returnURL = fileName.replaceAll("static", "");
+		return returnURL;*/
 		return returnURL;
 		
 	}
-
+	
 	public User createUser(User user) {
 		User u = this.userDao.save(user);
 		return u;
