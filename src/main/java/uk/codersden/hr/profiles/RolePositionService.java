@@ -30,6 +30,9 @@ public class RolePositionService {
 	
     @Autowired
     private StaticResourceService resourceService;
+    
+    @Autowired
+    private StorageService storageService;
 	
 	public Optional<RolePosition> findRolePositionByIdentifier(String identifier) {
 		return this.rolePositionDao.findById(identifier);
@@ -52,8 +55,9 @@ public class RolePositionService {
     		UUID uuid = UUID.randomUUID();
     		rolePosition.setIdentifier(uuid.toString());
     	}	
+		String fileName = this.storageService.save("files", rolePosition.getIdentifier(), file);
 
-		
+		/*
 		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("files") + '/' + rolePosition.getIdentifier());
 		
 
@@ -65,7 +69,7 @@ public class RolePositionService {
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}
 
-		String fileName = pathFolder.resolve(file.getOriginalFilename()).toString();
+		String fileName = pathFolder.resolve(file.getOriginalFilename()).toString();*/
 		fileName = fileName.replaceAll("static", "");
 		rolePosition.setFile(fileName);
     	
