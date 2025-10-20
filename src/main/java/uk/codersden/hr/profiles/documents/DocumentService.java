@@ -25,6 +25,7 @@ import uk.codersden.hr.profiles.Profile;
 import uk.codersden.hr.profiles.ProfileDao;
 import uk.codersden.hr.profiles.ProfileNotFoundException;
 import uk.codersden.hr.profiles.StaticResourceService;
+import uk.codersden.hr.profiles.StorageService;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -45,6 +46,10 @@ public class DocumentService {
     @Autowired
     private StaticResourceService resourceService;
 	
+    @Autowired
+    private StorageService storageService;
+    
+    
 	public List<Document> findAllDocumentsByProfile(String profileId) {
 		Optional<Profile> op = profileDao.findById(profileId);
 		List<Document> list = dao.findAllByProfile(op.get());
@@ -76,16 +81,16 @@ public class DocumentService {
 		doc.setStatus(DocumentStatus.ACTIVE.toString());
 		
 		doc.setIdentifier(identifier.toString());
-		Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("files") + '/' + identifier.toString());
+		// Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("files") + '/' + identifier.toString());
 		
-
-		try {
+		String fileName = this.storageService.save("files", profileIdentifier, file);
+		/*try {
 			Files.createDirectories(pathFolder);
 			Files.copy(file.getInputStream(), pathFolder.resolve(file.getOriginalFilename()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
-		}
+		}*/
 		if(documentPayload.getSharedWith() != null && documentPayload.getSharedWith().size() > 0) {
 			documentPayload.getSharedWith().forEach((shared_profile)->{
 				Optional<Profile> opSharedProfile = profileDao.findById(shared_profile.get("value"));
@@ -94,8 +99,8 @@ public class DocumentService {
 				}	
 			});
 		}
-		String fileName = pathFolder.resolve(file.getOriginalFilename()).toString();
-		fileName = fileName.replaceAll("static", "");
+		//String fileName = pathFolder.resolve(file.getOriginalFilename()).toString();
+		//fileName = fileName.replaceAll("static", "");
 		doc.setImg(fileName);
 		doc.setName(file.getOriginalFilename());
 		doc.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
