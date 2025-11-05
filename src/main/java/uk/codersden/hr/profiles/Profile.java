@@ -67,6 +67,7 @@ public class Profile {
 	
 	private String address;
 	private String gender;
+	private String type;
 	
 	@Column(name = "gender_identity")
 	private String genderIdentity;
@@ -346,6 +347,12 @@ public class Profile {
 	
 
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identifier);

@@ -1,19 +1,26 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * It's nice to have the different states of the roles, but this could be developed in the future
  * @author mvelasco
@@ -93,7 +100,7 @@ public class RolePosition {
 	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="start_date")
 	private Date startDate;
-	
+		
 	
 	public String getHeader() {
 		return header;
@@ -161,7 +168,6 @@ public class RolePosition {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	
 	
 	
 }

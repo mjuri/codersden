@@ -13,6 +13,6 @@ public interface ProfileDao extends JpaRepository<Profile, String>{
 	public List<Profile> findAllByDeleted(boolean deleted);
 	public Optional<Profile> findByEmail(String email);
 	
-    @Query("SELECT p FROM Profile p WHERE p.accountIdentifier = :accountIdentifier AND deleted = false")
+    @Query("SELECT p FROM Profile p WHERE p.accountIdentifier = :accountIdentifier AND deleted = false AND type='employee'")
 	public List<Profile> findAllByAccountIdentifier(@Param("accountIdentifier") String accountIdentifier);
 }
