@@ -29,8 +29,6 @@ public class JobApplication {
 	public void setId(JobVaccancyCandidate id) {
 		this.id = id;
 	}
-
-	public Integer order;
 	
 	public String getStatus() {
 		return status;
@@ -39,16 +37,6 @@ public class JobApplication {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-
-	public Integer getOrder() {
-		return order;
-	}
-
-
-	public void setOrder(Integer order) {
-		this.order = order;
 	}
 	
 	

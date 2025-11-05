@@ -31,6 +31,11 @@ public class RolePositionController {
 	@Autowired
 	private RolePositionService rolePositionService;
 	
+	@Autowired
+	private ProfileService profileService;
+	
+	@Autowired
+	private CandidateService candidateService;
 	
 	@CrossOrigin
 	@GetMapping("/{identifier}")
@@ -56,6 +61,52 @@ public class RolePositionController {
     	RolePosition savedRolePosition = rolePositionService.saveRolePosition(rolePosition, file);
     	
         return ResponseEntity.ok(savedRolePosition);
+    }
+    
+    @CrossOrigin
+    @PostMapping("/job-application/role/{roleIdentifier}/candidate/{candidateIdentifier}")
+	public ResponseEntity<JobApplication> addCandidateToRole(@PathVariable("roleIdentifier") String roleIdentifier,
+			@PathVariable("candidateIdentifier") String candidateIdentifier) throws ProfileNotFoundException {
+        Optional<RolePosition> op = rolePositionService.findRolePositionByIdentifier(roleIdentifier);
+        
+        JobApplication jobApplication;
+		Profile candidate = profileService.findProfileByIdentifier(candidateIdentifier);
+
+		try {
+			jobApplication = rolePositionService.addCandidate(op.get(), candidate);
+			
+		}catch(Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok(jobApplication);
+    }
+    @CrossOrigin
+    @DeleteMapping("/role/{roleIdentifier}/candidate/{candidateIdentifier}")
+	public ResponseEntity<JobApplication> removeCandidateToRole(@PathVariable("roleIdentifier") String roleIdentifier,
+			@PathVariable("candidateIdentifier") String candidateIdentifier) throws ProfileNotFoundException {
+
+		try {
+			rolePositionService.removeCandidate(roleIdentifier, candidateIdentifier);
+			
+		}catch(Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok().build();
+    }
+    @CrossOrigin
+    @PutMapping("/job-application")
+    public ResponseEntity<JobApplication> updateJobApplication(@RequestBody JobApplication jobApplication){
+    	//TODO Check if Job Application exists
+    	
+    	JobApplication jobApplicationUpdated;
+		try {
+			jobApplicationUpdated = rolePositionService.updateJobApplication(jobApplication);
+			
+		}catch(Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok(jobApplicationUpdated);
+    	
     }
     @CrossOrigin
     @PutMapping("/{identifier}/pdf")

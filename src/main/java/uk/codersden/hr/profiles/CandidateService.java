@@ -1,15 +1,20 @@
 package uk.codersden.hr.profiles;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CandidateService {
 	@Autowired
 	private CandidateDao candidateDao;
 	
+	@Autowired
+	private ProfileDao profileDao;
 	
 	@Autowired
 	private JobApplicationDao jobApplicationDao;
@@ -19,7 +24,7 @@ public class CandidateService {
 		if(candidate.getIdentifier() != null) {
 			candidate.setIdentifier(generateIdentifier());
 		}
-		
+		candidate.setType("candidate");
 		Candidate newCandidate = candidateDao.save(candidate);
 
 
@@ -48,8 +53,19 @@ public class CandidateService {
 	
 	public List<Candidate> findCandidatesByAccount(String accountIdentifier) {
 		
-		List<Candidate> candidates = this.candidateDao.findAllByAccountIdentifier(accountIdentifier);
-		
+		List<Profile> profiles = this.profileDao.findAllCandidatesByAccountIdentifier(accountIdentifier);
+		List<Candidate> candidates = new ArrayList<Candidate>();
+		Candidate c;
+		// Improve this in the future
+		for (Profile p : profiles) {
+			c = new Candidate();
+			c.setFirstName(p.getFirstName());
+			c.setLastName(p.getLastName());
+			c.setEmail(p.getEmail());
+			c.setIdentifier(p.getIdentifier());
+			
+			candidates.add(c);
+		}
 		
 		return candidates;
 	}

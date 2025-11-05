@@ -32,6 +32,9 @@ public class RolePositionService {
     private StaticResourceService resourceService;
     
     @Autowired
+    private JobApplicationDao jobApplicationDao;
+    
+    @Autowired
     private StorageService storageService;
 	
 	public Optional<RolePosition> findRolePositionByIdentifier(String identifier) {
@@ -108,6 +111,28 @@ public class RolePositionService {
 		role.setStatus("ARCHIVED");
 		return rolePositionDao.save(role);
 
+	}
+
+	public JobApplication addCandidate(RolePosition rolePosition, Profile candidate) {
+		JobVaccancyCandidate jobVaccancyCandidate = new JobVaccancyCandidate(rolePosition.getIdentifier(), candidate.getIdentifier());
+		JobApplication jobApplication = new JobApplication();
+		jobApplication.setId(jobVaccancyCandidate);
+		jobApplication.setStatus("submitting-application");
+		
+		return jobApplicationDao.save(jobApplication);
+	}
+
+	public void removeCandidate(String rolePositionIdentififern, String candidateIdentifier) {
+		JobApplication jobApplication = new JobApplication();
+		JobVaccancyCandidate jobVaccancyCandidate = new JobVaccancyCandidate(rolePositionIdentififern, candidateIdentifier);
+		jobApplication.setId(jobVaccancyCandidate);
+		
+		jobApplicationDao.delete(jobApplication);
+		
+	}
+
+	public JobApplication updateJobApplication(JobApplication jobApplication) {
+		return jobApplicationDao.save(jobApplication);
 	}
 	
 }

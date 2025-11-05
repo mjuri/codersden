@@ -11,10 +11,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -67,7 +70,7 @@ public class Profile {
 	
 	private String address;
 	private String gender;
-	private String type;
+
 	
 	@Column(name = "gender_identity")
 	private String genderIdentity;
@@ -344,15 +347,7 @@ public class Profile {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
-	
 
-	
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identifier);

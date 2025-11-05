@@ -15,4 +15,8 @@ public interface ProfileDao extends JpaRepository<Profile, String>{
 	
     @Query("SELECT p FROM Profile p WHERE p.accountIdentifier = :accountIdentifier AND deleted = false AND type='employee'")
 	public List<Profile> findAllByAccountIdentifier(@Param("accountIdentifier") String accountIdentifier);
+	
+    @Query("SELECT p FROM Profile p WHERE p.accountIdentifier = :accountIdentifier AND deleted = false AND type='candidate'")
+    public List<Profile> findAllCandidatesByAccountIdentifier(String accountIdentifier);
 }
+
