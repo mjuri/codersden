@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -150,6 +151,21 @@ public class RolePositionController {
 		return ResponseEntity.ok(rolePosition);   	
     }
     
+    @CrossOrigin
+    @GetMapping("/job-application/{roleIdentifier}/status/{status}")
+    public ResponseEntity<?> retrieveAllCandidatesByRoleAndStatus(@PathVariable("roleIdentifier") String roleIdentifier,
+    		@PathVariable("status") String status){
+
+    	List<Candidate> jobApplications = null;
+    	try{
+    		jobApplications = rolePositionService.findCandidatesByRoleAndState(roleIdentifier, status);
+    	}catch(Exception e) {
+    		return ResponseEntity.internalServerError().build();
+    	}
+
+    	return ResponseEntity.ok(jobApplications);
+    	
+    }
     @CrossOrigin
     @GetMapping("/profile/{identifier}")
     public ResponseEntity<?> retrieveAllRolePositionsForUser(@PathVariable("identifier") String identifier){

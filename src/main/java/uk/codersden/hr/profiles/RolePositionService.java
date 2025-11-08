@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class RolePositionService {
 	
 	@Autowired
 	private ProfileDao profileDao;
+	
+	@Autowired
+	private CandidateDao candidateDao;
 	
     @Autowired
     private StaticResourceService resourceService;
@@ -130,7 +134,16 @@ public class RolePositionService {
 		jobApplicationDao.delete(jobApplication);
 		
 	}
-
+	public List<Candidate> findCandidatesByRoleAndState(String roleIdentifier, String state){
+		List<JobApplication> jobApplications = jobApplicationDao.findByJobVaccancyIdentifierAndStatus(roleIdentifier, state);
+		List<Candidate> candidates = new ArrayList<>();
+		
+		for (JobApplication ja : jobApplications) {
+			Optional<Candidate> op = candidateDao.findById(ja.getId().getCandidateIdentifier());
+			candidates.add(op.get());
+		}
+		return candidates;
+	}
 	public JobApplication updateJobApplication(JobApplication jobApplication) {
 		return jobApplicationDao.save(jobApplication);
 	}
