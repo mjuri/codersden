@@ -81,6 +81,33 @@ public class Candidate {
 	@Column(name="account_identifier", nullable = true)
 	private String accountIdentifier;
 
+	@Column(name="linkedin_profile")
+	private String linkedinProfile;
+	
+	@Column(name="website")
+	private String website;
+	
+	@Column(name="years_of_experience")
+	private Integer yearsOfExperience;
+	
+	@Column(name="current_position")
+	private String currentPosition;
+	
+	@Column(name="current_company")
+	private String currentCompany;
+	
+	@Column(name="expected_salary")
+	private String expectedSalary;
+	
+	@Column(name="skills")
+	private String skills;
+	
+	@Column(name="notes")
+	private String notes;
+	
+	@Column(name="cv")
+	private String cv;
+	
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -271,6 +298,78 @@ public class Candidate {
 
 	public void setAccountIdentifier(String accountIdentifier) {
 		this.accountIdentifier = accountIdentifier;
+	}
+
+	public String getLinkedinProfile() {
+		return linkedinProfile;
+	}
+
+	public void setLinkedinProfile(String linkedinProfile) {
+		this.linkedinProfile = linkedinProfile;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Integer getYearsOfExperience() {
+		return yearsOfExperience;
+	}
+
+	public void setYearsOfExperience(Integer yearsOfExperience) {
+		this.yearsOfExperience = yearsOfExperience;
+	}
+
+	public String getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void setCurrentPosition(String currentPosition) {
+		this.currentPosition = currentPosition;
+	}
+
+	public String getCurrentCompany() {
+		return currentCompany;
+	}
+
+	public void setCurrentCompany(String currentCompany) {
+		this.currentCompany = currentCompany;
+	}
+
+	public String getExpectedSalary() {
+		return expectedSalary;
+	}
+
+	public void setExpectedSalary(String expectedSalary) {
+		this.expectedSalary = expectedSalary;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public String getCv() {
+		return cv;
+	}
+
+	public void setCv(String cv) {
+		this.cv = cv;
 	}
 	
 
