@@ -65,7 +65,7 @@ public class RolePositionController {
     }
     
     @CrossOrigin
-    @PostMapping("/job-application/role/{roleIdentifier}/candidate/{candidateIdentifier}")
+    @PostMapping("/role/{roleIdentifier}/candidate/{candidateIdentifier}")
 	public ResponseEntity<JobApplication> addCandidateToRole(@PathVariable("roleIdentifier") String roleIdentifier,
 			@PathVariable("candidateIdentifier") String candidateIdentifier) throws ProfileNotFoundException {
         Optional<RolePosition> op = rolePositionService.findRolePositionByIdentifier(roleIdentifier);
