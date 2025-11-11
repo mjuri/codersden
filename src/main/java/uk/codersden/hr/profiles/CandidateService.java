@@ -86,7 +86,7 @@ public class CandidateService {
 	public Candidate saveCandidate(Candidate candidate, MultipartFile file, String profileIdentifier) {
 		
 		UUID identifier = UUID.randomUUID();
-
+		candidate.setType("candidate");
 		if(candidate.getIdentifier() == null) {
 			candidate.setIdentifier(identifier.toString());
 		}

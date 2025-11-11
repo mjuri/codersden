@@ -49,7 +49,7 @@ public class CandidateController {
 	}
 	@CrossOrigin
 	@PostMapping("/profile/{profileIdentifier}/with-attachment")
-	public ResponseEntity<?> createCandidateWithAttachment(@RequestParam("candidatePayload") String candidatePayload,
+	public ResponseEntity<?> createCandidateWithAttachment(@RequestParam("payload") String candidatePayload,
 			@RequestParam("file") MultipartFile file, 
 			@PathVariable("profileIdentifier") String profileIdentifier) {
 		Candidate candidateUploaded;
@@ -69,7 +69,7 @@ public class CandidateController {
 	      return ResponseEntity.ok(candidateUploaded);
 	}
     @CrossOrigin
-    @PutMapping("/{identifier}/profile/profileIdentifier/with-attachment")
+    @PutMapping("/{identifier}/profile/{profileIdentifier}/with-attachment")
 	public ResponseEntity<Candidate> updateRolePosition(@PathVariable("identifier") String identifier,@PathVariable("profileIdentifier") String profileIdentifier, @RequestParam("payload") String candidatePayload,
 			@RequestParam("fileName") String fileName, @RequestParam("file") MultipartFile file)
 			throws ProfileNotFoundException, JsonMappingException, JsonProcessingException {
@@ -92,7 +92,7 @@ public class CandidateController {
         c.setExpectedSalary(updatedCandidate.getExpectedSalary());
         c.setSkills(updatedCandidate.getSkills());
         c.setNotes(updatedCandidate.getNotes());
-
+        c.setType(updatedCandidate.getType());
     	c = service.saveCandidate(c, file, profileIdentifier);
     	
         return ResponseEntity.ok(c);
