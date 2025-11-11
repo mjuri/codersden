@@ -1,12 +1,18 @@
 package uk.codersden.hr.profiles;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import uk.codersden.hr.profiles.documents.Document;
+import uk.codersden.hr.profiles.documents.DocumentStatus;
 
 @Service
 public class CandidateService {
@@ -18,6 +24,9 @@ public class CandidateService {
 	
 	@Autowired
 	private JobApplicationDao jobApplicationDao;
+	
+    @Autowired
+    private StorageService storageService;
 	
 	public Candidate create(Candidate candidate) {
 
@@ -72,6 +81,27 @@ public class CandidateService {
 	
 	private String generateIdentifier() {
 		return UUID.randomUUID().toString();
+	}
+	
+	public Candidate saveCandidate(Candidate candidate, MultipartFile file, String profileIdentifier) {
+		
+		UUID identifier = UUID.randomUUID();
+
+		if(candidate.getIdentifier() == null) {
+			candidate.setIdentifier(identifier.toString());
+		}
+		
+		String fileName = this.storageService.save("files/cv", profileIdentifier, file);
+
+
+
+		candidate.setCv(fileName);
+
+
+		Candidate c = this.candidateDao.save(candidate);
+		
+		
+		return c;
 	}
 	
 	

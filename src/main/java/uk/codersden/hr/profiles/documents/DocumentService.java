@@ -84,13 +84,7 @@ public class DocumentService {
 		// Path pathFolder = Paths.get(resourceService.getStaticDirectoryPath("files") + '/' + identifier.toString());
 		
 		String fileName = this.storageService.save("files", profileIdentifier, file);
-		/*try {
-			Files.createDirectories(pathFolder);
-			Files.copy(file.getInputStream(), pathFolder.resolve(file.getOriginalFilename()));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
-		}*/
+
 		if(documentPayload.getSharedWith() != null && documentPayload.getSharedWith().size() > 0) {
 			documentPayload.getSharedWith().forEach((shared_profile)->{
 				Optional<Profile> opSharedProfile = profileDao.findById(shared_profile.get("value"));
@@ -99,8 +93,7 @@ public class DocumentService {
 				}	
 			});
 		}
-		//String fileName = pathFolder.resolve(file.getOriginalFilename()).toString();
-		//fileName = fileName.replaceAll("static", "");
+
 		doc.setImg(fileName);
 		doc.setName(file.getOriginalFilename());
 		doc.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
