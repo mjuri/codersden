@@ -59,6 +59,25 @@ public class LoginController {
 		return ResponseEntity.ok(access);
 
 	}
+	@PostMapping("/google/{userName}")
+	@CrossOrigin
+	public ResponseEntity<?> loginGoogleUser(@PathVariable("userName") String userName) {
+
+		AccountAccess access;
+		try {
+			access = loginService.loginGoogleUser(userName);
+		} catch (NotFoundUserException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userName);
+
+		} catch (PasswordsDoesNotMatchException e) {
+
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.valueOf(403)).body(userName);
+		}
+		return ResponseEntity.ok(access);
+
+	}
 
 	@PostMapping("/logout")
 	@CrossOrigin
