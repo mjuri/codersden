@@ -1,6 +1,5 @@
 package uk.codersden.hr.profiles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,21 @@ public class AccountController {
 		}
 		
 		return ResponseEntity.ok(account);
+		
+	}
+	
+	@CrossOrigin
+	@GetMapping("/profile/{identifier}")
+	public ResponseEntity<?> retrieveAccounts(@PathVariable("identifier") String identifier){
+		List<Account> accounts = null;
+		try {
+			accounts = accountService.retrieveAccounts(identifier);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body(e);
+		}
+		
+		return ResponseEntity.ok(accounts);
 		
 	}
 }
