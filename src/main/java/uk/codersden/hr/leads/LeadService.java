@@ -22,6 +22,9 @@ public class LeadService {
 	private LeadDao dao;
 
 	@Autowired
+	private LeadContactHistoryDao contactHistoryDao;
+	
+	@Autowired
 	private ProfileDao profileDao;
 	
 	@Autowired
@@ -68,7 +71,7 @@ public class LeadService {
 		}
 		return op.get();
 	}
-
+	
 	public Lead deleteLead(String identifier) throws NotFoundException {
 		Optional<Lead> op = dao.findById(identifier);
 
@@ -82,5 +85,50 @@ public class LeadService {
 		
 		return group;
 	}
+	/** Lead Contact History methods **/
+	public LeadContactHistory findContactHistoryByIdentifier(String identifier) throws LeadNotFoundException {
+		Optional<LeadContactHistory> op = contactHistoryDao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new LeadNotFoundException("lead contact history" + identifier + " not found");
+		}
+		return op.get();
+		
+	}
+	public LeadContactHistory createContactHistory(LeadContactHistory contactHistory) {
+		
+		return contactHistoryDao.save(contactHistory);
+	}
 
+	public LeadContactHistory updateContactHistory(String identifier, LeadContactHistory contactHistory) throws LeadNotFoundException {
+		Optional<LeadContactHistory> op = contactHistoryDao.findById(identifier);
+		if(op.isEmpty()){
+			throw new LeadNotFoundException("lead contact history" + identifier + " not found");
+		}
+		contactHistory.setIdentifier(identifier);
+		return contactHistoryDao.save(contactHistory);
+	}
+
+	public List<LeadContactHistory> findAllContactHistoryByLeadIdentifier(String leadIdentifier) throws ProfileNotFoundException {
+		Optional<Lead> op = dao.findById(leadIdentifier);
+		if(op.isEmpty()) {
+			throw new ProfileNotFoundException();
+		}
+		
+		List<LeadContactHistory> list = contactHistoryDao.findAllByLeadIdentifier(leadIdentifier);
+		
+		return list;
+	}	
+	public LeadContactHistory deleteContactHistory(String identifier) throws NotFoundException {
+		Optional<LeadContactHistory> op = contactHistoryDao.findById(identifier);
+
+		if(op.isEmpty()) {
+			throw new NotFoundException(identifier);
+		}
+		LeadContactHistory contactHistory = op.get();
+		
+		contactHistoryDao.delete(contactHistory);
+		
+		
+		return contactHistory;
+	}
 }
