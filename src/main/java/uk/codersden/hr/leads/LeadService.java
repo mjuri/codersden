@@ -1,5 +1,7 @@
 package uk.codersden.hr.leads;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +33,7 @@ public class LeadService {
 	private AccountDao accountDao;
 	
 	public Lead createLead(Lead lead) {
-		
+		lead.setModDate(new Timestamp(System.currentTimeMillis()));
 		return dao.save(lead);
 	}
 
@@ -41,6 +43,7 @@ public class LeadService {
 			throw new LeadNotFoundException(leadIdentifier + " not found");
 		}
 		lead.setIdentifier(leadIdentifier);
+		lead.setModDate(new Timestamp(System.currentTimeMillis()));
 		return dao.save(lead);
 	}
 
@@ -50,7 +53,7 @@ public class LeadService {
 			throw new ProfileNotFoundException();
 		}
 		
-		List<Lead> list = dao.findAllByProfileIdentifier(profileIdentifier);
+		List<Lead> list = dao.findAllByProfileIdentifierOrderByModDateDesc(profileIdentifier);
 		
 		return list;
 	}
@@ -60,7 +63,7 @@ public class LeadService {
 			throw new AccountNotFoundException(accountIdentifier + " not found");
 		}
 		
-		List<Lead> list = dao.findAllByAccountIdentifier(accountIdentifier);
+		List<Lead> list = dao.findAllByAccountIdentifierOrderByModDateDesc(accountIdentifier);
 		
 		return list;
 	}
@@ -79,7 +82,7 @@ public class LeadService {
 			throw new NotFoundException(identifier);
 		}
 		Lead group = op.get();
-		
+		//TODO Delete also LeadCommentHistory
 		dao.delete(group);
 		
 		

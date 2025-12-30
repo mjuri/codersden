@@ -1,5 +1,7 @@
 package uk.codersden.hr.leads;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -83,6 +85,8 @@ public class Lead {
 	
     private String comments;
     
+	@Column(name="mod_date")
+	private Timestamp modDate;
     
 	public String getComments() {
 		return comments;
@@ -226,6 +230,14 @@ public class Lead {
 
 	public void setLinkedlnProfile(String linkedlnProfile) {
 		this.linkedlnProfile = linkedlnProfile;
+	}
+
+	public Timestamp getModDate() {
+		return modDate;
+	}
+
+	public void setModDate(Timestamp modDate) {
+		this.modDate = modDate;
 	}
 	
 	
