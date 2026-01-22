@@ -71,6 +71,14 @@ public class LeadController {
 		return ResponseEntity.ok(e);
 	}
 	@CrossOrigin
+	@GetMapping("/check/{firstName}/{lastName}")
+	public ResponseEntity<?> retrieveLead(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName ) {
+		LeadFound f;
+		f = this.leadService.findLeadByName(firstName, lastName);
+		
+		return ResponseEntity.ok(f);
+	}
+	@CrossOrigin
 	@DeleteMapping("/{identifier}")
 	public ResponseEntity<?> deleteGroup(@PathVariable("identifier") String identifier){
 		Lead lead = null;

@@ -134,4 +134,20 @@ public class LeadService {
 		
 		return contactHistory;
 	}
+
+	public LeadFound findLeadByName(String firstName, String lastName) {
+		Optional<Lead> op = dao.findByFirstNameAndLastName(firstName, lastName);
+		LeadFound leadFound = new LeadFound();
+		leadFound.setLeadFound(false);
+		if(!op.isEmpty()) {
+			Lead lead = op.get();
+			leadFound.setLeadFound(true);
+			leadFound.setLead(lead);
+			leadFound.setIdentifier(lead.getIdentifier());
+			
+			List<LeadContactHistory> contacts = contactHistoryDao.findAllByLeadIdentifier(lead.getIdentifier());
+			leadFound.setAttempts(contacts.size());
+		}
+		return leadFound;
+	}
 }
