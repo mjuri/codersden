@@ -41,7 +41,8 @@ public class LeadFound {
 		this.attempts = attempts;
 	}
 	public int getNextAttempt() {
-		return attempts++;
+		int nextAttempt = attempts + 1;
+		return nextAttempt;
 	}
 
 	@Override

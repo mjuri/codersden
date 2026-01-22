@@ -31,6 +31,7 @@ public class LeadContactHistoryController {
 		try {
 			list = leadService.findAllContactHistoryByLeadIdentifier(leadIdentifier);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(e);
 		}
 		
