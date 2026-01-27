@@ -81,12 +81,17 @@ public class LeadService {
 		if(op.isEmpty()) {
 			throw new NotFoundException(identifier);
 		}
-		Lead group = op.get();
-		//TODO Delete also LeadCommentHistory
-		dao.delete(group);
+		Lead lead = op.get();
+		List<LeadContactHistory> contacts = contactHistoryDao.findAllByLeadIdentifier(identifier);
+		
+		for (LeadContactHistory leadContactHistory : contacts) {
+			contactHistoryDao.delete(leadContactHistory);
+		}
+		
+		dao.delete(lead);
 		
 		
-		return group;
+		return lead;
 	}
 	/** Lead Contact History methods **/
 	public LeadContactHistory findContactHistoryByIdentifier(String identifier) throws LeadNotFoundException {
