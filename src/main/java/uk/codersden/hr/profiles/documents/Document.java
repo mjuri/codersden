@@ -86,9 +86,21 @@ public class Document {
 	private String name;
 	private String status;
 	
+	@Column(name="is_onboarding")
+	private Boolean isOnboarding;
 	
+	@Column(name="account_identifier")
+	private String accountIdentifier;
 	
-	
+	public Boolean getIsOnboarding() {
+		return isOnboarding;
+	}
+
+
+	public void setIsOnboarding(Boolean isOnboarding) {
+		this.isOnboarding = isOnboarding;
+	}
+
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="date_created")
 	
@@ -128,6 +140,16 @@ public class Document {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+	public String getAccountIdentifier() {
+		return accountIdentifier;
+	}
+
+
+	public void setAccountIdentifier(String accountIdentifier) {
+		this.accountIdentifier = accountIdentifier;
 	}
 	
 	

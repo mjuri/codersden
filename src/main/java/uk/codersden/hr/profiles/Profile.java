@@ -105,6 +105,9 @@ public class Profile {
 	@OneToOne(mappedBy = "profile")
 	private Contract contract;
 	
+	@Column(name="ai_onboarding")
+	private boolean aiOnboarding;
+	
 	public Contract getContract() {
 		return contract;
 	}
@@ -348,6 +351,12 @@ public class Profile {
 		this.online = online;
 	}
 
+	public boolean isAiOnboarding() {
+		return aiOnboarding;
+	}
+	public void setAiOnboarding(boolean aiOnboarding) {
+		this.aiOnboarding = aiOnboarding;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identifier);

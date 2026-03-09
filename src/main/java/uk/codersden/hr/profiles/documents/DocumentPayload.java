@@ -6,6 +6,14 @@ import java.util.Map;
 public class DocumentPayload {
 	private Document document;
 	private List<Map<String,String>> sharedWith;
+	private Boolean isOnboarding;
+	
+	public Boolean getIsOnboarding() {
+		return isOnboarding;
+	}
+	public void setIsOnboarding(Boolean isOnboarding) {
+		this.isOnboarding = isOnboarding;
+	}
 	public Document getDocument() {
 		return document;
 	}

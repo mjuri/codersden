@@ -33,7 +33,45 @@ public class ToDo {
 	private String title;
 	private boolean done;
 	private boolean read;
+	private String text;
 	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	@Column(name="employee_identifier")
+	private String employeeIdentifier;
+	
+	private String priority;
+	
+	public String getEmployeeIdentifier() {
+		return employeeIdentifier;
+	}
+
+	public void setEmployeeIdentifier(String employeeIdentifier) {
+		this.employeeIdentifier = employeeIdentifier;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -109,6 +147,10 @@ public class ToDo {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="date_created")
 	private Date dateCreated;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="due_date")
+	private Date dueDate;
 	
 	@Column(name="mod_date")
 	@JsonFormat(pattern="yyyy-MM-dd")

@@ -77,6 +77,10 @@ public class DocumentService {
 	public Document saveDocument(DocumentPayload documentPayload, MultipartFile file, String profileIdentifier)
 			throws ProfileNotFoundException {
 		Document doc = new Document();
+		Optional<Profile> opProfile = profileDao.findById(profileIdentifier);
+		Profile profile = opProfile.get();
+		doc.setAccountIdentifier(profile.getAccountIdentifier());
+		
 		UUID identifier = UUID.randomUUID();
 		doc.setStatus(DocumentStatus.ACTIVE.toString());
 		
@@ -93,7 +97,8 @@ public class DocumentService {
 				}	
 			});
 		}
-
+		doc.setIsOnboarding(documentPayload.getIsOnboarding());
+		
 		doc.setImg(fileName);
 		doc.setName(file.getOriginalFilename());
 		doc.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
@@ -112,6 +117,11 @@ public class DocumentService {
 
 	}
 	
+	private void findById(String profileIdentifier) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void sendNotification(Document doc) {
 		Set<Profile> shared = doc.getSharedWith();
 		for (Profile profile : shared) {

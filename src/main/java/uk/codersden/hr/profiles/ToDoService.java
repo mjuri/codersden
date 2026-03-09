@@ -47,7 +47,11 @@ public class ToDoService {
 		ToDo todo = op.get();
 		java.sql.Date modDate = new Date(System.currentTimeMillis());
 		todo.setModDate(modDate);
-		todo.setDone(true);
+
+
+		todo.setDone(!todo.isDone());
+		String status = todo.isDone() ? "done" : "pending";
+		todo.setStatus(status);
 		todo = this.toDoDao.save(todo);
 		
 		return todo;

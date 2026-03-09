@@ -103,6 +103,23 @@ public class ProfileController {
 		return ResponseEntity.ok(p);
 	}
 	
+	@PutMapping("/{identifier}/updateOnboardingStatus")
+	@CrossOrigin
+	public ResponseEntity<?> updateOnboardingStatus(@PathVariable("identifier") String identifier) {
+		Profile p = null;
+		try {
+			p = profileService.findProfileByIdentifier(identifier);
+			p.setAiOnboarding(true);
+			profileService.update(p);
+		}catch(ProfileNotFoundException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		return ResponseEntity.ok(p);
+	}
+	
 	@PutMapping
 	@CrossOrigin
 	public ResponseEntity<?> updateProfile(@RequestBody Profile profile) 
