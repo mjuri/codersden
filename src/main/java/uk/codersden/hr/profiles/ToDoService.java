@@ -15,14 +15,14 @@ public class ToDoService {
 	private ToDoDao toDoDao;
 	@Autowired
 	private ProfileDao profileDao;
-	public List<ToDo> findToDoListByUser(String profileIdentifier) throws ProfileNotFoundException {
-		Optional<Profile> opp = this.profileDao.findById(profileIdentifier);
+	public List<ToDo> findToDoListByUser(String employeeIdentifier) throws ProfileNotFoundException {
+		Optional<Profile> opp = this.profileDao.findById(employeeIdentifier);
 		if(opp.isEmpty()) {
 			throw new ProfileNotFoundException();
 		}
 		Profile p = opp.get();
 
-		List<ToDo> list  = this.toDoDao.findAllByProfileAndStatus(profileIdentifier, getTwentyDaysAgo());
+		List<ToDo> list  = this.toDoDao.findAllByEmployeeAndStatus(employeeIdentifier, getTwentyDaysAgo());
 		
 		return list;
 	}

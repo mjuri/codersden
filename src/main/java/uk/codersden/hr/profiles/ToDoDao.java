@@ -13,4 +13,7 @@ public interface ToDoDao extends JpaRepository<ToDo, String>{
 	
 	@Query("SELECT t FROM ToDo t WHERE t.profile.identifier = :profileIdentifier AND t.done = false OR (t.profile.identifier = :profileIdentifier AND t.done = true AND t.modDate > :xDaysAgo)")
     List<ToDo> findAllByProfileAndStatus(@Param("profileIdentifier") String profileIdentifier, @Param("xDaysAgo") Date xDaysAgo);
+	
+	@Query("SELECT t FROM ToDo t WHERE t.employeeIdentifier = :employeeIdentifier AND t.done = false OR (t.employeeIdentifier = :employeeIdentifier AND t.done = true AND t.modDate > :xDaysAgo)")
+    List<ToDo> findAllByEmployeeAndStatus(@Param("employeeIdentifier") String profileIdentifier, @Param("xDaysAgo") Date xDaysAgo);
 }
