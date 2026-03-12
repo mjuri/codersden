@@ -1,6 +1,8 @@
 package uk.codersden.hr.profiles;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import uk.codersden.hr.profiles.documents.Document;
 
 @Entity
 @Table(name = "todo")
@@ -35,6 +40,10 @@ public class ToDo {
 	private boolean read;
 	private String text;
 	
+    @OneToMany
+    @JoinColumn(name = "todo_identifier", referencedColumnName = "identifier")
+    private List<Document> documents = new ArrayList<>();
+    
 	public String getText() {
 		return text;
 	}
@@ -155,4 +164,15 @@ public class ToDo {
 	@Column(name="mod_date")
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date modDate;
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+
+	
+	
 }

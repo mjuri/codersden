@@ -89,6 +89,9 @@ public class Document {
 	@Column(name="is_onboarding")
 	private Boolean isOnboarding;
 	
+    @Column(name = "todo_identifier", insertable = false, updatable = false)
+    private String todoIdentifier;
+	
 	@Column(name="account_identifier")
 	private String accountIdentifier;
 	
@@ -151,6 +154,12 @@ public class Document {
 	public void setAccountIdentifier(String accountIdentifier) {
 		this.accountIdentifier = accountIdentifier;
 	}
-	
+	public String getTodoIdentifier() {
+		return todoIdentifier;
+	}
+
+	public void setTodoIdentifier(String todoIdentifier) {
+		this.todoIdentifier = todoIdentifier;
+	}
 	
 }
