@@ -98,7 +98,9 @@ public class DocumentService {
 			});
 		}
 		doc.setIsOnboarding(documentPayload.getIsOnboarding());
-		
+		if(documentPayload.getTodoIdentifier() != null) {
+			doc.setTodoIdentifier(documentPayload.getTodoIdentifier());
+		}
 		doc.setImg(fileName);
 		doc.setName(file.getOriginalFilename());
 		doc.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));

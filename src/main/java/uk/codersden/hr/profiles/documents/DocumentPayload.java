@@ -7,6 +7,7 @@ public class DocumentPayload {
 	private Document document;
 	private List<Map<String,String>> sharedWith;
 	private Boolean isOnboarding;
+	private String todoIdentifier;
 	
 	public Boolean getIsOnboarding() {
 		return isOnboarding;
@@ -25,6 +26,16 @@ public class DocumentPayload {
 	}
 	public void setVisibilty(List<Map<String,String>> sharedWith) {
 		this.sharedWith = sharedWith;
+	}
+
+	public void setSharedWith(List<Map<String, String>> sharedWith) {
+		this.sharedWith = sharedWith;
+	}
+	public String getTodoIdentifier() {
+		return todoIdentifier;
+	}
+	public void setTodoIdentifier(String todoIdentifier) {
+		this.todoIdentifier = todoIdentifier;
 	}
 	
 }

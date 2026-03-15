@@ -72,4 +72,15 @@ public class ToDoService {
 		this.toDoDao.delete(t);
 		return t;
 	}
+	public ToDo markAsReviewed(String identifier) throws TaskNotFoundException {
+		Optional<ToDo> op = this.toDoDao.findById(identifier);
+		if(op.isEmpty()) {
+			throw new TaskNotFoundException();
+		}
+		ToDo todo = op.get();
+		todo.setDone(true);
+		todo.setStatus("reviewed");
+		todo = this.toDoDao.save(todo);
+		return todo;
+	}
 }

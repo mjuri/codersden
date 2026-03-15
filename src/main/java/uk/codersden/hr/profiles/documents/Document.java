@@ -89,7 +89,7 @@ public class Document {
 	@Column(name="is_onboarding")
 	private Boolean isOnboarding;
 	
-    @Column(name = "todo_identifier", insertable = false, updatable = false)
+    @Column(name = "todo_identifier")
     private String todoIdentifier;
 	
 	@Column(name="account_identifier")

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,7 @@ public class ToDoController {
 		return ResponseEntity.ok(list);
 		
 	}
+
 	@CrossOrigin
 	@PostMapping("/profile/{id}")
 	public ResponseEntity<?> createToDoItem(@PathVariable("id") String profileIdentifier, 
@@ -73,6 +75,21 @@ public class ToDoController {
 
 		}
 
+		
+	}
+	@CrossOrigin
+	@PutMapping("{identifier}/markAsReviewed")
+	public ResponseEntity<?> markAsReviewed(@PathVariable("identifier") String identifier){
+		ToDo toDo;
+		
+		try {
+			toDo = toDoService.markAsReviewed(identifier);
+			return ResponseEntity.ok(toDo);
+		} catch (TaskNotFoundException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+
+		}
 		
 	}
 	

@@ -40,6 +40,9 @@ public class ToDo {
 	private boolean read;
 	private String text;
 	
+	@Column(name="onboarding_task")
+	private boolean onboardingTask; 
+	
     @OneToMany
     @JoinColumn(name = "todo_identifier", referencedColumnName = "identifier")
     private List<Document> documents = new ArrayList<>();
@@ -171,6 +174,14 @@ public class ToDo {
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+
+	public boolean isOnboardingTask() {
+		return onboardingTask;
+	}
+
+	public void setOnboardingTask(boolean onboardingTask) {
+		this.onboardingTask = onboardingTask;
 	}
 
 	
