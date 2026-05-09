@@ -1,5 +1,6 @@
 package uk.codersden.hr.contacts;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -26,16 +27,22 @@ public class Contact {
 	
 	@Column(name="where_did_you_meet_them")
 	private String where;
+	
+	@Column(name="who_did_you_meet")
+	private String who;
+	
 	private String email;
 	private String context;
 	private String interests;
 	private String pains;
 	
+	private Date dob;
+	
 	@Column(name="account_identifier")
 	private String accountIdentifier;
 	
 	@Column(name = "last_contact")
-	private Timestamp lastContact;
+	private Date lastContact;
 	
 	
 	
@@ -100,11 +107,11 @@ public class Contact {
 		this.pains = pains;
 	}
 
-	public Timestamp getLastContact() {
+	public Date getLastContact() {
 		return lastContact;
 	}
 
-	public void setLastContact(Timestamp lastContact) {
+	public void setLastContact(Date lastContact) {
 		this.lastContact = lastContact;
 	}
 	
@@ -116,6 +123,23 @@ public class Contact {
 
 	public void setAccountIdentifier(String accountIdentifier) {
 		this.accountIdentifier = accountIdentifier;
+	}
+	
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getWho() {
+		return who;
+	}
+
+	public void setWho(String who) {
+		this.who = who;
 	}
 
 	@Override
