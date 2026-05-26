@@ -17,73 +17,72 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uk.codersden.hr.NotFoundException;
 
-
-
 @RestController
 @RequestMapping("/wod/program")
 public class ProgramController {
 
 	@Autowired
-	private ProgramService programService;
-	
+	private ProgramService service;
+
 	@CrossOrigin
 	@GetMapping("/account/{accountIdentifier}")
-	public ResponseEntity<?> retrieveProgramsByProfile(@PathVariable("accountIdentifier") String accountIdentifier){
+	public ResponseEntity<?> retrieveProgramsByProfile(@PathVariable("accountIdentifier") String accountIdentifier) {
 		List<Program> list = new ArrayList<>();
 		try {
-			list = programService.findAllByAccountIdentifier(accountIdentifier);
-		}catch(Exception e) {
+			list = service.findAllByAccountIdentifier(accountIdentifier);
+		} catch (Exception e) {
 			return ResponseEntity.internalServerError().body(e);
 		}
-		
+
 		return ResponseEntity.ok(list);
-		
+
 	}
+
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<?> createProgram(@RequestBody Program program) {
-		Program e = this.programService.createProgram(program);
-		
+	public ResponseEntity<?> createProgram(@RequestBody Program obj) {
+		Program e = this.service.createProgram(obj);
+
 		return ResponseEntity.ok(e);
 	}
+
 	@CrossOrigin
 	@PutMapping("/{identifier}")
-	public ResponseEntity<?> updateProgram(@PathVariable("identifier") String programIdentifier, @RequestBody Program program) {
+	public ResponseEntity<?> updateProgram(@PathVariable("identifier") String identifier, @RequestBody Program obj) {
 		Program updatedProgram;
 		try {
-			updatedProgram = this.programService.updateProgram(programIdentifier, program);
-		} catch ( NotFoundException e) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		return ResponseEntity.ok(updatedProgram);
-	}
-	
-	
-	@CrossOrigin
-	@GetMapping("/{identifier}")
-	public ResponseEntity<?> retrieveProgram(@PathVariable("identifier") String identifier) throws NotFoundException {
-		Program program;
-		try {
-			program = this.programService.findByIdentifier(identifier);
+			updatedProgram = this.service.updateProgram(identifier, obj);
 		} catch (NotFoundException e) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		return ResponseEntity.ok(program);
+
+		return ResponseEntity.ok(updatedProgram);
 	}
-	
+
 	@CrossOrigin
-	@DeleteMapping("/{identifier}")
-	public ResponseEntity<?> deleteProgram(@PathVariable("identifier") String identifier){
-		Program program = null;
+	@GetMapping("/{identifier}")
+	public ResponseEntity<?> retrieveProgram(@PathVariable("identifier") String identifier) throws NotFoundException {
+		Program obj;
 		try {
-			program = programService.deleteProgram(identifier);
-			
-		}catch(NotFoundException e) {
+			obj = this.service.findByIdentifier(identifier);
+		} catch (NotFoundException e) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(program);
+
+		return ResponseEntity.ok(obj);
 	}
-	
+
+	@CrossOrigin
+	@DeleteMapping("/{identifier}")
+	public ResponseEntity<?> deleteProgram(@PathVariable("identifier") String identifier) {
+		Program obj = null;
+		try {
+			obj = this.service.deleteProgram(identifier);
+
+		} catch (NotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(obj);
+	}
+
 }
