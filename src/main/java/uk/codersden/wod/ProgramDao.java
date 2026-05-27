@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ProgramDao extends JpaRepository<Program, String> {
 	List<Program> findAllByAccountIdentifier(String id);
 	List<Program> findAllByDateAndSourceAndType(String date, String source, String type);
+	List<Program> findAllByAccountIdentifierAndDateAndType(String identifier, String date, String type);
 }

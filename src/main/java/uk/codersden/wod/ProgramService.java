@@ -70,4 +70,12 @@ public class ProgramService {
 
 		return obj;
 	}
+
+	public Program findByAccountIdentifierAndDateAndType(String accountIdentifier, String date, String type) throws NotFoundException {
+		List<Program> classes = dao.findAllByAccountIdentifierAndDateAndType(accountIdentifier, date, type);
+		if(classes.size() == 0) {
+			throw new NotFoundException(accountIdentifier);
+		}
+		return classes.get(0);
+	}
 }

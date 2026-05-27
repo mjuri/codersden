@@ -39,6 +39,22 @@ public class ProgramController {
 	}
 
 	@CrossOrigin
+	@GetMapping("/account/{accountIdentifier}/date/{date}/type/{type}")
+	public ResponseEntity<?> retrieveProgramsByProfile(@PathVariable("accountIdentifier") String accountIdentifier,
+			@PathVariable("date") String date, @PathVariable("type") String type) {
+
+		Program obj;
+		try {
+			obj = this.service.findByAccountIdentifierAndDateAndType(accountIdentifier, date, type);
+		} catch (NotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(obj);
+
+	}
+
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<?> createProgram(@RequestBody Program obj) {
 		Program e = this.service.createProgram(obj);
