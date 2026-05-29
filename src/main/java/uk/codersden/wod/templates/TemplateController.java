@@ -53,6 +53,9 @@ public class TemplateController {
 	@PutMapping("/{identifier}")
 	public ResponseEntity<?> updateTemplate(@PathVariable("identifier") String identifier, @RequestBody Template obj) {
 		Template updatedTemplate;
+	    if (obj.getDays() != null) {
+	    	obj.getDays().forEach(day -> day.setClassTemplate(obj));
+	    }
 		try {
 			updatedTemplate = this.service.updateTemplate(identifier, obj);
 		} catch (NotFoundException e) {
