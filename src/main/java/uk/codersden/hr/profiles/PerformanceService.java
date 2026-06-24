@@ -75,5 +75,15 @@ public class PerformanceService {
 		return performanceDao.save(performanceReview);
 	}
 
+	public List<Goal> retrieveGoalByAccountIdentifier(String accountIdentifier) {
+		return goalDao.findAllByAccountIdentifier(accountIdentifier);
+	}
+	//TODO Review this method.
+	public Goal deleteGoal(Goal goal) {
+		 goalDao.delete(goal);
+		 return goal;
+		
+	}
+
 
 }

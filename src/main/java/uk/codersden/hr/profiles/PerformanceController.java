@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -199,12 +200,36 @@ public class PerformanceController {
 
 		
 	}
+	@GetMapping("/goal/account/{accountIdentifier}")
+	@CrossOrigin
+	public ResponseEntity<?> retrieveGoalsByAccount(@PathVariable("accountIdentifier") String accountIdentifier) {
+		List<Goal> goals = null;
+		try {
+			goals = performanceService.retrieveGoalByAccountIdentifier(accountIdentifier);
+		} catch(Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok(goals);
+	}
+	
 	@GetMapping("/goal/{goalIdentifier}")
 	@CrossOrigin
 	public ResponseEntity<?> retrieveGoalByIdentfier(@PathVariable("goalIdentifier") String goalIdentifier) {
 		Goal goal = null;
 		try {
 			goal = performanceService.retrieveGoalByIdentifier(goalIdentifier);
+		} catch(Exception e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity.ok(goal);
+	}
+	@DeleteMapping("/goal/{goalIdentifier}")
+	@CrossOrigin
+	public ResponseEntity<?> deleteGoalByIdentfier(@PathVariable("goalIdentifier") String goalIdentifier) {
+		Goal goal = null;
+		try {
+			goal = performanceService.retrieveGoalByIdentifier(goalIdentifier);
+			performanceService.deleteGoal(goal);
 		} catch(Exception e) {
 			return ResponseEntity.internalServerError().build();
 		}

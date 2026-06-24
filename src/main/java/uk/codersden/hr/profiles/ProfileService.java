@@ -137,6 +137,9 @@ public class ProfileService {
 		if(null == profile.getAvatar()) {
 			profile.setAvatar(oldProfile.getAvatar());
 		}
+		Contract contract = profile.getContract();
+		contract.setProfile(profile);
+		profile.setContract(contract);
 		return this.profileDao.save(profile);
 	}
 	

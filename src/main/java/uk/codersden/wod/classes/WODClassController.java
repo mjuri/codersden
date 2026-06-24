@@ -66,6 +66,18 @@ public class WODClassController {
 	}
 
 	@CrossOrigin
+	@GetMapping("/account/{accountIdentifier}/leaderboard/year/{year}/month/{month}")
+	public ResponseEntity<?> retrieveRankingdByAccountAndMonth(@PathVariable("accountIdentifier") String accountIdentifier,
+			@PathVariable("year") Integer year,
+			@PathVariable("month") Integer month){
+		List<Rank> list = service.retrieveRankingByAccountAndMonth(accountIdentifier, year, month);
+		
+		//TODO ordernarla
+		return ResponseEntity.ok(list);
+		
+	}
+	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<?> createWODClass(@RequestBody WODClass obj) {
 		WODClass e = this.service.createWODClass(obj);

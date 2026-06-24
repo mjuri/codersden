@@ -37,10 +37,14 @@ public class Goal {
 	@ManyToMany(mappedBy = "goals")
 	private Set<PerformanceReview> performanceReviews;
 	
+	@Column(name="account_identifier")
+	private String accountIdentifier;
 	
 	private Integer progress;
 	
 	private String description;
+	private String type;
+	private String category;
 	
 	public String getDescription() {
 		return description;
@@ -98,6 +102,30 @@ public class Goal {
 
 	public void setProfileIdentifier(String profileIdentifier) {
 		this.profileIdentifier = profileIdentifier;
+	}
+
+	public String getAccountIdentifier() {
+		return accountIdentifier;
+	}
+
+	public void setAccountIdentifier(String accountIdentifier) {
+		this.accountIdentifier = accountIdentifier;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

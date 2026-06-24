@@ -21,6 +21,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,6 +38,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import uk.codersden.hr.groups.Group;
 import uk.codersden.hr.profiles.equipments.Equipment;
+import uk.codersden.wod.payments.WODProduct;
 
 @Entity
 @Table(name = "profiles")
@@ -71,6 +73,10 @@ public class Profile {
 	private String address;
 	private String gender;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "wod_membership_plan", nullable = true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private WODProduct membershipPlan;
 	
 	@Column(name = "gender_identity")
 	private String genderIdentity;
@@ -356,6 +362,14 @@ public class Profile {
 	}
 	public void setAiOnboarding(boolean aiOnboarding) {
 		this.aiOnboarding = aiOnboarding;
+	}
+	
+
+	public WODProduct getMembershipPlan() {
+		return membershipPlan;
+	}
+	public void setMembershipPlan(WODProduct membershipPlan) {
+		this.membershipPlan = membershipPlan;
 	}
 	@Override
 	public int hashCode() {
