@@ -43,7 +43,20 @@ public class AchievementController {
 			@PathVariable("unlocked") Boolean isUnlocked) {
 		List<AthleteAchievement> list = new ArrayList<>();
 		try {
-			list = service.findAllByAthleteAndUnlock(profileIdentifier, isUnlocked);
+			list = service.findAllByAthleteAndUnlocked(profileIdentifier, isUnlocked);
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body(e);
+		}
+
+		return ResponseEntity.ok(list);
+
+	}
+	@CrossOrigin
+	@GetMapping("/type/{type}")
+	public ResponseEntity<?> retrieveAchievementsByType(@PathVariable("type") String type) {
+		List<Achievement> list = new ArrayList<>();
+		try {
+			list = service.findAllByType(type);
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().body(e);
 		}

@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AchievementDao extends JpaRepository<Achievement, String> {
-
+	Achievement findByKey(String key);
+	List<Achievement> findAllByType(String type);
 }

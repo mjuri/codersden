@@ -1,5 +1,6 @@
 package uk.codersden.wod.achievements;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,8 +75,12 @@ public class AchievementService {
 		
 		return athleteAchievementDao.save(obj);
 	}
-
-	public List<AthleteAchievement> findAllByAthleteAndUnlock(String profileIdentifier, Boolean isUnlocked) {
-		return athleteAchievementDao.findAllByProfileIdentifierAndUnlocked(profileIdentifier, isUnlocked);
+	public List<Achievement> findAllByType(String type){
+		
+		return dao.findAllByType(type);
+	}
+	public List<AthleteAchievement> findAllByAthleteAndUnlocked(String profileIdentifier, Boolean isUnlocked) {
+		List<AthleteAchievement> list = athleteAchievementDao.findAllByProfileIdentifierAndUnlocked(profileIdentifier, isUnlocked);
+		return list;
 	}
 }
